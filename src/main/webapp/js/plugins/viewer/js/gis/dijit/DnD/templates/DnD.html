@@ -1,0 +1,13 @@
+<div>
+	<div class="instructions" data-dojo-attach-point="instructionsNode">Arrastre y suelte archivos KML , CSV , shapefiles, o URLs de servicios aqui o sobre el mapa</div>
+	<div class="alert-info off" data-dojo-attach-point="dndWarningDiv">
+	The browser you are using does not support drag-and-drop functionality. Try newer versions of Chrome or Firefox if possible.
+	</div>
+	<div data-dojo-attach-point="containerNode"></div>
+	<div data-dojo-attach-point="manualResourceAdd" class="manualResourceAdd">
+		<input data-dojo-attach-point="fileInputNode" class="fileInput" type="file" accept=".zip,.csv" />
+		<br>URL de servicio
+		<input data-dojo-attach-point="serviceUrlInputNode" class="serviceUrlInput" type="text" />
+		<button data-dojo-attach-point="manualAddButton">Add</button>
+	</div>
+</div>

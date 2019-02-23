@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Caracterización</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">       
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>       
+        <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <script language="JavaScript" src="js/md5.js"></script>      
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>        
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+        <script>
+            function getURLParams(k) {
+                var p = {};
+                location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (s, k, v) {
+                    p[k] = v;
+                });
+                return k ? p[k] : p;
+            }
+            function DateFormat(fecha) {
+                if (typeof(fecha)!=='undefined') {
+                    var d = (new Date(fecha)).toISOString().split("T")[0];
+                    return d;
+                } else {
+                    return '';
+                }
+
+//                var d = new Date(date),
+//                        month = '' + (d.getMonth() + 1),
+//                        day = '' + d.getDate(),
+//                        year = d.getFullYear();
+//
+//                if (month.length < 2)
+//                    month = '0' + month;
+//                if (day.length < 2)
+//                    day = '0' + day;
+//                var date = new Date();
+//                date.toLocaleDateString();
+//
+//                return [year, month, day].join('-');
+            }
+            ;
+            $("#problemPersonales").select2();
+            $("#problemEconomicos").select2();
+            $("#organizaciones").select2();
+            var identificador = getURLParams('identificador');
+            var usr_ref = getURLParams('ref');
+            var aprob_ficha = getURLParams('apro');
+        </script>
+
+    </head>
+    <body>
+        <div class="container" id="soc_ficha">
+
+            <div class="stepwizard-row setup-panel">
+                <div class="stepwizard-step">
+                    <a href="#step-1"  class="btn btn-primary btn-circle">1</a>
+                    <p>Información Institucional e Identificación del Predio</p>
+                </div>
+                <div class="stepwizard-step">
+                    <a href="#step-2"  class="btn btn-default btn-circle " >2</a>
+                    <p>Identificacion de la Familia</p>
+                </div>
+                <div class="stepwizard-step">
+                    <a href="#step-3"  class="btn btn-default btn-circle" >3</a>
+                    <p>Caracterizacion de  la Población</p>
+                </div>
+                <div class="stepwizard-step">
+                    <a href="#step-4" class="btn btn-default btn-circle" >4</a>
+                    <p>Acceso a Servicios Sociales, Educación y Salud</p>
+                </div>
+                <div class="stepwizard-step">
+                    <a href="#step-5"  class="btn btn-default btn-circle" >5</a>
+                    <p>Dimesión Economica</p>
+                </div>
+                <div class="stepwizard-step">
+                    <a href="#step-6"  class="btn btn-default btn-circle" >6</a>
+                    <p>Tecnologías de la Información</p>
+                </div>
+                <div class="stepwizard-step">
+                    <a href="#step-7"  class="btn btn-default btn-circle" >7</a>
+                    <p>Caracterización de la Vivienda</p>
+                </div>
+                <div class="stepwizard-step">
+                    <a href="#step-8"  class="btn btn-default btn-circle">8</a>
+                    <p>Riesgo, Arraigo y Dimesión Sociocultural</p>
+                </div>
+            </div>
+            <div id="mensaje_estado">                
+            </div>
+            <div id="mensaje" ></div>
+            <div class="row setup-content" id="step-1">
+
+
+                <div class="col-xs-12 ">
+                    <div class="col-md-12" >
+                        <h3> Información Institucional e Identificación del Predio</h3>
+                        <div class="form-group">
+                            <label class="control-label">1.1.Identificador</label>
+                            <input  maxlength="100" type="text" required="required" class="form-control" name="identificador" id="identificador" placeholder="Identificador REAS" disabled  />
+                        </div>                        
+                        <div class="form-group">
+                            <label class="control-label">1.2.Numero concepto</label>
+                            <input maxlength="100" type="text" required="required" class="form-control" id="concepto" name="concepto" placeholder="Concepto y fecha"  disabled/>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">1.3Direccion del PAR</label>
+                            <input required="required" class="form-control" name="direccion" id="direccion" placeholder="Dirección del PAR" disabled/> 
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">1.4.Manzana</label>
+                            <input type='number' min='1' required="required" class="form-control" name="manzana" id="manzana" placeholder="Manzana" disabled/> 
+
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">1.5.Lote Nº</label>
+                            <input type='number' min='1' required="required" class="form-control" name="lote" id="lote" placeholder="lote" disabled/>                                                                 
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">1.6.Barrio</label>
+                            <input required="required" class="form-control" name="barrio" id="barrrio" placeholder="Barrio" disabled/>                                                                                                 
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">1.7.Localidad</label>
+                            <select class="form-control" required  id="localidad"  disabled>
+                                <option value="" disabled selected>Seleccione la Localidad</option>
+                                <option>01 Usaquén</option>
+                                <option>02 Chapinero</option>
+                                <option>03 Santa Fe</option>
+                                <option>04 San Cristóbal</option>
+                                <option>05 Usme</option>
+                                <option>06 Tunjuelito</option>
+                                <option>07 Bosa</option>
+                                <option>08 Kennedy</option>
+                                <option>09 Fontibón</option>
+                                <option>10 Engativá</option>
+                                <option>11 Suba</option>
+                                <option>12 Barrios Unidos</option>
+                                <option>13 Teusaquillo</option>
+                                <option>14 Los Mártires</option>
+                                <option>15 Antonio Nariño</option>
+                                <option>16 Puente Aranda</option>
+                                <option>17 La Candelaria</option>
+                                <option>18 Rafael Uribe Uribe</option>
+                                <option>19 Ciudad Bolívar</option>
+                                <option>20 Sumapaz</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-success nextBtn pull-right"  id="next1" type="button" >Guardar y Continuar</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row setup-content" id="step-2">
+
+                <h3> Identificacion de la Familia</h3>
+                <div class="col-md-4 ">
+                    <div class="panel panel-default text-center" >
+                        <div class="card-header primary-color white-text">
+                            <h3>Nucleo Familiar</h3>                             
+                        </div>
+                        <div class="panel-body">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Parentesco</th>
+                                    </tr>                                       
+                                </thead>
+                                <tbody id="familia_table">
+                                </tbody>
+                            </table>
+                        </div>                           
+                    </div>
+                </div>
+                <div class="col-md-8 panel panel-default" id="miembros">
+                    <div class="row" id="tipo_familia_div">                    
+                        <div class="col-md-12 form-group">
+                            <label class="control-label ">2.1.Tipo de Familia </label>
+                            <select class="form-control tipofamilia" name="tipofamilia" required="required" id="tipofamilia">
+                                <option value="0"  >Seleccione el Tipo de Familia</option>
+                                <option value='1'> Nuclear: Ambos padres con sus hijos, sin que estos ultimos tengan dependientes en el hogar </option>
+                                <option value='2'> Extensa: Familia nuclear con otros parientes diferentes a padres e hijos </option>
+                                <option value='3'> Compuesta: Cada conyugue aporta hijos de una union anterior y a su vez existen hijos de la presente unión </option>
+                                <option value='4'> Monoparental: Un solo padre/madre con sus hijos, sin que estos tengan dependientes en el hogar </option>
+                                <option value='5'> Ampliada: Familia extensa donde viven miembros de la familia de dos o más generaciones, parientes cercanos o lejanos </option>
+                                <option value='6'> Unipersonal: Hogar en que vive una sola persona </option>
+                                <option value='7'> Pareja: Pareja del mismo o distinto género sin hijos </option>
+                            </select>
+                        </div>
+                    </div>    
+                    <button class="btn btn-primary  pull-right"  id="add_miembro" type="button" >agregar miembro</button>
+                    <hr>
+                    <div  class="persona miembro" >
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label class="control-label ">2.2.Parentesco</label>
+                                <select class="form-control parentesco" name="parentesco1" id="parentesco1">
+                                    <option value="0" selected >Seleccione el Tipo de Parentesco</option>
+                                    <option value="1"> Jefe de familia </option>
+                                    <option value="2"> Esposo(a)/Compañero(a) </option>
+                                    <option value="3"> Hijo(a) </option><option value="4"> Hermano(a) </option>
+                                    <option value="5"> Padre o Madre </option><option value="6"> Abuelo(a) </option>
+                                    <option value="7"> Nuera/Yerno </option><option value="8"> Nieto(a) </option>
+                                    <option value="9"> Suegro(a) </option><option value="10"> Otro pariente </option>
+                                    <option value="11"> Otro no pariente </option>
+                                </select>
+                            </div>
+                        </div>    
+                        <div class="row">
+                            <div class="col-md-3 form-group">
+                                <label class="control-label ">2.3.Primer Nombre</label>
+                                <input type="text" pattern="^([a-zA-ZñÑáéíóúÁÉÍÓÚ ])+[a-zA-ZñÑáéíóúÁÉÍÓÚ]+$" required="required" class="form-control nombre" name="nombre" id="nombre" placeholder="Primer Nombre"/>
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <label class="control-label">2.4.Segundo Nombre</label>
+                                <input type="text" pattern="^([a-zA-ZñÑáéíóúÁÉÍÓÚ ])+[a-zA-ZñÑáéíóúÁÉÍÓÚ]+$"  class="form-control segundo" name="segundo" id="segundo" placeholder="Segundo Nombre"/>
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <label class="control-label">2.5.Primer Apellido</label>
+                                <input type="text" pattern="^([a-zA-ZñÑáéíóúÁÉÍÓÚ ])+[a-zA-ZñÑáéíóúÁÉÍÓÚ]+$" required="required" class="form-control apellido"  name="apellido" id="apellido" placeholder="Primer Apellido"/>
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <label class="control-label">2.6.Segundo Apellido</label>
+                                <input type="text" pattern="^([a-zA-ZñÑáéíóúÁÉÍÓÚ ])+[a-zA-ZñÑáéíóúÁÉÍÓÚ]+$" class="form-control segundap"  name="segundap" id="segundap" placeholder="Segundo Apellido"/>
+                            </div>
+                        </div>                    
+                        <div class="row">
+                            <div class="col-md-3  form-group">
+                                <label class="control-label ">2.7.Fecha de Nacimiento</label>
+                                <input type='date' required="required" class="form-control datepicker nacimiento" name="nacimiento" id="nacimiento" data-date-format="mm/dd/yyyy" />
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <label class="control-label">2.8.Ciudad de Nacimiento</label>
+                                <select data-live-search="true" class="form-control ciudad" name="ciudad" id="ciudad"></select>                             
+                            </div> 
+                            <div class="col-md-3 form-group">
+                                <label class="control-label ">2.9.Tipo</label>
+                                <select class="form-control tipodoc" name="tipodoc" id="tipodoc" data-live-search="true">
+                                    <option value="0"  selected>Seleccione el Tipo de Identificación</option>
+                                    <option value="1"> CC: Cedula de Ciudadania </option>
+                                    <option value="2"> C.E: Cedula de Extranjería </option>
+                                    <option value="3"> T.I: Tarjeta de Identidad </option>
+                                    <option value="4"> R.C: Registro Civil </option>
+                                    <option value="5"> P.A: Pasaporte </option>
+                                    <option value="6"> NUIP: Número </option>
+                                    <option value="7"> T.E: Tarjeta de Extranjería </option>
+                                    <option value="0"> S.I: Sin Información </option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 form-group">                            
+                                <label class="control-label">2.10.Fecha de expedición</label>
+                                <input type='date' required="required" class="form-control datepicker expedoc" name="expedoc" id="expedoc" data-date-format="mm/dd/yyyy"/>
+                            </div>
+
+                        </div>
+                        <div class="row">                        
+                            <div class="col-md-3 form-group">
+                                <label class="control-label">2.11.Nº de Documento</label>
+                                <input type="number" pattern="^[1-9][0-9]*$" required="required" class="form-control numdoc" name="numdoc" id="numdoc" placeholder="Número de Identificación"/>
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <label class="control-label grupo_etario" id="grupo_etareo" >2.12 Grupo Etario: </label>
+
+                            </div>
+
+                            <div class="col-md-3  form-group">
+                                <label class="control-label">2.13.Estado Civil</label>
+                                <select class="form-control civil" name="civil" id="civil">
+                                    <option value="0"  selected>Seleccione el Estado Civíl</option>
+                                    <option value='1'>Soltero </option>
+                                    <option value='2'>Casado </option>
+                                    <option value='3'>Unión marital de hecho </option>
+                                    <option value='4'>Sin sociedad conyugal o comunidad de bienes </option>
+                                    <option value='5'>Viudo </option>                                
+                                </select>                      
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <label class="control-label ">2.14.Sexo</label>
+                                <select class="form-control sexo" name="sexo" id="sexo">
+                                    <option value="0"  selected>Seleccione el Sexo</option>
+                                    <option value='2'> Mujer </option>
+                                    <option value='1'> Hombre </option>
+                                    <option value='3'> Intersexual </option>
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-success nextBtn pull-right" type="button" id="next2" >Guardar y Continuar</button> 
+
+            </div>
+            <div class="row setup-content" id="step-3">
+                <div class="col-md-12">
+                    <h3> Caracterización de la Población</h3>
+
+                    <div class="" id="caracterizacion">
+
+                    </div>
+
+                </div>
+
+                <button class="btn btn-success nextBtn  pull-right" id="next3" type="button" >Guardar y Continuar</button>                            
+            </div>
+
+            <div class="row setup-content" id="step-4">
+                <div class="col-xs-12">
+                    <div class="col-md-12">
+                        <h3> Acceso a Servicios Sociales, Educación y Salud</h3>
+                        <div id="servicios">                                
+
+                        </div>
+
+                        <button class="btn btn-success nextBtn pull-right" id="next4" type="button" >Guardar y Continuar</button>         
+                    </div>
+                </div>
+            </div>
+
+            <div class="row setup-content" id="step-5">
+                <div class="col-xs-12">
+                    <div class="col-md-12">
+                        <h3>7.Dimensión Economica</h3>
+                        <hr>
+                        <div >    
+                            <div class="row">    
+                                <div class="col-lg-3">7.1.1.Ingrese el ingreso mensual del hogar:</div>
+                                <div class="col-lg-3"><input class="form-control" type="number" value="0"  id="ingreso"></div>
+                                <div class="col-lg-3">7.1.2.Ingrese el gasto promedio mensualdel hogar: </div>
+                                <div class="col-lg-3"><input class="form-control" type="number" value="0"  id="egreso"></div>                    
+                            </div>
+                            <div class="row">    
+                                <div class="col-lg-3">7.5¿Desea conseguir un trabajo remunerado o instalar un negocio?</div>
+                                <div class="col-lg-3">
+                                    <select class="form-control"  id="blTrabajo" >
+                                        <option value="null">Slecciona...</option><option value="false">No</option><option value="true">Si</option>
+
+                                    </select>
+                                </div>
+                                <div class="col-lg-3">¿Cúal trabajo desea conseguir? </div>
+                                <div class="col-lg-3"><input class="form-control"  placeholder="trabajo" type="text" id="trabajo" required="required" disabled="disabled"></div>                    
+                            </div>
+                            <div class="row">    
+                                <div class="col-lg-3">7.6¿Tiene experiencia en ello?</div>
+                                <div class="col-lg-3">
+                                    <select class="form-control"  id="blExperiencia" >
+                                        <<option value="null">Slecciona...</option><option value="false">No</option><option value="true">Si</option>
+
+                                    </select>
+                                </div>
+                                <div class="col-lg-3">Experiencia en meses</div>
+                                <div class="col-lg-3"><input class="form-control" type="number" value="0" id="Experiencia" disabled="disabled"></div>                    
+                            </div>
+                            <div class="row">    
+                                <div class="col-lg-3">7.7¿Las personas de este hogar poseen motocicleta?</div>
+                                <div class="col-lg-3">
+                                    <select class="form-control"  id="blMotocicleta" >
+                                        <option value="null">Slecciona...</option><option value="false">No</option><option value="true">Si</option>                            
+                                    </select>
+                                </div>
+                                <div class="col-lg-3"> ¿Cuantas Motocicletas?</div>
+                                <div class="col-lg-3"><input class="form-control"  value="0"  type="number" id="motocicletas" required="required"  disabled="disabled"></div>                    
+                            </div>
+                            <div class="row">    
+                                <div class="col-lg-3">7.8¿Las personas de este hogar poseen carro?</div>
+                                <div class="col-lg-3">
+                                    <select class="form-control"  id="blCarro" >
+                                        <option value="null">Slecciona...</option><option value="false">No</option><option value="true">Si</option>                              
+                                    </select>
+                                </div>
+                                <div class="col-lg-3"> ¿Cuantos Carros?</div>
+                                <div class="col-lg-3"><input class="form-control"  value="0"  type="number" id="carros" required="required" disabled="disabled"></div>                    
+                            </div>
+                            <div class="row">    
+                                <div class="col-lg-3">7.9¿Las personas de este hogar poseen bicicleta??</div>
+                                <div class="col-lg-3">
+                                    <select class="form-control"  id="blBici" >
+                                        <option value="null">Slecciona...</option><option value="false">No</option><option value="true">Si</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-3">¿Cuatas bicicletas?</div>
+                                <div class="col-lg-3"><input class="form-control"  value="0" type="number" id="bicicletas" required="required" disabled="disabled"></div>                    
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="" id="economica">                    
+                        </div>
+                        <button class="btn btn-success nextBtn  pull-right" id="next5" type="button" >Guardar y Continuar</button>                            
+                    </div>
+                </div>
+            </div>
+            <div class="row setup-content" id="step-6">
+                <div class="col-xs-12">
+                    <div class="col-md-12">
+                        <h3>Tecnologìas de la Información</h3>
+                        <div  id="tecnologia">
+                            <div class="row" >
+                                <div class="col-lg-4">12.1¿En este hogar tienen computador de mesa o de escritorio (PC-Desktop)?</div>
+                                <div class="col-lg-2">
+                                    <select class="form-control" id="blDesktop"   >
+                                        <option value="null">Slecciona...</option>
+                                        <option value="false">No</option>
+                                        <option value="true">Si</option>
+
+                                    </select>
+                                </div>                            
+                                <div class="col-lg-1" > ¿Cuantos?</div>
+                                <div class="col-lg-2">
+                                    <input class="form-control" type="number" id="num_pc" value="0" required="required" disabled="disabled">
+                                </div>                            
+                                <div class="col-lg-1"> ¿Cuantos usan?</div>
+                                <div class="col-lg-2">
+                                    <input class="form-control" type="number" id="uso_pc" value="0" required="required" disabled="disabled">
+                                </div>                            
+                            </div>
+                            <br>
+                            <div class="row" >
+                                <div class="col-lg-4">12.1 ¿En este hogar tienen computador portátil (laptop)?</div>
+                                <div class="col-lg-2">
+                                    <select class="form-control" id="blPortatil"   >
+                                        <option value="null">Slecciona...</option>
+                                        <option value="false">No</option>
+                                        <option value="true">Si</option>                                     
+                                    </select>
+                                </div>                            
+                                <div class="col-lg-1"> ¿Cuantos?</div>
+                                <div class="col-lg-2">
+                                    <input class="form-control" type="number" id="num_port" value="0" required="required"  disabled="disabled">
+                                </div>                            
+                                <div class="col-lg-1"> ¿Cuantos usan?</div>
+                                <div class="col-lg-2">
+                                    <input class="form-control" type="number" id="uso_port" value="0" required="required" disabled="disabled">
+                                </div>                            
+                            </div>
+                            <br>
+                            <div class="row" >
+                                <div class="col-lg-4">12.1¿En este hogar tienen tabletas digitales (tablets)?</div>
+                                <div class="col-lg-2">
+                                    <select class="form-control" id="blTablet"   >
+                                        <option value="null">Slecciona...</option>
+                                        <option value="false">No</option>
+                                        <option value="true">Si</option>                         
+                                    </select>
+                                </div>                            
+                                <div class="col-lg-1"> ¿Cuantos?</div>
+                                <div class="col-lg-2">
+                                    <input class="form-control" type="number" id="num_tab" value="0"  required="required" disabled="disabled">
+                                </div>                            
+                                <div class="col-lg-1">¿Cuantos usan?</div>
+                                <div class="col-lg-2">
+                                    <input class="form-control" type="number" id="uso_tab" value="0"  required="required" disabled="disabled">
+                                </div>                            
+                            </div>
+                            <hr>
+                            <div class="row" >
+                                <div class="col-lg-8">12.2 ¿Con qué frecuencia utiliza el computador (en cualquier lugar)?</div>
+                                <div class="col-lg-4">
+                                    <select class="form-control" id="usoFrecuencia"   >
+                                        <option value="0">Seleccione...</option>
+                                        <option value="1">Todos los días de la semana</option>
+                                        <option value="2">Al menos una vez a la semana, pero no cada día</option>
+                                        <option value="3">Al menos una vez al mes, pero no cada semana</option>
+                                        <option value="4">Al menos una vez al año, pero no cada mes</option>
+                                        <option value="5">No utiliza computador</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row" >
+                                <div class="col-lg-8">12.4 ¿Con qué frecuencia utiliza internet (en cualquier lugar y desde cualquier dispositivo)?</div>
+                                <div class="col-lg-4">
+                                    <select class="form-control" id="Frecuencia_internet"   >
+                                        <option value="0">Seleccione...</option>
+                                        <option value="1">Todos los días de la semana</option>
+                                        <option value="2">Al menos una vez a la semana, pero no cada día</option>
+                                        <option value="3">Al menos una vez al mes, pero no cada semana</option>
+                                        <option value="4">Al menos una vez al año, pero no cada mes</option>
+                                        <option value="5">No utiliza internet</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row" >
+
+                                <div class="col-lg-6 ">
+                                    12.3 ¿En cuales de los siguientes sitios usa computador?
+                                    <ul class="list-group sitios">
+                                        <li class="list-group-item"><input type="checkbox" class="sitio_comp">  En el hogar.</li>
+                                        <li class="list-group-item"><input type="checkbox" class="sitio_comp">  En el trabajo.</li>
+                                        <li class="list-group-item"><input type="checkbox" class="sitio_comp">  En el establecimiento educativo.</li>                                           
+                                        <li class="list-group-item"><input type="checkbox" class="sitio_comp">  En un aula comunitaria digital.</li>                                           
+                                        <li class="list-group-item"><input type="checkbox" class="sitio_comp">  Otro sitio</li>                                           
+                                    </ul>                                    
+                                    ¿Cúal otro?
+                                    <input class="form-control" type="text" id="otro_sitio_comp" >
+                                </div>
+                                <div class="col-lg-6 ">
+                                    12.5 ¿Para qué utiliza principalmente computador? importancia del 1 al 4
+                                    <ul class="list-group orden">
+                                        <li class="list-group-item"><input class="form-control imp_pc" type="number"  value="0"/>  Para trabajar.</li>
+                                        <li class="list-group-item"><input class="form-control imp_pc"  type="number"  value="0"  />   Para estudiar</li>
+                                        <li class="list-group-item"><input class="form-control imp_pc"  type="number" value="0"  />  Para entretenimiento.</li>                                           
+                                        <li class="list-group-item"><input class="form-control imp_pc"  type="number" value="0" />  Otro</li>                                           
+                                    </ul>                                    
+                                    ¿Cúal otro?
+                                    <input class="form-control" type="text" id="otro_comp" >
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row" >
+
+                                <div class="col-lg-6 ">
+                                    12.6 ¿Cuáles de los siguientes dispositivos utiliza para acceder a Internet?
+                                    <ul class="list-group ">
+                                        <li class="list-group-item"><input type="checkbox" class="disopsi_internet">  Compulador de escritorio</li>
+                                        <li class="list-group-item"><input type="checkbox" class="disopsi_internet">  Computador portátil</li>
+                                        <li class="list-group-item"><input type="checkbox" class="disopsi_internet">  Tableta</li>                                           
+                                        <li class="list-group-item"><input type="checkbox" class="disopsi_internet">  Teléfono celular</li>                                           
+                                        <li class="list-group-item"><input type="checkbox" class="disopsi_internet">  Consolas para juegos electrónicos (Play Station, X-box, Wii, PSP,Nintendo, Gameboy, etc.)</li>                                              
+                                        <li class="list-group-item"><input type="checkbox" class="disopsi_internet">  Televisor inteligente</li>                                           
+                                        <li class="list-group-item"><input type="checkbox" class="disopsi_internet">  eproductores digitales de música, video e imagen (MP3, MP4, lpod)</li>                                           
+                                        <li class="list-group-item"><input type="checkbox" class="disopsi_internet">  Otro</li>                                           
+                                    </ul>                                    
+                                    ¿Cúal otro?
+                                    <input class="form-control" type="text" id="otro_dispositivo" >
+                                </div>
+                            </div>
+                            <div class="col-lg-6 ">
+                                12.7 Para cuales de los siguientes servicios o actividades utiliza internet:
+                                <ul class="list-group orden_actividad">
+                                    <li class="list-group-item"><input type="checkbox" class="act_internet"> Obtener información (excluir la búsqueda de información con fines de educación y aprendizaje)</li>
+                                    <li class="list-group-item"><input type="checkbox" class="act_internet"> Correo y mensajería.</li>
+                                    <li class="list-group-item"><input type="checkbox" class="act_internet"> Redes sociales.</li>                                           
+                                    <li class="list-group-item"><input type="checkbox" class="act_internet"> Comprar ordenar productos o servicios.</li>                                           
+                                    <li class="list-group-item"><input type="checkbox" class="act_internet"> Banca electrónica y otros servicios financieros.</li>                                           
+                                    <li class="list-group-item"><input type="checkbox" class="act_internet"> Educación y aprendizaje.</li>                                           
+                                    <li class="list-group-item"><input type="checkbox" class="act_internet"> Trámiles con organismos gubernamentales.</li>                                           
+                                    <li class="list-group-item"><input type="checkbox" class="act_internet"> Actividades de entretenimiento (juegos, bajar música, etc.)</li>                                           
+                                    <li class="list-group-item"><input type="checkbox" class="act_internet"> Consulta de medios de comunicación (televisión, radio, periódicos, revistas, medios digitales, etc.).</li>                                           
+                                    <li class="list-group-item"><input type="checkbox" class="act_internet"> Otro</li>                                           
+                                </ul>                                    
+                                ¿Cúal otro?
+                                <input class="form-control" type="text" id="otro_act_internet" >
+                            </div>
+
+                        </div>
+                    </div>
+                    <button class="btn btn-success nextBtn  pull-right" id="next6" type="button" >Guardar y Continuar</button>                            
+                </div>
+
+            </div>
+            <div class="row setup-content" id="step-7">
+                <div class="col-xs-12">
+                    <div class="col-md-12">
+                        <h3>8. Caracterización de la Vivienda</h3>
+                        <hr>
+                        <div id="vivienda">   
+                            <div class="row">
+                                <div class="col-md-5">8.1 Tipo de vivienda</div>
+                                <div class="col-md-5">
+                                    <select class="form-control tipo-vivienda" name="tipovivienda" id="tipovivienda">
+                                        <option value="0">Seleccione...</option><option value="1">Apartamento</option><option value="2">Casa-Lote</option><option value="3">Casa</option><option value="4">Casa Prefabricada</option><option value="5">otro</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <input id="cual_tipovivienda" class="form-control cual_tipovivienda" name="cual_tipovivienda" placeholder="¿Cúal?"  required="required" disabled="disabled"/>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-5">8.2 Calidad en la que acredita la tenencia del predio </div>
+                                <div class="col-md-5">
+                                    <select class="form-control acredita-tenencia" name="acreditaTenencia" id="acreditaTenencia">
+                                        <option value="0">Seleccione...</option><option value="1">Arrendatario</option><option value="2">Usufructuario</option><option value="3">Poseedor</option><option value="4">Tenedor</option><option value="5">Propietario</option>
+                                    </select>
+                                </div>                                
+                            </div>
+                            <div class="row">
+                                <div class="col-md-5">8.3 Documento que acrediten la tenencia</div>
+                                <div class="col-md-5">
+                                    <select class="form-control tipo-tenencia" name="tipotenencia" id="tipotenencia">
+                                        <option value="0">Seleccione...</option><option value="1">Escritura</option><option value="2">Certificador de libertad y tradicón</option><option value="3">Promesa de compraventa</option><option value="4">Otra</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <input id="doctenencia"  class="form-control doc-tenencia" name="doctenencia" placeholder="¿Cúal?"  required="required" disabled="disabled"/>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    8.3 ¿Tiene afectación de vivienda familiar o patrimonio de familiar? 
+                                    <textarea class="form-control afectacion" name="afectacion" id="afectacion"></textarea>
+                                </div>
+                            </div>
+                            <hr>
+
+                            <div class="row">
+                                <div class="col-md-6">8.4 Servicios públicos con los que cuenta el PAR:
+                                    <ul class="list-group">
+                                        <li class="list-group-item"><input type="checkbox" name="acueducto" id="acueducto"/>   Acueducto y alcantarillado</li>
+                                        <li class="list-group-item"><input type="checkbox" name="energia" id="energia" />   Servicio de Energia</li>
+                                        <li class="list-group-item"><input type="checkbox" name="gas"  id="gas"/>   Servicio de gas domiciliario</li>                                           
+                                    </ul>
+                                </div> 
+                                <div class="col-md-4">
+                                    <ul class="list-group casa">
+                                        <li class="list-group-item"><input class="form-control " type="number" name="consumoacueducto" value="0" id="consumoacueducto"/>  Consumo de agua en  m3</li>
+                                        <li class="list-group-item"><input class="form-control"  type="number" name="consumoenergia" value="0" id="consumoenergia" />   Consumo de energia en KW</li>
+                                        <li class="list-group-item"><input class="form-control"  type="number" name="consumogas" value="0"  id="consumogas"/>  Consumo de gas en m3</li>                                           
+                                    </ul>
+                                </div> 
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    8.5 Características Física:
+                                    <ul class="list-group casa">
+                                        <li class="list-group-item"><input type="number" class="form-control pisos" name="pisos" id="pisos" /> Número de pisos del PAR  </li>
+                                        <li class="list-group-item"><input type="number" class="form-control cuartos" name="cuartos"  id="cuartos" /> Número de cuartos del PAR </li>                               
+
+                                        <li class="list-group-item"> <input type="number" class="form-control baños" name="baños" id="banos" />   Número de baños del PAR</li>                                           
+                                        <li class="list-group-item"><input type="number" class="form-control cocinas" name="cocinas" id="cocinas" />  Número de cocinas del PAR </li>                                           
+                                    </ul>
+                                </div>                          
+
+
+                            </div> 
+                            <hr>
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    8.6.1 ¿Las paredes son mayoritariamente de bloque,ladrillo, piedra, madera pulida, concreto vaciado y/o material prefabricado?
+                                </div>
+                                <div class="col-lg-2">
+                                    <select class="form-control"  id="blParedes" >
+                                        <option value="null" >seleccione....</option>
+                                        <option value="false" >No</option>
+                                        <option value="true" >Si</option>                                        
+                                    </select>
+                                </div>
+                                <div class="col-md-12">
+                                    Comentario/observación:
+                                    <textarea class="form-control comenParedes" name="comenParedes" id="comenParedes"></textarea>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    8.6.2 ¿La vivienda tiene mayoritariamente pisos en tierra?
+                                </div>
+                                <div class="col-lg-2">
+                                    <select class="form-control"  id="blPisos" >
+                                        <option value="null" >seleccione....</option>
+                                        <option value="false" >No</option>
+                                        <option value="true" >Si</option>                                        
+                                    </select>
+                                </div>
+                                <div class="col-md-12">
+                                    Comentario/observación
+                                    <textarea class="form-control comenPisos" name="comenPisos" id="comenPisos"></textarea>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    8.6.3 ¿Las paredes son mayoritariamente de materiales de bajo impacto ambiental o ecológico (origen vegetal o biocompatible)?
+                                </div>
+                                <div class="col-lg-2">
+                                    <select class="form-control"  id="blMateriales" >
+                                        <option value="null" >seleccione....</option>
+                                        <option value="false" >No</option>
+                                        <option value="true" >Si</option> 
+
+                                    </select>
+                                </div>
+                                <div class="col-md-12">
+                                    Comentario/observación
+                                    <textarea class="form-control comenImpact" name="comenImpact" id="comenImpact"></textarea>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    9. Consciencia del Riesgo (Responde el entrevistado)Cual de estos eventos ha afectado su barrio o vivienda en los últimos 2 años: Inundaciones, deslizamientos, hundimientos de tierra, grietas.
+                                </div>
+                                <div class="col-lg-2">                                    
+                                    <select class="form-control" id="conciencia_riesgo" >
+                                        <option value="0" selected >selccione...</option>
+                                        <option value="1" >Inundaciones</option>
+                                        <option value="2" >Deslizamientos</option>
+                                        <option value="3" >Hundimientos de tierra</option>
+                                        <option value="4" >Grietas</option>
+                                        <option value="5" >Ninguna</option>
+                                    </select>
+                                </div>                               
+                            </div>
+                        </div>
+
+                        <button class="btn btn-success nextBtn  pull-right" id="next7" type="button" >Guardar y Continuar</button>                            
+                    </div>
+                </div>
+            </div>
+            <div class="row setup-content" id="step-8">
+                <div class="col-xs-12">
+                    <div class="col-md-12">
+                        <h3>Riesgo, Arraigo y Dimensión Sociocultural</h3>                              
+                         <div class="row ">   
+                            <div class="col-lg-3">10.1. ¿En este hogar convive con animales?</div>
+                            <div class="col-lg-3">
+                                 <select class="form-control"  id="boolMascota" name="boolMascota">
+                                    <option value="0" disabled selected>Seleccione...</option>
+                                    <option value="si" >Si</option>
+                                    <option value="no" >No</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-6">  
+                                <input type="text" class="form-control mascotas" disabled name="mascotas" id="mascotas" placeholder="Ejemplo: 5 Gatos"/>                                   
+                            
+                            </div> 
+                        </div>
+                 
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-3">
+                                10.3 ¿asiste a alguna de las siguientes actividades en la zona donde vive?                                        
+                            </div>
+                            <div class="col-md-3">
+                                <select class="form-control actividad-barrio" id="actividad-barrio" >
+                                    <option value="0" selected="">seleccione...</option>
+                                    <option value="1">Religiosas</option>
+                                    <option value="2">Deportivas</option>
+                                    <option value="3">Espirituales</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                10.4   Las relaciones en su barrio son:                                       
+                            </div>
+                            <div class="col-md-3">
+                                <select class="form-control relaciones" id="relaciones" >
+                                    <option value="0" selected="">seleccione...</option>
+                                    <option value="1">solidarias</option>
+                                    <option value="2">Amigables</option>
+                                    <option value="3">Indiferentes</option>
+                                    <option value="4">Conflictivas</option>
+                                </select>
+                            </div>
+
+                        </div>
+                        <div id="sociocultural">
+
+                        </div>     
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-4">
+                                10.5 ¿A quién ayuda cuando tiene problemas personales?
+                            </div>                            
+
+                            <div class="col-md-5">
+                                <select class="form-control multiples"  id="problemPersonales" multiple>                                   
+                                    <option value="1">Alguien del hogar.</option>
+                                    <option value="2">Familiares de otro hogar.</option>
+                                    <option value="3">Vecino(a)s o amigo(a)s.</option>
+                                    <option value="4">Compadres o comadres</option>
+                                    <option value="5">Un(a) profesional especializado(a).</option>
+                                    <option value="6">Compañero(a)s de trabajo.</option>
+                                    <option value="7">Entidad de caridad.</option>
+                                    <option value="8">Iglesia, congregación o grupo espiritual.</option>
+                                    <option value="9">No tiene problemas personales.</option>
+                                    <option value="10">No tiene quien le ayude.</option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-4">
+                                10.6 ¿A quién recurre cuando tiene problemas económicos?
+                            </div>                            
+
+                            <div class="col-md-5">
+                                <select class="form-control multiples" id="problemEconomicos"  multiple>                                   
+                                    <option value="1">Familiares de otro hogar.</option>
+                                    <option value="2">Vecino(a)s o amigo(a)s.</option>
+                                    <option value="3">Personas del hogar.</option>
+                                    <option value="4">Banco, cooperativa de ahorro.</option>
+                                    <option value="5">Iglesia, congregación o grupo espiritual .</option>
+                                    <option value="6">Compañero(a)s de trabajo.</option>
+                                    <option value="7">Compraventa, prestamista.</option>
+                                    <option value="8">Entidad de caridad.</option>
+                                    <option value="9">otro</option>
+                                    <option value="10">No tiene problemas económicos.</option>
+                                    <option value="11">No tiene a quién recurrir.</option>
+
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control"  id="otroEconomico" placeholder="Otro ¿Cúal?">
+                            </div>                            
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-4">
+                                10.7   De las siguientes organizaciones, ¿a cuál(es) pertenece?
+                            </div>                            
+
+                            <div class="col-md-8">
+                                <select class="form-control multiples" id="organizaciones"  multiple>                                   
+                                    <option value="1">Organización religiosa, fe o grupo de oración.</option>
+                                    <option value="2">Organización artística, musical voluntaria, deportivas, social o de recreación.</option>
+                                    <option value="3">Asociación de madres y padres de familia, ex-alumno(a)s, entre otros.</option>
+                                    <option value="4">Cooperativa o asociación de productore(a)s o comerciantes.</option>
+                                    <option value="5">Organización voluntaria ambientalista, de atención en salud o de caridad.</option>
+                                    <option value="6">Grupo o partido político.</option>
+                                    <option value="7">Organizaciones de propiedad horizontal.</option>
+                                    <option value="8">Junta de acción comunal, cívica barrial o de seguridad y vigilancia.</option>
+                                    <option value="9">Asociación profesional, cámara, gremio o sindicato.</option>
+                                    <option value="10">Grupos juveniles (metaleros, skinheads, emos, entre otros).</option>
+                                    <option value="11">Organización étnica (autoridad indígena grupo de negritudes, comunidades afrodescendientes, ROM).</option>
+                                    <option value="12">Grupo de adultos mayores.</option>
+                                    <option value="13">Organizaciones LGBT (Lesbianas, Gays, Bisexuales y Transgeneristas).</option>
+                                    <option value="14">No pertenece a ninguna de las anteriores organizaciones</option>
+
+                                </select>
+                            </div>                                                   
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-3">
+                                10.8 ¿Por qué razón principal no pertenece a alguna organización?
+                            </div> 
+                            <div class="col-md-3">
+                                <select class="form-control " id="noPertenencia">                                   
+                                    <option value="0">Seleccione...</option>
+                                    <option value="1">Porque no tiene confianza.</option>
+                                    <option value="2">Porque no conoce quién la lidera.</option>
+                                    <option value="3">Porque no conoce organizaciones.</option>
+                                    <option value="4">Porque es costoso participar.</option>
+                                    <option value="5">Porque no le interesa o no le ve utilidad.</option>
+                                    <option value="6">Porque no lo(a) han invitado.</option>
+                                    <option value="7">Por falta de tiempo.</option>
+                                    <option value="8">Otra</option>
+                                    <option value="9">No sabe, no responde.</option>                                    
+
+                                </select>
+                            </div>                                                   
+                            <div class="col-md-4">
+                                10.9  En el ÚLTIMO AÑO, ¿ha participado en reuniones o ha tenido contacto con dicha(s) organización(es)?
+                            </div> 
+                            <div class="col-md-2">
+                                <select class="form-control " id="blParticiapacion">                                   
+                                    <option value="null">Seleccione...</option>
+                                    <option value="false">No</option>
+                                    <option value="true">Si</option>
+
+                                </select>
+                            </div>                                                   
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-3">
+                                10.10 Esa organización es de carácter:
+                            </div> 
+                            <div class="col-md-3">
+                                <select class="form-control " id="caracOrganizacion">                                   
+                                    <option value="0">Seleccione...</option>
+                                    <option value="1">Local (municipal).</option>
+                                    <option value="2">Regional.</option>
+                                    <option value="3">Nacional.</option>
+                                    <option value="4">Internacional.</option>
+                                    <option value="5">No sabe, no responde.</option>
+
+                                </select>
+                            </div>                                                   
+                            <div class="col-md-3">
+                                10.11 ¿Cuántas personas conforman esa organización?
+                            </div> 
+                            <div class="col-md-3">
+                                <select class="form-control multiples" id="numPersonas">                                   
+                                    <option value="0">Seleccione...</option>
+                                    <option value="1">Menos de 5 personas.</option>
+                                    <option value="2">Entre 5 y menos de 20 personas.</option>
+                                    <option value="3">Enlre 20 y menos de 50 personas.</option>
+                                    <option value="4">50 personas o más.</option>
+                                    <option value="5">No sabe, no responde.</option>                                                            
+                                </select>
+                            </div>                                                   
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-6">11.1 La vivienda está cerca de:
+                                <ul class="list-group">
+                                    <li class="list-group-item "><input type="checkbox" value="a" class="cerca"/>  Fábricas o industrias.</li>
+                                    <li class="list-group-item "><input type="checkbox" value="b" class="cerca" />  Aeropuertos.</li>
+                                    <li class="list-group-item "><input type="checkbox" value="c" class="cerca"/>  Basureros y/o botaderos de basuras.</li>
+                                    <li class="list-group-item "><input type="checkbox" value="d"  class="cerca" />  Plazas de mercado</li>
+                                    <li class="list-group-item "><input type="checkbox" value="e"  class="cerca" />  Terminales de buses</li>
+                                    <li class="list-group-item "><input type="checkbox" value="f"  class="cerca" />  Bares o Prostíbulos</li>
+                                    <li class="list-group-item "><input type="checkbox" value="g"   class="cerca"/>  Expendios de droga (ollas).</li>
+                                    <li class="list-group-item "><input type="checkbox" value="h"   class="cerca" />  Lotes baldíos o sitios oscuros y peligrosos</li>
+                                    <li class="list-group-item "><input type="checkbox" value="i"   class="cerca"/>  Antenas de comunicación, de radiotransmisión (radio, beeper, celular, radioaficionados, etc.), líneas de alta tensión o centrales eléctrica</li>
+                                    <li class="list-group-item "><input type="checkbox" value="j"   class="cerca"/>  Caños de aguas negras</li>
+                                    <li class="list-group-item "><input type="checkbox" value="k"   class="cerca"/>  Mataderos</li>
+                                    <li class="list-group-item "><input type="checkbox"  value="l"  class="cerca" />  Talleres de mecánica, servitecas y/o estaciones de gasolina</li>
+
+                                </ul>
+                            </div> 
+                            <div class="col-md-6">11.2 ¿Cuáles de los siguientes problemas presenta el sector donde está ubicada su vivienda?
+                                <ul class="list-group ">                                                                  
+                                    <li class="list-group-item "><input type="checkbox" value="a" class="problemas"/> Ruido.</li>
+                                    <li class="list-group-item "><input type="checkbox" value="b" class="problemas" /> Exceso de anuncios publicitarios.</li>
+                                    <li class="list-group-item "><input type="checkbox" value="c" class="problemas"/> Inseguridad.</li>
+                                    <li class="list-group-item "><input type="checkbox" value="d" class="problemas" /> Contaminación del Aire.</li>
+                                    <li class="list-group-item "><input type="checkbox" value="e" class="problemas"/> Malos Olores.</li>
+                                    <li class="list-group-item "><input type="checkbox" value="f" class="problemas" /> Generación y manejo Inadecuado de Basuras .</li>
+                                    <li class="list-group-item "><input type="checkbox" value="g" class="problemas" /> Invasión de andenes y calles.</li>
+                                    <li class="list-group-item "><input type="checkbox" value="h" class="problemas"/> Invasión del Espacio Público.</li>
+                                    <li class="list-group-item "><input type="checkbox" value="i" class="problemas" /> Presencia de Animales que causan molestias.</li>
+                                    <li class="list-group-item "><input type="checkbox" value="j" class="problemas"/> Presencias de insectos, roedores.</li>
+                                </ul>
+                            </div>                                        
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-6">11.3 ¿En su hogar clasifican las basuras?
+                                <ul class="list-group">
+                                    <li class="list-group-item "><input type="checkbox" value="a"  class="basuras"/>  Desperdicios de alimentos y desechos orgánicos.</li>
+                                    <li class="list-group-item "><input type="checkbox" value="b"  class="basuras"/>  Vidrio.</li>
+                                    <li class="list-group-item "><input type="checkbox" value="c"  class="basuras" />  Papel y cartón.</li>
+                                    <li class="list-group-item "><input type="checkbox" value="d"  class="basuras"/>  Plástico.</li>
+                                    <li class="list-group-item "><input type="checkbox" value="e"  class="basuras"/>  Pilas y baterías.</li>
+                                    <li class="list-group-item "><input type="checkbox" value="f"  class="basuras"/>  Envases metálicos o de aluminio.</li>
+                                    <li class="list-group-item "><input type="checkbox" value="g"  class="basuras"/>  Medicamentos.</li>                                                                       
+                                </ul>
+                            </div> 
+                            <div class="col-md-6">11.4 ¿Cuáles de las siguientes prácticas se realizan en su hogar para reducir el consumo de agua y energía eléctrica?
+                                <ul class="list-group ">                                                                  
+                                    <li class="list-group-item "><input type="checkbox" value="a"  class="reduct-consumo" /> Usar bombillas de bajo consumo. </li>
+                                    <li class="list-group-item "><input type="checkbox" value="b"  class="reduct-consumo"/> Apagar Luces.</li>
+                                    <li class="list-group-item "><input type="checkbox" value="c"  class="reduct-consumo" /> Reutilizar Agua.</li>
+                                    <li class="list-group-item "><input type="checkbox" value="d"   class="reduct-consumo"/> Recolectar Agua Lluvia.</li>
+                                    <li class="list-group-item "><input type="checkbox" value="e"   class="reduct-consumo"/> Usar tanque sanitario de bajo consumo de agua.</li>
+                                    <li class="list-group-item "><input type="checkbox" value="f"  class="reduct-consumo"/> Planchar la mayor cantidad de ropa en cada ocasión o no planchar</li>
+                                    <li class="list-group-item "><input type="checkbox" value="g"   class="reduct-consumo"/> Cambiar electrodomésticos por otros de bajo consumo.</li>
+                                </ul>
+                            </div>                                        
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-3">
+                                13.1 ¿Hace cuanto vive en la zona?
+                            </div>
+                            <div class="col-md-1">
+                                <input type="number"  min="1" class="form-control años-zona" name="añosZona" id="tiempo_zona"/> 
+                            </div>
+
+                            <div class="col-md-2">
+                                <select class="form-control" id="tipo_tiempo">
+                                    <option value="0" selected >seleccione...</option>
+                                    <option value="1">Año(s)</option>
+                                    <option value="2">Mes(es) </option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <!--<input type="checkbox" name="gustoUbicacion" />-->
+                                13.2 ¿Se siente a gusto con la ubicación de su vivienda?                                    
+                            </div>
+                            <div class="col-md-2">
+                                <select class="form-control"  name="gustoUbicacion" id="gustoUbicacion">
+                                    <option value="0"  selected>Seleccione...</option>
+                                    <option value="si" >Si</option>
+                                    <option value="no" >No</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                13.3  ¿Se siente a gusto con  su vivienda?                                    
+                            </div>
+                            <div class="col-md-2">
+                                <select class="form-control"  id="gustoVivienda" name="gustoVivienda">
+                                    <option value="0"  selected>Seleccione...</option>
+                                    <option value="si" >Si</option>
+                                    <option value="no" >No</option>
+                                </select>                                                                  
+                            </div>
+                            <div class="col-md-4">
+                                13.4  ¿Se siente a gusto con  su vecindario?                               
+                            </div>
+                            <div class="col-md-2">
+                                <select class="form-control"  id="gustoVecindario" name="gustoVecindario">
+                                    <option value="0"  selected>Seleccione...</option>
+                                    <option value="si" >Si</option>
+                                    <option value="no" >No</option>
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                13.5  La idea de salir del predio en alto riesgo le parece:
+                                <select class="form-control" id="salida">
+                                    <option value="0" selected >seleccione...</option>
+                                    <option value="1"  >Positiva</option>
+                                    <option value="2"  >Aceptable</option>
+                                    <option value="3"  >Negativa</option>
+                                    <option value="4"  >Traumática</option>
+                                    <option value="5"  >Indiferente</option>
+                                </select>
+                                ¿Por qué? 
+                                <textarea  class="form-control" name="porqueSalir" id="porque_salida" placeholder="¿Explique por qué?"></textarea>
+                            </div>
+                            <div class="col-md-6">
+                                13.6 Nivel de importanciade la zona donde vive para su proyecto de vida:
+                                <select class="form-control" id="importancia_zona">
+                                    <option value="0" selected >seleccione...</option>
+                                    <option value="1"  >bajo</option>
+                                    <option value="2"  >Medio</option>
+                                    <option value="3"  >Alto</option>                                    
+                                </select>
+                                ¿Por qué? 
+                                <textarea  class="form-control" name="porqueImportancia" id="porque_importancia" placeholder="¿Explique por qué?"></textarea>
+                            </div>
+
+                        </div>  
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-12">
+                                14 Realice observaciones si identifica situaciones de atención prioritaria, describalas y reportelas en este campo
+
+                                <textarea  class="form-control" name="observaciones" id="observaciones" placeholder=""></textarea>
+                            </div>                                
+                        </div>                           
+                        <hr>
+                        <div class="row" id="revision">
+                            <div class="col-md-12" >
+                                observaciones de la revision:
+                                <textarea  class="form-control" name="observaciones_revision" id="observaciones_revision" placeholder=""></textarea>
+                            </div>                                
+                            <div class="col-md-9" >
+
+                            </div>                                
+                            <div class="col-md-3" >
+                                <button class="btn btn-success btn-lg " id="aprobar_social" type="button">Aprobar</button>
+                                <button class="btn btn-warning btn-lg " id="devolver_social" type="button">Devolver ficha</button>                               
+                            </div>                                
+
+                        </div>  
+                        <hr>
+                        <div class="row" >                                          
+                            <div class="col-md-7" >
+
+                            </div>                                
+                            <div class="col-md-3" >
+
+                                <button class="btn btn-primary  btn-lg "  id="enviar_x_aprobacion" type="button" data-dismiss="modal" >Enviar para aprobación</button>
+                            </div>                                
+                            <div class="col-md-2" >
+                                <button class="btn btn-success nextBtn btn-lg " id="next8" type="button" data-dismiss="modal" >Finalizar</button>            
+                            </div>                                
+
+                        </div>  
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <script src="js/reas/caracterizacion/pasos.js"></script>
+        <script src="js/reas/caracterizacion/familia_v003.js?v=A21J2HK12"></script>
+        <link href="css/pasos.css" rel="stylesheet">
+        <link href="css/forms.css" rel="stylesheet">      
+        <script src="js/reas/caracterizacion/ini_ver5.js?v=A21J2HK12"></script>
+
+    </body>
+</html>

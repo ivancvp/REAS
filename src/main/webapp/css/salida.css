@@ -1,0 +1,22 @@
+.btn-google {
+    background-color: #f5f5f5;
+    color: #464545;
+    border-radius: 30px;
+    border-color: #dedede;
+}
+
+.btn-salida{
+    color: #fff;
+    background-color: #2896f5;
+    border-color: #118cf7;
+    border-radius: 30px;
+}
+.btn-salida:hover{
+    color: #fff;
+}
+#contenedor_salida{
+    border: solid 1px;
+    margin: 15px;
+    border-radius: 20px;
+    padding: 10px;
+}

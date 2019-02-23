@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Lista de Chequeo</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="../css/tecnica/bootstrap.min.js"></script>
+        <script src="../css/tecnica/bootstrap.min.js"></script>
+       
+        <link href="../css/tecnica/bootstrap.min.css" rel="stylesheet" />
+        
+      <style>
+    
+        .form-horizontal .control-label{
+            text-align: left;
+        }
+        h1{
+            color:#3498DB;
+        }
+        h3{
+            color:#E74C3C;
+        }
+    </style>
+    
+    
+    
+    </head>
+    <body>
+       
+<form>
+
+        
+ <div class="container">
+            
+ <h1>Lista de Chequeo Para Estudio de Documentos</h1>
+ <p style="color:#5F6A6A; font-weight: bold ">Dirección de Reasentamientos</p>
+
+  <hr /> 
+ <div class="row"> 
+ 
+    <div class="form-group col-sm-6">
+     <label >Nombre del Beneficiario</label>
+     <input type="text" class="form-control" id='nom_ben'>
+   </div>
+
+    <div class="form-group col-sm-6">
+     <label >Identificador</label>
+     <input type="text" class="form-control" id='iden' >
+   </div>
+ 
+ </div>    
+ 
+  
+    <div class="row"> 
+        <div class="form-group col-sm-4">
+        <label >Seleccione la condición del beneficiario</label>
+        <select class="form-control" id="type" >
+            <option value="">Seleccione...</option>
+            <option value="propietario">Propietario</option>
+            <option value="poseedor">Poseedor</option>
+        </select> 
+        </div>
+    </div>
+  
+  
+
+  
+  <div id="1">
+    <h3>Para Poseedores y/o Propietarios</h3>
+
+    <hr /> 
+
+   <table class="table">
+      <thead>
+        <tr>
+          <th>Nombre de Documento</th>
+          <th>Revision</th>
+          <th>Folio</th>
+          <th>Notas</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="col-sm-5">Concepto Técnico IDIGER</td>
+          <td class="col-sm-2"><select class="form-control" ><option>Si</option> <option>No</option> </select></td>
+          <td class="col-sm-3"><input type="text" class="form-control" ></td>
+          <td class="col-sm-2"><input type="text" class="form-control" ></td>
+        </tr>
+         <tr>
+          <td class="col-sm-5">Diagnóstico técnico IDIGER o Acción Judicial</td>
+          <td class="col-sm-2"><select class="form-control" ><option>Si</option> <option>No</option> </select></td>
+          <td class="col-sm-3"><input type="text" class="form-control" ></td>
+          <td class="col-sm-2"><input type="text" class="form-control" ></td>
+        </tr>
+        <tr>
+          <td class="col-sm-5">Ficha Técnica de Reconocimiento</td>
+          <td class="col-sm-2"><select class="form-control" ><option>Si</option> <option>No</option> </select></td>
+          <td class="col-sm-3"><input type="text" class="form-control" ></td>
+          <td class="col-sm-2"><input type="text" class="form-control" ></td>
+        </tr>
+        <tr>
+          <td class="col-sm-5">Ficha de Información Predial</td>
+          <td class="col-sm-2"><select class="form-control" ><option>Si</option> <option>No</option> </select></td>
+          <td class="col-sm-3"><input type="text" class="form-control" ></td>
+          <td class="col-sm-2"><input type="text" class="form-control" ></td>
+        </tr>
+        <tr>
+          <td class="col-sm-5">Ficha Social CVP</td>
+          <td class="col-sm-2"><select class="form-control" ><option>Si</option> <option>No</option> </select></td>
+          <td class="col-sm-3"><input type="text" class="form-control" ></td>
+          <td class="col-sm-2"><input type="text" class="form-control" ></td>
+        </tr>
+        <tr>
+          <td class="col-sm-5">Copia de cédula titulaR y/o titulares del proceso</td>
+          <td class="col-sm-2"><select class="form-control" ><option>Si</option> <option>No</option> </select></td>
+          <td class="col-sm-3"><input type="text" class="form-control" ></td>
+          <td class="col-sm-2"><input type="text" class="form-control" ></td>
+        </tr>
+        <tr>
+          <td class="col-sm-5">Copia Registros Civiles o tarjetas de identidad de menores de edad</td>
+          <td class="col-sm-2"><select class="form-control" ><option>Si</option> <option>No</option> </select></td>
+          <td class="col-sm-3"><input type="text" class="form-control" ></td>
+          <td class="col-sm-2"><input type="text" class="form-control" ></td>
+        </tr>
+        <tr>
+          <td class="col-sm-5">Documentos Seguridad Social SISBEN (copia) o Carnet de Afiliación a Salud</td>
+          <td class="col-sm-2"><select class="form-control" ><option>Si</option> <option>No</option> </select></td>
+          <td class="col-sm-3"><input type="text" class="form-control" ></td>
+          <td class="col-sm-2"><input type="text" class="form-control" ></td>
+        </tr>
+        <tr>
+          <td class="col-sm-5">Certificado Médico de discapacidad fisica o mental (en este caso debe existir un representante legal)</td>
+          <td class="col-sm-2"><select class="form-control" ><option>Si</option> <option>No</option> </select></td>
+          <td class="col-sm-3"><input type="text" class="form-control" ></td>
+          <td class="col-sm-2"><input type="text" class="form-control" ></td>
+        </tr>
+        <tr>
+            <td class="col-sm-5">Documento que acredite el estado civil:<br> Casado: registro civil de matrimonio <br>Unión marital de hecho: Acta de conciliación</td>
+          <td class="col-sm-2"><select class="form-control" ><option>Si</option> <option>No</option> </select></td>
+          <td class="col-sm-3"><input type="text" class="form-control" ></td>
+          <td class="col-sm-2"><input type="text" class="form-control" ></td>
+        </tr>
+       <tr>
+          <td class="col-sm-5" style="    font-weight: bold;">Copia de recibos de servicios Públicos</td>
+
+        </tr>
+        <tr>
+          <td class="col-sm-5">Acueducto</td>
+          <td class="col-sm-2"><select class="form-control" ><option>Si</option> <option>No</option> </select></td>
+          <td class="col-sm-3"><input type="text" class="form-control" ></td>
+          <td class="col-sm-2"><input type="text" class="form-control" ></td>
+        </tr>
+        <tr>
+          <td class="col-sm-5">Codensa</td>
+          <td class="col-sm-2"><select class="form-control" ><option>Si</option> <option>No</option> </select></td>
+          <td class="col-sm-3"><input type="text" class="form-control" ></td>
+          <td class="col-sm-2"><input type="text" class="form-control" ></td>
+        </tr>
+        <tr>
+          <td class="col-sm-5">Gas Natural</td>
+          <td class="col-sm-2"><select class="form-control" ><option>Si</option> <option>No</option> </select></td>
+          <td class="col-sm-3"><input type="text" class="form-control" ></td>
+          <td class="col-sm-2"><input type="text" class="form-control" ></td>
+        </tr>
+
+      </tbody>
+    </table>
+ 
+  </div>
+ 
+  <div id="2">
+        <h3>Para Propietarios</h3>
+         <hr /> 
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Nombre de Documento</th>
+              <th>Revision</th>
+              <th>Folio</th>
+              <th>Notas</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="col-sm-5">Escritura Pública del predio en Alto Riesgo -PAR</td>
+              <td class="col-sm-2"><select class="form-control" ><option>Si</option> <option>No</option> </select></td>
+              <td class="col-sm-3"><input type="text" class="form-control" ></td>
+              <td class="col-sm-2"><input type="text" class="form-control" ></td>
+            </tr>
+            <tr>
+              <td class="col-sm-5">Certificado de Tradición y Libertad</td>
+              <td class="col-sm-2"><select class="form-control" ><option>Si</option> <option>No</option> </select></td>
+              <td class="col-sm-3"><input type="text" class="form-control" ></td>
+              <td class="col-sm-2"><input type="text" class="form-control" ></td>
+            </tr>
+            <tr>
+              <td class="col-sm-5">Recibo pago Impuesto Predial</td>
+              <td class="col-sm-2"><select class="form-control" ><option>Si</option> <option>No</option> </select></td>
+              <td class="col-sm-3"><input type="text" class="form-control" ></td>
+              <td class="col-sm-2"><input type="text" class="form-control" ></td>
+            </tr>
+            <tr>
+              <td class="col-sm-5">Certificación Catastral</td>
+              <td class="col-sm-2"><select class="form-control" ><option>Si</option> <option>No</option> </select></td>
+              <td class="col-sm-3"><input type="text" class="form-control" ></td>
+              <td class="col-sm-2"><input type="text" class="form-control" ></td>
+            </tr>
+
+          </tbody>
+      </table>
+</div>
+ 
+  
+  <div id="3">
+            <h3>Para Poseedores</h3>
+           <hr /> 
+
+         <table class="table">
+           <thead>
+             <tr>
+               <th>Nombre de Documento</th>
+               <th>Revision</th>
+               <th>Folio</th>
+               <th>Notas</th>
+             </tr>
+           </thead>
+           <tbody>
+             <tr>
+               <td class="col-sm-5">Contrato de Cesión de Derechos o Promesa de Compraventa</td>
+               <td class="col-sm-2"><select class="form-control" ><option>Si</option> <option>No</option> </select></td>
+               <td class="col-sm-3"><input type="text" class="form-control" ></td>
+               <td class="col-sm-2"><input type="text" class="form-control" ></td>
+             </tr>
+             <tr>
+               <td class="col-sm-5">Declaraciones Estraproceso. afirmaciones administrativas ante la CVP o pruebas de habitabilidad</td>
+               <td class="col-sm-2"><select class="form-control" ><option>Si</option> <option>No</option> </select></td>
+               <td class="col-sm-3"><input type="text" class="form-control" ></td>
+               <td class="col-sm-2"><input type="text" class="form-control" ></td>
+             </tr>
+             <tr>
+               <td class="col-sm-5">Copia cédula de testigos de afirmaciones administrativas</td>
+               <td class="col-sm-2"><select class="form-control" ><option>Si</option> <option>No</option> </select></td>
+               <td class="col-sm-3"><input type="text" class="form-control" ></td>
+               <td class="col-sm-2"><input type="text" class="form-control" ></td>
+             </tr>
+             <tr>
+               <td class="col-sm-5">Certificado Catastral</td>
+               <td class="col-sm-2"><select class="form-control" ><option>Si</option> <option>No</option> </select></td>
+               <td class="col-sm-3"><input type="text" class="form-control" ></td>
+               <td class="col-sm-2"><input type="text" class="form-control" ></td>
+             </tr>
+           </tbody>  
+       </table>
+      
+  </div>
+  
+ 
+  
+  
+  
+
+ <hr /> 
+  <div class="row">
+
+    <div class="form-group col-sm-6">
+     <label >Diligenciado por</label>
+     <input type="text" class="form-control" >
+   </div>    
+
+</div> 
+   
+<button type="button" class="btn btn-danger" id="imp">Imprimir</button>
+<button class="btn " onclick="dat()">Guardar</button> 
+<button class="btn btn-success" id="envio_est_doc">Enviar a Estudio Documentos</button> 
+
+ <script src="../alerta/envio.js"></script>
+
+ 
+ 
+<script>
+function dat(){
+    console.log("error"); 
+    $identificador = document.getElementById("iden");
+    $datos = {
+        op: 'get_nom_ben'
+    };
+
+    $.ajax({
+        type: "GET",
+        url: "../GestionConsultas",
+        data: $datos,
+        dataType: "json",
+        async: true,
+        success: function (response) {
+            if (response.length > 0)
+            {
+                resultados = response[0];
+                document.getElementById("nom_ben").value = resultados["Nombre 1"];
+               }else{
+                  console.log("error"); 
+               } 
+               }
+       });
+}
+     
+  
+</script>
+ 
+
+  <script>
+      
+    $('#1').hide();   
+    $('#2').hide();
+    $('#3').hide();
+
+    $('#type').on('change', function() {
+
+        if($('#type').val() === 'propietario') { 
+            $('#1').show();
+            $('#2').show();
+            $('#3').hide();
+        } else {
+            $('#1').show();
+            $('#3').show();
+            $('#2').hide();
+        }
+        if($('#type').val() === '') {
+            $('#1').hide();   
+            $('#2').hide();
+            $('#3').hide();
+        }
+    });
+    
+  </script>
+ 
+ 
+ 
+ </div>
+
+        
+ </form>
+        
+        
+        
+        
+        
+        
+    </body>
+</html>

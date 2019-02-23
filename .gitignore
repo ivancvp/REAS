@@ -1,0 +1,38 @@
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+nbactions.xml
+nb-configuration.xml
+/src/main/webapp/js/vendors/SmartWizard-master/nbproject/private/
+!/src/main/webapp/js/vendors/SmartWizard-master/dist/
+!/src/main/webapp/js/vendors/alpaca/dist/
+!/src/main/webapp/js/vendors/viewerjs-master/viewerjs-master/dist/
+!/src/main/webapp/js/vendors/Inputmask/dist/
+!/src/main/webapp/js/vendors/jquery-confirm-master/dist/
+!/src/main/webapp/js/vendors/tribute/dist/
+!/src/main/webapp/js/vendors/bootstrap/dist/
+!/src/main/webapp/js/vendors/jszip/dist/
+!/src/main/webapp/js/vendors/Easy-Date-Range-Picker/dist/
+!/src/main/webapp/js/vendors/jquery.timeline-master/dist/
+!/src/main/webapp/js/vendors/timeline/dist/

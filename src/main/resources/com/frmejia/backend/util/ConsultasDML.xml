@@ -1,0 +1,2777 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Consultas>        
+    <Consulta id="ActualizarRevisionResoluciones">
+        <sql>
+            UPDATE resoluciones_marzo SET
+                
+            "INICIO" = CASE WHEN to_date('@INICIO', 'DD/MM/YYYY') = '0001-01-01 BC' THEN NULL ELSE to_date('@INICIO', 'DD/MM/YYYY') END,
+            "FIN" = CASE WHEN to_date('@FIN', 'DD/MM/YYYY') = '0001-01-01 BC' THEN NULL ELSE to_date('@FIN', 'DD/MM/YYYY') END,
+            "CEDULA EVACUADO" = @CEDULA-EVACUADO,
+            "NOMBRE EVACUADO" = '@NOMBRE-EVACUADO',
+            /*
+            "CODIGO PRESUPUESTAL" = '@CODIGO-PRESUPUESTAL',
+            "CDP" = '@CDP',
+            "FECHA CDP" = '@FECHA-CDP',
+            */
+                
+            --"CDP" = '@cdp-selector',
+            
+            "NUM MESES" = @NUM-MESES,
+            "VALOR AYUDA MES" = @VALOR-AYUDA-MES,
+            "TOTAL" = @TOTAL,
+            "TOTAL MAS UN MES" = @TOT-MAS-UN-MES,
+                
+            /*
+            "INICIO PAGO" = CASE WHEN to_date('@INI-PAGO', 'DD/MM/YYYY') = '0001-01-01 BC' THEN NULL ELSE to_date('@INI-PAGO', 'DD/MM/YYYY') END,
+            "FIN PAGO" = CASE WHEN to_date('@FN-PAGO', 'DD/MM/YYYY') = '0001-01-01 BC' THEN NULL ELSE to_date('@FN-PAGO', 'DD/MM/YYYY') END,
+            */
+            /*
+            "RESOLUCION" = '@RESOLUCION',
+            "SOLICITUD RP" = '@SOLICITUD-RP',
+            "VALOR CDP TOTAL" = @VALOR-CDP-TOTAL,
+            "OBJETO SOLICITUD CRP" = '@OBJETO-SOLICITUD-CRP',
+            */
+            /*
+            "NUM MESES PAGAR" = @NUM-MES-PAGAR,
+            "MESES PAGAR" = '@MESES-PAGAR',
+            "TOTAL PAGAR" = @TOT-PAGAR,
+            */
+            /*
+            "APLICA 2B" = @APLICA-2B,
+            "INICIO 2B" = CASE WHEN to_date('@INI-2B', 'DD/MM/YYYY') = '0001-01-01 BC' THEN NULL ELSE to_date('@INI-2B', 'DD/MM/YYYY') END,
+            */
+            "resolucion_estado" = '@resolucion_estado',
+            "observacion" = '@observacion',
+                
+            /*
+            "resolucion_marzo_fecha" = @resolucion_marzo_fecha,
+            "resolucion_marzo_usuario" = '@resolucion_marzo_usuario',
+            "resolucion_marzo_usr_cargo" = '@resolucion_marzo_usr_cargo',
+            */
+                
+            "resolucion_marzo_upd_fecha" = to_timestamp('@TIMESTAMP_SISTEMA', 'DD/MM/YYYY HH24:MI:SS'),
+            "resolucion_marzo_upd_usuario" = '@resolucion_marzo_upd_usuario',
+            "resolucion_marzo_upd_usr_cargo" = '@resolucion_marzo_upd_usr_cargo',
+            --"resolucion_usuario_financiero" = '@resolucion_usuario_financiero',
+            --"resolucion_cargo_usuario_financiero" = '@resolucion_cargo_usuario_financiero',
+            "resolucion_usuario_tecnico" = '@resolucion_usuario_tecnico',
+            "resolucion_cargo_usuario_tecnico" = '@resolucion_cargo_usuario_tecnico'
+
+            WHERE
+            "IDENTIFICADOR" = '@IDENTIFICADOR'
+                
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>false</es_dml_complejo>
+    </Consulta>
+    
+    <Consulta id="ActualizarRevisionFinancieraResoluciones">
+        <sql>
+            
+            UPDATE resoluciones_marzo SET
+                
+                
+                
+            "CDP" = '@cdp-selector',
+            
+            "RESOLUCION" = '@RESOLUCION',
+            "SOLICITUD RP" = '@SOLICITUD-RP',
+            "VALOR CDP TOTAL" = @VALOR-CDP-TOTAL,
+            "OBJETO SOLICITUD CRP" = '@OBJETO-SOLICITUD-CRP',
+                
+            crp_fecha = CASE WHEN to_date('@crp_fecha', 'DD/MM/YYYY') = '0001-01-01 BC' THEN NULL ELSE to_date('@crp_fecha', 'DD/MM/YYYY') END,
+            crp_numero = '@crp_numero',
+            
+            "resolucion_estado" = '@resolucion_estado',
+            
+            "INICIO PAGO" = CASE WHEN to_date('@INI-PAGO', 'DD/MM/YYYY') = '0001-01-01 BC' THEN NULL ELSE to_date('@INI-PAGO', 'DD/MM/YYYY') END,
+            "FIN PAGO" = CASE WHEN to_date('@FN-PAGO', 'DD/MM/YYYY') = '0001-01-01 BC' THEN NULL ELSE to_date('@FN-PAGO', 'DD/MM/YYYY') END,
+                                
+            "resolucion_marzo_upd_fecha" = to_timestamp('@TIMESTAMP_SISTEMA', 'DD/MM/YYYY HH24:MI:SS'),
+            "resolucion_usuario_financiero" = '@resolucion_usuario_financiero',
+            "resolucion_cargo_usuario_financiero" = '@resolucion_cargo_usuario_financiero'
+            WHERE
+            "IDENTIFICADOR" = '@IDENTIFICADOR'
+                
+            
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>false</es_dml_complejo>
+    </Consulta>
+    
+    <Consulta id="ActualizarDatosCuentas">
+        <sql>
+            
+            UPDATE contrato SET
+            "@nombre" = @tipo@value@tipo,
+            contrato_upd_user = '@USUARIO_SISTEMA', 
+            contrato_upd_time = to_timestamp('@TIMESTAMP_SISTEMA', 'DD/MM/YYYY HH24:MI:SS')
+            WHERE
+            claveunida = '@claveunida'
+            RETURNING "@nombre"
+                
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>true</es_dml_complejo>
+    </Consulta>
+    <Consulta id="reporte_fichas">
+        <sql>
+            select identificador,"IDENTIFICA_ANTERIOR" ,CONCAT ( "1er_Nombre_Ben1",' ',"2do_Nombre_Ben1",' ',"1er_Apellido_Ben1",' ',"2do_Apellido_Ben1" )as nom_prin,"Cedula 1"
+            from ficha_reconocimiento_v1 as fr inner join definitiva as df on fr.identificador=df."IDENTIFICADOR" where identificador like '2018-11%';
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>true</es_dml_complejo>
+    </Consulta>
+    <Consulta id="salvar_identificacion_caracterizacion">
+        <sql>
+            WITH 
+            sel as (
+            Select "IDENTIFICADOR" from definitiva where "IDENTIFICADOR"='@identificador' 
+            ),
+            upd as(
+            UPDATE	definitiva
+            SET 	
+            "Localidad"='@localidad',"Barrio"='@barrio',
+            "Dirección"='@direccion',"MZ"='@manzana',"LT"='@lote'                  
+            WHERE "IDENTIFICADOR"=(select "IDENTIFICADOR" from sel)
+            returning "IDENTIFICADOR"
+            ),ins as(
+            INSERT INTO definitiva("IDENTIFICADOR", "Barrio", "Localidad","MZ","LT")
+            SELECT '@identificador' ,'@barrio','@localidad','@manzana','@lote' 
+            WHERE NOT EXISTS (select 1 from upd )
+            returning "IDENTIFICADOR"	
+            )
+            select * from upd union select * from ins 
+                
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>true</es_dml_complejo>
+    </Consulta>
+    
+    
+     
+    <Consulta id="ActualizarFechasCuentas">
+        <sql>
+            
+            UPDATE contrato SET
+            "@nombre" = @tipo@value@tipo
+            WHERE
+            claveunida = '@claveunida'
+            RETURNING "@nombre"
+
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>true</es_dml_complejo>
+    </Consulta>
+    <Consulta id="CalcularValoresCuentasResolucionMarzo">
+        <sql>
+            
+            UPDATE cuentas_resoluciones_marzo
+            SET
+            dias_x_pagar = date_part( 'day', age("FIN VALIDO" + interval '1 day' , "INICIO VALIDO" ) )
+            ,meses_x_pagar = ( date_part( 'year', age("FIN VALIDO" + interval '1 day' , "INICIO VALIDO" ) ) * 12 ) + ( date_part( 'month', age("FIN VALIDO" + interval '1 day' , "INICIO VALIDO" ) ) ) 
+            ,total_pagar = ( 
+            round(valor_ayuda_mes * date_part( 'day', age("FIN VALIDO" + interval '1 day' , "INICIO VALIDO" ) ) / 30 ) +
+            (valor_ayuda_mes * 
+            ( 
+            ( date_part( 'year', age("FIN VALIDO" + interval '1 day' , "INICIO VALIDO" ) ) * 12 ) 
+            + 
+            ( date_part( 'month', age("FIN VALIDO" + interval '1 day' , "INICIO VALIDO" ) ) )
+            )
+            ) 
+            ) 
+            where "CLAVEUNIDA" = '@CLAVEUNIDA'
+            returning dias_x_pagar,meses_x_pagar,total_pagar
+
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>true</es_dml_complejo>
+    </Consulta>
+    
+    <Consulta id="ActualizarEstadoContrato">
+        <sql>
+            
+            UPDATE cuentas_resoluciones_marzo SET
+            incluir_contrato = @ACTIVO
+            WHERE
+            "CLAVEUNIDA" = '@CLAVEUNIDA'
+            
+                
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>false</es_dml_complejo>
+    </Consulta>
+    
+    
+    <Consulta id="InsertarNuevoContrato">
+        <sql>
+            INSERT INTO contrato
+            (
+            identificador ,
+            claveunida ,
+            consecontrato ,
+            cont_fecha_inicio ,
+            cont_fecha_fin ,
+            valor_ayuda_mes ,
+            titular_nombre ,
+            titular_cedula ,
+            cuenta_banco ,
+            cuenta_tipo ,
+            cuenta_numero ,
+            contrato_user ,
+            contrato_time,
+            
+            cont_direccion_predio,
+            cont_localidad_predio,
+            cont_upz_predio,
+            cont_barrio_predio,
+            cont_matricula_predio,
+            cont_chip_predio,
+            beneficiario_telefono
+            )
+            VALUES 
+            (
+            '@identificador',
+            '@identificador' || (select coalesce( max(consecontrato) + 1, 1) from contrato where identificador = '@identificador'),
+            (select coalesce( max(consecontrato) + 1, 1) from contrato where identificador = '@identificador'),
+            CASE WHEN to_date('@cont_fecha_inicio', 'DD/MM/YYYY') = '0001-01-01 BC' THEN NULL ELSE to_date('@cont_fecha_inicio', 'DD/MM/YYYY') END,
+            CASE WHEN to_date('@cont_fecha_fin', 'DD/MM/YYYY') = '0001-01-01 BC' THEN NULL ELSE to_date('@cont_fecha_fin', 'DD/MM/YYYY') END,
+            @valor_ayuda_mes,
+            '@titular_nombre',
+            '@titular_cedula',
+            @cuenta_banco,
+            '@cuenta_tipo',
+            '@cuenta_numero',
+            '@USUARIO_SISTEMA', 
+            to_timestamp('@TIMESTAMP_SISTEMA', 'DD/MM/YYYY HH24:MI:SS'),
+                
+            '@cont_direccion_predio',
+            CASE WHEN '@cont_localidad_predio' &lt;&gt; '' THEN '@cont_localidad_predio' ELSE null END,
+            CASE WHEN '@cont_upz_predio' &lt;&gt; '' THEN '@cont_upz_predio' ELSE null END,
+            '@cont_barrio_predio',
+            '@cont_matricula_predio',
+            '@cont_chip_predio',
+            '@telefono'
+            )
+            returning *
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>true</es_dml_complejo>
+    </Consulta>
+    
+    <Consulta id="ActualizarEstadoResoluciones">
+        <sql>
+            
+            UPDATE resoluciones_marzo SET
+            "@nombre" = @tipo@value@tipo
+            WHERE
+            "IDENTIFICADOR" = '@IDENTIFICADOR'
+            RETURNING "@nombre"
+                
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>true</es_dml_complejo>
+    </Consulta>
+    <Consulta id="actualizarNumeroResolucionConsecutivo">
+        <sql>
+            
+            UPDATE resoluciones_marzo SET
+            "RESOLUCION" = nextval('sequencia_resoluciones')
+            WHERE
+            "IDENTIFICADOR" = '@IDENTIFICADOR'
+            RETURNING "RESOLUCION"
+                
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>true</es_dml_complejo>
+    </Consulta>
+    
+    <Consulta id="ActualizarEstadoResolucionesMasivo">
+        <sql>
+            
+            UPDATE resoluciones_marzo SET
+            "@nombre" = @tipo@value@tipo
+            WHERE
+            "IDENTIFICADOR" in (@IDENTIFICADORES)
+            RETURNING "@nombre"
+                
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>true</es_dml_complejo>
+    </Consulta>
+    
+    <Consulta id="GuardarNuevoMemorando">
+        <sql>
+            INSERT INTO memorando (identificador,resolucion,cdp,crp,inicio_pago,fin_pago) 
+            values(
+            '@IDENTIFICADOR',
+            '@RESOLUCION',
+            '@cdp_numero',
+            '@crp_numero',
+            CASE WHEN to_date('@INI-PAGO', 'DD/MM/YYYY') = '0001-01-01 BC' THEN NULL ELSE to_date('@INI-PAGO', 'DD/MM/YYYY') END,
+            CASE WHEN to_date('@FN-PAGO', 'DD/MM/YYYY') = '0001-01-01 BC' THEN NULL ELSE to_date('@FN-PAGO', 'DD/MM/YYYY') END
+            )
+            RETURNING id
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>true</es_dml_complejo>
+    </Consulta>
+    
+    <Consulta id="ActualizarAlertas">
+        <sql>
+            
+            UPDATE "ALERTAS RESOLUCIONES" SET
+            "@nombre" = @tipo@value@tipo
+            WHERE
+            "IDENTIFICADOR" = '@IDENTIFICADOR'
+            RETURNING "@nombre"
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>true</es_dml_complejo>
+    </Consulta>
+    
+    <Consulta id="GuardarNuevoMemorando_desde_grafico">
+        <sql>
+            WITH
+            upd as (
+            UPDATE memorando SET
+            resolucion = '@RESOLUCION',
+            cdp = '@cdp_numero',
+            crp = '@crp_numero',
+            cordis = '@cordis',
+            inicio_pago = CASE WHEN to_date('@INI-PAGO', 'DD/MM/YYYY') = '0001-01-01 BC' THEN NULL ELSE to_date('@INI-PAGO', 'DD/MM/YYYY') END,
+            fin_pago = CASE WHEN to_date('@FN-PAGO', 'DD/MM/YYYY') = '0001-01-01 BC' THEN NULL ELSE to_date('@FN-PAGO', 'DD/MM/YYYY') END,
+            memorando_user = '@USUARIO_SISTEMA', 
+            memorando_fecha = to_timestamp('@TIMESTAMP_SISTEMA', 'DD/MM/YYYY HH24:MI:SS')
+            WHERE
+            identificador = '@IDENTIFICADOR' and id = @id
+            returning chart_id
+            ),
+            ins as (
+            INSERT INTO memorando ( 
+            id, 
+            identificador, 
+            resolucion, 
+            cdp, 
+            crp, 
+            cordis, 
+            inicio_pago, 
+            fin_pago,
+            memorando_user , 
+            memorando_fecha 
+            ) 
+            SELECT 
+            @id,
+            '@IDENTIFICADOR',
+            '@RESOLUCION',
+            '@cdp_numero',
+            '@crp_numero',
+            '@cordis',
+            CASE WHEN to_date('@INI-PAGO', 'DD/MM/YYYY') = '0001-01-01 BC' THEN NULL ELSE to_date('@INI-PAGO', 'DD/MM/YYYY') END,
+            CASE WHEN to_date('@FN-PAGO', 'DD/MM/YYYY') = '0001-01-01 BC' THEN NULL ELSE to_date('@FN-PAGO', 'DD/MM/YYYY') END,
+            '@USUARIO_SISTEMA', 
+            to_timestamp('@TIMESTAMP_SISTEMA', 'DD/MM/YYYY HH24:MI:SS')
+            WHERE NOT EXISTS (SELECT 1 FROM memorando WHERE identificador = '@IDENTIFICADOR' and id = @id)
+            returning chart_id
+            ) 
+            select * from ins union select * from upd;
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>true</es_dml_complejo>
+    </Consulta>
+    <Consulta id="Eliminar_Memorando_desde_grafico">
+        <sql>
+            WITH
+            radicaciones as (
+            DELETE FROM grupo_radicacion_memorando
+            WHERE memorando_id = '@id'
+            ),
+            memos as (
+            DELETE FROM memorando 
+            WHERE
+            identificador = '@IDENTIFICADOR' and id = '@id'
+            returning id
+            )
+            select * from memos
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>true</es_dml_complejo>
+    </Consulta>
+    
+    <Consulta id="Eliminar_Resolucion_desde_grafico">
+        <sql>
+            with cons as(
+            select id_resolucion, resolucion, identificador, res_modificatoria,
+            (case 
+            when res_modificatoria IS NOT NULL THEN (SELECT id_res_modificatoria FROM resolucion_modificacion where id_res_original=id_resolucion)
+		
+            end) as modif
+            ,
+            (case 
+            when res_modificatoria IS NULL THEN (SELECT id_res_original FROM resolucion_modificacion where (id_res_original=id_resolucion OR id_res_modificatoria=id_resolucion ))
+            end) as modificatoria
+	
+            from resolucion 
+            where identificador = '@IDENTIFICADOR' and resolucion = '@id'
+            ), 
+            bep as (	
+            UPDATE resolucion SET res_modificatoria=null where id_resolucion=(select modificatoria from cons) 		
+	
+            ),
+            del as (
+            delete from resolucion where id_resolucion= (select modif from cons)
+            ),
+            del2 as (
+            delete from resolucion where id_resolucion= (select id_resolucion from cons )
+            )       
+            select * from cons            
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>false</es_dml_complejo>
+    </Consulta>
+    
+    <Consulta id="editar_resolucion_desde_grafico">
+        <sql>
+            UPDATE resolucion SET
+            fecha_inicio = CASE WHEN to_date('@fecha_inicio', 'DD/MM/YYYY') = '0001-01-01 BC' THEN NULL ELSE to_date('@fecha_inicio', 'DD/MM/YYYY') END,
+            fecha_fin = CASE WHEN to_date('@fecha_fin', 'DD/MM/YYYY') = '0001-01-01 BC' THEN NULL ELSE to_date('@fecha_fin', 'DD/MM/YYYY') END
+            WHERE
+            identificador = '@IDENTIFICADOR' and resolucion = '@id'
+            returning resolucion
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>true</es_dml_complejo>
+    </Consulta>
+    
+    <Consulta id="insertar_resolucion_desde_grafico">
+        <sql>
+            INSERT INTO resolucion (  
+            identificador ,  
+            fecha_inicio ,  
+            fecha_fin,  
+            resolucion ,  
+            fecha_resolucion ,
+            cdp_id,
+            crp_numero,
+            crp_fecha,
+            resolucion_user,
+            resolucion_fecha
+            ) 
+            VALUES 
+            (
+            '@identificador',
+            CASE WHEN to_date('@fecha_inicio', 'DD/MM/YYYY') = '0001-01-01 BC' THEN NULL ELSE to_date('@fecha_inicio', 'DD/MM/YYYY') END,
+            CASE WHEN to_date('@fecha_fin', 'DD/MM/YYYY') = '0001-01-01 BC' THEN NULL ELSE to_date('@fecha_fin', 'DD/MM/YYYY') END,
+            '@resolucion',
+            CASE WHEN to_date('@fechaResolucion', 'DD/MM/YYYY') = '0001-01-01 BC' THEN NULL ELSE to_date('@fechaResolucion', 'DD/MM/YYYY') END,
+            @cdp_id,
+            '@crp',
+            CASE WHEN to_date('@fechaCRP', 'DD/MM/YYYY') = '0001-01-01 BC' THEN NULL ELSE to_date('@fechaCRP', 'DD/MM/YYYY') END,
+            '@USUARIO_SISTEMA', 
+            to_timestamp('@TIMESTAMP_SISTEMA', 'DD/MM/YYYY HH24:MI:SS')
+            )
+            returning id_resolucion
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>true</es_dml_complejo>
+    </Consulta>
+    <Consulta id="insertar_actualizar_resolucion_desde_grafico">
+        <sql>
+            WITH
+            upd as (
+            UPDATE resolucion SET
+            fecha_inicio =CASE WHEN to_date('@fecha_inicio', 'DD/MM/YYYY') = '0001-01-01 BC' THEN NULL ELSE to_date('@fecha_inicio', 'DD/MM/YYYY') END,
+            fecha_fin =CASE WHEN to_date('@fecha_fin', 'DD/MM/YYYY') = '0001-01-01 BC' THEN NULL ELSE to_date('@fecha_fin', 'DD/MM/YYYY') END,
+            resolucion ='@resolucion',
+            fecha_resolucion =CASE WHEN to_date('@fechaResolucion', 'DD/MM/YYYY') = '0001-01-01 BC' THEN NULL ELSE to_date('@fechaResolucion', 'DD/MM/YYYY') END,
+            cdp_id = @cdp_id,
+            crp_numero ='@crp',
+            crp_fecha =CASE WHEN to_date('@fechaCRP', 'DD/MM/YYYY') = '0001-01-01 BC' THEN NULL ELSE to_date('@fechaCRP', 'DD/MM/YYYY') END,
+            ties_res_id = @ties_res_id,
+            resolucion_observaciones = '@observaciones',
+            resolucion_usr_upd ='@USUARIO_SISTEMA', 
+            resolucion_time_upd =to_timestamp('@TIMESTAMP_SISTEMA', 'DD/MM/YYYY HH24:MI:SS')
+            WHERE
+            id_resolucion = @id_resolucion
+            returning id_resolucion, 'UPDATE'::text as op
+            ),
+            ins as (
+            INSERT INTO resolucion (  
+            identificador ,  
+            fecha_inicio ,  
+            fecha_fin,  
+            resolucion ,  
+            fecha_resolucion ,
+            cdp_id,
+            crp_numero,
+            crp_fecha,
+            ties_res_id,
+            resolucion_observaciones,
+            resolucion_user,
+            resolucion_fecha
+            ) 
+            SELECT
+            '@identificador',
+            CASE WHEN to_date('@fecha_inicio', 'DD/MM/YYYY') = '0001-01-01 BC' THEN NULL ELSE to_date('@fecha_inicio', 'DD/MM/YYYY') END,
+            CASE WHEN to_date('@fecha_fin', 'DD/MM/YYYY') = '0001-01-01 BC' THEN NULL ELSE to_date('@fecha_fin', 'DD/MM/YYYY') END,
+            '@resolucion',
+            CASE WHEN to_date('@fechaResolucion', 'DD/MM/YYYY') = '0001-01-01 BC' THEN NULL ELSE to_date('@fechaResolucion', 'DD/MM/YYYY') END,
+            @cdp_id,
+            '@crp',
+            CASE WHEN to_date('@fechaCRP', 'DD/MM/YYYY') = '0001-01-01 BC' THEN NULL ELSE to_date('@fechaCRP', 'DD/MM/YYYY') END,
+            @ties_res_id,
+            '@observaciones',
+            '@USUARIO_SISTEMA', 
+            to_timestamp('@TIMESTAMP_SISTEMA', 'DD/MM/YYYY HH24:MI:SS')
+            WHERE NOT EXISTS (SELECT 1 FROM resolucion WHERE id_resolucion = @id_resolucion)
+            returning id_resolucion, 'INSERT'::text as op
+            ) 
+            select * from ins union select * from upd;
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>true</es_dml_complejo>
+    </Consulta>    
+    <Consulta id="insertar_observacion_identificador">
+        <sql>
+            INSERT INTO comentarios (  
+            identificador ,  
+            comen_desc ,  
+            comen_interesados,
+            comen_referencias,
+            comen_user,
+            comen_time
+            ) 
+            VALUES
+            (
+            '@identificador',
+            '@comen_desc',
+            '@comen_interesados',
+            '@comen_referencias',
+            '@USUARIO_SISTEMA', 
+            to_timestamp('@TIMESTAMP_SISTEMA', 'DD/MM/YYYY HH24:MI:SS')
+            )
+            returning encode(hmac(comen_id::text,comen_user, 'sha1'),'hex') as comen_id, 'INSERT'::text as op
+            
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>true</es_dml_complejo>
+    </Consulta>
+    
+    <Consulta id="insertar_editar_grupo_radicacion_memorando">
+        <sql>
+            WITH
+            upd as (
+            UPDATE grupo_radicacion SET
+            grurad_upd_user ='@USUARIO_SISTEMA', 
+            grurad_upd_time =to_timestamp('@TIMESTAMP_SISTEMA', 'DD/MM/YYYY HH24:MI:SS')
+            WHERE
+            grurad_id = @grupoId
+            returning grurad_id, grurad_fecha, 'UPDATE'::text as op
+            ),
+            ins as (
+            INSERT INTO grupo_radicacion (  
+            grurad_fecha ,  
+            grurad_user ,  
+            grurad_time
+            ) 
+            SELECT
+            to_timestamp('@TIMESTAMP_SISTEMA', 'DD/MM/YYYY HH24:MI:SS'),
+            '@USUARIO_SISTEMA', 
+            to_timestamp('@TIMESTAMP_SISTEMA', 'DD/MM/YYYY HH24:MI:SS')
+            WHERE NOT EXISTS (SELECT 1 FROM grupo_radicacion WHERE grurad_id = @grupoId)
+            returning grurad_id, grurad_fecha, 'INSERT'::text as op
+            ), 
+            grupo as (
+            select * from ins union select * from upd
+            ),
+            elim_anteriores as (
+            delete from grupo_radicacion_memorando where grurad_id in (select grurad_id from grupo) and memorando_id not in (@MEMORANDOS_IDS)
+            ),
+            inser_nuevos as (
+            insert into grupo_radicacion_memorando
+            select * from
+            (select (select grurad_id from grupo),unnest(ARRAY[ @MEMORANDOS_IDS ]) memorando_id ) a where memorando_id not in (select memorando_id from grupo_radicacion_memorando where grurad_id in (select grurad_id from grupo) )
+            returning *
+            )
+            select * from grupo
+            
+            
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>true</es_dml_complejo>
+    </Consulta>
+    
+    <Consulta id="InsertarEditarMemorandoDesdeGrafico">
+        <sql>
+            WITH
+            upd as (
+            UPDATE memorando SET
+            resolucion = '@RESOLUCION',
+            cdp = (select cdp_numero::text from cdp where cdp_id = @cdp_numero),
+            crp = '@crp_numero',
+            cordis = '@cordis',
+            inicio_pago = CASE WHEN to_date('@INI-PAGO', 'DD/MM/YYYY') = '0001-01-01 BC' THEN NULL ELSE to_date('@INI-PAGO', 'DD/MM/YYYY') END,
+            fin_pago = CASE WHEN to_date('@FN-PAGO', 'DD/MM/YYYY') = '0001-01-01 BC' THEN NULL ELSE to_date('@FN-PAGO', 'DD/MM/YYYY') END,
+            ties_mem_id = @ties_mem_id,
+            memorando_user = '@USUARIO_SISTEMA', 
+            memorando_fecha = to_timestamp('@TIMESTAMP_SISTEMA', 'DD/MM/YYYY HH24:MI:SS')
+            WHERE
+            identificador = '@IDENTIFICADOR' and id = @id
+            returning id::text, 'UPDATE'::text as op
+            ),
+            ins as (
+            INSERT INTO memorando ( 
+            id, 
+            identificador, 
+            resolucion, 
+            cdp, 
+            crp, 
+            cordis, 
+            inicio_pago, 
+            fin_pago,
+            ties_mem_id,
+            memorando_user , 
+            memorando_fecha 
+            ) 
+            SELECT 
+            @id,
+            '@IDENTIFICADOR',
+            '@RESOLUCION',
+            (select cdp_numero::text from cdp where cdp_id = @cdp_numero),
+            '@crp_numero',
+            '@cordis',
+            CASE WHEN to_date('@INI-PAGO', 'DD/MM/YYYY') = '0001-01-01 BC' THEN NULL ELSE to_date('@INI-PAGO', 'DD/MM/YYYY') END,
+            CASE WHEN to_date('@FN-PAGO', 'DD/MM/YYYY') = '0001-01-01 BC' THEN NULL ELSE to_date('@FN-PAGO', 'DD/MM/YYYY') END,
+            @ties_mem_id,
+            '@USUARIO_SISTEMA', 
+            to_timestamp('@TIMESTAMP_SISTEMA', 'DD/MM/YYYY HH24:MI:SS')
+            WHERE NOT EXISTS (SELECT 1 FROM memorando WHERE identificador = '@IDENTIFICADOR' and id = @id)
+            returning id::text, 'INSERT'::text as op
+            ) 
+            select * from ins union select * from upd;
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>true</es_dml_complejo>
+    </Consulta>
+    <Consulta id="AsignarTarea">
+        <sql>
+            UPDATE actividad SET
+            actividad_usuario = '@actividad_usuario',
+            tiest_proc_id = 2,
+            actividad_asignacion_fecha = to_timestamp('@TIMESTAMP_SISTEMA', 'DD/MM/YYYY HH24:MI:SS')
+            WHERE
+            proceso_id= @proceso_id  AND
+            tipo_actividad_id = @tipo_actividad_id
+            returning 'ok'
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>true</es_dml_complejo>
+    </Consulta>    
+    <Consulta id="ActualizarTareaEnProceso">
+        <sql>
+            UPDATE actividad SET
+            tiest_proc_id = 3
+            WHERE
+            proceso_id= @proceso_id  AND
+            tipo_actividad_id = @tipo_actividad_id
+            returning 'ok'
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>true</es_dml_complejo>
+    </Consulta>
+    <Consulta id="ActualizarTareaCompletada">
+        <sql>
+            WITH
+            upd as (
+            UPDATE actividad SET
+            tiest_proc_id = 4
+            ,actividad_activa = false
+            ,actividad_finalizacion_fecha = to_timestamp('@TIMESTAMP_SISTEMA', 'DD/MM/YYYY HH24:MI:SS')
+            WHERE
+            proceso_id= @proceso_id  AND
+            tipo_actividad_id = @tipo_actividad_id
+            returning proceso_id,tipo_actividad_id
+            ),
+            activar_siguientes as(
+            UPDATE actividad SET
+            actividad_activa = true
+            ,tiest_proc_id = 2
+            ,actividad_asignacion_fecha = to_timestamp('@TIMESTAMP_SISTEMA', 'DD/MM/YYYY HH24:MI:SS')
+            WHERE
+            proceso_id = (select proceso_id from upd)
+            AND
+            tipo_actividad_id in( select tiact_id from tipo_actividad where actividad_previa = (select tipo_actividad_id from upd))
+            RETURNING proceso_id,tipo_actividad_id
+            )
+            select * from activar_siguientes union select * from upd;
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>true</es_dml_complejo>
+    </Consulta>
+    
+    <Consulta id="InsertarNuevoProceso">
+        <sql>
+            WITH
+            proc as (
+            INSERT INTO proceso ( 
+            identificador,
+            tiproc_id,
+            cordis_entrada,
+            cordis_fecha_entrada,
+            tiesproc_id,
+            proc_usuario,
+            proc_time
+            ) 
+            SELECT 
+            '@IDENTIFICADOR',
+            @tipo_proceso_id,
+            '@cordis_entrada',
+            to_timestamp('@cordis_fecha_entrada', 'DD/MM/YYYY HH24:MI:SS'),
+            1,
+            '@USUARIO_SISTEMA', 
+            to_timestamp('@TIMESTAMP_SISTEMA', 'DD/MM/YYYY HH24:MI:SS')
+            returning proc_id
+            ) ,
+            act as (
+            INSERT INTO actividad(
+            proceso_id ,
+            tipo_actividad_id ,
+            tiest_proc_id ,
+            actividad_usuario ,
+            actividad_asignacion_fecha,
+            actividad_activa
+            )
+            SELECT *, (SELECT actividad_previa is null FROM tipo_actividad WHERE  tiact_id = act)
+            FROM 
+            (
+            SELECT  
+            unnest(ARRAY[ (select proc_id from proc) ])
+            ,unnest(ARRAY[ @tipo_actividad_id ]) act
+            ,unnest(ARRAY[ 2 ])
+            ,unnest(ARRAY[ @usuario ])
+            ,unnest(ARRAY[ to_timestamp('@TIMESTAMP_SISTEMA', 'DD/MM/YYYY HH24:MI:SS') ])
+            ) a
+            RETURNING proceso_id,tipo_actividad_id
+            )
+            select * from act;
+
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>true</es_dml_complejo>
+    </Consulta>
+    <Consulta id="InsertarRevisionJuridicaNuevoContrato">
+        <sql>
+            
+            WITH
+            upd as (
+            UPDATE revision_nuevo_contrato SET
+            revcon_entrega_par= @revcon_entrega_par, 
+            revcon_completitud_contrato= @revcon_completitud_contrato, 
+            revcon_titularidad= @revcon_titularidad, 
+            revcon_certificacion_bancaria= @revcon_certificacion_bancaria, 
+            revcon_obs_entrega_par= '@revcon_obs_entrega_par', 
+            revcon_obs_completitud_contrato= '@revcon_obs_completitud_contrato', 
+            revcon_obs_titularidad= '@revcon_obs_titularidad', 
+            revcon_obs_certificacion_bancaria= '@revcon_obs_certificacion_bancaria', 
+            revcon_viable= @revcon_viable, 
+            revcon_fecha_inicio_ayuda = CASE WHEN to_date('@revcon_fecha_inicio_ayuda', 'DD/MM/YYYY') = '0001-01-01 BC' THEN NULL ELSE to_date('@revcon_fecha_inicio_ayuda', 'DD/MM/YYYY') END,
+            revcon_fecha_fin_ayuda = CASE WHEN to_date('@revcon_fecha_fin_ayuda', 'DD/MM/YYYY') = '0001-01-01 BC' THEN NULL ELSE to_date('@revcon_fecha_fin_ayuda', 'DD/MM/YYYY') END,
+            revcon_usuario= '@USUARIO_SISTEMA', 
+            revcon_time= to_timestamp('@TIMESTAMP_SISTEMA', 'DD/MM/YYYY HH24:MI:SS')
+            WHERE
+            revcon_cordis_solicitud = '@cordis' AND
+            identificador= '@identificador' 
+            returning revcont_id
+            ),
+            ins as (
+            INSERT INTO public.revision_nuevo_contrato(
+            revcon_cordis_solicitud, 
+            identificador, 
+            revcon_entrega_par, 
+            revcon_completitud_contrato, 
+            revcon_titularidad, 
+            revcon_certificacion_bancaria, 
+            revcon_viable, 
+            revcon_fecha_inicio_ayuda ,
+            revcon_fecha_fin_ayuda ,
+            revcon_usuario, 
+            revcon_time
+            )
+            SELECT 
+            '@cordis', 
+            '@identificador',
+            @revcon_entrega_par,
+            @revcon_completitud_contrato,
+            @revcon_titularidad,
+            @revcon_certificacion_bancaria,
+            @revcon_viable,
+            CASE WHEN to_date('@revcon_fecha_inicio_ayuda', 'DD/MM/YYYY') = '0001-01-01 BC' THEN NULL ELSE to_date('@revcon_fecha_inicio_ayuda', 'DD/MM/YYYY') END,
+            CASE WHEN to_date('@revcon_fecha_fin_ayuda', 'DD/MM/YYYY') = '0001-01-01 BC' THEN NULL ELSE to_date('@revcon_fecha_fin_ayuda', 'DD/MM/YYYY') END,
+            '@USUARIO_SISTEMA', 
+            to_timestamp('@TIMESTAMP_SISTEMA', 'DD/MM/YYYY HH24:MI:SS')
+            WHERE NOT EXISTS (SELECT 1 FROM revision_nuevo_contrato WHERE 
+            revcon_cordis_solicitud = '@cordis' AND
+            identificador= '@identificador' 
+            )
+            returning revcont_id
+            ),
+            activi as (
+            UPDATE actividad SET
+            puede_completarse = true
+            WHERE
+            proceso_id = @proceso_id AND  tipo_actividad_id = @tipo_actividad_id
+            )
+            select * from ins union select * from upd;
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>true</es_dml_complejo>
+    </Consulta>
+    <Consulta id="ActualizarDatosOficioRespuestaRevisionNuevoContrato">
+        <sql>
+            WITH
+            upd as (
+            UPDATE proceso SET
+            noti_direccion = '@noti_direccion',
+            noti_barrio = '@noti_barrio',
+            noti_ciudad = '@noti_ciudad',
+            noti_localidad = '@noti_localidad',
+            noti_telefono = '@noti_telefono',
+            noti_nombre = $$@noti_nombre$$
+
+            WHERE
+            cordis_entrada = '@cordis' AND
+            identificador= '@identificador' 
+            returning proc_id
+            ),
+            activi as (
+            UPDATE actividad SET
+            puede_completarse = true
+            WHERE
+            proceso_id = @proceso_id AND  tipo_actividad_id = @tipo_actividad_id
+            )
+            select * from upd
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>true</es_dml_complejo>
+    </Consulta>
+    
+    <Consulta id="ActualizarDatosCordisSalidaSolicitudNuevoContrato">
+        <sql>
+            WITH
+            upd as (
+            UPDATE proceso SET
+            cordis_salida = '@cordis_salida',
+            cordis_fecha_salida = to_timestamp('@cordis_fecha_salida', 'DD/MM/YYYY')
+
+            WHERE
+            cordis_entrada = '@cordis' AND
+            identificador= '@identificador' 
+            returning proc_id
+            ),
+            activi as (
+            UPDATE actividad SET
+            puede_completarse = true
+            WHERE
+            proceso_id = @proceso_id AND  tipo_actividad_id = @tipo_actividad_id
+            )
+            select * from upd
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>true</es_dml_complejo>
+    </Consulta>
+    <Consulta id="crear_resolucion_modificatoria">
+        <sql>
+            WITH ins1 AS (
+            SELECT * FROM resolucion 
+            WHERE resolucion='@resolucion' and identificador='@identificador'
+            order by fecha_resolucion desc limit 1
+            )
+            ,ins2 AS ( 
+            UPDATE resolucion
+            SET res_modificatoria='true', 
+            fecha_fin= ((SELECT fecha_fin FROM ins1) - interval '1 days')
+            WHERE id_resolucion=(select id_resolucion from ins1) 
+            RETURNING id_resolucion  	      
+            )
+            ,ins3 AS (
+            INSERT INTO resolucion(
+            identificador, fecha_inicio, fecha_fin, resolucion, 
+            fecha_resolucion, cdp_id, resolucion_user, resolucion_fecha, 
+            crp_numero, crp_fecha,  resolucion_usr_upd, 
+            resolucion_time_upd)
+            VALUES (
+            (SELECT identificador FROM ins1), 
+            (SELECT fecha_inicio FROM ins1), 
+            (SELECT fecha_fin FROM ins1), 
+            CONCAT((SELECT resolucion FROM ins1),'Modif.'), 
+            (SELECT fecha_resolucion FROM ins1), 
+            (SELECT cdp_id FROM ins1),
+            (SELECT resolucion_user FROM ins1), 
+            now(),
+            (SELECT crp_numero FROM ins1), 
+            (SELECT crp_fecha FROM ins1),
+            '@usuario',
+            now()              
+            )
+            RETURNING id_resolucion
+            )
+            ,ins4 AS (
+            INSERT INTO resolucion_modificacion(id_res_original,id_res_modificatoria, id_tipo_modificacion, justificacion)
+            VALUES (
+            (SELECT id_resolucion FROM ins1),
+            (SELECT id_resolucion FROM ins3),
+            @tipo,
+            '@justificacion'
+            )
+            )
+            SELECT id_resolucion FROM  ins3 
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>true</es_dml_complejo>
+    </Consulta>
+    <Consulta id="ActualizarTareaPuedeCompletarse">
+        <sql>
+            UPDATE actividad SET
+            puede_completarse = true
+            WHERE
+            proceso_id = @proceso_id AND  tipo_actividad_id = @tipo_actividad_id
+            returning 'ok'
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>true</es_dml_complejo>
+    </Consulta>
+    <Consulta id="guardar_modificatoria">
+        <sql>
+            UPDATE resolucion_modificacion SET id_tipo_modificacion=@tipo, justificacion='@justificacion'
+            WHERE id_res_modificatoria=(select id_resolucion from resolucion where resolucion='@resolucion')
+            returning *
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>true</es_dml_complejo>
+    </Consulta>  
+    <Consulta id="guardar_actualizar_notificacion">
+        <sql>
+            WITH sel as (
+            Select * from resolucion where id_resolucion='@resolucion' and identificador='@identificador' 
+            ),
+            usu as (
+            select * from usuario where usuario_usuario='@usuario'
+            ),ups as(
+            UPDATE	res_notificacion
+            SET 	notificacion_fecha='@fecha', usuario_id=(select usuario_id from usu)
+            WHERE resolucion_id=(select id_resolucion from sel)
+            returning resolucion_id
+            ),ins as(
+            INSERT INTO res_notificacion(resolucion_id, notificacion_fecha, usuario_id)
+            select (select id_resolucion from sel),'@fecha' , (select usuario_id from usu)
+            WHERE NOT EXISTS (select 1 from ups )
+            returning resolucion_id	
+            )
+            select * from ups union select * from ins
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>true</es_dml_complejo>
+    </Consulta>  
+    
+    <!--creacion expediente-->   
+    <Consulta id="crear_proceso_identificador_vereditas">
+        <sql>
+            WITH 
+            sel as (
+            Select "IDENTIFICADOR" from definitiva where "IDENTIFICADOR"= '@identificador2' OR  "IDENTIFICA_ANTERIOR"= '@identificador2'
+            ),
+            ins as(
+            INSERT INTO definitiva("IDENTIFICADOR","IDENTIFICA_ANTERIOR","Barrio","Localidad","MZ","LT","Sector","Concepto de Ingreso","Fecha de Ingreso al Proceso" ,"Dirección","Cod_Estado_Proceso","Cod_Estado_Subproceso","UPZ",fecha_concepto_ingreso,"Código Chip Catastro",contrato_user,contrato_time)
+            SELECT date_part('year', CURRENT_DATE)||'-'||SUBSTRING ('@localidad' FROM 1 for 2)||'-'||(select id_familia from definitiva order by id_familia DESC limit 1),'@identificador2' ,'@barrio','@localidad','@manzana','@lote','@sector','@concepto','@fecha_ingreso','@direccion',1,11,'@upz',@fecha_concepto,@chip ,'@usuario',CURRENT_DATE
+            WHERE NOT EXISTS (select 1 from sel )
+            returning "IDENTIFICADOR"	
+            ),
+            unidades as (
+            INSERT INTO "tbl_Unds_Habitacionales" ("Identificador","Num_Und_Habitacional")
+            SELECT (select "IDENTIFICADOR" from ins),@unidades
+            WHERE NOT EXISTS (select 1 from sel )  AND   exists ( select 1 from ins)
+            returning "Identificador"	
+            ),
+            sel_riesgo as (
+            SELECT "Identificador", "Riesgo"
+            FROM public."tbl_Riesgo"
+            WHERE "Identificador"=(select "IDENTIFICADOR" from ins)
+
+            ), upd_riesgo as (
+            UPDATE public."tbl_Riesgo"
+            SET  "Riesgo"='No Aplica'
+            WHERE "Identificador"=(select  "Identificador" from sel_riesgo)
+            returning *
+            ), ins_riesgo as (
+            INSERT INTO public."tbl_Riesgo"(
+            "Identificador", "Riesgo")
+            select (select "IDENTIFICADOR" from ins),'No Aplica'
+            WHERE not exists (select 1 from sel_riesgo ) AND   exists ( select 1 from ins)
+            returning *
+            ),
+            sel_origen as (
+
+            SELECT "Identificador", "Origen"
+            FROM public."tbl_Origen"
+            WHERE "Identificador"=(select "IDENTIFICADOR" from ins)
+
+            ), upd_origen as (
+            UPDATE public."tbl_Origen"
+            SET  "Origen"='Sentencia, Acto Admin' 
+            WHERE "Identificador"=(select "Identificador" from sel_origen)
+            returning *
+            ), ins_origen as (
+            INSERT INTO public."tbl_Origen"(
+            "Identificador", "Origen")
+            select (select "IDENTIFICADOR" from ins),'Sentencia, Acto Admin'
+            WHERE not exists (select 1 from sel_origen )  AND   exists ( select 1 from ins)
+            returning *
+            )
+            select * from ins      
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>true</es_dml_complejo>
+    </Consulta> 
+    <Consulta id="crear_identificador_temporal">
+        <sql>
+            WITH 
+            sel as (
+            Select "IDENTIFICADOR" from definitiva where "Código Chip Catastro"= @chip 
+            ),           
+            ins as(
+            INSERT INTO definitiva("IDENTIFICADOR","IDENTIFICA_ANTERIOR","Barrio","Localidad","MZ","LT","Sector","Concepto de Ingreso","Fecha de Ingreso al Proceso" ,"Cod_Estado_Proceso","Cod_Estado_Subproceso","UPZ",fecha_concepto_ingreso,"Código Chip Catastro","Dirección",contrato_user
+            ,contrato_time)
+            SELECT date_part('year', CURRENT_DATE)||'-'||SUBSTRING ('@localidad' FROM 1 for 2)||'-'||nextval('sec_identificador'),'@identificador2' ,'@barrio','@localidad','@manzana','@lote','@sector','@concepto','@fecha_ingreso',1,11,'@upz',@fecha_concepto,@chip,'@direccion' ,'@usuario'
+            ,CURRENT_DATE
+            WHERE NOT EXISTS (select 1 from sel )
+            returning "IDENTIFICADOR"	
+            ),
+            unidades as (
+            INSERT INTO "tbl_Unds_Habitacionales" ("Identificador","Num_Und_Habitacional")
+            SELECT (select "IDENTIFICADOR" from ins),@unidades
+            WHERE NOT EXISTS (select 1 from sel ) AND   exists ( select 1 from ins)
+            returning "Identificador"	
+            ),
+            sel_riesgo as (
+            SELECT "Identificador", "Riesgo"
+            FROM public."tbl_Riesgo"
+            WHERE "Identificador"=(select "IDENTIFICADOR" from ins) 
+            ),
+            upd_riesgo as (
+            UPDATE public."tbl_Riesgo"
+            SET  "Riesgo"='No Aplica'
+            WHERE "Identificador"=(select "Identificador" from sel_riesgo)
+            returning *
+            ), ins_riesgo as (
+            INSERT INTO public."tbl_Riesgo"(
+            "Identificador", "Riesgo")
+            select (select "IDENTIFICADOR" from ins),'No Aplica'
+            WHERE not exists (select 1 from sel_riesgo )  AND   exists ( select 1 from ins)
+            returning *
+            ) ,
+            sel_origen as (
+
+            SELECT "Identificador", "Origen"
+            FROM public."tbl_Origen"
+            WHERE "Identificador"=(select "IDENTIFICADOR" from ins)
+
+            ), upd_origen as (
+            UPDATE public."tbl_Origen"
+            SET  "Origen"='Sentencia, Acto Admin' 
+            WHERE "Identificador"=(select "Identificador" from sel_origen)
+            returning *
+            ), ins_origen as (
+            INSERT INTO public."tbl_Origen"(
+            "Identificador", "Origen")
+            select (select "IDENTIFICADOR" from ins),'Sentencia, Acto Admin'
+            WHERE not exists (select 1 from sel_origen )  AND   exists ( select 1 from ins)
+            returning *
+            )  
+            select * from ins      
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>true</es_dml_complejo>
+    </Consulta> 
+    <Consulta id="crear_identificador_temporal_quebrada">
+        <sql>
+            WITH 
+            sel as (
+            Select "IDENTIFICADOR" from definitiva where "Código Chip Catastro"= @chip 
+            ),           
+            ins as(
+            INSERT INTO definitiva("IDENTIFICADOR","IDENTIFICA_ANTERIOR","Barrio","Localidad","MZ","LT","Sector","Concepto de Ingreso","Fecha de Ingreso al Proceso" ,"Cod_Estado_Proceso","Cod_Estado_Subproceso","UPZ",fecha_concepto_ingreso,"Código Chip Catastro","Dirección",contrato_user
+            ,contrato_time)
+            SELECT date_part('year', CURRENT_DATE)||'-@centro-'||nextval('sec_identificador'),'@identificador2' ,'@barrio','@localidad','@manzana','@lote','@sector','@concepto','@fecha_ingreso',1,11,'@upz',@fecha_concepto,@chip,'@direccion' ,'@usuario'
+            ,CURRENT_DATE
+            WHERE NOT EXISTS (select 1 from sel )
+            returning "IDENTIFICADOR"	
+            ),
+            unidades as (
+            INSERT INTO "tbl_Unds_Habitacionales" ("Identificador","Num_Und_Habitacional")
+            SELECT (select "IDENTIFICADOR" from ins),@unidades
+            WHERE NOT EXISTS (select 1 from sel ) AND   exists ( select 1 from ins)
+            returning "Identificador"	
+            ),
+            sel_riesgo as (
+            SELECT "Identificador", "Riesgo"
+            FROM public."tbl_Riesgo"
+            WHERE "Identificador"=(select "IDENTIFICADOR" from ins) 
+            ),
+            upd_riesgo as (
+            UPDATE public."tbl_Riesgo"
+            SET  "Riesgo"='No Aplica'
+            WHERE "Identificador"=(select "Identificador" from sel_riesgo)
+            returning *
+            ), ins_riesgo as (
+            INSERT INTO public."tbl_Riesgo"(
+            "Identificador", "Riesgo")
+            select (select "IDENTIFICADOR" from ins),'No Aplica'
+            WHERE not exists (select 1 from sel_riesgo )  AND   exists ( select 1 from ins)
+            returning *
+            ) ,
+            sel_origen as (
+
+            SELECT "Identificador", "Origen"
+            FROM public."tbl_Origen"
+            WHERE "Identificador"=(select "IDENTIFICADOR" from ins)
+
+            ), upd_origen as (
+            UPDATE public."tbl_Origen"
+            SET  "Origen"='Sentencia, Acto Admin' 
+            WHERE "Identificador"=(select "Identificador" from sel_origen)
+            returning *
+            ), ins_origen as (
+            INSERT INTO public."tbl_Origen"(
+            "Identificador", "Origen")
+            select (select "IDENTIFICADOR" from ins),'Sentencia, Acto Admin'
+            WHERE not exists (select 1 from sel_origen )  AND   exists ( select 1 from ins)
+            returning *
+            )  
+            select * from ins      
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>true</es_dml_complejo>
+    </Consulta> 
+    <Consulta id="crear_identificador_surr">
+        <sql>
+            WITH sel
+            AS (
+            SELECT "IDENTIFICADOR"
+            FROM definitiva
+            WHERE "Código Chip Catastro" = @chip
+            OR "IDENTIFICADOR" = '@identificador_idiger'
+            )
+            ,ins
+            AS (
+            INSERT INTO definitiva (
+            "IDENTIFICADOR"
+            ,"IDENTIFICA_ANTERIOR"
+            ,"Barrio"
+            ,"Localidad"
+            ,"MZ"
+            ,"LT"
+            ,"Sector"
+            ,"Concepto de Ingreso"
+            ,"Fecha de Ingreso al Proceso"
+            ,"Cod_Estado_Proceso"
+            ,"Cod_Estado_Subproceso"
+            ,"UPZ"
+            ,fecha_concepto_ingreso
+            ,"Código Chip Catastro"
+            ,"Dirección"
+            ,contrato_user
+            ,contrato_time
+            )
+            SELECT '@identificador_idiger'
+            ,'@identificador2'
+            ,'@barrio'
+            ,'@localidad'
+            ,'@manzana'
+            ,'@lote'
+            ,'@sector'
+            ,'@concepto'
+            ,'@fecha_ingreso'
+            ,1
+            ,11
+            ,'@upz'
+            ,@fecha_concepto
+            ,@chip
+            ,'@direccion'
+            ,'@usuario'
+            ,CURRENT_DATE
+            WHERE NOT EXISTS (
+            SELECT 1
+            FROM sel
+            ) returning "IDENTIFICADOR"
+            )
+            ,unidades
+            AS (
+            INSERT INTO "tbl_Unds_Habitacionales" (
+            "Identificador"
+            ,"Num_Und_Habitacional"
+            )
+            SELECT (
+            SELECT "IDENTIFICADOR"
+            FROM ins
+            )
+            ,@unidades
+            WHERE NOT EXISTS (
+            SELECT 1
+            FROM sel
+            )
+            AND exists ( select 1 from ins)
+            returning "Identificador"
+            )
+            ,sel_sur
+            AS (
+            SELECT *
+            FROM PUBLIC."tbl_Enlace_SURR"
+            WHERE "Identificador" = '@identificador_idiger'
+            )
+            ,upd_sur
+            AS (
+            UPDATE PUBLIC."tbl_Enlace_SURR"
+            SET "Num_Ficha_Social" = '@social_idiger'
+            ,"Num_Ficha_Tecnica" = '@tecnica_idiger'
+            ,"Fecha_Ultimo_Acceso" = current_timestamp
+            ,"Nom_Usuario" = '@usuario'
+            WHERE "Identificador" = (
+            SELECT "Identificador"
+            FROM sel_sur
+            )
+            AND   exists ( select 1 from ins)
+            returning *
+            )
+            ,ins_sur
+            AS (
+            INSERT INTO PUBLIC."tbl_Enlace_SURR" (
+            "Identificador"
+            ,"Num_Ficha_Social"
+            ,"Num_Ficha_Tecnica"
+            ,"Fecha_Ultimo_Acceso"
+            ,"Nom_Usuario"
+            )
+            SELECT '@identificador_idiger'
+            ,'@social_idiger'
+            ,'@tecnica_idiger'
+            ,current_timestamp
+            ,'@usuario'
+            WHERE NOT EXISTS (
+            SELECT 1
+            FROM sel_sur
+            )
+            AND   exists ( select 1 from ins)
+            returning *
+            )
+            ,sel_riesgo
+            AS (
+            SELECT "Identificador"
+            ,"Riesgo"
+            FROM PUBLIC."tbl_Riesgo"
+            WHERE "Identificador" = '@identificador_idiger'
+            )
+            ,upd_riesgo
+            AS (
+            UPDATE PUBLIC."tbl_Riesgo"
+            SET "Riesgo" = '@riesgo'
+            WHERE "Identificador" = (
+            SELECT "Identificador"
+            FROM sel_riesgo
+            ) returning *
+            )
+            ,ins_riesgo
+            AS (
+            INSERT INTO PUBLIC."tbl_Riesgo" (
+            "Identificador"
+            ,"Riesgo"
+            )
+            SELECT '@identificador_idiger'
+            ,'@riesgo'
+            WHERE NOT EXISTS (
+            SELECT 1
+            FROM sel_riesgo
+            ) 
+            AND  not exists ( select 1 from ins)
+            returning *
+            )
+            ,sel_origen
+            AS (
+            SELECT "Identificador"
+            ,"Origen"
+            FROM PUBLIC."tbl_Origen"
+            WHERE "Identificador" = (
+            SELECT "IDENTIFICADOR"
+            FROM ins
+            )
+            )
+            ,upd_origen
+            AS (
+            UPDATE PUBLIC."tbl_Origen"
+            SET "Origen" = 'IDIGER'
+            WHERE "Identificador" = (
+            SELECT "Identificador"
+            FROM sel_origen
+            ) returning *
+            )
+            ,ins_origen
+            AS (
+            INSERT INTO PUBLIC."tbl_Origen" (
+            "Identificador"
+            ,"Origen"
+            )
+            SELECT (
+            SELECT "IDENTIFICADOR"
+            FROM ins
+            )
+            ,'IDIGER'
+            WHERE NOT EXISTS (
+            SELECT 1
+            FROM sel_origen
+            )
+            AND  exists ( select 1 from ins)
+            returning *
+            )
+            SELECT *
+            FROM ins
+            
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>true</es_dml_complejo>
+    </Consulta> 
+    <Consulta id="crear_identificador_temporal_surr">
+        <sql>
+            WITH
+            ins
+            AS (
+            INSERT INTO definitiva (
+            "IDENTIFICADOR"
+            ,"IDENTIFICA_ANTERIOR"
+            ,"Barrio"
+            ,"Localidad"
+            ,"MZ"
+            ,"LT"
+            ,"Sector"
+            ,"Concepto de Ingreso"
+            ,"Fecha de Ingreso al Proceso"
+            ,"Cod_Estado_Proceso"
+            ,"Cod_Estado_Subproceso"
+            ,"UPZ"
+            ,fecha_concepto_ingreso
+            ,"Código Chip Catastro"
+            ,"Dirección"
+            ,contrato_user
+            ,contrato_time
+            )
+            SELECT 
+            date_part('year', CURRENT_DATE)||'-'||SUBSTRING ('@localidad' FROM 1 for 2)||'-'||nextval('sec_identificador')
+            ,'@identificador2'
+            ,'@barrio'
+            ,'@localidad'
+            ,'@manzana'
+            ,'@lote'
+            ,'@sector'
+            ,'@concepto'
+            ,'@fecha_ingreso'
+            ,1
+            ,11
+            ,'@upz'
+            ,@fecha_concepto
+            ,@chip
+            ,'@direccion'
+            ,'@usuario'
+            ,CURRENT_DATE
+            returning "IDENTIFICADOR"
+            )
+            ,unidades
+            AS (
+            INSERT INTO "tbl_Unds_Habitacionales" (
+            "Identificador"
+            ,"Num_Und_Habitacional"
+            )
+            SELECT (
+            SELECT "IDENTIFICADOR"
+            FROM ins
+            )
+            ,@unidades
+            WHERE  exists ( select 1 from ins)
+            returning "Identificador"
+            )
+            ,sel_sur
+            AS (
+            SELECT *
+            FROM PUBLIC."tbl_Enlace_SURR"
+            WHERE "Identificador" = (SELECT "IDENTIFICADOR" FROM ins )
+            )
+            ,upd_sur
+            AS (
+            UPDATE PUBLIC."tbl_Enlace_SURR"
+            SET "Num_Ficha_Social" = '@social_idiger'
+            ,"Num_Ficha_Tecnica" = '@tecnica_idiger'
+            ,"Fecha_Ultimo_Acceso" = current_timestamp
+            ,"Nom_Usuario" = '@usuario'
+            WHERE "Identificador" = (
+            SELECT "Identificador"
+            FROM sel_sur
+            )
+            AND   exists ( select 1 from ins)
+            returning *
+            )
+            ,ins_sur
+            AS (
+            INSERT INTO PUBLIC."tbl_Enlace_SURR" (
+            "Identificador"
+            ,"Num_Ficha_Social"
+            ,"Num_Ficha_Tecnica"
+            ,"Fecha_Ultimo_Acceso"
+            ,"Nom_Usuario"
+            )
+            SELECT (SELECT "IDENTIFICADOR" FROM ins )
+            ,'@social_idiger'
+            ,'@tecnica_idiger'
+            ,current_timestamp
+            ,'@usuario'
+            WHERE NOT EXISTS (
+            SELECT 1
+            FROM sel_sur
+            )
+            AND   exists ( select 1 from ins)
+            returning *
+            )
+            ,sel_riesgo
+            AS (
+            SELECT "Identificador"
+            ,"Riesgo"
+            FROM PUBLIC."tbl_Riesgo"
+            WHERE "Identificador" = (SELECT "IDENTIFICADOR" FROM ins)
+            )
+            ,upd_riesgo
+            AS (
+            UPDATE PUBLIC."tbl_Riesgo"
+            SET "Riesgo" = '@riesgo'
+            WHERE "Identificador" = (
+            SELECT "Identificador"
+            FROM sel_riesgo
+            ) returning *
+            )
+            ,ins_riesgo
+            AS (
+            INSERT INTO PUBLIC."tbl_Riesgo" (
+            "Identificador"
+            ,"Riesgo"
+            )
+            SELECT (SELECT "IDENTIFICADOR" FROM ins)
+            ,'@riesgo'
+            WHERE NOT EXISTS (
+            SELECT 1
+            FROM sel_riesgo
+            ) 
+            AND exists ( select 1 from ins)
+            returning *
+            )
+            ,sel_origen
+            AS (
+            SELECT "Identificador"
+            ,"Origen"
+            FROM PUBLIC."tbl_Origen"
+            WHERE "Identificador" = (
+            SELECT "IDENTIFICADOR"
+            FROM ins
+            )
+            )
+            ,upd_origen
+            AS (
+            UPDATE PUBLIC."tbl_Origen"
+            SET "Origen" = 'IDIGER'
+            WHERE "Identificador" = (
+            SELECT "Identificador"
+            FROM sel_origen
+            ) returning *
+            )
+            ,ins_origen
+            AS (
+            INSERT INTO PUBLIC."tbl_Origen" (
+            "Identificador"
+            ,"Origen"
+            )
+            SELECT ( SELECT "IDENTIFICADOR" FROM ins )
+            ,'IDIGER'
+            WHERE NOT EXISTS (
+            SELECT 1
+            FROM sel_origen
+            )
+            AND  exists ( select 1 from ins)
+            returning *
+            )
+            SELECT *
+            FROM ins
+            
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>true</es_dml_complejo>
+    </Consulta> 
+    <Consulta id="activar_identificador_surr">
+        <sql>
+            WITH sel
+            AS (
+            SELECT "IDENTIFICADOR"
+            FROM definitiva
+            WHERE "IDENTIFICADOR" = '@identificador_idiger'
+            ), upd as(
+            UPDATE public.definitiva
+            SET   "Localidad"='@localidad', "UPZ"='@upz', 
+            "Sector"='@sector', "Barrio"='@barrio', "Dirección"='@direccion', "MZ"='@manzana', "LT"='@lote', 
+            "Fecha de Ingreso al Proceso"='@fecha_ingreso', 
+            "Concepto de Ingreso"='@concepto',      
+            "Código Chip Catastro"=@chip,
+            "Cod_Estado_Proceso"=1, "Cod_Estado_Subproceso"=11,
+            fecha_concepto_ingreso=@fecha_concepto,
+            contrato_user='@usuario',        
+            contrato_time=CURRENT_DATE        
+            
+            
+            WHERE "IDENTIFICADOR"=(SELECT "IDENTIFICADOR" FROM sel) AND EXISTS (
+            SELECT 1
+            FROM sel
+            ) returning "IDENTIFICADOR"
+            )
+            ,unidades
+            AS (
+            INSERT INTO "tbl_Unds_Habitacionales" (
+            "Identificador"
+            ,"Num_Und_Habitacional"
+            )
+            SELECT (
+            SELECT "IDENTIFICADOR"
+            FROM upd
+            )
+            ,@unidades
+            WHERE NOT EXISTS (
+            SELECT 1
+            FROM sel
+            )
+            AND exists ( select 1 from upd)
+            returning "Identificador"
+            )
+            ,sel_sur
+            AS (
+            SELECT *
+            FROM PUBLIC."tbl_Enlace_SURR"
+            WHERE "Identificador" = '@identificador_idiger'
+            )
+            ,upd_sur
+            AS (
+            UPDATE PUBLIC."tbl_Enlace_SURR"
+            SET "Num_Ficha_Social" = '@social_idiger'
+            ,"Num_Ficha_Tecnica" = '@tecnica_idiger'
+            ,"Fecha_Ultimo_Acceso" = current_timestamp
+            ,"Nom_Usuario" = '@usuario'
+            WHERE "Identificador" = (
+            SELECT "Identificador"
+            FROM sel_sur
+            )
+            AND   exists ( select 1 from upd)
+            returning *
+            )
+            ,ins_sur
+            AS (
+            INSERT INTO PUBLIC."tbl_Enlace_SURR" (
+            "Identificador"
+            ,"Num_Ficha_Social"
+            ,"Num_Ficha_Tecnica"
+            ,"Fecha_Ultimo_Acceso"
+            ,"Nom_Usuario"
+            )
+            SELECT '@identificador_idiger'
+            ,'@social_idiger'
+            ,'@tecnica_idiger'
+            ,current_timestamp
+            ,'@usuario'
+            WHERE NOT EXISTS (
+            SELECT 1
+            FROM sel_sur
+            )
+            AND   exists ( select 1 from upd)
+            returning *
+            )
+            ,sel_riesgo
+            AS (
+            SELECT "Identificador"
+            ,"Riesgo"
+            FROM PUBLIC."tbl_Riesgo"
+            WHERE "Identificador" = '@identificador_idiger'
+            )
+            ,upd_riesgo
+            AS (
+            UPDATE PUBLIC."tbl_Riesgo"
+            SET "Riesgo" = '@riesgo'
+            WHERE "Identificador" = (
+            SELECT "Identificador"
+            FROM sel_riesgo
+            ) returning *
+            )
+            ,ins_riesgo
+            AS (
+            INSERT INTO PUBLIC."tbl_Riesgo" (
+            "Identificador"
+            ,"Riesgo"
+            )
+            SELECT '@identificador_idiger'
+            ,'@riesgo'
+            WHERE NOT EXISTS (
+            SELECT 1
+            FROM sel_riesgo
+            ) 
+            AND  not exists ( select 1 from upd)
+            returning *
+            )
+            ,sel_origen
+            AS (
+            SELECT "Identificador"
+            ,"Origen"
+            FROM PUBLIC."tbl_Origen"
+            WHERE "Identificador" = (
+            SELECT "IDENTIFICADOR"
+            FROM upd
+            )
+            )
+            ,upd_origen
+            AS (
+            UPDATE PUBLIC."tbl_Origen"
+            SET "Origen" = 'IDIGER'
+            WHERE "Identificador" = (
+            SELECT "Identificador"
+            FROM sel_origen
+            ) returning *
+            )
+            ,ins_origen
+            AS (
+            INSERT INTO PUBLIC."tbl_Origen" (
+            "Identificador"
+            ,"Origen"
+            )
+            SELECT (
+            SELECT "IDENTIFICADOR"
+            FROM upd
+            )
+            ,'IDIGER'
+            WHERE NOT EXISTS (
+            SELECT 1
+            FROM sel_origen
+            )
+            AND  exists ( select 1 from upd)
+            returning *
+            )
+            SELECT *
+            FROM upd
+            
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>true</es_dml_complejo>
+    </Consulta> 
+    <Consulta id="crear_proceso_caracoli_paimes">
+        <sql>
+            WITH
+            ins
+            AS (
+            INSERT INTO definitiva (
+            "IDENTIFICADOR"
+            ,"IDENTIFICA_ANTERIOR"
+            ,"Barrio"
+            ,"Localidad"
+            ,"MZ"
+            ,"LT"
+            ,"Sector"
+           
+            ,"Fecha de Ingreso al Proceso"
+            ,"Cod_Estado_Proceso"
+            ,"Cod_Estado_Subproceso"
+            ,"UPZ"          
+            ,"Código Chip Catastro"
+            ,"Dirección"
+            ,contrato_user
+            ,contrato_time
+            )
+            SELECT 
+            date_part('year', CURRENT_DATE)||'-CP19-'||nextval('sec_identificador')
+            ,'@identificador2'
+            ,'@barrio'
+            ,'@localidad'
+            ,'@manzana'
+            ,'@lote'
+            ,'@sector'           
+            ,'@fecha_ingreso'
+            ,1
+            ,11
+            ,'@upz'           
+            ,@chip
+            ,'@direccion'
+            ,'@usuario'
+            ,CURRENT_DATE
+            returning "IDENTIFICADOR"
+            )
+            ,unidades
+            AS (
+            INSERT INTO "tbl_Unds_Habitacionales" (
+            "Identificador"
+            ,"Num_Und_Habitacional"
+            )
+            SELECT (
+            SELECT "IDENTIFICADOR"
+            FROM ins
+            )
+            ,@unidades
+            WHERE  exists ( select 1 from ins)
+            returning "Identificador"
+            )         
+            ,sel_riesgo
+            AS (
+            SELECT "Identificador"
+            ,"Riesgo"
+            FROM PUBLIC."tbl_Riesgo"
+            WHERE "Identificador" = (SELECT "IDENTIFICADOR" FROM ins)
+            )
+            ,upd_riesgo
+            AS (
+            UPDATE PUBLIC."tbl_Riesgo"
+            SET "Riesgo" = '@riesgo'
+            WHERE "Identificador" = (
+            SELECT "Identificador"
+            FROM sel_riesgo
+            ) returning *
+            )
+            ,ins_riesgo
+            AS (
+            INSERT INTO PUBLIC."tbl_Riesgo" (
+            "Identificador"
+            ,"Riesgo"
+            )
+            SELECT (SELECT "IDENTIFICADOR" FROM ins)
+            ,'@riesgo'
+            WHERE NOT EXISTS (
+            SELECT 1
+            FROM sel_riesgo
+            ) 
+            AND exists ( select 1 from ins)
+            returning *
+            )
+            ,sel_origen
+            AS (
+            SELECT "Identificador"
+            ,"Origen"
+            FROM PUBLIC."tbl_Origen"
+            WHERE "Identificador" = (
+            SELECT "IDENTIFICADOR"
+            FROM ins
+            )
+            )
+            ,upd_origen
+            AS (
+            UPDATE PUBLIC."tbl_Origen"
+            SET "Origen" = 'Sentencia, Acto Admin'
+            WHERE "Identificador" = (
+            SELECT "Identificador"
+            FROM sel_origen
+            ) returning *
+            )
+            ,ins_origen
+            AS (
+            INSERT INTO PUBLIC."tbl_Origen" (
+            "Identificador"
+            ,"Origen"
+            )
+            SELECT ( SELECT "IDENTIFICADOR" FROM ins )
+            ,'Sentencia, Acto Admin'
+            WHERE NOT EXISTS (
+            SELECT 1
+            FROM sel_origen
+            )
+            AND  exists ( select 1 from ins)
+            returning *
+            )
+            SELECT *
+            FROM ins
+    
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>true</es_dml_complejo> 
+    </Consulta> 
+    <Consulta id="crear_identificador_definitivo">
+        <sql>
+            WITH Upd
+            AS (
+            UPDATE definitiva
+            SET "IDENTIFICADOR" = date_part('year', CURRENT_DATE) || '-' || SUBSTRING('@localidad' FROM 1 FOR 2) || '-' || nextval('sec_identificador')
+            , contrato_upd_user = '@USUARIO_SISTEMA' 
+            , contrato_upd_time = to_timestamp('@TIMESTAMP_SISTEMA', 'DD/MM/YYYY HH24:MI:SS')
+            WHERE "IDENTIFICADOR" = '@identificador' returning "IDENTIFICADOR"
+            )
+            SELECT *
+            FROM Upd
+    
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>true</es_dml_complejo> 
+    </Consulta> 
+    <Consulta id="insertar_concepto">
+        <sql>
+            INSERT INTO public.concepto_ingreso(
+            identificador, conse, concepto_ingreso, fecha_concepto)
+            VALUES ('@identificador', @consecutivo, '@concepto', '@fecha')
+            returning identificador
+    
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>true</es_dml_complejo> 
+    </Consulta> 
+    <!--fin de creacion de procesos-->
+ 
+    <Consulta id="salvar_dimension_economica_hogar">
+        <sql>
+            with  upd_econo as(
+            UPDATE public.tbl_arraigo_vivienda
+            SET  ingreso_promedio=@ingreso, egreso_promedio=@gasto_promedio, bl_trabajo=@obtener_trabajo, cual_trabajo='@cual_trabajo', 
+            bl_experiencia=@experiencia, experiencia=@exp_meses, bl_moto=@motocicletas, num_motos=@cuantas_motos, bl_carro=@carros, 
+            num_carros=@cuantos_carros, bl_bici=@bicicletas, num_bicicletas=@cuantas_bicis
+            WHERE identificador='@identificador'
+            RETURNING  identificador
+
+            ),ins_econo as(
+            INSERT INTO public.tbl_arraigo_vivienda( ingreso_promedio, egreso_promedio, bl_trabajo, cual_trabajo, 
+            bl_experiencia, experiencia, bl_moto, num_motos, bl_carro, 
+            num_carros, bl_bici, num_bicicletas ,identificador)
+            select  @ingreso,@gasto_promedio,@obtener_trabajo,'@cual_trabajo',@experiencia,@exp_meses,@motocicletas,
+            @cuantas_motos,@carros,@cuantos_carros,@bicicletas,@cuantas_bicis,'@identificador'
+            WHERE NOT EXISTS (select 1 from upd_econo ) 
+            returning identificador
+            )
+            select *from upd_econo union select *from ins_econo
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>true</es_dml_complejo> 
+    </Consulta> 
+    <Consulta id="salvar_tecnologia">
+        <sql>
+            with  upd_econo as(
+            UPDATE public.tbl_arraigo_vivienda
+            SET  tiene_desktop=@bl_desktop, cantidad_desktop=@num_desktop, uso_desktop=@uso_desktop, 
+            tiene_portatil=@bl_portatil, catidad_portatiles=@num_portatil, uso_portatiles=@uso_portatil, frecuencia_uso_computador=@frec_desktop, 
+            tiene_tablet=@bl_tablet, cantidad_tablet=@num_tablet, uso_tablet=@uso_tablet, sitio_uso_computador=@sitio_orden, 
+            principal_uso_computador=@orden_importancia, frecuencia_uso_internet=@frec_internet, dispositivo_acceso_internet=@orden_dispositivo, 
+            objetivo_uso_internet=@orden_actividad
+            WHERE identificador='@identificador'
+            RETURNING  identificador
+            ),ins_econo as(
+            INSERT INTO public.tbl_arraigo_vivienda( tiene_desktop, cantidad_desktop, uso_desktop, 
+            tiene_portatil, catidad_portatiles, uso_portatiles, frecuencia_uso_computador, 
+            tiene_tablet, cantidad_tablet, uso_tablet, sitio_uso_computador, 
+            principal_uso_computador, frecuencia_uso_internet, dispositivo_acceso_internet, 
+            objetivo_uso_internet,identificador) 
+            select @bl_desktop,@num_desktop,@uso_desktop,@bl_portatil,@num_portatil,@uso_portatil,@frec_desktop,@bl_tablet,@num_tablet,@uso_tablet,
+            @sitio_orden,@orden_importancia,@frec_internet,@orden_dispositivo,@orden_actividad,'@identificador'
+            WHERE NOT EXISTS (select 1 from upd_econo ) 
+            returning identificador
+            )
+            select *from upd_econo union select *from ins_econo
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>true</es_dml_complejo> 
+    </Consulta> 
+    
+    <Consulta id="cerrar_solicitud_unidad_habitacional">
+        <sql>
+            WITH 
+            sel as (
+            Select * from definitiva where  id_familia= @identificador
+            ),
+            chk_soli as (	
+            select * from solicitud_unidad_habitacional
+            where id_padre=@identificador and id_nueva_unidad  is null
+            ),            
+            ins as(
+            INSERT INTO public.definitiva(
+            "IDENTIFICADOR" , 
+            "IDENTIFICA_ANTERIOR", "Localidad", "UPZ", "Sector", 
+            "Barrio", "Dirección", "MZ", "LT", "Telefono", "Nombre 1", "1er_Apellido_Ben1", 
+            "2do_Apellido_Ben1", "1er_Nombre_Ben1", "2do_Nombre_Ben1", "Cedula 1", 
+            "Nombre 2", "1er_Apellido_Ben2", "2do_Apellido_Ben2", "1er_Nombre_Ben2", 
+            "2do_Nombre_Ben2", "Cedula 2", "No Familias", "Fecha de Ingreso al Proceso", 
+            "Concepto de Ingreso", "Prioridad", "Fecha Apertura Carpeta", 
+            "Habitado", "Caso Jurídico", "Año de Atención", "Acompañamiento Actual", 
+            "Histórico Acompañamiento del Proceso", "Soporte Evacuación", 
+            "Nro Cédula Catastral", "Código Chip Catastro", resultado_cruce, 
+            fecha_cruce, cuenta_codensa, estado_codensa, fecha_solictud_codensa, 
+            fecha_paz_salvo_codensa, cuenta_acueducto, estado_acueducto, 
+            fecha_solictud_acueducto, fecha_paz_salvo_acueducto, cuenta_gas, 
+            estado_gas, fecha_solictud_gas, fecha_paz_salvo_gas, "Fecha acta de entrega alternativa habitacional", 
+            "Fecha de Verificación de Traslado", "Año de Reporte", "Procesos Inactivos", 
+            "Fecha Acta de entrega predio en riesgo a CVP", "Solicitud Adecuación del Predio a DPAE", 
+            "Notificación Adecuación Predio en Alto riesgo", "Fecha Entrega predio en riesgo al DADEP", 
+            "Meta Banco Mundial", "Ubicación de Carpeta", "Observaciones", 
+            "Profesional a Cargo", "Predio demolido", "Fecha ficha predial", 
+            foto1, s_guid, s_colineage, s_generation, s_lineage, "Fecha_Ultima_actualización_carpeta", 
+            meta_2008, "CAP_SI_NO", fecha_traslado_inicial, "Fec_Notificacion_Alcaldia_Vigilancia_PAR", 
+            "Cod_Estado_Proceso", "Cod_Estado_Subproceso", "Nom_DPAE", "Iden_DPAE", 
+            "Valor Ayuda Temporal", "Teléfono Relocalización")
+            SELECT (date_part('year', CURRENT_DATE)||'-'||SUBSTRING ((select "Localidad" from sel) FROM 1 for 2)||'-'||nextval('sec_identificador')), NULL, "Localidad", "UPZ", "Sector", 
+            "Barrio", "Dirección", "MZ", "LT", "Telefono", "Nombre 1", "1er_Apellido_Ben1", 
+            "2do_Apellido_Ben1", "1er_Nombre_Ben1", "2do_Nombre_Ben1", "Cedula 1", 
+            "Nombre 2", "1er_Apellido_Ben2", "2do_Apellido_Ben2", "1er_Nombre_Ben2", 
+            "2do_Nombre_Ben2", "Cedula 2", "No Familias", "Fecha de Ingreso al Proceso", 
+            "Concepto de Ingreso", "Prioridad", "Fecha Apertura Carpeta", 
+            "Habitado", "Caso Jurídico", "Año de Atención", "Acompañamiento Actual", 
+            "Histórico Acompañamiento del Proceso", "Soporte Evacuación", 
+            "Nro Cédula Catastral", "Código Chip Catastro", resultado_cruce, 
+            fecha_cruce, cuenta_codensa, estado_codensa, fecha_solictud_codensa, 
+            fecha_paz_salvo_codensa, cuenta_acueducto, estado_acueducto, 
+            fecha_solictud_acueducto, fecha_paz_salvo_acueducto, cuenta_gas, 
+            estado_gas, fecha_solictud_gas, fecha_paz_salvo_gas, "Fecha acta de entrega alternativa habitacional", 
+            "Fecha de Verificación de Traslado", "Año de Reporte", "Procesos Inactivos", 
+            "Fecha Acta de entrega predio en riesgo a CVP", "Solicitud Adecuación del Predio a DPAE", 
+            "Notificación Adecuación Predio en Alto riesgo", "Fecha Entrega predio en riesgo al DADEP", 
+            "Meta Banco Mundial", "Ubicación de Carpeta", "Observaciones", 
+            "Profesional a Cargo", "Predio demolido", "Fecha ficha predial", 
+            foto1, s_guid, s_colineage, s_generation, s_lineage, "Fecha_Ultima_actualización_carpeta", 
+            meta_2008, "CAP_SI_NO", fecha_traslado_inicial, "Fec_Notificacion_Alcaldia_Vigilancia_PAR", 
+            "Cod_Estado_Proceso", "Cod_Estado_Subproceso", "Nom_DPAE", "Iden_DPAE", 
+            "Valor Ayuda Temporal", "Teléfono Relocalización"
+            FROM sel WHERE  EXISTS (select * from chk_soli )
+            returning *       
+            ),
+            cls_uni as (
+            UPDATE public.solicitud_unidad_habitacional
+            SET id_nueva_unidad=(select id_familia from ins),unidad_creada=TRUE  
+            WHERE id_nueva_unidad IS NULL
+            AND id_padre=(select id_familia from sel)
+            )
+            ,
+            unidades as (
+            INSERT INTO "tbl_Unds_Habitacionales" ("Identificador","Num_Und_Habitacional")
+            VALUES((select "IDENTIFICADOR" from ins), 1)
+           
+            returning "Identificador"	
+            )
+            ,
+            close_uni as(
+            update "tbl_Unds_Habitacionales"
+            SET "Num_Und_Habitacional"=(select (count(*)+1)  from solicitud_unidad_habitacional where id_padre=@identificador and unidad_creada=true  ) 
+            WHERE "Identificador"=(select "IDENTIFICADOR" from sel)
+
+            )
+            select * from ins
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>true</es_dml_complejo> 
+    </Consulta> 
+    <!-- fin tareas para identificadortes hijo-->
+    
+    
+    <Consulta id="InsertarDocumento">
+        <sql>
+            INSERT INTO public.documento_adjunto(
+            doc_descripcion, doc_numfolios, doc_ruta, 
+            doc_time,  doc_user,  identificador, 
+            tidoc_id, doc_thumbnail)
+            VALUES (?, ?, ?, 
+            ?, ?, ?, 
+            ?, ?)
+            returning doc_id;
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+    </Consulta>
+    
+    <Consulta id="aprobar_ficha">
+        <sql>          
+            UPDATE public.tbl_arraigo_vivienda
+            SET 
+            estado_ficha=3, id_usuario_revision=@usr, fecha_revision=CURRENT_TIMESTAMP,
+            comentarios_ficha='@observaciones'
+            WHERE  identificador='@identificador'
+            returning estado_ficha           
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+    </Consulta>
+    <Consulta id="devolver_ficha">
+        <sql>          
+            UPDATE public.tbl_arraigo_vivienda
+            SET 
+            estado_ficha=4, id_usuario_revision=@usr, fecha_revision=CURRENT_TIMESTAMP,
+            comentarios_ficha='@observaciones'
+            WHERE  identificador='@identificador'
+            returning estado_ficha           
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+    </Consulta>
+    <Consulta id="revision_ficha">
+        <sql>          
+            UPDATE public.tbl_arraigo_vivienda
+            SET 
+            estado_ficha=2
+            WHERE  identificador='@identificador'
+            returning estado_ficha           
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+    </Consulta>
+    <!--inserciones y actualizaciones de la ficha social v7-->
+    <Consulta id="insertar_ficha">
+        <sql>
+            WITH sel as(
+            SELECT identificador FROM public.tbl_arraigo_vivienda
+            WHERE identificador='@identificador'
+            ), ins as (
+            INSERT INTO public.tbl_arraigo_vivienda (
+            identificador,id_usuario,id_profesional, fecha_cargue )
+            select '@identificador',@usuario,@usuario, CURRENT_DATE
+            WHERE NOT EXISTS (select 1 from sel)
+            returning identificador
+            )  
+            SELECT * FROM sel UNION ALL SELECT * FROM ins
+
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+    </Consulta>
+    <Consulta id="upd_usuario_ficha">
+        <sql>
+            UPDATE public.tbl_arraigo_vivienda
+            SET upd_usuario=(select usuario_usuario from usuario where usuario_id=@usuario), upd_fecha=CURRENT_DATE,version_ficha=@version,tipo_familia=@familia
+            WHERE identificador='@identificador'
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+    </Consulta>
+    <Consulta id="insertar_miembro">
+        <sql>
+            WITH sel as(
+            SELECT id_miembro FROM public."tbl_Miembros"
+            WHERE "Identificador"='@identificador' AND "Orden"=@orden
+            ), ins as (
+            INSERT INTO public."tbl_Miembros"(
+            "Identificador", "Orden")
+            select '@identificador',@orden
+            WHERE NOT EXISTS (select 1 from sel)
+            returning id_miembro
+            ),
+            sel_car as(
+            SELECT * FROM public.tbl_miembro_caracterizacion 
+            WHERE id_miembro=(SELECT * FROM sel UNION ALL SELECT * FROM ins)
+            ),
+            ins_car as (
+            INSERT INTO public.tbl_miembro_caracterizacion(id_miembro)
+            SELECT (SELECT * FROM sel UNION ALL SELECT * FROM ins) 
+            WHERE NOT EXISTS (select 1 from sel_car)
+            )
+            SELECT * FROM sel UNION ALL SELECT * FROM ins
+
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+    </Consulta>
+    <Consulta id="identificacion_vivienda">
+        <sql>
+            WITH 
+            sel as (
+            Select "IDENTIFICADOR" from definitiva where "IDENTIFICADOR"='@identificador' 
+            ),
+            upd as(
+            UPDATE definitiva
+            SET 	
+            "Localidad"='@localidad',"Barrio"='@barrio',"Concepto de Ingreso"='@concepto',
+            "Dirección"='@direccion_par',"MZ"='@manzana',"LT"='@lote',fecha_concepto_ingreso=@fecha_concepto,contrato_upd_user=(select usuario_usuario from usuario where usuario_id=@usuario)                   
+            WHERE "IDENTIFICADOR"=(select "IDENTIFICADOR" from sel)
+            returning "IDENTIFICADOR"
+            )
+            select "IDENTIFICADOR" from upd 
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+    </Consulta>
+    <Consulta id="economia_vivienda">
+        <sql>            
+            UPDATE public.tbl_arraigo_vivienda
+            SET  ingreso_promedio=@ingreso, 
+            egreso_promedio=@egreso, bl_moto=@moto, num_motos=@num_motos, bl_carro=@carro, num_carros=@num_carros, 
+            bl_bici=@bicicletas, num_bicicletas=@num_bici,
+            actividad_par='@actividad',
+            destinacion_par=@destinacion,
+            actividad_formalizada =@formalizada,
+            razon_social='@razon_social',
+            otros_propietarios ='@otros_propietarios',
+            ubicacion_clientes =@ubicacion_clientes,
+            valor_desarrollo_actividad =@valor_desarrollo,
+            produccion_mensual =@produccion,
+            valor_herramientas=@valor_herramientas,
+            num_empleados=@empleados,
+            area_actividad=@area_actividad
+            WHERE identificador='@identificador'            
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+    </Consulta>
+    <Consulta id="economia_vivienda_predio">
+        <sql>            
+            UPDATE public.tbl_arraigo_vivienda
+            SET  
+            actividad_par='@actividad',
+            destinacion_par=@destinacion,
+            actividad_formalizada =@formalizada,
+            razon_social='@razon_social',
+            otros_propietarios ='@otros_propietarios'
+            ubicacion_clientes =@ubicacion_clientes,
+            valor_desarrollo_actividad =@valor_desarrollo,
+            produccion_mensual =@produccion,
+            valor_herramientas=@valor_herramientas,
+            num_empleados=@empleados,
+            area_actividad=@area_actividad,
+            WHERE identificador='@identificador'            
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+    </Consulta>
+    <Consulta id="caracterizacion_vivienda">
+        <sql>            
+            UPDATE public.tbl_arraigo_vivienda
+            SET  tipo_vivienda=@tipo_vivienda, 
+            otro_tipo_vivienda='@otro_tipo', documento_tenencia=@documento_tenencia,tenencia_predio=@calidad_tenencia, otro_doc_tenencia='@otro_doc', 
+            num_pisos_par=@num_pisos, num_habitaciones_par=@num_cuartos, num_banos_par=@num_banos, num_cocinas_par=@num_cocinas, 
+            servicio_acueducto=@acueducto, servicio_energia=@energia, servicio_gas=@gas, 
+            consumo_acueducto=@consumo_agua,
+            consumo_gas=@consumo_gas,
+            consumo_energia =@consumo_energia,
+            unidades_identificadas=@num_unidades,
+            conciencia_riesgo='@conciencia_riesgo',
+            impacto_materia_paredes='{"bool":@impacto_paredes,"comentario":""}' , material_pisos='{"bool":@material_pisos,"comentario":""}' , material_paredes='{"bool":@material_paredes,"comentario":""}'     
+            WHERE identificador='@identificador'
+
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+    </Consulta>
+    <Consulta id="sociocultural_vivienda">
+        <sql>            
+            UPDATE public.tbl_arraigo_vivienda
+            SET    
+            mascota=@animales, cuantos_tipo='@cuantos',tipo_mascota=@tipo_animal       
+            WHERE identificador='@identificador'
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+    </Consulta>
+    <Consulta id="ambiental_vivienda">
+        <sql>            
+            UPDATE public.tbl_arraigo_vivienda
+            SET    
+            lugares_cercanos_vivienda='@cerca_viv',
+            problemas_sector_vivienda='@problemas_sector',
+            clasificacion_basuras ='@basuras',
+            practica_consumo_servicios ='@practicas_consumo'       
+            WHERE identificador='@identificador'
+
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+    </Consulta>
+    <Consulta id="tecnologia_vivienda">
+        <sql>            
+            UPDATE public.tbl_arraigo_vivienda
+            SET  tiene_desktop=@tiene_pc, cantidad_desktop=@cuantos_pc, uso_desktop=@uso_pc, 
+            tiene_portatil=@tiene_laptop, catidad_portatiles=@cuantos_laptop, uso_portatiles=@uso_laptop, 
+            tiene_tablet=@tiene_tablet, cantidad_tablet=@cuantas_tablet, uso_tablet=@uso_tablet
+            WHERE identificador='@identificador'
+            
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+    </Consulta>
+    <Consulta id="arraigo_vivienda">
+        <sql>            
+            UPDATE public.tbl_arraigo_vivienda
+            SET  gusto_ubicacion_par=@gusto_ubicacion, gusto_vivienda=@gusto_vivienda, gusto_vecindario_par=@gusto_vecindario, 
+            tiempo_zona_par=@tiempo_zona, tipo_tiempo_zona_par = 2, salida_par=@salida_predio, porque_salida_par='@porque_salida', 
+            importancia_zona_proyecto_vida=@importancia_zona, porque_importancia_proyecto_vida='@porque_importancia', 
+            observaciones='@observaciones',comentarios_ficha='@comentarios'
+            WHERE identificador='@identificador'
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+    </Consulta>
+    
+    <Consulta id="identificacion_miembro">
+        <sql>            
+            with upd_miembro as(
+            UPDATE public."tbl_Miembros"
+            SET 
+            "B01_Primer_Apellido"='@apellido_uno', "B02_Segundo_Apellido"='@apellido_dos', "B03_Nombres"='@nombre_uno @nombre_dos', 
+            "B05_Parentesco" =@parentesco, "B06_Genero"=@sexo, "B07_Estado_Civil"=@estado_civil, "B08_Fec_Nacimiento"=@fecha_nacimiento, 
+            "B04_Tipo_Identificacion"=@tipo_documento, "B04_Fec_Exp_Doc_Identificacion"=@fecha_expedicion, primer_nombre='@nombre_uno', segundo_nombre='@nombre_dos',
+            ciudad_nacimiento='@ciudad_nacimiento',"B04_Identificacion"=@num_identificacion
+            WHERE id_miembro=@id_miembro and "Orden"=@orden           
+            returning id_miembro
+            ),  
+            ins_miembro as (
+            INSERT INTO public."tbl_Miembros"(
+            "Identificador","B01_Primer_Apellido", "B02_Segundo_Apellido", "B03_Nombres", primer_nombre, segundo_nombre,
+            "B05_Parentesco", "B06_Genero", "B07_Estado_Civil", "B08_Fec_Nacimiento", 
+            "B04_Tipo_Identificacion", "B04_Identificacion", "B04_Fec_Exp_Doc_Identificacion",ciudad_nacimiento,"Orden")
+            select  '@identificador','@apellido_uno','@apellido_dos','@nombre_uno @nombre_dos','@nombre_uno','@nombre_dos',@parentesco,@sexo,@estado_civil,@fecha_nacimiento,@tipo_documento,@num_identificacion,@fecha_expedicion,'@ciudad_nacimiento',@orden
+            WHERE NOT EXISTS(select 1 from upd_miembro )
+            returning id_miembro
+            )
+            select * from ins_miembro union select * from upd_miembro 
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+    </Consulta>
+    <Consulta id="caracterizacion_miembro">
+        <sql>            
+            with sele_carac as(
+            select id_miembro from "tbl_Miembros"
+            where "Identificador"='@identificador'            
+            AND "Orden"=@orden
+            ), upd_caract as(
+            UPDATE public.tbl_miembro_caracterizacion
+            SET  etnia=@etnia, orientacion_sexual=@orientacion, discapacidad=@tipo_discapacidad, 
+            cabeza_familia=@cabeza_famlia, victima_conflicto=@victima, ruv_victimas=@registro_victimas, desmoviilzado=@desmovilizado, 
+            desplazado=@desplazado, retorno_desplazado=@retorno
+            WHERE id_miembro=(select id_miembro from sele_carac)
+            returning id_miembro
+            ),ins_carac as(
+            INSERT INTO public.tbl_miembro_caracterizacion(id_miembro,
+            etnia, orientacion_sexual, discapacidad, cabeza_familia, 
+            victima_conflicto, ruv_victimas, desmoviilzado, desplazado, retorno_desplazado)
+            select (select id_miembro from sele_carac),@etnia, @orientacion, @tipo_discapacidad, @cabeza_famlia, @victima, @registro_victimas, @desmovilizado,@desplazado, @retorno
+            where not exists(select 1 from upd_caract)
+            returning id_miembro
+            )
+            select *from upd_caract union select *from ins_carac
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+    </Consulta>
+    <Consulta id="serv_sociales_miembro">
+        <sql>            
+            with sele_carac as(
+            select id_miembro from "tbl_Miembros"
+            where "Identificador"='@identificador'            
+            AND "Orden"=@orden
+            ), upd_caract as(
+            UPDATE public.tbl_miembro_caracterizacion
+            SET  ayuda_estatal=@servicio,otra_ayuda_estatal='@otro'
+            WHERE id_miembro=(select id_miembro from sele_carac)
+            returning id_miembro
+            ),ins_carac as(
+            INSERT INTO public.tbl_miembro_caracterizacion( ayuda_estatal,otra_ayuda_estatal )
+            select @servicio,'@otro'
+            where not exists(select 1 from upd_caract)
+            returning id_miembro
+            )
+            select *from upd_caract union select *from ins_carac
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+    </Consulta>
+    <Consulta id="educacion_miembro">
+        <sql>            
+        
+            with sele_carac as(
+            select id_miembro from "tbl_Miembros"
+            where "Identificador"='@identificador'            
+            AND "Orden"=@orden
+            ), upd_caract as(
+            UPDATE public.tbl_miembro_caracterizacion
+            SET  
+            lectoescritura=@lectoescritura, ultimo_grado_aprobado=@ultimo_grado, asistenacia_institucion_infantil=@asiste_jardin,             
+            estudia_actualmente=@estudia,  razon_no_estudio=@razon_desescolaridad,  cual_razon='@otra_razon'
+            WHERE id_miembro=(select id_miembro from sele_carac)
+            returning id_miembro
+            )
+            select * from upd_caract 
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+    </Consulta>
+    <Consulta id="salud_miembro">
+        <sql>            
+            with sele_carac as(
+            select id_miembro from "tbl_Miembros"
+            where "Identificador"='@identificador'            
+            AND "Orden"=@orden
+            ), upd_caract as(
+            UPDATE public.tbl_miembro_caracterizacion
+            SET  enfermedad_cronica='@cual_enfermedad',sistema_salud=@sistema_salud, regimen_salud=@regimen,doc_diagnostico=@diagnostico
+            WHERE id_miembro=(select id_miembro from sele_carac)
+            returning id_miembro
+            )
+            select * from upd_caract 
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+    </Consulta>
+    <Consulta id="economia_miembro">
+        <sql>            
+            with sele_carac as(
+            select id_miembro from "tbl_Miembros"
+            where "Identificador"='@identificador'
+            AND "Orden"=@orden
+            ), upd_caract as(
+            UPDATE public.tbl_miembro_caracterizacion
+            SET  
+            ocupacion_persona=@ocupacion,bl_trabajo=@trabajo_remunerado,cual_trabajo='@cual_trabajo',bl_experiencia=@experiencia,experiencia=@tiempo_exp, lugar_trabajo=@lugar_trabajo, destinacion_par=@destinacion_predio
+            
+            WHERE id_miembro=(select id_miembro from sele_carac)
+            returning id_miembro
+            )
+            select * from upd_caract 
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+    </Consulta>
+    <Consulta id="sociocultural_miembro">
+        <sql>            
+            with sele_carac as(
+            select id_miembro from "tbl_Miembros"
+            where "Identificador"='@identificador'
+            AND "Orden"=@orden
+            ), upd_caract as(
+            UPDATE public.tbl_miembro_caracterizacion
+            SET   relaciones_barrio_om='@relaciones_barrio',acudiente_problemas_economicos='@problemas_econimicos',
+            acudiente_problemas_personales='@problemas_personales',pertenencia_organizaciones='@organizaciones',
+            razon_no_pertenencia='@no_pertenencia',reuniones_organizacion=@participacion_org,caracter_organizacion='@caracter_org',
+            miembros_organizacion='@miembros_org'
+            WHERE id_miembro=(select id_miembro from sele_carac)
+            returning id_miembro
+            )
+            select * from upd_caract 
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+    </Consulta>
+    <Consulta id="tecnologias_miembro">
+        <sql>            
+            with sele_carac as(
+            select id_miembro from "tbl_Miembros"
+            where "Identificador"='@identificador'
+            AND "Orden"=@orden
+            ), upd_caract as(
+            UPDATE public.tbl_miembro_caracterizacion
+            SET   frecuencia_uso_computador=@frecuencia_computador , sitio_uso_computador='@sitio_computador',objetivo_uso_computador='@obj_uso_computador',
+            frecuencia_uso_internet=@frecuencia_internet,dispositivo_acceso_internet='@dispositivo_internet',objetivo_uso_internet='@objetivo_internet'
+            WHERE id_miembro=(select id_miembro from sele_carac)
+            returning id_miembro
+            )
+            select * from upd_caract 
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+    </Consulta>
+    
+    <!--fin de las inserciones y actualizaciones de la ficha social v7-->
+    
+    
+    <!--ficha social v6 -->
+    <Consulta id="salvar_identificacion_caracterizacion">
+        <sql>
+            WITH 
+            sel as (
+            Select "IDENTIFICADOR" from definitiva where "IDENTIFICADOR"='@identificador' 
+            ),
+            upd as(
+            UPDATE	definitiva
+            SET 	
+            "Localidad"='@localidad',"Barrio"='@barrio',
+            "Dirección"='@direccion',"MZ"='@manzana',"LT"='@lote'                  
+            WHERE "IDENTIFICADOR"=(select "IDENTIFICADOR" from sel)
+            returning "IDENTIFICADOR"
+            ),ins as(
+            INSERT INTO definitiva("IDENTIFICADOR", "Barrio", "Dirección", "Localidad","MZ","LT")
+            SELECT '@identificador' ,'@barrio','@direccion','@localidad','@manzana','@lote' 
+            WHERE NOT EXISTS (select 1 from upd )
+            returning "IDENTIFICADOR"	
+            )
+            select * from upd union select * from ins 
+                
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>true</es_dml_complejo>
+    </Consulta>
+    <Consulta id="salvar_miembro_caracterizacion">
+        <sql>
+            with upd_miembro as(
+            UPDATE public."tbl_Miembros"
+            SET 
+            "B01_Primer_Apellido"='@apellido', "B02_Segundo_Apellido"='@segundo_apellido', "B03_Nombres"='@nombre @segundo_nombre', 
+            "B05_Parentesco" =@parentesco, "B06_Genero"=@sexo, "B07_Estado_Civil"=@est_civil, "B08_Fec_Nacimiento"=@nacimiento, 
+            "B04_Tipo_Identificacion"=@tipo_doc, "B04_Fec_Exp_Doc_Identificacion"=@expedicion, primer_nombre='@nombre', segundo_nombre='@segundo_nombre',
+            ciudad_nacimiento='@ciudad',"B04_Identificacion"=@num_doc
+            WHERE "Identificador"='@identificador' and "Orden"=@orden          
+            returning id_miembro
+            ),  
+            ins_miembro as (
+            INSERT INTO public."tbl_Miembros"(
+            "Identificador","B01_Primer_Apellido", "B02_Segundo_Apellido", "B03_Nombres", primer_nombre, segundo_nombre,
+            "B05_Parentesco", "B06_Genero", "B07_Estado_Civil", "B08_Fec_Nacimiento", 
+            "B04_Tipo_Identificacion", "B04_Identificacion", "B04_Fec_Exp_Doc_Identificacion",ciudad_nacimiento,"Orden")
+            select  '@identificador','@apellido','@segundo_apellido','@nombre @segundo_nombre','@nombre','@segundo_nombre',@parentesco,@sexo,@est_civil,@nacimiento,@tipo_doc,@num_doc,@expedicion,'@ciudad',@orden
+            WHERE NOT EXISTS(select 1 from upd_miembro )
+            returning id_miembro
+            )
+            select * from ins_miembro union select * from upd_miembro 
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+    </Consulta>
+    
+    <Consulta id="salvar_poblacion_caracterizacion">
+        <sql>
+            with sele_carac as(
+            select id_miembro from "tbl_Miembros"
+            where "Identificador"='@identificador'
+            AND id_miembro=@id_miembro
+            ), upd_caract as(
+            UPDATE public.tbl_miembro_caracterizacion
+            SET  etnia=@etnia, orientacion_sexual=@orientacion, discapacidad=@discapacidad, 
+            cabeza_familia=@cabeza, victima_conflicto=@victima, ruv_victimas=@ruv, desmoviilzado=@desmovilizado, 
+            desplazado=@desplazado, retorno_desplazado=@retorno
+            WHERE id_miembro=(select id_miembro from sele_carac)
+            returning id_miembro
+            ),ins_carac as(
+            INSERT INTO public.tbl_miembro_caracterizacion(
+            id_miembro, etnia, orientacion_sexual, discapacidad, cabeza_familia, 
+            victima_conflicto, ruv_victimas, desmoviilzado, desplazado, retorno_desplazado)
+            select (select id_miembro from sele_carac),@etnia, @orientacion, @discapacidad, @cabeza, @victima, @ruv, @desmovilizado,@desplazado, @retorno
+            where not exists(select 1 from upd_caract)
+            returning id_miembro
+
+            )
+            select *from upd_caract union select *from ins_carac
+           
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+    </Consulta>
+    <Consulta id="salvar_servicios_sociales">
+        <sql>
+            with sele_carac as(
+            select id_miembro from "tbl_Miembros"
+            where "Identificador"='@identificador'
+            AND id_miembro=@id_miembro
+            ), upd_caract as(
+            UPDATE public.tbl_miembro_caracterizacion
+            SET  ayuda_estatal=@ayuda, otra_ayuda_estatal='@otra_ayuda', 
+            lectoescritura=@lectoescritura, ultimo_grado_aprobado=@grado_aprobado, asistenacia_institucion_infantil=@instituto_infantil, 
+            tiempo_llegada=@tiempo_llegada, enfermedad_cronica='@enfermedad',sistema_salud=@sistema_salud, regimen_salud=@regimen_salud,
+            estudia_actualmente=@estudio_actual, doc_diagnostico=@diagnostico, lugar_estudio=@lugar_estudio ,  razon_no_estudio=@razon_noestudia,  cual_razon='@otra_razon'
+            WHERE id_miembro=(select id_miembro from sele_carac)
+            returning id_miembro
+            )
+            select * from upd_caract 
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+    </Consulta>
+    <Consulta id="salvar_dimension_economica">
+        <sql>
+            with sele_carac as(
+            select id_miembro from "tbl_Miembros"
+            where "Identificador"='@identificador'
+            AND id_miembro=@id_miembro
+            ), upd_caract as(
+            UPDATE public.tbl_miembro_caracterizacion
+            SET  ingreso_promedio=@ingreso_promedio, soporte_ingresos=@soporte_ingresos, 
+            ocupacion_persona=@ocupacion, lugar_trabajo=@lugar_trabajo, destinacion_par=@destinacion, actividad_par='@actividad_par', 
+            actividad_formalizada=@formalizada, razon_social='@razon_social', otros_propietarios='@propietarios', 
+            ubicacion_clientes=@clientes, valor_desarrollo_actividad=@valor_desarrollo, produccion_mensual=@valor_produccion, 
+            valor_herramientas=@valor_herramientas
+            WHERE id_miembro=(select id_miembro from sele_carac)
+            returning id_miembro
+            )
+            select * from upd_caract 
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+    </Consulta>
+    <Consulta id="salvar_caracterizacion_vivienda">
+        <sql>
+            with  upd_caract as( 
+            UPDATE public.tbl_arraigo_vivienda
+            SET  tipo_vivienda=@tipo_vivienda, otro_tipo_vivienda='@otro_tipo_vivienda', documento_tenencia=@doc_tenencia, 
+            otro_doc_tenencia='@otro_doc_tenencia', num_pisos_par=@pisos, num_habitaciones_par=@habitaciones, 
+            num_banos_par=@banos, num_cocinas_par=@cocinas, servicio_acueducto=@acueducto, servicio_energia=@energia, 
+            servicio_gas=@gas, afectacion_patrimonio_familiar='@afectacion', tipo_familia=@tipo_familia, id_profesional=@ref, tenencia_predio=@calidad_tenencia,
+            material_paredes=@meterial_paredes,material_pisos=@materia_pisos,impacto_materia_paredes=@impact_paredes, consumo_acueducto=@consumo_acueducto,
+            consumo_energia=@consumo_energia ,consumo_gas=@consumo_gas,conciencia_riesgo='@conciencia_riesgo'
+            WHERE identificador='@identificador'
+            RETURNING  identificador
+            ),ins_carac as(
+            INSERT INTO public.tbl_arraigo_vivienda(           
+            identificador,tipo_vivienda, otro_tipo_vivienda, documento_tenencia, otro_doc_tenencia, 
+            num_pisos_par, num_habitaciones_par, num_banos_par, num_cocinas_par, 
+            servicio_acueducto, servicio_energia, servicio_gas, afectacion_patrimonio_familiar,tipo_familia,id_profesional,tenencia_predio, material_paredes,material_pisos,impacto_materia_paredes,consumo_energia,consumo_gas,consumo_acueducto,conciencia_riesgo)
+            select '@identificador',@tipo_vivienda,'@otro_tipo_vivienda',@doc_tenencia,'@otro_doc_tenencia',@pisos,@habitaciones,@banos,@cocinas,@acueducto,@energia,@gas,'@afectacion',@tipo_familia,@ref,@calidad_tenencia,@meterial_paredes,@materia_pisos,@impact_paredes,@consumo_energia,@consumo_gas,@consumo_acueducto,'@conciencia_riesgo'
+            WHERE NOT EXISTS (select 1 from upd_caract )
+            returning identificador
+            )
+            select *from upd_caract union select *from ins_carac
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+    </Consulta>
+    <Consulta id="salvar_riesgo_arraigo">
+        <sql>            
+            UPDATE public.tbl_arraigo_vivienda
+            SET  gusto_ubicacion_par=@gusto_ubicacion, gusto_vivienda=@gusto_vivienda, gusto_vecindario_par=@gusto_vecindario, 
+            tiempo_zona_par=@tiempo_zona, tipo_tiempo_zona_par=@tipo_tiempo_zona, salida_par=@salida, porque_salida_par='@porque_salida', 
+            importancia_zona_proyecto_vida=@importancia_proyecto, porque_importancia_proyecto_vida='@porque_proyecto', 
+            mascota=@mascota, cuantos_tipo='@cuantos', observaciones='@boservaciones',pertenencia_organizaciones =@organizaciones,
+            razon_no_pertenencia=@no_pertenencia,  reuniones_organizacion =@reuniones_org,caracter_organizacion=@caracter_org, 
+            miembros_organizacion=@personas_org,
+            acudiente_problemas_personales=@problem_personal,
+            acudiente_problemas_economicos=@problem_economicos,
+            lugares_cercanos_vivienda=@lugar_cercano,
+            problemas_sector_vivienda=@problemas,
+            clasificacion_basuras=@basuras,
+            practica_consumo_servicios=@consumo,
+            id_usuario=@usuario_id
+            WHERE identificador='@identificador'
+            returning identificador           
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+    </Consulta>
+    <Consulta id="salvar_riesgo_arraigo_persona">
+        <sql>   
+            with sele_carac as(
+            select id_miembro from "tbl_Miembros"
+            where "Identificador"='@identificador'
+            AND id_miembro=@id_miembro
+            ), upd_caract as(
+            UPDATE public.tbl_miembro_caracterizacion
+            SET   actividades_zona=@actividad_barrio, relacion_barrio=@relaciones_barrio, pretenencia_organizacion_zona='@organizacion_zona'
+            WHERE id_miembro=(select id_miembro from sele_carac)
+            returning id_miembro
+            )
+            select * from upd_caract 
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+    </Consulta>
+    <!--fin ficha social v6-->
+    
+    <!--Inserción notificacion ficha social-->
+    <Consulta id="notificacion_revision_ficha_social">
+        <sql>   
+            with sel_proc as(
+            SELECT id_proceso
+            FROM procesos.proceso
+            WHERE id_tipo_proceso=5 AND identificador='@identificador'
+            ),
+            ins_proc as (
+            INSERT INTO procesos.proceso(
+            id_tipo_proceso, identificador)
+            select 5,'@identificador'
+            where not exists (select 1 from  sel_proc)    
+            returning id_proceso    
+            ),upd_proc as (
+            UPDATE procesos.actividad
+            SET estado=2
+            WHERE id_proceso=(select id_proceso from  sel_proc union all select id_proceso from ins_proc)
+            ), 
+            ins_notificación as (
+            INSERT INTO procesos.actividad(
+            id_proceso, id_tipo_actividad, actividad_padre, 
+            creado_por, asignado_a, fecha_creacion,
+            fecha_asignacion, fecha_cierre, estado, observacion_inicial)
+            VALUES (
+            (select id_proceso from sel_proc union all  select id_proceso from ins_proc), 18,17,
+            @usr,(select usuario_id from usuario u , parametros p WHERE u.usuario_usuario=p.param_descripcion  AND param_codigo='reas.lider.social'), CURRENT_DATE,
+            CURRENT_DATE,CURRENT_DATE + interval '15 day',1,'Por favor revisar la ficha de caracterización.'
+            )
+            )
+            select * from sel_proc union all select * from ins_proc
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+    </Consulta>    
+    <Consulta id="devolver_ficha_notificacion">
+        <sql>                        
+            UPDATE public.tbl_arraigo_vivienda
+            SET  estado_ficha=4
+            WHERE identificador=(SELECT identificador  FROM procesos.proceso  WHERE id_proceso='@id_proceso')                                
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+    </Consulta>    
+    <Consulta id="notificacion_aprobacion_ficha_social">
+        <sql>   
+            with sel_proc as(
+            SELECT id_proceso
+            FROM procesos.proceso
+            WHERE id_tipo_proceso=5 AND identificador='@identificador'
+            ),
+            ins_proc as (
+            INSERT INTO procesos.proceso(
+            id_tipo_proceso, identificador)
+            select 5,'@identificador'
+            where not exists (select 1 from  sel_proc)    
+            returning id_proceso    
+            ),upd_proc as (
+            UPDATE procesos.actividad
+            SET estado=2
+            WHERE id_proceso=(select id_proceso from  sel_proc union all select id_proceso from ins_proc)
+            )            
+            select * from sel_proc union all select * from ins_proc
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+    </Consulta>
+    
+    <!--consultas servicios publicos-->
+    <Consulta id="insertar_servicio">
+        <sql>   
+            INSERT INTO public.servicio_publico(
+            identificador, consecutivo, tipo_servicio )
+            VALUES ('@identificador', @consecutivo,'@servicio'); 
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+    </Consulta>  
+    <Consulta id="actualizar_servicio">
+        <sql>   
+            UPDATE public.servicio_publico
+            SET  disponibilidad='@disponibilidad', modalidad='@modalidad', 
+            direccion='@direccion', cuenta='@cuenta', estado='@estado', fecha_paz_salvo=@fecha, 
+            observacion='@observacion'
+            WHERE identificador='@identificador'           
+            AND consecutivo=@consecutivo         
+            AND tipo_servicio='@servicio' 
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+    </Consulta>  
+    <Consulta id="borrar_servicio">
+        <sql>   
+            DELETE FROM public.servicio_publico
+            WHERE identificador='@identificador'           
+            AND consecutivo=@consecutivo         
+            AND tipo_servicio='@servicio' 
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+    </Consulta>  
+    <!--fin de servicios publicos-->
+    
+    <!--Inicio salvado beneficiarios definitiva desde la ficha-->
+    <Consulta id="salvar_beneficiario_uno">
+        <sql>   
+            UPDATE public.definitiva
+            SET   "Nombre 1"='@nombre_uno'||' '||'@nombre_dos'||' '||'@apellido_uno'||' '||'@apellido_dos', "1er_Apellido_Ben1"='@apellido_uno', "2do_Apellido_Ben1"='@apellido_dos', "1er_Nombre_Ben1"='@nombre_uno', 
+            "2do_Nombre_Ben1"='@nombre_dos', "Cedula 1"='@num_identificacion'
+            WHERE "IDENTIFICADOR"='@identificador'
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+    </Consulta>
+    <Consulta id="salvar_beneficiario_dos">
+        <sql>   
+            UPDATE public.definitiva
+            SET  "Nombre 2"='@nombre_uno'||' '||'@nombre_dos'||' '||'@apellido_uno'||' '||'@apellido_dos', "1er_Apellido_Ben2"='@apellido_uno', "2do_Apellido_Ben2"='@apellido_dos', "1er_Nombre_Ben2"='@nombre_uno', 
+            "2do_Nombre_Ben2"='@nombre_dos', "Cedula 2"='@num_identificacion'
+            WHERE "IDENTIFICADOR"='@identificador'
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+    </Consulta>
+    <!--fin de servicios publicossalvado beneficiarios definitiva desde la ficha-->
+    
+    <!--inserción de concepto de zona de ronda hidrica-->
+    <Consulta id="guardar_concepto_afectacion">
+        <sql>   
+            INSERT INTO public.concepto_afectacion_hidrica(
+            consecutivo, identificador, direccion_catastral, sector_catastro, 
+            cod_quebrada, fecha_reporte, id_usuario,afectacion)
+            VALUES (@consecutivo, '@identificador', '@direccion', '@sector', '@quebrada',
+            CURRENT_DATE, '@usuario',@afectacion)
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+    </Consulta>
+    
+    <Consulta id="delete_img_visor">
+        <sql>
+            delete from documento_adjunto where doc_descripcion = 'imgen concepto visor' and identificador='@identificador'
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+    </Consulta>
+    <Consulta id="delete_img_covertura">
+        <sql>
+            delete from documento_adjunto where doc_descripcion = 'imagen covertura SDA' and identificador='@identificador'
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+    </Consulta>
+    <!--fin de insercion de concepto de zona de ronda hidrica-->
+    
+    
+    
+    
+    <!--Fabian-->
+    <Consulta id="InsertarLogUsuario">
+        <sql>INSERT INTO log_usuario(usuario,"timestamp",user_agent, referer) VALUES ('@USUARIO', current_timestamp, '@USER_AGENT', '@REFERER')</sql>
+        <conexion>atencion_reloca</conexion>
+
+        <permisos>*</permisos>
+    </Consulta>
+    
+    
+</Consultas>    

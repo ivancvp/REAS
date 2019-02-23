@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">   
+        <!--<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">-->
+        <script language="JavaScript" src="js/md5.js"></script>             
+        <link href="css/pasos_v7.css" rel="stylesheet">     
+    </head>
+    <body>
+        <div id="form_social_v7">
+            <div class="row form-group">
+                <div class="col-xs-12">
+                    <ul class="nav nav-pills nav-justified thumbnail setup-panel">
+                        <li class="active" ><a href="#step-1">
+                                <h4 class="list-group-item-heading">Paso 1</h4>
+                                <p class="list-group-item-text"></p>
+                            </a></li>
+                        <li class="disabled"><a href="#step-2">
+                                <h4 class="list-group-item-heading">Paso 2</h4>
+                                <p class="list-group-item-text"></p>
+                            </a></li>
+                        <li class="disabled">
+                            <a href="#step-3">
+                                <h4 class="list-group-item-heading">Paso 3</h4>
+                                <p class="list-group-item-text"></p>
+                            </a>
+                        </li>
+                        <li class="disabled">
+                            <a href="#step-4">
+                                <h4 class="list-group-item-heading">Paso 4</h4>
+                                <p class="list-group-item-text"></p>
+                            </a>
+                        </li>
+                        <li class="disabled">
+                            <a href="#step-5">
+                                <h4 class="list-group-item-heading">Paso 5</h4>
+                                <p class="list-group-item-text"></p>
+                            </a>
+                        </li>
+                        <li class="disabled">
+                            <a href="#step-6">
+                                <h4 class="list-group-item-heading">Paso 6</h4>
+                                <p class="list-group-item-text"></p>
+                            </a>
+                        </li>
+                        <li class="disabled">
+                            <a href="#step-7">
+                                <h4 class="list-group-item-heading">Paso 7</h4>
+                                <p class="list-group-item-text"></p>
+                            </a>
+                        </li>
+                        <li class="disabled">
+                            <a href="#step-8">
+                                <h4 class="list-group-item-heading">Paso 8</h4>
+                                <p class="list-group-item-text"></p>
+                            </a>
+                        </li>
+                        <li class="disabled">
+                            <a href="#step-9">
+                                <h4 class="list-group-item-heading">Paso 9</h4>
+                                <p class="list-group-item-text"></p>
+                            </a>
+                        </li>
+                        <li class="disabled">
+                            <a href="#step-10">
+                                <h4 class="list-group-item-heading">Paso 10</h4>
+                                <p class="list-group-item-text"></p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div id="mensaje"></div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="col-md-12   setup-content " id="step-1">
+                        <h3> 1. Información Institucional e Identificación del Predio</h3>
+                        <div class="ident_predio" id="ident_predio">
+                            <div class="form-group">
+                                <label class="control-label">1.1.Identificador</label>
+                                <input  maxlength="100" type="text" required="required" class="form-control" id="identificador" placeholder="Identificador REAS" disabled  />
+                            </div>                        
+                            <div class="form-group">
+                                <label class="control-label">1.2.Numero concepto</label>
+                                <input maxlength="100" type="text" required="required" class="form-control" id="concepto" name="concepto" placeholder="Concepto y fecha"  disabled/>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">1.2.Fecha del concepto</label>
+                                <input type="date" required="required" class="form-control" id="fecha_concepto"  disabled/>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">1.3.Direccion del PAR</label>
+                                <input required="required" class="form-control" name="direccion" id="direccion_par" placeholder="Dirección del PAR" disabled/> 
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">1.4.Manzana</label>
+                                <input type='number' min='1' required="required" class="form-control" name="manzana" id="manzana" placeholder="Manzana" disabled/> 
+
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">1.5.Lote Nº</label>
+                                <input type='text' required="required" class="form-control" name="lote" id="lote" placeholder="lote" disabled/>                                                                 
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">1.6.Barrio</label>
+                                <input required="required" class="form-control" name="barrio" id="barrio" placeholder="Barrio" disabled/>                                                                                                 
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">1.7.Localidad</label>
+                                <select class="form-control" required  id="localidad"  disabled>
+                                    <option value="" disabled selected>Seleccione la Localidad</option>
+                                    <option>01 Usaquén</option>
+                                    <option>02 Chapinero</option>
+                                    <option>03 Santa Fe</option>
+                                    <option>04 San Cristóbal</option>
+                                    <option>05 Usme</option>
+                                    <option>06 Tunjuelito</option>
+                                    <option>07 Bosa</option>
+                                    <option>08 Kennedy</option>
+                                    <option>09 Fontibón</option>
+                                    <option>10 Engativá</option>
+                                    <option>11 Suba</option>
+                                    <option>12 Barrios Unidos</option>
+                                    <option>13 Teusaquillo</option>
+                                    <option>14 Los Mártires</option>
+                                    <option>15 Antonio Nariño</option>
+                                    <option>16 Puente Aranda</option>
+                                    <option>17 La Candelaria</option>
+                                    <option>18 Rafael Uribe Uribe</option>
+                                    <option>19 Ciudad Bolívar</option>
+                                    <option>20 Sumapaz</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button id="btn_siguiente" class="btn btn-primary btn-lg btn_siguiente  pull-right" >Guardar y continuar  <span class="glyphicon glyphicon-" aria-hidden="true"></span></button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="setup-content" id="step-2">
+                        <h3 class="">2. Identificación de la familia </h3>                        
+                        <div class="row" >                    
+                            <div class="col-md-4 form-group" style="padding: 30px;">
+                                <label class="control-label ">2.1.Tipo de Familia </label>
+                                <select class="form-control "  name="tipo_famlia" id="tipo_famlia">
+                                    <option value=0 >Seleccione el Tipo de Familia</option>
+                                    <option value=1> Nuclear: Ambos padres con sus hijos, sin que estos ultimos tengan dependientes en el hogar </option>
+                                    <option value=2> Extensa: Familia nuclear con otros parientes diferentes a padres e hijos </option>
+                                    <option value=3> Compuesta: Cada conyugue aporta hijos de una union anterior y a su vez existen hijos de la presente unión </option>
+                                    <option value=4> Monoparental: Un solo padre/madre con sus hijos, sin que estos tengan dependientes en el hogar </option>
+                                    <option value=5> Ampliada: Familia extensa donde viven miembros de la familia de dos o más generaciones, parientes cercanos o lejanos </option>
+                                    <option value=6> Unipersonal: Hogar en que vive una sola persona </option>
+                                    <option value=7> Pareja: Pareja del mismo o distinto género sin hijos </option>
+                                </select>
+                            </div>
+                            <div class="col-md-8 form-group">
+                                <div class="panel  " >
+                                    <button class="btn btn-primary  "   id="add_miembro_v7" type="button" >agregar miembro <span class="glyphicon glyphicon-plus"></span> </button>
+                                </div>
+                            </div>
+                        </div> 
+                        <div  class="col-lg-4  " > 
+                            <div class="panel panel-default text-center" >
+                                <div class="card-header primary-color white-text">
+                                    <h3>Nucleo Familiar</h3>                             
+                                </div>
+                                <div class="panel-body">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Nombre</th>
+                                                <th>Parentesco</th>
+                                            </tr>                                       
+                                        </thead>
+                                        <tbody id="familia_tabla_v7">
+
+                                        </tbody>
+                                    </table>
+                                </div>                           
+                            </div>
+                        </div>
+                        <div class="col-md-8 " id="miembros_v7" >
+                            <!--donde se agrega los formularios dependiendo del numero de personaas-->
+                        </div>
+                        <button id="btn_siguiente" class="btn btn-primary btn-lg btn_siguiente  pull-right">Guardar y continuar </button>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="col-md-12   setup-content" id="step-3">
+                        <h3 class="">3. Caracterización de la Población </h3>
+                        <div id="caract_miembro">
+                            <!--donde se agrega los formularios dependiendo del numero de personaas-->
+                        </div>
+                        <button id="btn_siguiente" class="btn btn-primary btn-lg btn_siguiente  pull-right">Guardar y continuar </button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="col-md-12   setup-content" id="step-4">
+                        <h3 class="">(4,5,6). Acceso a Servicios Sociales o Distritales, Educación y  Salud </h3>
+                        <div id="servi_miembro">
+                            <!--donde se agrega los formularios dependiendo del numero de personaas-->
+                        </div>
+                        <button id="btn_siguiente" class="btn btn-primary btn-lg btn_siguiente  pull-right">Guardar y continuar </button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="col-md-12   setup-content" id="step-5">
+                        <h3 class=""> 7. Dimensión Económica</h3>
+                        <hr>
+                        <div class="panel panel-default">    
+                            <div class=" panel-heading">  
+                                <h3>7. información del hogar</h3>
+                            </div>                
+                            <div class=" panel-body">    
+                                <div class="row">    
+                                    <div class="col-lg-3">7.1.1.Ingrese el ingreso mensual del hogar:</div>
+                                    <div class="col-lg-3"><input class="form-control" type="number"  min="0" value="0" id="ingreso"></div>
+                                    <div class="col-lg-3">7.1.2.Ingrese el gasto promedio mensualdel hogar: </div>
+                                    <div class="col-lg-3"><input class="form-control" type="number"  min="0"  value="0" id="egreso"></div>                    
+                                </div>                
+
+                                <div class="row">    
+                                    <div class="col-lg-3">7.7.1¿Las personas de este hogar poseen motocicleta?</div>
+                                    <div class="col-lg-3">
+                                        <select class="form-control" id="moto">
+                                            <option value='null'>Seleccione..</option>
+                                            <option value=false>No</option>
+                                            <option value=true>Si</option>                                     
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-3">7.7.2. ¿Cuantas Motocicletas?</div>
+                                    <div class="col-lg-3"><input class="form-control" value="0" type="number"   min="0" id="num_motos"></div>                    
+                                </div>
+                                <div class="row">    
+                                    <div class="col-lg-3">7.8.1.¿Las personas de este hogar poseen carro?</div>
+                                    <div class="col-lg-3">
+                                        <select class="form-control" id="carro">
+                                            <option value='null'>Seleccione...</option>
+                                            <option value=false>No</option>
+                                            <option value=true>Si</option>                                        
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-3">7.8.2. ¿Cuantos Carros?</div>
+                                    <div class="col-lg-3"><input class="form-control" value="0" type="number"   min="0"  id="num_carros"></div>                    
+                                </div>
+                                <div class="row">    
+                                    <div class="col-lg-3">7.9.1.¿Las personas de este hogar poseen bicicleta??</div>
+                                    <div class="col-lg-3">
+                                        <select class="form-control" id="bicicletas">
+                                            <option value='null'>Seleccione...</option>
+                                            <option value=false>No</option>
+                                            <option value=true>Si</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-3"> 7.9.2.¿Cuatas bicicletas?</div>
+                                    <div class="col-lg-3"><input class="form-control" value="0" type="number"   min="0"  id="num_bici"></div>                    
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-5">7.10.Seleccione la destinación que tiene el predio en alto riesgo (PAR)</div>
+                                    <div class="col-md-2">
+                                        <select class="form-control destinacion_predio_padre" id="destinacion_predio" name="destinacion_predio">
+                                            <option value="0">Seleccione...</option>
+                                            <option value="1">Residencial</option>
+                                            <option value="2">Comercio</option>
+                                            <option value="3">Industria</option>
+                                            <option value="4">Agrícola-Pecuario</option>
+                                            <option value="5">Arriendo</option>
+                                            <option value="6">Mixta (Residencial + Actividad Productiva)</option>
+                                        </select>
+                                    </div>
+                                </div> 
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="panel panel-default " id="destinacion_inmueble">    
+                            <div class=" panel-heading">  
+                                <h3>7.10. Destinación del Inmueble</h3>
+                            </div>                
+                            <div class=" panel-body">    
+                                <div class="row ">
+                                    <div class="col-md-1">7.11.1 Actividad Realizada</div>
+                                    <div class="col-md-2">
+                                        <input type="text" class="form-control actividad" id="actividad" name="actividad" placeholder="Actividad">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="checkbox" class="formalizacion" id="formalizada" name="formalizacion">7.11.2 ¿Formalizada?
+                                    </div>  
+                                    <div class="col-md-1">7.11.3 Razón Social (Si es formal)</div>
+                                    <div class="col-md-2">
+                                        <input type="text" class="form-control razon-social" id="razon_social" name="actividad" placeholder="Actividad">
+                                    </div>
+                                    <div class="col-md-1">7.11.4 Nombre de los propietarios</div>
+                                    <div class="col-md-3">
+                                        <textarea class="form-control propietarios" id="otros_propietarios"  name="propietarios" placeholder="Ponga el nombre de los propietarios separado por coma"></textarea>
+                                    </div>
+                                </div>
+                                <div class="row ">
+                                    <div class="col-md-1">7.11.5 Clientes o usuarios tienen ubicación: </div>
+                                    <div class="col-md-2"><select class="form-control ubicacion-clientes"  id="ubicacion_clientes" name="ubiclientes">
+                                            <option value="0">Seleccione...</option>
+                                            <option value="1">Local</option>
+                                            <option value="2">Regional</option>
+                                            <option value="3">Nacional</option>
+                                            <option value="4">Internacional</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">7.11.6 Valor mensual de gastos para desarrollar la actividad (Aprox.)</div>
+                                    <div class="col-md-2">
+                                        <input type="number"   min="0"  value="0" class="form-control valdesarrollo"  id="valor_desarrollo"  name="valdesarrollo" placeholder="valor"></div>
+                                    <div class="col-md-1">7.11.7 Valor de producción mensual / Canon Mensual</div>
+                                    <div class="col-md-3">
+                                        <input type="number"   min="0"  class="form-control valproduccion"   id="produccion"   name="valproduccion" value="0" placeholder="valor de la producción">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-1">7.11.8 Valor maquinaria y/o herramientas (Aprox.)</div>
+                                    <div class="col-md-2">
+                                        <input type="number"   min="0" value="0" class="form-control valherramientas" id="valor_herramientas" name="valherramientas" placeholder="valor de las herramientas y/o maquinaria">
+                                    </div>
+                                    <div class="col-md-1">7.11.9 Número de empleados formales</div>
+                                    <div class="col-md-2">
+                                        <input type="number"   min="0" value="0" class="form-control " id="empleados"  placeholder="empleados">
+                                    </div>
+                                    <div class="col-md-1">7.11.10 Área de la vivienda para realizar la actividad (en metros)</div>
+                                    <div class="col-md-2">
+                                        <input type="number"   min="0" value="0" class="form-control " id="area_actividad"  placeholder="area de la activdad">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <hr>
+                        <div id="economi_miembro">
+                            <!--donde se agrega los formularios dependiendo del numero de personaas-->
+                        </div>
+
+                        <button id="btn_siguiente" class="btn btn-primary btn-lg btn_siguiente  pull-right">Guardar y continuar </button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="col-md-12   setup-content" id="step-6">
+                        <h3 class=""> (8,9). Caracterización de la Vivienda y Consciencia del Riesgo</h3>                      
+                        <hr>
+                        <div id="vivienda">   
+                            <div class="row">
+                                <div class="col-md-5">8.1 Tipo de vivienda</div>
+                                <div class="col-md-5">
+                                    <select class="form-control tipo-vivienda" name="tipovivienda" id="tipo_vivienda">
+                                        <option value="0">Seleccione...</option>
+                                        <option value="1">Apartamento</option>
+                                        <option value="2">Casa-Lote</option>
+                                        <option value="3">Casa</option>
+                                        <option value="4">Casa Prefabricada</option>
+                                        <option value="5">otro</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <input id="otro_tipo" class="form-control cual_tipovivienda" name="cual_tipovivienda" placeholder="¿Cúal?"/>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-5">8.2 Calidad en la que acredita la tenencia del predio </div>
+                                <div class="col-md-5">
+                                    <select class="form-control acredita-tenencia" name="acreditaTenencia" id="calidad_tenencia">                                        
+                                        <option value="0">Seleccione...</option><option value="1">Arrendatario</option><option value="2">Usufructuario</option><option value="3">Poseedor</option><option value="4">Tenedor</option><option value="5">Propietario</option>
+                                    </select>
+                                </div>                                
+                            </div>
+                            <div class="row">
+                                <div class="col-md-5">8.3 Documento que acrediten la tenencia</div>
+                                <div class="col-md-5">
+                                    <select class="form-control tipo-tenencia" name="tipotenencia" id="documento_tenencia">
+                                        <option value="0">Seleccione...</option><option value="1">Escritura</option><option value="2">Certificador de libertad y tradicón</option><option value="3">Promesa de compraventa</option><option value="4">Otra</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <input id="otro_doc"  class="form-control doc-tenencia" name="doctenencia" placeholder="¿Cúal?"/>
+                                </div>
+                            </div>                           
+                            <hr>
+
+                            <div class="row">
+                                <div class="col-md-6">8.4 Servicios públicos con los que cuenta el PAR:
+                                    <ul class="list-group">
+                                        <li class="list-group-item"><input type="checkbox" name="acueducto" id="acueducto"/>   Acueducto y alcantarillado</li>
+                                        <li class="list-group-item"><input type="checkbox" name="energia" id="energia" />   Servicio de Energia</li>
+                                        <li class="list-group-item"><input type="checkbox" name="gas"  id="gas"/>   Servicio de gas domiciliario</li>                                           
+                                    </ul>
+                                </div> 
+                                <div class="col-md-4">8.4 Consumo de los Servicios públicos del PAR:
+                                    <ul class="list-group casa">
+                                        <li class="list-group-item"><input class="form-control " type="number" name="consumo_agua" value="0" min="0" max="90000" id="consumo_agua"/>  Consumo en  m3</li>
+                                        <li class="list-group-item"><input class="form-control"  type="number" name="consumoenergia" value="0"  min="0" max="90000" id="consumo_energia" />   Consumo en KW</li>
+                                        <li class="list-group-item"><input class="form-control"  type="number" name="consumogas" value="0"  min="0" max="90000" id="consumo_gas"/>  Consumo en m3</li>                                           
+                                    </ul>
+                                </div> 
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    8.5 Caracteristicas del Par:
+                                    <ul class="list-group casa">
+                                        <li class="list-group-item"><input type="number" class="form-control pisos" name="pisos"  min="0" max="6" id="num_pisos" /> Número de pisos del PAR  </li>
+                                        <li class="list-group-item"><input type="number" class="form-control cuartos" name="cuartos"  min="0" max="15" id="num_cuartos" /> Número de cuartos del PAR </li>
+
+                                    </ul>
+                                </div> 
+                                <div class="col-md-6">
+                                    8.5 Caracteristicas del Par:
+                                    <ul class="list-group casa">                                           
+                                        <li class="list-group-item"> <input type="number" class="form-control baños" name="baños"  min="0" max="10" id="num_banos" />   Número de baños del PAR</li>                                           
+                                        <li class="list-group-item"><input type="number" class="form-control cocinas" name="cocinas"  min="0" max="10" id="num_cocinas" />  Número de cocinas del PAR </li>                                           
+                                    </ul>
+                                </div>
+                            </div> 
+                            <hr>
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    8.6.1 ¿Las paredes son mayoritariamente de bloque,ladrillo, piedra, madera pulida, concreto vaciado y/o material prefabricado?
+                                </div>
+                                <div class="col-lg-2">
+                                    <select class="form-control"  id="material_paredes" >
+                                        <option value=false >No</option>
+                                        <option value=true >Si</option>                                        
+                                    </select>
+                                </div>                                
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    8.6.2 ¿La vivienda tiene mayoritariamente pisos en tierra?
+                                </div>
+                                <div class="col-lg-2">
+                                    <select class="form-control"  id="material_pisos" >
+                                        <option value=false >No</option>
+                                        <option value=true >Si</option>                                        
+                                    </select>
+                                </div>                             
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    8.6.3 ¿Las paredes son mayoritariamente de materiales de bajo impacto ambiental o ecológico (origen vegetal o biocompatible)?
+                                </div>
+                                <div class="col-lg-2">
+                                    <select class="form-control"  id="impacto_paredes" >
+                                        <option value=false >No</option>
+                                        <option value=true >Si</option>
+
+                                    </select>
+                                </div>                               
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    8.7. ¿Cuántas Unidades Habitacionales se identifican?
+                                </div>
+                                <div class="col-lg-2">
+                                    <input id="num_unidades"  type="number" class="form-control doc-tenencia" />
+                                </div>                               
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    9. Consciencia del Riesgo (Responde el entrevistado)Cual de estos eventos ha afectado su barrio o vivienda en los últimos 2 años: Inundaciones, deslizamientos, hundimientos de tierra, grietas.
+                                </div>
+                                <div class="col-lg-2">                                    
+                                    <select class="form-control" id="conciencia_riesgo" >
+                                        <option value="0" selected >selccione...</option>
+                                        <option value="1" >Inundaciones</option>
+                                        <option value="2" >Deslizamientos</option>
+                                        <option value="3" >Hundimientos de tierra</option>
+                                        <option value="4" >Grietas</option>
+                                        <option value="5" >Ninguna</option>
+                                    </select>
+                                </div>                               
+                            </div>
+                            <hr>
+                        </div>
+                        <button id="btn_siguiente" class="btn btn-primary btn-lg btn_siguiente  pull-right">Guardar y continuar </button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="col-md-12   setup-content" id="step-7">
+                        <h3 class=""> 10. Dimensión Sociocultural</h3>
+                        <hr>
+                        <div class="row mascotas">   
+
+                            <div class="col-lg-3">10.1. ¿En este hogar convive con animales?</div>
+                            <div class="col-lg-3">
+                                <select class="form-control" id="animales">
+                                    <option value='null'>Seleccione..</option>
+                                    <option value=false>No</option>
+                                    <option value=true>Si</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-3"> </div> 
+                            <div class="col-lg-3"> <button class="btn btn-warning" id="add_mascota"> Agregar Mascota <i class="fas fa-plus-circle"></i></button>  <button class="btn btn-danger" id="rm_mascota"><i class="far fa-trash-alt"></i></button> </div> 
+                        </div>
+                        <div id="mascotas_pull">    
+                            <div class="row mascotas">    
+                                <div class="col-lg-3">10.2. ¿ Cuántos?</div>
+                                <div class="col-lg-3">
+                                    <input class="form-control masc-cuantos" value="0" type="number"   min="0"  id="cuantos">
+                                </div>       
+                                <div class="col-lg-3">10.2. ¿Qué tipo?</div>
+                                <div class="col-lg-3">
+                                <select class="form-control tipo_masc" id="tipo_animal">
+                                        <option value="0"   >Seleccione..</option>
+                                        <option value="1"  >Canino</option>
+                                        <option value="2"  >Felino</option>
+                                        <option value="3"  >Ave</option>
+                                        <option value="4"  >Roedor</option>
+                                        <option value="5"  >Aracnido</option>                              
+                                        <option value="6"  >Pez</option>                              
+                                    </select>
+                                </div>
+                            </div>                        
+                        </div>                        
+                        <hr>                        
+                        <div class="col-md-6 " >
+                            <div class="panel panel-default" >
+                                <div class="panel table-condensed" >
+                                    10.3. En su barrio las relaciones son:
+                                </div>
+                                <div class="panel panel-body" >
+                                    <table class="table  table-condensed">
+                                        <thead>
+                                            <tr>
+                                                <th>Nombre</th>
+                                                <th>Solidaridad</th>
+                                                <th>Cordiales</th>
+                                                <th>Indiferentes</th>
+                                                <th>Conflictivas</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="relaciones_table">       
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 " >
+                            <div class="panel panel-default" >
+                                <div class="panel panel-heading" >
+                                    10.4. ¿A quién recurre cuando tiene problemas económicos?
+                                </div>
+                                <div class="panel panel-body" >
+                                    <table class="table table-condensed">
+                                        <thead>
+                                            <tr>
+                                                <th>Nombre</th>                                                
+                                                <th>1</th>                                                
+                                                <th>2</th>                                                
+                                                <th>3</th>                                                
+                                                <th>4</th>                                                
+                                                <th>5</th>                                                
+                                                <th>6</th>                                                
+                                                <th>7</th>                                                
+                                                <th>8</th>                                                
+                                                <th>9</th>                                                
+                                                <th>10</th>                                                
+                                                <th>11</th>                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbdoy_probecono">       
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 " >
+                            <div class="panel panel-default" >
+                                <div class="panel panel-heading" >
+                                    10.5. ¿A quién acude cuando tiene problemas personales?
+                                </div>
+                                <div class="panel panel-body" >
+                                    <table class="table table-condensed">
+                                        <thead>
+                                            <tr>
+                                                <th>Nombre</th>
+                                                <th>1</th>                                                
+                                                <th>2</th>                                                
+                                                <th>3</th>                                                
+                                                <th>4</th>                                                
+                                                <th>5</th>                                                
+                                                <th>6</th>                                                
+                                                <th>7</th>                                                
+                                                <th>8</th>                                                
+                                                <th>9</th>                                                
+                                                <th>10</th>                                                  
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbdoy_probeperso">       
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 " >
+                            <div class="panel panel-default" >
+                                <div class="panel panel-heading" >
+                                    10.6. De las siguientes organizaciones, ¿a cuál(es) pertenece?
+                                </div>
+                                <div class="panel panel-body" >
+                                    <table class="table table-condensed">
+                                        <thead>
+                                            <tr>
+                                                <th>Nombre</th>
+                                                <th>1</th>                                                
+                                                <th>2</th>                                                
+                                                <th>3</th>                                                
+                                                <th>4</th>                                                
+                                                <th>5</th>                                                
+                                                <th>6</th>                                                
+                                                <th>7</th>                                                
+                                                <th>8</th>                                                
+                                                <th>9</th>   
+                                                <th>10</th>  
+                                                <th>11</th>  
+                                                <th>12</th>  
+                                                <th>13</th>  
+                                                <th>14</th>  
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbdoy_organiza">       
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 " >
+                            <div class="panel panel-default" >
+                                <div class="panel panel-heading" >
+                                    10.7. Si no pertenece a ninguna (opción 14) ¿Por qué razón principal no pertenece a alguna organización?
+                                </div>
+                                <div class="panel panel-body" >
+                                    <table class="table table-condensed">
+                                        <thead>
+                                            <tr>
+                                                <th>Nombre</th>
+                                                <th>1</th>                                                
+                                                <th>2</th>                                                
+                                                <th>3</th>                                                
+                                                <th>4</th>                                                
+                                                <th>5</th>                                                
+                                                <th>6</th>                                                
+                                                <th>7</th>                                                
+                                                <th>8</th>                                                
+                                                <th>9</th>  
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbdoy_nopertenencia">       
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 " >
+                            <div class="panel panel-default" >
+                                <div class="panel panel-heading" >
+                                    10.8. En el ÚLTIMO AÑO, ¿ha participado en reuniones o ha tenido contacto con dicha(s) organización(es)?
+                                </div>
+                                <div class="panel panel-body" >
+                                    <table class="table table-condensed">
+                                        <thead>
+                                            <tr>
+                                                <th>Nombre</th>
+                                                <th>SI</th>                                      
+                                                <th>No</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbdoy_participacion">       
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 " >
+                            <div class="panel panel-default" >
+                                <div class="panel panel-heading" >
+                                    10.9. Esa organización es de carácter
+                                </div>
+                                <div class="panel panel-body" >
+                                    <table class="table table-condensed">
+                                        <thead>
+                                            <tr>
+                                                <th>Nombre</th>
+                                                <th>1</th>                                                
+                                                <th>2</th>                                                
+                                                <th>3</th>                                                
+                                                <th>4</th>                                             
+
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbdoy_caracter_org">       
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 " >
+                            <div class="panel panel-default" >
+                                <div class="panel panel-heading" >
+                                    10.10. ¿ Cuántas personas conforman esa organización?
+                                </div>
+                                <div class="panel panel-body" >
+                                    <table class="table table-condensed">
+                                        <thead>
+                                            <tr>
+                                                <th>Nombre</th>
+                                                <th>1</th>
+                                                <th>2</th>
+                                                <th>3</th>
+                                                <th>4</th>
+                                                <th>5</th>
+                                                <th>6</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbdoy_miembros_org">       
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <button id="btn_siguiente" class="btn btn-primary btn-lg btn_siguiente  pull-right">Guardar y continuar </button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="col-md-12   setup-content" id="step-8">
+                        <h3 class="">11. CONDICIONES Y PRÀCTICAS ASOCIADAS AL CAPITAL AMBIENTAL</h3>
+
+                        <div class="row">
+                            <div class="col-md-6">11.1 La vivienda está cerca de:
+                                <ul class="list-group">
+                                    <li class="list-group-item "><input type="checkbox" value="a" class="cerca"/>  Fábricas o industrias.</li>
+                                    <li class="list-group-item "><input type="checkbox" value="b" class="cerca" />  Aeropuertos.</li>
+                                    <li class="list-group-item "><input type="checkbox" value="c" class="cerca"/>  Basureros y/o botaderos de basuras.</li>
+                                    <li class="list-group-item "><input type="checkbox" value="d"  class="cerca" />  Plazas de mercado</li>
+                                    <li class="list-group-item "><input type="checkbox" value="e"  class="cerca" />  Terminales de buses</li>
+                                    <li class="list-group-item "><input type="checkbox" value="f"  class="cerca" />  Bares o Prostíbulos</li>
+                                    <li class="list-group-item "><input type="checkbox" value="g"   class="cerca"/>  Expendios de droga (ollas).</li>
+                                    <li class="list-group-item "><input type="checkbox" value="h"   class="cerca" />  Lotes baldíos o sitios oscuros y peligrosos</li>
+                                    <li class="list-group-item "><input type="checkbox" value="i"   class="cerca"/>  Antenas de comunicación, de radiotransmisión (radio, beeper, celular, radioaficionados, etc.), líneas de alta tensión o centrales eléctrica</li>
+                                    <li class="list-group-item "><input type="checkbox" value="j"   class="cerca"/>  Caños de aguas negras</li>
+                                    <li class="list-group-item "><input type="checkbox" value="k"   class="cerca"/>  Mataderos</li>
+                                    <li class="list-group-item "><input type="checkbox"  value="l"  class="cerca" />  Talleres de mecánica, servitecas y/o estaciones de gasolina</li>
+
+                                </ul>
+                            </div> 
+                            <div class="col-md-6">11.2 ¿Cuáles de los siguientes problemas presenta el sector donde está ubicada su vivienda?
+                                <ul class="list-group ">                                                                  
+                                    <li class="list-group-item "><input type="checkbox" value="a" class="problemas"/> Ruido.</li>
+                                    <li class="list-group-item "><input type="checkbox" value="b" class="problemas" /> Exceso de anuncios publicitarios.</li>
+                                    <li class="list-group-item "><input type="checkbox" value="c" class="problemas"/> Inseguridad.</li>
+                                    <li class="list-group-item "><input type="checkbox" value="d" class="problemas" /> Contaminación del Aire.</li>
+                                    <li class="list-group-item "><input type="checkbox" value="e" class="problemas"/> Malos Olores.</li>
+                                    <li class="list-group-item "><input type="checkbox" value="f" class="problemas" /> Generación y manejo Inadecuado de Basuras .</li>
+                                    <li class="list-group-item "><input type="checkbox" value="g" class="problemas" /> Invasión de andenes y calles.</li>
+                                    <li class="list-group-item "><input type="checkbox" value="h" class="problemas"/> Invasión del Espacio Público.</li>
+                                    <li class="list-group-item "><input type="checkbox" value="i" class="problemas" /> Presencia de Animales que causan molestias.</li>
+                                    <li class="list-group-item "><input type="checkbox" value="j" class="problemas"/> Presencias de insectos, roedores.</li>
+                                </ul>
+                            </div>                                        
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-6">11.3 ¿En su hogar clasifican las basuras?
+                                <ul class="list-group">
+                                    <li class="list-group-item "><input type="checkbox" value="a"  class="basuras"/>  Desperdicios de alimentos y desechos orgánicos.</li>
+                                    <li class="list-group-item "><input type="checkbox" value="b"  class="basuras"/>  Vidrio.</li>
+                                    <li class="list-group-item "><input type="checkbox" value="c"  class="basuras" />  Papel y cartón.</li>
+                                    <li class="list-group-item "><input type="checkbox" value="d"  class="basuras"/>  Plástico.</li>
+                                    <li class="list-group-item "><input type="checkbox" value="e"  class="basuras"/>  Pilas y baterías.</li>
+                                    <li class="list-group-item "><input type="checkbox" value="f"  class="basuras"/>  Envases metálicos o de aluminio.</li>
+                                    <li class="list-group-item "><input type="checkbox" value="g"  class="basuras"/>  Medicamentos.</li>                                                                       
+                                </ul>
+                            </div> 
+                            <div class="col-md-6">11.4 ¿Cuáles de las siguientes prácticas se realizan en su hogar para reducir el consumo de agua y energía eléctrica?
+                                <ul class="list-group ">                                                                  
+                                    <li class="list-group-item "><input type="checkbox" value="a"  class="reduct-consumo" /> Usar bombillas de bajo consumo. </li>
+                                    <li class="list-group-item "><input type="checkbox" value="b"  class="reduct-consumo"/> Apagar Luces.</li>
+                                    <li class="list-group-item "><input type="checkbox" value="c"  class="reduct-consumo" /> Reutilizar Agua.</li>
+                                    <li class="list-group-item "><input type="checkbox" value="d"   class="reduct-consumo"/> Recolectar Agua Lluvia.</li>
+                                    <li class="list-group-item "><input type="checkbox" value="e"   class="reduct-consumo"/> Usar tanque sanitario de bajo consumo de agua.</li>
+                                    <li class="list-group-item "><input type="checkbox" value="f"  class="reduct-consumo"/> Planchar la mayor cantidad de ropa en cada ocasión o no planchar</li>
+                                    <li class="list-group-item "><input type="checkbox" value="g"   class="reduct-consumo"/> Cambiar electrodomésticos por otros de bajo consumo.</li>
+                                </ul>
+                            </div>                                        
+                        </div>
+                        <button id="btn_siguiente" class="btn btn-primary btn-lg btn_siguiente  pull-right">Guardar y continuar </button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="col-md-12   setup-content" id="step-9">
+                        <h3 class=""> 12. USO DE TECNOLOGÍAS DE LA INFORMACIÓN- TIC</h3>
+                        <div class="row" >
+                            <div class="col-lg-4">12.1.1 ¿En este hogar tienen computador de mesa o de escritorio (PC-Desktop)?</div>
+                            <div class="col-lg-2">
+                                <select class="form-control" id="tiene_pc"   >
+                                    <option value=false >No</option>
+                                    <option value=true >Si</option>
+
+                                </select>
+                            </div>                            
+                            <div class="col-lg-1">12.1.2 ¿Cuantos?</div>
+                            <div class="col-lg-2">
+                                <input class="form-control" type="number" id="cuantos_pc" value="0"   min="0" max="20">
+                            </div>                            
+                            <div class="col-lg-1">12.1.3 ¿Cuantos usan?</div>
+                            <div class="col-lg-2">
+                                <input class="form-control" type="number" id="uso_pc" value="0"  min="0" max="20">
+                            </div>                            
+                        </div>
+                        <br>
+                        <div class="row" >
+                            <div class="col-lg-4">12.1.4 ¿En este hogar tienen computador portátil (laptop)?</div>
+                            <div class="col-lg-2">
+                                <select class="form-control" id="tiene_laptop"   >
+                                    <option value=false >No</option>
+                                    <option value=true >Si</option>                                        
+                                </select>
+                            </div>                            
+                            <div class="col-lg-1">12.1.5 ¿Cuantos?</div>
+                            <div class="col-lg-2">
+                                <input class="form-control" type="number" id="cuantos_laptop" value="0"  min="0" max="20">
+                            </div>                            
+                            <div class="col-lg-1">12.1.6 ¿Cuantos usan?</div>
+                            <div class="col-lg-2">
+                                <input class="form-control" type="number" id="uso_laptop" value="0"    min="0" max="20">
+                            </div>                            
+                        </div>
+                        <br>
+                        <div class="row" >
+                            <div class="col-lg-4">12.1.7 ¿En este hogar tienen tabletas digitales (tablets)?</div>
+                            <div class="col-lg-2">
+                                <select class="form-control" id="tiene_tablet"   >
+                                    <option value=false >No</option>
+                                    <option value=true >Si</option>                                       
+                                </select>
+                            </div>                            
+                            <div class="col-lg-1">12.1.8 ¿Cuantos?</div>
+                            <div class="col-lg-2">
+                                <input class="form-control" type="number" id="cuantas_tablet" value="0"    min="0" max="20">
+                            </div>                            
+                            <div class="col-lg-1">12.1.9 ¿Cuantos usan?</div>
+                            <div class="col-lg-2">
+                                <input class="form-control" type="number" id="uso_tablet" value="0"    min="0" max="20">
+                            </div>                            
+                        </div>
+                        <hr>
+                        <div class="col-md-6 " >
+                            <div class="panel panel-default" >
+                                <div class="panel panel-heading" >
+                                    12.2. ¿Con qué frecuencia utiliza computador (en cualquier lugar)? O.U.
+                                </div>
+                                <div class="panel panel-body" >
+                                    <table class="table table-condensed">
+                                        <thead>
+                                            <tr>
+                                                <th>Nombre</th>
+                                                <th>1</th>                                                
+                                                <th>2</th>                                                
+                                                <th>3</th>                                                
+                                                <th>4</th>                                                
+                                                <th>5</th>                                               
+
+
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbdoy_frecuencia_pc">       
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 " >
+                            <div class="panel panel-default" >
+                                <div class="panel panel-heading" >
+                                    12.3. ¿En cuales de los siguientes sitios usa computador? O.M.
+                                </div>
+                                <div class="panel panel-body" >
+                                    <table class="table table-condensed">
+                                        <thead>
+                                            <tr>
+                                                <th>Nombre</th>
+                                                <th>1</th>                                                
+                                                <th>2</th>                                                
+                                                <th>3</th>                                                
+                                                <th>4</th>                                                
+                                                <th>5</th>                                                
+                                                <th>6</th>                                                
+
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbdoy_sitio_pc">       
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 " >
+                            <div class="panel panel-default" >
+                                <div class="panel panel-heading" >
+                                    12.4. ¿para qué utiliza principalmente computador? Marque en orden de importancia de 1 a 4.
+                                </div>
+                                <div class="panel panel-body" >
+                                    <table class="table table-condensed">
+                                        <thead>
+                                            <tr>
+                                                <th>Nombre</th>
+                                                <th>1</th>                                                
+                                                <th>2</th>                                                
+                                                <th>3</th>                                                
+                                                <th>4</th>                                           
+
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbdoy_uso_pc">       
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 " >
+                            <div class="panel panel-default" >
+                                <div class="panel panel-heading" >
+                                    12.5. ¿Con qué frecuencia utiliza internet (en cualquier lugar y desde cualquier dispositivo)? O.U.
+                                </div>
+                                <div class="panel panel-body" >
+                                    <table class="table table-condensed">
+                                        <thead>
+                                            <tr>
+                                                <th>Nombre</th>
+                                                <th>1</th>                                                
+                                                <th>2</th>                                                
+                                                <th>3</th>                                                
+                                                <th>4</th>                                        
+                                                <th>5</th>  
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbdoy_frecuencia">       
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 " >
+                            <div class="panel panel-default" >
+                                <div class="panel panel-heading" >
+                                    12.6. ¿Cuáles de los siguientes dispositivos utiliza para acceder a Internet: O.M.
+                                </div>
+                                <div class="panel panel-body" >
+                                    <table class="table table-condensed">
+                                        <thead>
+                                            <tr>
+                                                <th>Nombre</th>
+                                                <th>1</th>                                                
+                                                <th>2</th>                                                
+                                                <th>3</th>                                                
+                                                <th>4</th>                                             
+                                                <th>5</th>                                                
+                                                <th>6</th>                                                
+                                                <th>7</th>                                                
+                                                <th>8</th>                                             
+
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbdoy_dispositivo_int">       
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 " >
+                            <div class="panel panel-default" >
+                                <div class="panel panel-heading" >
+                                    12.7. Para cuales de los siguientes servicios o actividades utiliza internet: O.M.
+                                </div>
+                                <div class="panel panel-body" >
+                                    <table class="table table-condensed">
+                                        <thead>
+                                            <tr>
+                                                <th>Nombre</th>
+                                                <th>1</th>
+                                                <th>2</th>
+                                                <th>3</th>
+                                                <th>4</th>
+                                                <th>5</th>
+                                                <th>6</th>
+                                                <th>7</th>
+                                                <th>8</th>
+                                                <th>9</th>
+                                                <th>10</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbdoy_obejtivo_int">       
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <button id="btn_siguiente" class="btn btn-primary btn-lg btn_siguiente  pull-right">Guardar y continuar </button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="col-md-12   setup-content" id="step-10">
+                        <h3 class="">13. Arraigo y 14. Observaciones</h3>
+                        <div class="row">
+                            <div class="col-md-4">
+                                13.1 ¿Hace cuanto vive en la zona?(tiempo en meses)   
+                            </div>
+                            <div class="col-md-2">
+                                <input type="number"  min="1" class="form-control años-zona" name="añosZona" id="tiempo_zona"/> 
+                            </div>
+
+
+                            <div class="col-md-4">
+                                <!--<input type="checkbox" name="gustoUbicacion" />-->
+                                13.2 ¿Se siente a gusto con la ubicación de su vivienda?                                 
+                            </div>
+                            <div class="col-md-2">
+                                <select class="form-control"  name="gustoUbicacion" id="gusto_ubicacion">
+                                    <option value="null"  selected>Seleccione...</option>
+                                    <option value=true >Si</option>
+                                    <option value=false >No</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                13.3  ¿Se siente a gusto con  su vivienda?                                    
+                            </div>
+                            <div class="col-md-2">
+                                <select class="form-control"  id="gusto_vivienda" name="gustoVivienda">
+                                    <option value="null"  selected>Seleccione...</option>
+                                    <option value=true >Si</option>
+                                    <option value=false >No</option>
+                                </select>                                                                  
+                            </div>
+                            <div class="col-md-4">
+                                13.4  ¿Se siente a gusto con  su vecindario?                               
+                            </div>
+                            <div class="col-md-2">
+                                <select class="form-control"  id="gusto_vecindario" name="gustoVecindario">
+                                    <option value="null"  selected>Seleccione...</option>
+                                    <option value=true >Si</option>
+                                    <option value=false >No</option>
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                13.5  La idea de salir del predio en alto riesgo le parece:
+                                <select class="form-control" id="salida_predio">
+                                    <option value="0" selected >seleccione...</option>
+                                    <option value="6"  >Ideal</option>
+                                    <option value="1"  >Positiva</option>
+                                    <option value="2"  >Aceptable</option>
+                                    <option value="3"  >Negativa</option>
+                                    <option value="4"  >Traumática</option>
+                                    <option value="5"  >Indiferente</option>
+                                </select>
+                                <textarea  class="form-control" name="porqueSalir" id="porque_salida" placeholder="¿Explique por qué?"></textarea>
+                            </div>
+                            <div class="col-md-6">
+                                13.6 Nivel de importanciade la zona donde vive para su proyecto de vida:
+                                <select class="form-control" id="importancia_zona">
+                                    <option value="0" selected >seleccione...</option>
+                                    <option value="1"  >bajo</option>
+                                    <option value="2"  >Medio</option>
+                                    <option value="3"  >Alto</option>                                    
+                                </select>
+                                <textarea  class="form-control" name="porqueImportancia" id="porque_importancia" placeholder="¿Explique por qué?"></textarea>
+                            </div>
+
+                        </div>  
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-12">
+                                14. Realice observaciones si identifica situaciones de atención prioritaria, describalas y reportelas en este campo
+
+                                <textarea  class="form-control" name="observaciones" id="observaciones" placeholder=""></textarea>
+                            </div>                                
+                        </div>               
+                        <hr>
+                        <div class="row" id="revision">
+                            <div class="col-md-12" >
+                                observaciones de la revision:
+                                <textarea  class="form-control" name="comentarios" id="comentarios" placeholder=""></textarea>
+                            </div>                                
+                            <div class="col-md-9" >
+
+                            </div>                                
+                            <div class="col-md-3" >
+                                <button class="btn btn-success btn-lg " id="aprobar_social" type="button">Aprobar</button>
+                                <button class="btn btn-warning btn-lg " id="devolver_social" type="button">Devolver ficha</button>                               
+                            </div>                                
+
+                        </div>  
+                        <hr>
+                        <div class="btn-group" style="width: 100%;">                        
+                            <button id="btn_enviar" class="btn btn-warning btn-lg  btn_siguiente  pull-right">Guardar y enviar para aprobacion  </button>
+                            <button id="btn_siguiente" class="btn btn-primary btn-lg btn_siguiente  pull-right">Finalizar </button>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--scripts de comportamiento-->
+
+        <script src="js/reas/caracterizacion/ficha_data.js?v=A21J2HK12"></script>
+        <script src="js/reas/caracterizacion/pasos_v7.js?v=A21J2HK12"></script>
+        <script src="js/reas/caracterizacion/caract_comport_v7.js?v=A21J2HK12"></script>
+    </body>
+
+</html>
+

@@ -1,0 +1,2730 @@
+<html>
+    <head>
+        <title>Ficha Tecnica de Reconocimiento</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+           
+        <script language="JavaScript" src="js/md5.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+       
+         <link href="css/tecnica/bootstrap.min.css" rel="stylesheet">
+         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <link href="css/tecnica/bootstrap-select.min.css" rel="stylesheet" />
+        <script src="css/tecnica/bootstrap-select.min.js"></script>
+        
+        
+         <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+   
+       
+        <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+
+        <!-- Text spinners style -->
+        <link href="css/plugins/textSpinners/spinners.css" rel="stylesheet">
+
+        <link href="css/animate.css" rel="stylesheet">
+
+
+        <!-- Literally Canvas -->
+        <link href="literallycanvas-0.4.14/css/literallycanvas.css" rel="stylesheet">
+        <script src="literallycanvas-0.4.14/js/react-with-addons.js"></script>
+        <script src="literallycanvas-0.4.14/js/react-dom.js"></script>
+        <script src="literallycanvas-0.4.14/js/literallycanvas.js"></script>
+        <!-- Literally Canvas -->
+
+
+        <!-- Plugin visor de imagenes-->
+        <link href="img_plugin/css/fileinput.css" media="all" rel="stylesheet" type="text/css"/>
+        <link href="img_plugin/themes/explorer/theme.css" media="all" rel="stylesheet" type="text/css"/>
+        <script src="img_plugin/js/plugins/sortable.js" type="text/javascript"></script>
+        <script src="img_plugin/js/fileinput.js" type="text/javascript"></script>
+        <script src="img_plugin/js/locales/fr.js" type="text/javascript"></script>
+        <script src="img_plugin/js/locales/es.js" type="text/javascript"></script>
+        <script src="img_plugin/themes/explorer/theme.js" type="text/javascript"></script>
+        <!-- Plugin visor de imagenes-->
+
+
+
+        <link href="css/pasos_tecnica.css" rel="stylesheet">
+        <script src="js/reas/tecnica/pasos.js"></script>
+         <script src="js/reas/tecnica/direccion.js"></script>
+         
+         
+
+        <script  language="JavaScript" src="js/reas/tecnica/fotos.js?v=<?php echo(rand()); ?>"></script>
+
+
+        <!-- generacion pdf-->
+
+        <script src='pdf/pdfmake.min.js'></script>
+        <script src='pdf/pdfmake.js'></script>
+        <script src='pdf/vfs_fonts.js'></script>
+        <script src='pdf/reporte.js'></script>
+        <script src='reportes/download.js'></script>
+
+        <!-- canvas para imprimir el mapa de google-->
+
+        <!--Leaflet-->
+        
+        
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet-draw@0.4.9/dist/leaflet.draw.css" />
+        
+        <script src="leaflet/tecnica/leaflet.js"></script>
+         <script src="leaflet/tecnica/leaflet.draw.js"></script>
+        <script src="leaflet/tecnica/leaflet-iiif.js"></script>        
+        <script src="leaflet/spin.js"></script>
+        <script src="leaflet/leaflet.spin.js"></script>
+        <!--Leaflet descarga de imágenes-->
+        <script src="leaflet/dist/bundle.js"></script>
+        <!--Leaflet-->
+        
+        <!-- Plugin visor de imagenes-->
+        <style>
+            .btn-file {
+                position: relative;
+                overflow: hidden;
+            }
+            .btn-file input[type=file] {
+                position: absolute;
+                top: 0;
+                right: 0;
+                min-width: 100%;
+                min-height: 100%;
+                font-size: 100px;
+                text-align: right;
+                filter: alpha(opacity=0);
+                opacity: 0;
+                outline: none;
+                background: white;
+                cursor: inherit;
+                display: block;
+            }
+
+            #img-upload{
+                width: 80%;
+            }
+            input[type=number]::-webkit-inner-spin-button, 
+            input[type=number]::-webkit-outer-spin-button { 
+              -webkit-appearance: none; 
+              margin: 0; 
+            }
+            
+            .direccion {
+                padding-right:2px;  
+                padding-left:2px;
+              }
+              
+              .direccion1 {
+                padding-right:2px;  
+                padding-left:12px;
+              }
+            
+            
+        </style>
+
+
+
+    </head>
+
+    <body >
+
+        <div class="container">
+
+            <div class="stepwizard ">
+                <div class="stepwizard-row setup-panel">
+                    <div class="stepwizard-step">
+                        <a href="#step-1" class="btn btn-primary btn-circle">1</a>
+                        <p>1. Información Familiar</p>
+                    </div>
+                    <div class="stepwizard-step">
+                        <a href="#step-2" class="btn btn-default btn-circle" >2</a>
+                        <p>2. Información General de la Vivienda</p>
+                    </div>
+                    <div class="stepwizard-step">
+                        <a href="#step-3" class="btn btn-default btn-circle" >3</a>
+                        <p>3. Descripción de la Vivienda</p>
+                    </div>
+                    <div class="stepwizard-step">
+                        <a href="#step-4" class="btn btn-default btn-circle" >4</a>
+                        <p>4. Planos de la vivienda</p>
+                    </div>
+                    <div class="stepwizard-step">
+                        <a href="#step-5" class="btn btn-default btn-circle" id="step5">5</a>
+                        <p>5. Fotografías de la vivienda</p>
+                    </div>
+                    <div class="stepwizard-step">
+                        <a href="#step-6" class="btn btn-default btn-circle" >6</a>
+                        <p>6. Observaciones</p>
+                    </div>
+                </div>
+            </div>
+
+            <form role="form" action="" method="post" name="myform" id="myform">
+
+
+                <div class="row setup-content" id="step-1">
+
+                    <h3> Información Familiar</h3>
+
+
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="control-label">Fecha de elaboración</label>
+                                <input type="date"  id="fecha_elaboracion" class="form-control" placeholder="Ingrese la Fecha" >
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="control-label">Identificador</label>
+                                <input type="text" id="identificador" required="required" class="form-control" placeholder="Ingrese el Identificador">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label num_ficha">Ficha técnica No.</label>
+                                <input type="number" id="ficha_num" class="form-control num_ficha" placeholder="Ingrese el Número de ficha">
+                            </div>
+                        </div>                        
+                    </div>
+                   
+                    
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="form-group">
+                                <label class="control-label">1.1 Nombre del beneficiario Principal</label>
+                           <div class="row">
+                            <div class="col-md-3">
+                               <div class="form-group">                           
+                                   <input  type="text"  id="nom1_1"  class="form-control" placeholder="1er Nombre" >                            
+                               </div>
+                           </div>
+                           <div class="col-md-3">
+                               <div class="form-group">                           
+                                   <input  type="text"  id="nom1_2"  class="form-control" placeholder="2do Nombre" >                            
+                               </div>
+                           </div>
+                           <div class="col-md-3">
+                               <div class="form-group">                           
+                                   <input  type="text"  id="ape1_1"  class="form-control" placeholder="1er Apellido" >                            
+                               </div>
+                           </div>
+                           <div class="col-md-3">
+                               <div class="form-group">                           
+                                   <input  type="text"  id="ape1_2"  class="form-control" placeholder="2do Apellido" >                            
+                               </div>
+                           </div>
+                        </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">1.2 Cédula</label>
+                                <input type="number" id="cedula_prin" class="form-control" placeholder="Ingrese la cédula" oninput="checkNumberFieldLength(this);"/>
+                            </div>
+                        </div>
+                     </div>
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="form-group">
+                                <label class="control-label">1.3 Nombre del beneficiario Secundario</label>
+                                 <div class="row">
+                                    <div class="col-md-3">
+                                       <div class="form-group">                           
+                                           <input  type="text"  id="nom2_1"  class="form-control" placeholder="1er Nombre" >                            
+                                       </div>
+                                   </div>
+                                   <div class="col-md-3">
+                                       <div class="form-group">                           
+                                           <input  type="text"  id="nom2_2"  class="form-control" placeholder="2do Nombre" >                            
+                                       </div>
+                                   </div>
+                                   <div class="col-md-3">
+                                       <div class="form-group">                           
+                                           <input  type="text"  id="ape2_1"  class="form-control" placeholder="1er Apellido">                            
+                                       </div>
+                                   </div>
+                                   <div class="col-md-3">
+                                       <div class="form-group">                           
+                                           <input  type="text"  id="ape2_2"  class="form-control" placeholder="2do Apellido">                            
+                                       </div>
+                                   </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">1.4 Cédula</label>
+                                <input type="number" id="cedula_sec"  class="form-control" placeholder="Ingrese la cédula" oninput="checkNumberFieldLength(this);" />
+                            </div>
+                        </div>
+                       </div>
+                     <div class="row">
+                    <div class="col-md-9">
+                        <div class="form-group">
+                            <label class="control-label">1.5 Nombre de quien atiende la visita</label>
+                        <div class="row">
+                            <div class="col-md-3">
+                               <div class="form-group">                           
+                                   <input  type="text"  id="nom3_1"  class="form-control" placeholder="1er Nombre" >                            
+                               </div>
+                           </div>
+                           <div class="col-md-3">
+                               <div class="form-group">                           
+                                   <input  type="text"  id="nom3_2"  class="form-control" placeholder="2do Nombre" >                            
+                               </div>
+                           </div>
+                           <div class="col-md-3">
+                               <div class="form-group">                           
+                                   <input  type="text"  id="ape3_1"  class="form-control" placeholder="1er Apellido" >                            
+                               </div>
+                           </div>
+                           <div class="col-md-3">
+                               <div class="form-group">                           
+                                   <input  type="text"  id="ape3_2"  class="form-control" placeholder="2do Apellido" >                            
+                               </div>
+                           </div>
+                        </div>
+                              </div>
+                    </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">1.6 Cédula</label>
+                                <input type="number"  id="cedula_visita" class="form-control" data-toggle="dropdown" oninput="checkNumberFieldLength(this);" placeholder="Ingrese la cedula" >
+                            </div>
+                        </div>     
+                     </div>    
+                    <script>
+                        function checkNumberFieldLength(elem){
+                            
+                            
+                            
+                            if (elem.value.length > 10) {
+                                    elem.value = elem.value.slice(0,10); 
+                                }
+                            }
+                            
+                        </script>
+
+
+                     <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">1.7 Parentesco de quien atiende la visita</label>
+                                <select class="form-control"  id="parentesco" >
+                                    <option value="" >Seleccione el Tipo de Parentesco</option>
+                                    <option value='JEFE DE FAMILIA'> Jefe de familia </option>
+                                    <option value='ESPOSO(A)/CCOMPAÑERO(O)'> Esposo(a)/Compañero(a) </option>
+                                    <option value='HIJO(A)'> Hijo(a) </option>
+                                    <option value='HERMANO(A)'> Hermano(a) </option>
+                                    <option value='PADRE O MADRE'> Padre o Madre </option>
+                                    <option value='ABUELO(A)'> Abuelo(a) </option>
+                                    <option value='NUERA/YERNO'> Nuera/Yerno </option>
+                                    <option value='NIETO(A)'> Nieto(a) </option>
+                                    <option value='SUEGRO(A)'> Suegro(a) </option>
+                                    <option value='OTRO PARIENTE'> Otro pariente </option>
+                                    <option value='OTRO NO PARIENTE'> Otro no pariente </option>
+                                    <option value='ARRENDATARIO'> Arrendatario </option>
+                                    <option value='OTRO'> Otro </option>
+                                </select>
+                            </div>
+                        </div>
+                          <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">1.8 Número Telefónico (1)</label>
+                                <input type="number"  id="telefono1"  class="form-control" placeholder="Ingrese el Numero de telefono 1" oninput="checkNumberFieldLength(this);"  />
+                               
+                            </div>
+    
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">1.9 Número Telefónico (2)</label>
+                                <input type="number" id="telefono2"   class="form-control" placeholder="Ingrese el Numero de telefono 2" oninput="checkNumberFieldLength(this);"  />
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" onclick="paso1()" >Guardar</button>
+
+                </div>
+
+
+                <div class="row setup-content" id="step-2">
+
+
+                    <h3> Información General de la Vivienda</h3>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">2.1 Localidad</label>
+                                <select class="selectpicker form-control" data-live-search="true" id="localidad" disabled>
+                                    <option value="01 Usaquén">01. Usaquén</option>
+                                    <option value="02 Chapinero">02. Chapinero</option>
+                                    <option value="03 Santa Fe">03. Santa Fe</option>
+                                    <option value="04 San Cristóbal">04. San Cristóbal</option>
+                                    <option value="05 Usme">05. Usme</option>
+                                    <option value="06 Tunjuelito">06. Tunjuelito</option>
+                                    <option value="07 Bosa">07. Bosa</option>
+                                    <option value="08 Kennedy">08. Kennedy</option>
+                                    <option value="09 Fontibón">09. Fontibón</option>
+                                    <option value="10 Engativá">10. Engativá</option>
+                                    <option value="11 Suba">11. Suba</option>
+                                    <option value="12 Barrios Unidos">12. Barrios Unidos</option>
+                                    <option value="13 Teusaquillo">13. Teusaquillo</option>
+                                    <option value="14 Los Mártires">14. Los Mártires</option>
+                                    <option value="15 Antonio Nariño">15. Antonio Nariño</option>
+                                    <option value="16 Puente Aranda">16. Puente Aranda</option>
+                                    <option value="17 La Candelaria">17. La Candelaria</option>
+                                    <option value="18 Rafael Uribe Uribe">18. Rafael Uribe Uribe</option>
+                                    <option value="19 Ciudad Bolívar">19. Ciudad Bolívar</option>
+                                    <option value="20 Sumapaz">20. Sumapaz</option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">2.2 Barrio</label>
+                                <input type="text"  id="barrio" class="form-control" placeholder="Ingrese el Barrio" disabled/>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">2.3 UPZ</label>
+                                <input  type="text" id="upz"  class="form-control" placeholder="Ingrese la UPZ" disabled />
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">2.4 Dirección tomada en campo</label>
+                                <div class="input-group">
+                              <input type="text" class="form-control" id="dir_campo" placeholder="Ingrese la dirección" disabled>
+                              <span class="input-group-btn">
+                                <button class="btn btn-success" type="button" onclick="gen_direccion(1)">Editar</button>
+                              </span>
+                            </div>
+                                
+                            </div>
+                    
+                        </div>
+
+                    </div>
+                 
+
+                    <div class="modal fade" tabindex="-1" data-focus-on="input:first" style="display: none;" id="modal_form_tec">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content" id="form_tec">
+
+                            </div>
+                        </div>
+
+                    </div>
+                      <script>
+                        function gen_direccion(id){
+                            $('.modal-content').css('height', '47%');
+                            $('.modal-body').css('max-height', 'calc(100% - 200px)');
+                            $('#form_tec').empty();
+                            var contenido=generar_direccion();
+                            $('#form_tec').append(contenido);
+                            $('#modal_form_tec').modal('show');
+                            var letras=genCharArray('a', 'z');
+                           
+                            $('#3d').append("<option value=\" \" ></option>");
+                            for(i=0;i<26;i++){
+                            $('#3d').append("<option value=\""+letras[i]+"\" >"+letras[i]+"</option>");
+                            }
+                            $('#5d').append("<option value=\" \" ></option>");
+                            for(i=0;i<26;i++){
+                            $('#5d').append("<option value=\""+letras[i]+"\" >"+letras[i]+"</option>");
+                            }
+                            $('#8d').append("<option value=\" \" ></option>");
+                            for(i=0;i<26;i++){
+                            $('#8d').append("<option value=\""+letras[i]+"\" >"+letras[i]+"</option>");
+                            }
+                            
+                            $("#save_direccion").click(function(){
+                                if(id===1){
+                                    $('#dir_campo').val($('#11d').val());
+                                }
+                                 if(id===2){
+                                    $('#dir_reco').val($('#11d').val());
+                                }
+                                 if(id===3){
+                                    $('#dir_cat').val($('#11d').val());
+                                }
+                            });
+                            
+                        }
+                            
+                    </script>
+                    
+                    <div class="row">
+                         <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">2.5 Dirección concepto de recomendación</label>
+                               
+                              <input type="text" class="form-control" id="dir_reco" placeholder="Ingrese la dirección" disabled>
+
+                                
+                            </div>
+                    
+                        </div>
+ 
+                        
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="control-label">Manzana</label>
+                                <input type="text" id="man_reco" class="form-control" disabled/>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="control-label">Lote</label>
+                                <input type="text"  id="lot_reco" class="form-control" disabled/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">2.6 Dirección Catastral</label>
+                                <div class="input-group">
+                              <input type="text" class="form-control" id="dir_cat" placeholder="Ingrese la dirección" disabled>
+                              <span class="input-group-btn">
+                                <button class="btn btn-success" type="button" onclick="gen_direccion(3)">Editar</button>
+                              </span>
+                            </div>
+                                
+                            </div>
+                    
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="control-label">Manzana</label>
+                                <input type="text" id="man_cat"  class="form-control" />
+                            </div>
+   
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="control-label">Lote</label>
+                                <input type="text" id="lot_cat"  class="form-control" />
+                            </div>
+
+                            
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">CHIP Catastro</label>
+                                <input type="text"  id="chip" class="form-control" placeholder="Ingrese el CHIP" />
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="control-label">Área terreno (M2)</label>
+                                <input min="0" type="number" id="area_ter"  class="form-control" placeholder="Ingrese el area de terreno"  />
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="control-label">Área construcción(M2)</label>
+                                <input min="0" type="number" id="area_con"  class="form-control" placeholder="Ingrese el area de construcción"  />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4> 2.10 Linderos </h4>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="form-group ">
+                                <label class="control-label">Norte:</label>
+                                <input type="text"  id="lin_nor"  class="form-control" placeholder="Norte"  />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group ">
+                                <label class="control-label">Sur:</label>
+                                <input type="text" id="lin_sur"  class="form-control" placeholder="Sur"  />
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                     <div class="row">
+
+                         <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Oriente:</label>
+                                <input type="text" id="lin_ori"  class="form-control" placeholder="Oriente"  />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group ">
+                                <label class="control-label">Occidente:</label>
+                                <input type="text" id="lin_occ"  class="form-control" placeholder="Occidente"  />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4> 2.11 Coordenadas </h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group ">
+                                <label class="control-label">X:</label>
+                                <input type="number" id="cord_x"  class="form-control" placeholder="Coordenada X"  />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group ">
+                                <label class="control-label">Y:</label>
+                                <input type="number" id="cord_y" class="form-control" placeholder="Coordenada Y"  />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4> 2.12 Servicios Públicos </h4>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Tipo</th>
+                                    <th>Si-No</th>
+                                    <th>Modo</th>
+                                    <th>No. de cuenta/contrato</th>
+                                    <th>Dirección Recibo SPD</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1. Acueducto</td>
+                                    <td><select class="form-control"  id="acu_dis">
+                                            <option value="" >Seleccione...</option>
+                                            <option value="Si">Si</option>
+                                            <option Value="No">No</option>
+                                        </select></td>
+                                    <td><select class="form-control"  id="acu_mod">
+                                            <option value="" >Seleccione el modo</option>
+                                            <option value="Provisional">1. Provisional</option>
+                                            <option value="Definitivo Privado">2. Definitivo Privado</option>
+                                            <option value="Definitivo Público">3. Definitivo Público</option>
+                                        </select></td>
+                                    <td><input type="text" id="acu_con"  class="form-control" placeholder="Ingrese No. de cuenta"  /></td>
+                                    <td><input type="text" id="acu_dir"  class="form-control" placeholder="Ingrese la dirección"  /></td>
+                                </tr>
+
+
+
+                                <tr>
+                                    <td>2. Alcantarillado</td>
+                                    <td><select class="form-control"  id="alc_dis">
+                                            <option value="" >Seleccione...</option>
+                                            <option value="Si">Si</option>
+                                            <option value="No">No</option>
+                                        </select></td>
+                                    <td><select class="form-control" id="alc_mod">
+                                            <option value="" >Seleccione el modo</option>
+                                            <option value="Provisional">1. Provisional</option>
+                                            <option value="Definitivo Privado">2. Definitivo Privado</option>
+                                            <option value="Definitivo Público">3. Definitivo Público</option>
+                                        </select></td>
+                                    <td><input type="text" id="alc_con" class="form-control" placeholder="Ingrese No. de cuenta"  /></td>
+                                    <td><input type="text" id="alc_dir" class="form-control" placeholder="Ingrese la dirección"  /></td>
+                                </tr>
+                                <tr>
+                                    <td>3. Aseo</td>
+                                    <td><select class="form-control"  id="ase_dis">
+                                            <option value="" >Seleccione...</option>
+                                            <option value="Si">Si</option>
+                                            <option value="No">No</option>
+                                        </select></td>
+                                    <td><select class="form-control" id="ase_mod">
+                                            <option value="" >Seleccione el modo</option>
+                                            <option value="Provisional">1. Provisional</option>
+                                            <option value="Definitivo Privado">2. Definitivo Privado</option>
+                                            <option value="Definitivo Público">3. Definitivo Público</option>
+                                        </select></td>
+                                    <td><input type="text" id="ase_con" class="form-control" placeholder="Ingrese No. de cuenta"  /></td>
+                                    <td><input type="text" id="ase_dir"  class="form-control" placeholder="Ingrese la dirección"  /></td>
+                                </tr>
+                                <tr>
+                                    <td>4. Energía eléctrica </td>
+                                    <td><select class="form-control"  id="ene_dis">
+                                            <option value="" >Seleccione...</option>
+                                            <option value="Si">Si</option>
+                                            <option value="No">No</option>
+                                        </select></td>
+                                    <td><select class="form-control" id="ene_mod">
+                                            <option value="" >Seleccione el modo</option>
+                                            <option value="Provisional">1. Provisional</option>
+                                            <option value="Definitivo Privado">2. Definitivo Privado</option>
+                                            <option value="Definitivo Público">3. Definitivo Público</option>
+                                        </select></td>
+                                    <td><input type="text" id="ene_con" class="form-control" placeholder="Ingrese No. de cuenta"  /></td>
+                                    <td><input type="text" id="ene_dir"  class="form-control" placeholder="Ingrese la dirección"  /></td>
+                                </tr>
+                                <tr>
+                                    <td>5. Gas Natural</td>
+                                    <td><select class="form-control" id="gas_dis">
+                                            <option value="" >Seleccione...</option>
+                                            <option value="Si">Si</option>
+                                            <option value="No">No</option>
+                                        </select></td>
+                                    <td><select class="form-control" id="gas_mod">
+                                            <option value="" >Seleccione el modo</option>
+                                            <option value="Provisional">1. Provisional</option>
+                                            <option value="Definitivo Privado">2. Definitivo Privado</option>
+                                            <option value="Definitivo Público">3. Definitivo Público</option>
+                                        </select></td>
+                                    <td><input type="text" id="gas_con"  class="form-control" placeholder="Ingrese No. de cuenta"  /></td>
+                                    <td><input type="text" id="gas_dir"  class="form-control" placeholder="Ingrese la dirección"  /></td>
+                                </tr>
+                                <tr>
+                                    <td>6. Teléfono Fijo</td>
+                                    <td><select class="form-control"  id="tel_dis">
+                                            <option value="" >Seleccione...</option>
+                                            <option value="Si">Si</option>
+                                            <option value="No">No</option>
+                                        </select></td>
+                                    <td><select class="form-control"  id="tel_mod">
+                                            <option value="" >Seleccione el modo</option>
+                                            <option value="Provisional">1. Provisional</option>
+                                            <option value="Definitivo Privado">2. Definitivo Privado</option>
+                                            <option value="Definitivo Público">3. Definitivo Público</option>
+                                        </select></td>
+                                    <td><input type="text" id="tel_con"  class="form-control" placeholder="Ingrese No. de cuenta"  /></td>
+                                    <td><input type="text" id="tel_dir" class="form-control" placeholder="Ingrese la dirección"  /></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+
+                    </div>
+
+
+                    <button class="btn btn-primary nextBtn btn-lg pull-right" type="button"  onclick="paso2()">Guardar</button>
+
+                </div>
+
+
+                <div class="row setup-content" id="step-3">
+                    <h3> 3. Descripción de la Vivienda</h3>
+
+                    <div class="row">
+
+                        <div class="col-md-3">
+                            <div class="form-group ">
+                                <label class="control-label">3.1 Tipo de Inmueble</label>
+                                <select class="form-control"  id="tip_inm">
+                                    <option value="" >Seleccione...</option>
+                                    <option value="Casa">1. Casa</option>
+                                    <option value="Casa Lote">2. Casa Lote</option>
+                                    <option value="Institucional">3. Institucional</option>
+                                    <option value="Industrial">4. Industrial</option>
+                                    <option value="Bodega">5. Bodega</option>
+                                    <option value="Garaje">6. Garaje</option>
+                                    <option value="Oficina">7. Oficina</option>
+                                    <option value="Lote">8. Lote</option>
+                                    <option value="No Aplica">9. No Aplica</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group ">
+                                <label class="control-label">3.2 Número de Pisos</label>
+                                <input type="number"  id="num_pis"  min="0" class="form-control" placeholder="Numero de Pisos"  />
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group ">
+                                <label class="control-label">3.3 Unidades de vivienda</label>
+                                <input type="number" id="unid_viv"  min="0" class="form-control" placeholder="Numero de viviendas"  />
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group ">
+                                <label class="control-label">3.4 Estado de la construcción</label>
+                                <select class="form-control" id="est_con1">
+                                    <option value="" >Seleccione...</option>
+                                    <option value="Completa">1. Completa</option>
+                                    <option value="Incompleta">2. Incompleta</option>
+                                </select>
+                                <select class="form-control"  id="est_con2">
+                                    <option value="" >Seleccione...</option>
+                                    <option value="Habitada">1. Habitada</option>
+                                    <option value="Deshabilitada">2. Deshabilitada</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-3">
+                            <div class="form-group ">
+                                <label class="control-label">3.5 Etapa de construcción</label>
+                                <select class="form-control"  id="etp_cons">
+                                    <option value="" >Seleccione...</option>
+                                    <option value="Obra Provisional">1. Obra Provisional</option>
+                                    <option value="Obra negra">2. Obra negra</option>
+                                    <option value="Obra gris">3. Obra gris</option>
+                                    <option value="Obra Blanca">4. Obra Blanca</option>
+                                    <option value="No Aplica">5. No Aplica</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group ">
+                                <label class="control-label">3.6 Uso del predio</label>
+                                <select class="form-control"  id="uso_pred">
+                                    <option value="" >Seleccione...</option>
+                                    <option value="Residencial">1. Residencial</option>
+                                    <option value="Comercial">2. Comercial</option>
+                                    <option value="Mixto">3. Mixto</option>
+                                    <option value="Institucional">4. Institucional</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group ">
+                                <label class="control-label">3.7 Cimentación</label>
+                                <select class="form-control"  id="cimen">
+                                    <option value="" >Seleccione...</option>
+                                    <option value="Zapatas">1. Zapatas</option>
+                                    <option value="Vigas corridas">2. Vigas corridas</option>
+                                    <option value="Placa flotante">3. Placa flotante</option>
+                                    <option value="Muro confinamiento">4. Muro confinamiento</option>
+                                    <option value="Ninguna">5. Ninguna</option>
+                                    <option value="No Identificada">6. No Identificada</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group ">
+                                <label class="control-label">3.8 Estructura</label>
+                                <select class="form-control"  id="estruct">
+                                    <option value="" >Seleccione...</option>
+                                    <option value="Pórtico">1. Pórtico</option>
+                                    <option value="Mamposteria confinada">2. Mamposteria confinada</option>
+                                    <option value="Mamposteria parcialmente confinada">3. Mamposteria parcialmente confinada</option>
+                                    <option value="Mamposteria Simple">4. Mamposteria Simple</option>
+                                    <option value="Madera">5. Madera</option>
+                                    <option value="Prefabricado">6. Prefabricado</option>
+                                    <option value="Material de recuperación">7. Material de recuperación</option>
+                                    <option value="No Aplica">8. No Aplica</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="row">
+
+                        <div class="col-md-3">
+                            <div class="form-group ">
+                                <label class="control-label">3.9 Material de Paredes</label>
+                                <select class="form-control"  id="mat_par">
+                                    <option value="" >Seleccione...</option>
+                                    <option value="Material de recuperación">1. Material de recuperación</option>
+                                    <option value="Madera, guadua, caña, otro vegetal">2. Madera, guadua, caña, otro vegetal</option>
+                                    <option value="Bahareque">3. Bahareque</option>
+                                    <option value="Adobe o tapia pisada">4. Adobe o tapia pisada</option>
+                                    <option value="Ladrillo, bloque o prefabricado">5. Ladrillo, bloque o prefabricado</option>
+                                    <option value="Concreto reforzado">6. Concreto reforzado</option>
+                                    <option value="Material metálico">7. Material metálico</option>
+                                    <option value="No Aplica">8. No Aplica</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group ">
+                                <label class="control-label">3.10 Material de Pisos</label>
+                                <select class="form-control"  id="mat_pis">
+                                    <option value="" >Seleccione...</option>
+                                    <option value="Tierra, arena">1. Tierra, arena</option>
+                                    <option value="Mortero / mineral">2. Mortero / mineral</option>
+                                    <option value="Madera burda, otro veg">3. Madera burda, otro veg.</option>
+                                    <option value="Baldosin, ladrillo, vinilo">4. Baldosin, ladrillo, vinilo</option>
+                                    <option value="Madera pulida, alfombra">5. Madera pulida, alfombra</option>
+                                    <option value="No Aplica">6. No Aplica</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group ">
+                                <label class="control-label">3.11 Material de Cubierta</label>
+                                <select class="form-control"  id="mat_cub">
+                                    <option value="" >Seleccione...</option>
+                                    <option value="Material de recuperación">1. Material de recuperación</option>
+                                    <option value="Teja de Zinc">2. Teja de Zinc</option>
+                                    <option value="Teja de asbesto cemento">3. Teja de asbesto cemento</option>
+                                    <option value="Teja plástica">4. Teja plástica </option>
+                                    <option value="Placa de concreto reforzado">5. Placa de concreto reforzado</option>
+                                    <option value="Placa fácil">6. Placa fácil</option>
+                                    <option value="No Aplica">7. No Aplica</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p> <b> 3.12 Distribución de la vivienda </b></p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>Número de habitaciones</td>
+                                    <td><input type="number" id="num_hab"  min="0" class="form-control" placeholder="No. Habitaciones"  /></td>
+                                    <td>Número de Garajes</td>
+                                    <td><input type="number" id="num_gar"  min="0" class="form-control" placeholder="No. Garajes"  /></td>
+                                </tr>
+                                <tr>
+                                    <td>Número de unidades sanitarias</td>
+                                    <td><input type="number" id="num_san"  min="0" class="form-control" placeholder="No. unidades sanitarias"  /></td>
+                                    <td>Número de Locales</td>
+                                    <td><input type="number" id="num_loc"  min="0" class="form-control" placeholder="No. Locales"  /></td>
+                                </tr>
+                                <tr>
+                                    <td>Número de cocinas</td>
+                                    <td><input type="number" id="num_coc"  min="0"  class="form-control" placeholder="No. Cocinas"  /></td>
+                                    <td>Número de Bodegas</td>
+                                    <td><input type="number" id="num_bod"  min="0" class="form-control" placeholder="No. Bodegas"  /></td>
+                                </tr>
+                                <tr>
+                                    <td>Número de Lavaderos</td>
+                                    <td><input type="number" id="num_lav"  min="0" class="form-control" placeholder="No. Lavaderos"  /></td>
+
+                                </tr>
+                                <tr>
+                                    <td>Número de Patios</td>
+                                    <td><input type="number" id="num_pat"  min="0" class="form-control" placeholder="No. Patios"  /></td>
+                                    <td>Todo es un espacio Multiple?</td>
+                                    <td><select class="form-control"  id="esp_mul">
+                                            <option value="" >Seleccione...</option>
+                                            <option value="Si">Si</option>
+                                            <option value="No">No</option>
+                                        </select></td>
+                                </tr>
+                                <tr>
+                                    <td>Zona Social (Sala, Comedor, Estar)</td>
+                                    <td><select class="form-control"  id="zon_soc">
+                                            <option value="" >Seleccione...</option>
+                                            <option value="Si">Si</option>
+                                            <option value="No">No</option>
+                                        </select></td>
+                                    <td>Tiene criadero de Animales?</td>
+                                    <td><select class="form-control"  id="cri_ani">
+                                            <option value="" >Seleccione...</option>
+                                            <option value="Si">Si</option>
+                                            <option value="No">No</option>
+                                        </select></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p> <b> 3.13 Caracteristicas de la cocina </b><p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>1. Se encuentra Enchapada?</td>
+                                    <td><select class="form-control"  id="coc_enc">
+                                            <option value="" >Seleccione...</option>
+                                            <option value="Si">Si</option>
+                                            <option value="No">No</option>
+                                        </select></td>
+                                </tr>
+                                <tr>
+                                    <td>2. Tiene lavaplatos?</td>
+                                    <td><select class="form-control"  id="coc_lav">
+                                            <option value="" >Seleccione...</option>
+                                            <option value="Si">Si</option>
+                                            <option value="No">No</option>
+                                        </select></td>
+                                </tr>
+                                <tr>
+                                    <td>3. Tiene meson?</td>
+                                    <td><select class="form-control"  id="coc_mes">
+                                            <option value="" >Seleccione...</option>
+                                            <option value="Si">Si</option>
+                                            <option value="No">No</option>
+                                        </select></td>
+                                </tr>
+                                <tr>
+                                    <td>4. Cocina independiente?</td>
+                                    <td><select class="form-control"  id="coc_ind">
+                                            <option value="" >Seleccione...</option>
+                                            <option value="Si">Si</option>
+                                            <option value="No">No</option>
+                                        </select></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p> <b> 3.14 Caracteristicas de la Unidad Sanitaria </b><p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>1. Se encuentra Enchapado?</td>
+                                    <td><select class="form-control" id="san_enc">
+                                            <option value="" >Seleccione...</option>
+                                            <option value="Si">Si</option>
+                                            <option value="No">No</option>
+                                        </select></td>
+                                </tr>
+                                <tr>
+                                    <td>2. Tiene Ducha?</td>
+                                    <td><select class="form-control"  id="san_duc">
+                                            <option value="" >Seleccione...</option>
+                                            <option value="Si">Si</option>
+                                            <option value="No">No</option>
+                                        </select></td>
+                                </tr>
+                                <tr>
+                                    <td>3. Tiene aparatos sanitarios?</td>
+                                    <td><select class="form-control"  id="san_apar">
+                                            <option value="" >Seleccione...</option>
+                                            <option value="Si">Si</option>
+                                            <option value="No">No</option>
+                                        </select></td>
+                                </tr>
+                                <tr>
+                                    <td>4. Los desagues conectan con Alcantarillado?</td>
+                                    <td><select class="form-control" id="san_des">
+                                            <option value="" >Seleccione...</option>
+                                            <option value="Si">Si</option>
+                                            <option value="No">No</option>
+                                        </select></td>
+                                </tr>
+                                <tr>
+                                    <td>5. Los desagues conectan con Pozo Séptico?</td>
+                                    <td><select class="form-control" id="san_poz">
+                                            <option value="" >Seleccione...</option>
+                                            <option value="Si">Si</option>
+                                            <option value="No">No</option>
+                                        </select></td>
+                                </tr>
+                                <tr>
+                                    <td>6. Los desagues evacuan a la ladera?</td>
+                                    <td><select class="form-control"  id="san_lad">
+                                            <option value="" >Seleccione...</option>
+                                            <option value="Si">Si</option>
+                                            <option value="No">No</option>
+                                        </select></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+
+                    </div>
+
+
+
+                    <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" onclick="paso3()" >Guardar</button>
+
+
+                </div>
+
+
+
+                <div class="row setup-content" id="step-4">
+                    <h3>4. Planos de la vivienda</h3>
+
+                    <p>Para realizar el plano de ubicación de la vivienda, usted puede hacer uso de la herramienta de dibujo de la vivienda sobre el mapa ó puede subir
+                        directamente la imagen si cuenta con ella.</p>
+
+                    <button class="btn btn-primary" type="button" id="showmap">Ver Mapa</button>
+
+                    <div id="myDIV" style="display:none">    
+                        <div id="map" style="width: 100%;height:580px;"> </div>                        
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <iframe src="" id="arc_visor" height="600" width="95%"></iframe>
+                        </div>                        
+                    </div>
+                    
+
+                    <script>
+                        $("#showmap").click(function () {
+                            $("#myDIV").toggle("slow");
+                        });
+
+
+                    </script>                   
+
+
+
+                    <div class="row">
+
+                        <div class="col-md-12">
+
+                            <div class="form-group">                                 
+                                <label>Cargar Imagen</label>
+                                <div class="input-group">
+                                    <span class="input-group-btn">
+                                        <span class="btn btn-danger btn-file">
+                                            Cargar... <input type="file" id="imgInp1">
+                                        </span>
+                                    </span>
+                                    <input type="text" class="form-control" readonly>
+                                </div>
+
+                                <div style="margin:auto; width:800px; height:500px; box-shadow: 10px 10px 5px #888888;" id="divp1">
+                                    <button type="button" onclick="close_div2(this.id)" class="btn btn-default" style="z-index:10;position:absolute">X</button> 
+                                    <img id='img_plano1' src='#' style="width:780px; height:480px;left:10px; top:10px;position:relative"/>
+                                    <!--<button style="z-index:10;position:relative" type="button" class="btn btn-success" onclick="RotarPlano1()"><span class="glyphicon glyphicon-repeat"></span>Rotar</button>-->
+                                    <a href=""  id="desimgp1" download="Plano_Ubicacion.jpg" style="position:relative">
+                                        <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-save"></span>Descargar</button>                                   
+                                    </a> 
+
+                                </div>
+                                <canvas id="canvas" width=400 height=400 style="display:none"></canvas>
+                                <script>
+                                    
+                var canvas=document.getElementById("canvas");
+                var ctx=canvas.getContext("2d");
+
+                var image=document.createElement("img");
+               
+
+                function rotcanvas(angulo,imgIndex){
+                    
+                        image.onload=function(){
+                            canvas.width=this.width;
+                            canvas.height=this.height;
+                            ctx.drawImage(image,canvas.width/2-image.width/2,canvas.height/2-image.width/2);
+                            
+                        };
+                        image.src=$('#'+(imgIndex)).attr('src');
+
+                            drawRotated(angulo);
+                            var dataURL = canvas.toDataURL();
+
+                          return dataURL;
+                    }
+
+                            function drawRotated(degrees){
+                                    ctx.clearRect(0,0,canvas.width,canvas.height);
+                                    ctx.save();
+                                    ctx.translate(canvas.width/2,canvas.height/2);
+                                    ctx.rotate(degrees*Math.PI/180);
+                                    ctx.drawImage(image,-image.width/2,-image.width/2);
+                                    ctx.restore();
+                            }     
+                                    
+                                    
+                                    
+                                    $('#desimgp1').click(function () {
+                                        var src = $('#img_plano1').attr('src');
+                                        $("#desimgp1").attr("href", src);
+                                    });
+                                    
+                                    function close_div2(identify) {
+                                       
+                                        $('#img_plano1').attr('src', "data:image/jpeg;base64,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");
+                                       
+                                    }
+                                    var angle = 0;
+                                    function RotarPlano1() {
+                                     angle += 90;   
+                                     $('#img_plano1').attr('src',rotcanvas(angle,'img_plano1'));
+                                    }
+                                </script>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="myModalu" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Plano Ubicación</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div id="logu"> <img id="img_ubica"  onerror="arguments[0].currentTarget.style.display='none'"/></div>
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="" id="desimgu" download="Ubicacion.jpg">
+                                        <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-save"></span>Descargar</button>
+                                    </a>                                                
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>                                                
+                                    <script>
+                                        $('#desimgu').click(function () {
+                                            var src = $('#img_plano1').attr('src');
+                                            $("#desimgu").attr("href", src);
+                                        });
+                                    </script>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+                    <h4>4.2 Plano de Vivienda vista superior</h4> 
+
+                    <p>Para realizar el plano de la vivienda (Vista superior), usted cuenta con dos opciones, la primera es hacer uso de la herramienta de edición ó cargar directaqmente
+                        la imagen si cuenta con esta.</p>
+
+
+                    <button class="btn btn-primary" type="button" id="showmap1">Ver Herramienta de edición</button>
+
+                    <div id="myDIV1">                    
+                        <div class="my-drawing"></div>
+
+                    </div>
+                    
+                    
+
+                    <div class="row">
+                        <div class="col-md-12">                         
+                            <a href="" id="png" download="Plano.png">
+                                <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-save"></span>Descargar Plano Vista Superior</button>
+                            </a> 
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <p> Alternativa 2 para elaborar el plano de vista superior, recuerde exportar su plano en formato .jpg </p>
+                        <div class="col-md-12">
+                            <iframe src="https://vectr.com/new" id="flowplanner" height="600" width="1200"></iframe>
+                        </div>                        
+                    </div>
+
+                    <script>
+                        $("#showmap1").click(function () {
+                            $("#myDIV1").toggle("slow");
+                        });
+
+                        $('#png').click(function (e) {
+
+                            var imgplano = lc.getImage().toDataURL("image/png").replace("image/png", "image/octet-stream");
+
+                            $('#png').attr("href", imgplano);
+
+                        });
+
+                    </script>  
+
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Cargar Imagen</label>
+                                <div class="input-group">
+                                    <span class="input-group-btn">
+                                        <span class="btn btn-danger btn-file">
+                                            Cargar... <input type="file" id="imgInp">
+                                        </span>
+                                    </span>
+                                    <input type="text" class="form-control" readonly>
+                                </div>
+
+                                <div style="margin:auto; width:500px; height:500px; box-shadow: 10px 10px 5px #888888;" id="divp">
+                                    <button type="button" onclick="close_div1(this.id)" class="btn btn-default" id="botonp" style="z-index:10;position:absolute">X</button> 
+                                    <img id='img_plano' src="#" alt="" style="width:480px; height:480px;left:10px; top:10px;position:relative"/>
+                                    <!--<button style="z-index:10;position:relative" type="button" class="btn btn-success" onclick="RotarPlano()"><span class="glyphicon glyphicon-repeat"></span>Rotar</button>-->
+                                    <a href=""  id="desimgp" download="Plano.jpg" style="position:relative">
+                                        <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-save"></span>Descargar</button>                                   
+                                    </a> 
+
+                                </div>
+
+                                <script>
+  
+                                    $('#desimgp').click(function () {
+                                        var src = $('#img_plano').attr('src');
+                                        $("#desimgp").attr("href", src);
+                                    });
+     
+                                    function close_div1(identify) {                                       
+                                        $('#img_plano').attr('src', "data:image/jpeg;base64,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");
+                                    }
+                                    var angle = 0;
+                                    function RotarPlano() {
+                                    angle += 90;     
+                                     $('#img_plano').attr('src',rotcanvas(angle,'img_plano'));
+                                    }
+                                </script>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="modal fade" id="myModalp" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Plano Vivienda (Vista Superior)</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div id="logp"> <img id="img_viv" onerror="arguments[0].currentTarget.style.display='none'"/></div>
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="" id="desimgpl" download="Plano.png">
+                                        <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-save"></span>Descargar</button>
+                                    </a>                                                
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>                                                
+                                    <script>
+                                        $('#desimgpl').click(function () {
+                                            var src = $('#img_plano').attr('src');
+                                            $("#desimgpl").attr("href", src);
+                                        });
+                                    </script>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+                    <script>
+
+
+
+
+                    </script>
+
+
+
+                    <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" onclick="paso4()" >Guardar</button>
+
+                    <script >
+
+
+                        function paso4() {
+
+                            $identificador = document.getElementById("identificador");
+
+                            var plano = JSON.stringify(lc.getSnapshot());
+
+                            var st1 = /\\"/g;
+
+                            var pl1 = plano.replace(st1, "@");
+                            var foto_p = document.getElementById('img_plano');
+                            var foto_ubicacion = document.getElementById('img_plano1');
+                          
+                            foto_p = String(foto_p.src);
+                           
+                            foto_ubicacion = String(foto_ubicacion.src);
+                            
+                        
+                            $datos = {
+                                op: 'ficha_4',
+                                identificador: $($identificador).val(),
+                                plano: pl1,
+                                foto_plano: foto_p,
+                                foto_ubicacion: foto_ubicacion
+                            };
+
+                            $.ajax({
+                                type: "POST",
+                                url: "GestionConsultas",
+                                data: $datos,
+                                dataType: "json",
+                                async: true,
+                                success: function (response) {
+                                    if (response)
+                                    {
+                                        console.log(response);
+
+                                    }
+                                }
+                            });
+
+
+
+                        }
+
+                    </script>
+
+
+
+
+                </div>
+
+
+                <div class="row setup-content" id="step-5">
+                    <h3>5. Fotografias de la vivienda</h3>
+
+                    <p>En la siguiente sección, usted podrá asignar cada una de las fotografias al formulario técnico, recuerde que es una imágen
+                        por cada lugar, para un total de 6 imágenes.</p>
+
+
+
+                    <div class="row">
+                        <div id="folder" class="col-md-12" style='display: none;'>
+
+                        </div>            
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label class="btn btn-success btn-file control-label">
+                                Cargar <input type='file' id="imgu" data-max-size="4000000" style="display: none;"/>
+                            </label>
+                        </div>
+
+                    </div>
+
+               <canvas id="canvas1" style="display:none"></canvas>     
+
+                    <script>
+                        var i = 1;
+                        var j = 1;
+                        var k = 1;
+                        var angulo = 0;
+                        var cont_c = 0;
+                        $("#imgu").on('change', function () {
+
+
+                            if (j > (6 + cont_c)) {
+                                alert("Cantidad de fotos suficientes");
+                            } else {
+                                
+                                
+            var fileInput = $('#imgu');
+            var maxSize = fileInput.data('max-size');
+                if(fileInput.get(0).files.length){
+                    var fileSize = fileInput.get(0).files[0].size; // in bytes
+                    if(fileSize>maxSize){
+                        alert('Tamaño de la imagen es mayor a ' + maxSize + ' bytes');
+                        return false;
+                    }else{
+                    }
+                }else{
+                    alert('choose file, please');
+                    return false;
+                }
+                                
+                                
+
+                                readURL(this, j);
+                                $("#folder").append("<div id='div" + j + "' style='position:relative; display:inline-block; margin: 5px; width:200; height:200; box-shadow: 10px 10px 5px #888888;'> </div>");
+                                $('#div' + j).append("<button type='button' onclick='close_div(this.id)' class='btn btn-default' id='but" + j + "' style='z-index:10;'>x</button>");
+                                $('#div' + j).append("<button id='rot" + j + "' type='button' style='z-index:10;' class='btn btn-success' ><span class='glyphicon glyphicon-repeat'></span></button>");
+
+                                $('#div' + j).append("<img id='" + j + "' src='#' alt='your image' style='z-index:-10;position:absolute; margin:auto; top: 5px; left: 5px;'/>");
+                                
+                                $('#div' + j).append("<select class='form-control' onclick='asig_img(this.id)' style='position:absolute; border-color: black; border-style:solid; opacity: 0.9; margin:auto; top: 160px; left: 5px; width:190px'  id='sel" + j + "'><option value='' >Seleccione..</option><option value='1'>Exterior/Entorno</option><option value='2'>Espacio Social</option><option value='3'>Cocina</option><option value='4'>Nomenclatura</option><option value='5'>Habitaciones</option><option value='6'>Unidad Sanitaria</option></select>");
+
+
+
+                                var x = document.getElementById('folder');
+                                if (x.style.display === 'none') {
+                                    x.style.display = 'inline';
+                                }
+                                document.getElementById("div" + j).style.cursor = "url('img/zoom.png'), auto";
+
+                                $("#sel" + j).bind("click", function (e) {
+                                    e.stopPropagation();
+                                   
+                                });
+                                $("#rot" + j).bind("click", function (e) {
+                                    e.stopPropagation();
+                                    angulo += 90;
+                                                                                
+                                    $('#' + (j-1)).attr('src',rotcanvas(angulo,(j-1)));
+                                    asig_img($('#sel'+(j-1)).attr('id'));
+                                });                              
+                                
+                                $('#div' + j).click(function () {
+                                    console.log(j);
+
+                                    show_modal(j - 1);
+                                });
+
+
+                                j++;
+                            }
+
+
+
+
+                        });
+                        
+                        
+
+                        
+
+                        function readURL(input, j) {
+                            if (input.files && input.files[0]) {
+                                var reader = new FileReader();
+                                reader.onload = function (e) {
+                                    
+                                    
+                    var width=400;      
+                                    
+                    var imge = new Image();
+                    
+                    imge.onload = function() {
+                      if (imge.width > width) {
+                          
+                          var oc = document.getElementById("canvas1");
+                          var octx = oc.getContext("2d");
+                       
+                        oc.width = imge.width;
+                        oc.height = imge.height;
+                        octx.drawImage(imge, 0, 0);
+                        while (oc.width * 0.5 > width) {
+                          oc.width *= 0.5;
+                          oc.height *= 0.5;
+                          octx.drawImage(oc, 0, 0, oc.width, oc.height);
+                        }
+                        oc.width = width;
+                        oc.height = oc.width * imge.height / imge.width;
+                        octx.drawImage(imge, 0, 0, oc.width, oc.height);
+                        $('#' + j).attr('src',oc.toDataURL()).width(190).height(190);
+                      } else {
+                        $('#' + j).attr('src',e.target.result).width(190).height(190);
+                      }
+                    };
+                    imge.src = e.target.result;
+ 
+
+                                };
+
+
+                                reader.readAsDataURL(input.files[0]);
+                            }
+                        }
+                        function show_modal(idt) {
+                            
+                            if ($('#sel' + idt).val() === "1") {
+                                $('#myModal1').modal('show');
+                                $('#log1').css('display', 'inline');
+                            }
+                            if ($('#sel' + idt).val() === "2") {
+                                $('#myModal3').modal('show');
+                                $('#log3').css('display', 'inline');
+                            }
+                            if ($('#sel' + idt).val() === "3") {
+                                $('#myModal5').modal('show');
+                                $('#log5').css('display', 'inline');
+                            }
+                            if ($('#sel' + idt).val() === "4") {
+                                $('#myModal2').modal('show');
+                                $('#log2').css('display', 'inline');
+                            }
+                            if ($('#sel' + idt).val() === "5") {
+                                $('#myModal4').modal('show');
+                                $('#log4').css('display', 'inline');
+                            }
+                            if ($('#sel' + idt).val() === "6") {
+                                $('#myModal6').modal('show');
+                                $('#log6').css('display', 'inline');
+                            }
+                        }
+var k1=0;
+
+                        function asig_img(identify) {
+                            var idt = identify.slice(-1);
+
+                            if ($('#sel' + idt).val() === "1") {
+                                k1=0;
+                                for (lk = 1; lk <j; lk++) { 
+                                    if ($('#sel' + lk).val() === "1") {
+                                        k1=k1+1;
+                                    }
+                                }
+                                if(k1===1){
+                                   $('#img_ext').attr('src', $('#' + idt).attr('src')); 
+                                }else{
+                                  $('#sel' + idt).val('');
+                                  alert("Solo ingresar una Foto por item");
+                                }
+      
+                                
+                            }
+                            if ($('#sel' + idt).val() === "2") {
+                                
+                                k1=0;
+                                for (lk = 1; lk <j; lk++) { 
+                                    if ($('#sel' + lk).val() === "2") {
+                                        k1=k1+1;
+                                    }
+                                }
+                                if(k1===1){
+                                   $('#img_esp').attr('src', $('#' + idt).attr('src')); 
+                                }else{
+                                  $('#sel' + idt).val('');
+                                  alert("Solo ingresar una Foto por item");
+                                }
+      
+                               
+                            }
+                            if ($('#sel' + idt).val() === "3") {
+                                
+                                 k1=0;
+                                for (lk = 1; lk <j; lk++) { 
+                                    if ($('#sel' + lk).val() === "3") {
+                                        k1=k1+1;
+                                    }
+                                }
+                                if(k1===1){
+                                  $('#img_coc').attr('src', $('#' + idt).attr('src'));
+                                }else{
+                                  $('#sel' + idt).val('');
+                                  alert("Solo ingresar una Foto por item");
+                                }
+
+                            }
+                            if ($('#sel' + idt).val() === "4") {
+                                
+                                 k1=0;
+                                for (lk = 1; lk <j; lk++) { 
+                                    if ($('#sel' + lk).val() === "4") {
+                                        k1=k1+1;
+                                    }
+                                }
+                                if(k1===1){
+                                  $('#img_nom').attr('src', $('#' + idt).attr('src'));
+                                }else{
+                                  $('#sel' + idt).val('');
+                                  alert("Solo ingresar una Foto por item");
+                                }
+                                
+                                
+                                
+                                
+                            }
+                            if ($('#sel' + idt).val() === "5") {
+                                
+                                 k1=0;
+                                for (lk = 1; lk <j; lk++) { 
+                                    if ($('#sel' + lk).val() === "5") {
+                                        k1=k1+1;
+                                    }
+                                }
+                                if(k1===1){
+                                  $('#img_hab').attr('src', $('#' + idt).attr('src'));
+                                }else{
+                                  $('#sel' + idt).val('');
+                                  alert("Solo ingresar una Foto por item");
+                                }
+    
+                            }
+                            if ($('#sel' + idt).val() === "6") {
+                                
+                                
+                                k1=0;
+                                for (lk = 1; lk <j; lk++) { 
+                                    if ($('#sel' + lk).val() === "6") {
+                                        k1=k1+1;
+                                    }
+                                }
+                                if(k1===1){
+                                 $('#img_usa').attr('src', $('#' + idt).attr('src'));
+                                }else{
+                                  $('#sel' + idt).val('');
+                                  alert("Solo ingresar una Foto por item");
+                                }
+     
+                            }
+                        }
+
+
+
+                        function close_div(identify) {
+                            cont_c = cont_c + 1;
+                            var idt = identify.slice(-1);
+
+                            if ($('#sel' + idt).val() === '1') {
+                                $('#img_ext').attr('src', null);
+                            }
+                            if ($('#sel' + idt).val() === '2') {
+                                $('#img_esp').attr('src', null);
+                            }
+                            if ($('#sel' + idt).val() === '3') {
+                                $('#img_coc').attr('src', null);
+                            }
+                            if ($('#sel' + idt).val() === '4') {
+                                $('#img_nom').attr('src', null);
+                            }
+                            if ($('#sel' + idt).val() === '5') {
+                                $('#img_hab').attr('src', null);
+                            }
+                            if ($('#sel' + idt).val() === '6') {
+                                $('#img_usa').attr('src', null);
+                            }
+                            $('#div' + idt).remove();
+                        }
+
+
+                    </script>
+
+
+
+                    <div class="row">
+
+
+                        <div class="col-md-6">
+
+
+                            <div class="form-group ">                      
+
+                                <label class="btn btn-default btn-file control-label" style="display: none;">
+                                    Cargar <input type='file' id="img1" style="display: none;" />
+                                </label>
+
+
+                                <div class="modal fade" id="myModal1" role="dialog">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h4 class="modal-title">Exterior/Entorno</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="logo" id="log1"> <img id="img_ext" onerror="arguments[0].currentTarget.style.display='none'"/></div>
+                                            </div>
+                                            <div class="modal-footer">
+
+
+                                                <a href="" id="desimg1" download="Exterior_Entorno.jpg">
+                                                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-save"></span>Descargar</button>
+                                                </a>                                                
+                                                <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>                                                
+                                                <script>
+                                                    $('#desimg1').click(function () {
+                                                        var src = $('#img_ext').attr('src');
+                                                        $("#desimg1").attr("href", src);
+                                                    });
+                                                </script>
+
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-6">
+
+                            <label class="btn btn-default btn-file" style="display: none;">
+                                Cargar <input type='file' id="img2" style="display: none;" />
+                            </label>
+
+
+
+                            <div class="modal fade" id="myModal2" role="dialog">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Nomenclatura</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="logo" id="log2"> <img id="img_nom" onerror="arguments[0].currentTarget.style.display='none'"/></div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a href="" id="desimg2" download="Nomenclatura.jpg">
+                                                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-save"></span>Descargar</button>
+                                            </a>                                                
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>                                                
+                                            <script>
+                                                $('#desimg2').click(function () {
+                                                    var src = $('#img_nom').attr('src');
+                                                    $("#desimg2").attr("href", src);
+                                                });
+                                            </script>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+
+                    <div class="row">
+                        <div class="col-md-6">
+
+                            <label class="btn btn-default btn-file" style="display: none;">
+                                Cargar <input type='file' id="img3" style="display: none;" />
+                            </label>
+
+
+
+                            <div class="modal fade" id="myModal3" role="dialog">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Espacio Social</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="logo" id="log3"> <img id="img_esp" onerror="arguments[0].currentTarget.style.display='none'"/></div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a href="" id="desimg3" download="Espacio_Social.jpg">
+                                                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-save"></span>Descargar</button>
+                                            </a>                                                
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>                                                
+                                            <script>
+                                                $('#desimg3').click(function () {
+                                                    var src = $('#img_esp').attr('src');
+                                                    $("#desimg3").attr("href", src);
+                                                });
+                                            </script>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <label class="btn btn-default btn-file" style="display: none;">
+                                Cargar <input type='file' id="img4" style="display: none;" />
+                            </label>
+
+
+
+                            <div class="modal fade" id="myModal4" role="dialog">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Habitaciones</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="logo" id="log4"> <img id="img_hab" onerror="arguments[0].currentTarget.style.display='none'"/></div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a href="" id="desimg4" download="Habitaciones.jpg">
+                                                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-save"></span>Descargar</button>
+                                            </a>                                                
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>                                                
+                                            <script>
+                                                $('#desimg4').click(function () {
+                                                    var src = $('#img_hab').attr('src');
+                                                    $("#desimg4").attr("href", src);
+                                                });
+                                            </script>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="row">
+                        <div class="col-md-6">
+
+                            <label class="btn btn-default btn-file" style="display: none;">
+                                Cargar <input type='file' id="img5" style="display: none;" />
+                            </label>
+
+
+
+                            <div class="modal fade" id="myModal5" role="dialog">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Cocina</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="logo" id="log5"> <img id="img_coc" onerror="arguments[0].currentTarget.style.display='none'"/></div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a href="" id="desimg5" download="Cocina.jpg">
+                                                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-save"></span>Descargar</button>
+                                            </a>                                                
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>                                                
+                                            <script>
+                                                $('#desimg5').click(function () {
+                                                    var src = $('#img_coc').attr('src');
+                                                    $("#desimg5").attr("href", src);
+                                                });
+                                            </script>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+
+                            <label class="btn btn-default btn-file" style="display: none;">
+                                Cargar <input type='file' id="img6" style="display: none;" />
+                            </label>
+
+
+
+                            <div class="modal fade" id="myModal6" role="dialog">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Unidad Sanitaria</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="logo" id="log6"> <img id="img_usa" onerror="arguments[0].currentTarget.style.display='none'"/></div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a href="" id="desimg6" download="Unidad_Sanitaria.jpg">
+                                                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-save"></span>Descargar</button>
+                                            </a>                                                
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>                                                
+                                            <script>
+                                                $('#desimg6').click(function () {
+                                                    var src = $('#img_usa').attr('src');
+                                                    $("#desimg6").attr("href", src);
+                                                });
+                                            </script>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" onclick="paso5()" >Guardar</button>
+                   
+                    
+                    
+
+                    
+                </div>
+
+
+                <div class="row setup-content" id="step-6">
+
+                    <h3>6. Observaciones</h3>
+
+                    <div class="row">
+
+                        <div class="col-md-12">
+                            <div class="form-group ">
+                                <label class="control-label" >Observaciones:</label>
+                                <textarea id="observ" class="form-control" style="text-transform: uppercase" rows="3"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group ">
+                                <p> <b> NOTAS: </b> Las fotografías se deben tomar por cada unidadeshabitacional encontrada,
+                                    en una foto debe aparecer alguien del grupo familiar ojala algún mayor. Incluir las
+                                    fotografías relacionadas y las demás que sean necesarias.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><b>Elaboró</b></p>
+                            <div class="form-group form-inline ">
+                                <label class="control-label">Nombre:</label>
+                                <input id="nom_ela" type="text"   class="form-control" placeholder=""  />
+                            </div>
+                            <div class="form-group form-inline ">
+                                <label  class="control-label">Cargo:</label>
+                                <input id="car_ela" type="text"   class="form-control" placeholder=""  />
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <p><b>Revisó</b></p>
+                            <div class="form-group form-inline ">
+                                <label  class="control-label">Nombre:</label>
+                                <input  id="nom_rev" type="text"   class="form-control" placeholder=""  />
+                            </div>
+                            <div class="form-group form-inline ">
+                                <label  class="control-label">Cargo:</label>
+                                <input id="car_rev" type="text"   class="form-control" placeholder=""  />
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+
+                    <button class="btn btn-success btn-lg pull-right" type="button" id='fin_btn' onclick="paso6()"  >Finalizar</button>
+
+
+                    <div class="modal fade" id="myModalf" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabelf" style="font-weight: bold;">Almacenamiento Exitoso</h4>
+                                </div>
+                                <div class="modal-body">
+                                    Formulario técnico almacenado satisfactoriamente.
+                                </div>
+                                <div class="modal-footer">
+                                    <button id="closeform" type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>                                  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <script>
+                        $('#closeform').click(function () {
+                            window.top.location.reload();
+                        });
+                    </script>
+
+
+
+
+
+                </div>
+
+
+            </form>
+
+        </div>
+
+
+
+        <script>
+
+
+            var backgroundImage = new Image();
+            backgroundImage.src = 'img/grid.png';
+
+            var lc = LC.init(
+                    document.getElementsByClassName('my-drawing')[0],
+                    {imageURLPrefix: 'literallycanvas-0.4.14/img', backgroundColor: '#fff',
+                        backgroundShapes: [
+                            LC.createShape(
+                                    'Image', {x: 0, y: 0, image: backgroundImage, scale: 0.4})
+                        ]}
+                            
+            );
+ 
+
+        </script>
+
+
+        <script>
+            
+
+            function buscar_tecnica(identificador) {
+
+                $buscar = document.getElementById("buscar");
+                var resultados;
+                $datos = {
+                    op: 'buscar_ficha',
+                    identificador: identificador
+                };
+                
+                
+                $.ajax({
+                    type: "GET",
+                    url: "GestionConsultas",
+                    data: $datos,
+                    dataType: "json",
+                    async: false,
+                    success: function (response) {
+
+                    },
+                    error: function (response) {
+                    }
+                });
+                
+                
+                $datos1 = {
+                    op: 'bus_serv',
+                    identificador: identificador
+
+                };
+                
+                $.ajax({
+                    type: "GET",
+                    url: "GestionConsultas",
+                    data: $datos1,
+                    dataType: "json",
+                    async: false,
+                    success: function (response) {
+                        if (response.length > 0)
+                        {
+                            resultados = response[0];
+                            console.log(resultados);
+                            
+                            
+                            if((resultados["cta_acu"]?resultados["cta_acu"]:'Sin cuenta')==='Sin cuenta'){
+                                document.getElementById("acu_con").value = (resultados["cta_acu1"]?resultados["cta_acu1"]:'');
+                            }else{
+                                document.getElementById("acu_con").value = (resultados["cta_acu"]?resultados["cta_acu"]:'');
+                            }                            
+                            if((resultados["cta_ene"]?resultados["cta_ene"]:'Sin cuenta')==='Sin cuenta'){
+                                document.getElementById("ene_con").value = (resultados["cta_ene1"]?resultados["cta_ene1"]:'');
+                            }else{
+                                document.getElementById("ene_con").value = (resultados["cta_ene"]?resultados["cta_ene"]:'');
+                            }
+                            if((resultados["cta_gas"]?resultados["cta_gas"]:'Sin cuenta')==='Sin cuenta'){
+                                document.getElementById("gas_con").value = (resultados["cta_gas1"]?resultados["cta_gas1"]:'');
+                            }else{
+                                document.getElementById("gas_con").value = (resultados["cta_gas"]?resultados["cta_gas"]:'');
+                            }
+   
+                            
+                         }   
+                    },
+                    error: function (response) {
+                    }
+                });
+                
+                
+
+                $.ajax({
+                    type: "GET",
+                    url: "GestionConsultas",
+                    data: $datos,
+                    dataType: "json",
+                    async: false,
+                    success: function (response) {
+                        if (response.length > 0)
+                        {
+                            resultados = response[0];
+                            
+                           var sector=(resultados["sector"]?resultados["sector"]:'');
+                           sector=sector.toUpperCase();
+                           
+                           if(sector==="VEREDITAS" || sector==="GAVILANES"){
+                               $(".num_ficha").css('display','none');
+                           }
+                            
+                            document.getElementById("fecha_elaboracion").value = resultados["fecha_elaboracion"];
+                            document.getElementById("identificador").value = resultados["identificador"];
+                           
+                            document.getElementById("nom3_1").value = (resultados["nom3_1"]?resultados["nom3_1"]:'');
+                            document.getElementById("nom3_2").value = (resultados["nom3_2"]?resultados["nom3_2"]:'');
+                            document.getElementById("ape3_1").value = (resultados["ape3_1"]?resultados["ape3_1"]:'');
+                            document.getElementById("ape3_2").value = (resultados["ape3_2"]?resultados["ape3_2"]:'');                            
+                            
+                            
+                            document.getElementById("cedula_visita").value = (resultados["cedula_visita"]?resultados["cedula_visita"]:'');
+                            document.getElementById("nom1_1").value = (resultados["nom1_1"]?resultados["nom1_1"]:'');
+                            document.getElementById("nom1_2").value = (resultados["nom1_2"]?resultados["nom1_2"]:'');
+                            document.getElementById("ape1_1").value = (resultados["ape1_1"]?resultados["ape1_1"]:'');
+                            document.getElementById("ape1_2").value = (resultados["ape1_2"]?resultados["ape1_2"]:'');
+                            document.getElementById("cedula_prin").value = (resultados["cedula_prin"]?resultados["cedula_prin"]:'');
+                            
+                            document.getElementById("parentesco").value = (resultados["parentesco"]?resultados["parentesco"]:'');
+                            document.getElementById("nom2_1").value = (resultados["nom2_1"]?resultados["nom2_1"]:'');
+                            document.getElementById("nom2_2").value = (resultados["nom2_2"]?resultados["nom2_2"]:'');
+                            document.getElementById("ape2_1").value = (resultados["ape2_1"]?resultados["ape2_1"]:'');
+                            document.getElementById("ape2_2").value = (resultados["ape2_2"]?resultados["ape2_2"]:'');
+                            document.getElementById("cedula_sec").value = (resultados["cedula_sec"]?resultados["cedula_sec"]:'');
+                            document.getElementById("telefono1").value = (resultados["telefono1"]?resultados["telefono1"]:'');
+                            document.getElementById("telefono2").value = (resultados["telefono2"]?resultados["telefono2"]:'');
+                            document.getElementById("localidad").value = (resultados["localidad"]?resultados["localidad"]:'');
+                            document.getElementById("barrio").value = (resultados["barrio"]?resultados["barrio"]:'');
+                            document.getElementById("upz").value = (resultados["upz"]?resultados["upz"]:'');
+                            
+                            document.getElementById("dir_campo").value = (resultados["dir_campo"]?resultados["dir_campo"]:'');
+                            document.getElementById("dir_reco").value = (resultados["dir_reco"]?resultados["dir_reco"]:'');
+                            document.getElementById("man_reco").value = (resultados["man_reco"]?resultados["man_reco"]:'');
+                            document.getElementById("lot_reco").value = (resultados["lot_reco"]?resultados["lot_reco"]:'');
+                            document.getElementById("dir_cat").value = (resultados["dir_cat"]?resultados["dir_cat"]:'');
+                            document.getElementById("man_cat").value = (resultados["man_cat"]?resultados["man_cat"]:'');
+                            document.getElementById("lot_cat").value = (resultados["lot_cat"]?resultados["lot_cat"]:'');
+                            document.getElementById("chip").value = (resultados["chip"]?resultados["chip"]:'');
+                            document.getElementById("area_ter").value = (resultados["area_ter"]?resultados["area_ter"]:'');
+                            document.getElementById("area_con").value = (resultados["area_con"]?resultados["area_con"]:'');
+                            document.getElementById("lin_nor").value = (resultados["lin_nor"]?resultados["lin_nor"]:'');
+                            document.getElementById("lin_sur").value = (resultados["lin_sur"]?resultados["lin_sur"]:'');
+                            document.getElementById("lin_ori").value = (resultados["lin_ori"]?resultados["lin_ori"]:'');
+                            document.getElementById("lin_occ").value = (resultados["lin_occ"]?resultados["lin_occ"]:'');
+                            document.getElementById("cord_x").value = (resultados["cord_x"]?resultados["cord_x"]:'');
+                            document.getElementById("cord_y").value = (resultados["cord_y"]?resultados["cord_y"]:'');
+                            document.getElementById("acu_dis").value = (resultados["acu_dis"]?resultados["acu_dis"]:'');
+                            document.getElementById("acu_mod").value = (resultados["acu_mod"]?resultados["acu_mod"]:'');
+                        
+                            document.getElementById("acu_dir").value = (resultados["acu_dir"]?resultados["acu_dir"]:'');
+                            document.getElementById("alc_dis").value = (resultados["alc_dis"]?resultados["alc_dis"]:'');
+                            document.getElementById("alc_mod").value = (resultados["alc_mod"]?resultados["alc_mod"]:'');
+                            document.getElementById("alc_con").value = (resultados["alc_con"]?resultados["alc_con"]:'');
+                            document.getElementById("alc_dir").value = (resultados["alc_dir"]?resultados["alc_dir"]:'');
+                            document.getElementById("ase_dis").value = (resultados["ase_dis"]?resultados["ase_dis"]:'');
+                            document.getElementById("ase_mod").value = (resultados["ase_mod"]?resultados["ase_mod"]:'');
+                            document.getElementById("ase_con").value = (resultados["ase_con"]?resultados["ase_con"]:'');
+                            document.getElementById("ase_dir").value = (resultados["ase_dir"]?resultados["ase_dir"]:'');
+                            document.getElementById("ene_dis").value = (resultados["ene_dis"]?resultados["ene_dis"]:'');
+                            document.getElementById("ene_mod").value = (resultados["ene_mod"]?resultados["ene_mod"]:'');
+                        
+                            document.getElementById("ene_dir").value = (resultados["ene_dir"]?resultados["ene_dir"]:'');
+                            document.getElementById("gas_dis").value = (resultados["gas_dis"]?resultados["gas_dis"]:'');
+                            document.getElementById("gas_mod").value = (resultados["gas_mod"]?resultados["gas_mod"]:'');
+                        
+                            document.getElementById("gas_dir").value = (resultados["gas_dir"]?resultados["gas_dir"]:'');
+                            document.getElementById("tel_dis").value = (resultados["tel_dis"]?resultados["tel_dis"]:'');
+                            document.getElementById("tel_mod").value = (resultados["tel_mod"]?resultados["tel_mod"]:'');
+                            document.getElementById("tel_con").value = (resultados["tel_con"]?resultados["tel_con"]:'');
+                            document.getElementById("tel_dir").value = (resultados["tel_dir"]?resultados["tel_dir"]:'');
+
+                            document.getElementById("tip_inm").value = (resultados["tip_inm"]?resultados["tip_inm"]:'');
+                            document.getElementById("num_pis").value = (resultados["num_pis"]?resultados["num_pis"]:'');
+                            document.getElementById("unid_viv").value = (resultados["unid_viv"]?resultados["unid_viv"]:'');
+                            document.getElementById("est_con1").value = (resultados["est_con1"]?resultados["est_con1"]:'');
+                            document.getElementById("est_con2").value = (resultados["est_con2"]?resultados["est_con2"]:'');
+                            document.getElementById("etp_cons").value = (resultados["etp_cons"]?resultados["etp_cons"]:'');
+                            document.getElementById("uso_pred").value = (resultados["uso_pred"]?resultados["uso_pred"]:'');
+                            document.getElementById("cimen").value = (resultados["cimen"]?resultados["cimen"]:'');
+                            document.getElementById("estruct").value = (resultados["estruct"]?resultados["estruct"]:'');
+                            document.getElementById("mat_par").value = (resultados["mat_par"]?resultados["mat_par"]:'');
+                            document.getElementById("mat_pis").value = (resultados["mat_pis"]?resultados["mat_pis"]:'');
+                            document.getElementById("mat_cub").value = (resultados["mat_cub"]?resultados["mat_cub"]:'');
+                            /*!document.getElementById("est_cons").value=resultados["est_cons"];*/
+                            document.getElementById("num_hab").value = (resultados["num_hab"]?resultados["num_hab"]:'');
+                            document.getElementById("num_gar").value = (resultados["num_gar"]?resultados["num_gar"]:'');
+                            document.getElementById("num_san").value = (resultados["num_san"]?resultados["num_san"]:'');
+                            document.getElementById("num_loc").value = (resultados["num_loc"]?resultados["num_loc"]:'');
+                            document.getElementById("num_coc").value = (resultados["num_coc"]?resultados["num_coc"]:'');
+                            document.getElementById("num_bod").value = (resultados["num_bod"]?resultados["num_bod"]:'');
+                            document.getElementById("num_lav").value = (resultados["num_lav"]?resultados["num_lav"]:'');
+                            document.getElementById("num_pat").value = (resultados["num_pat"]?resultados["num_pat"]:'');
+                            document.getElementById("esp_mul").value = (resultados["esp_mul"]?resultados["esp_mul"]:'');
+                            document.getElementById("zon_soc").value = (resultados["zon_soc"]?resultados["zon_soc"]:'');
+                            document.getElementById("cri_ani").value = (resultados["cri_ani"]?resultados["cri_ani"]:'');
+                            document.getElementById("coc_enc").value = (resultados["coc_enc"]?resultados["coc_enc"]:'');
+                            document.getElementById("coc_lav").value = (resultados["coc_lav"]?resultados["coc_lav"]:'');
+                            document.getElementById("coc_mes").value = (resultados["coc_mes"]?resultados["coc_mes"]:'');
+                            document.getElementById("coc_ind").value = (resultados["coc_ind"]?resultados["coc_ind"]:'');
+                            document.getElementById("san_enc").value = (resultados["san_enc"]?resultados["san_enc"]:'');
+                            document.getElementById("san_duc").value = (resultados["san_duc"]?resultados["san_duc"]:'');
+                            document.getElementById("san_apar").value = (resultados["san_apar"]?resultados["san_apar"]:'');
+                            document.getElementById("san_des").value = (resultados["san_des"]?resultados["san_des"]:'');
+                            document.getElementById("san_poz").value = (resultados["san_poz"]?resultados["san_poz"]:'');
+                            document.getElementById("san_lad").value = (resultados["san_lad"]?resultados["san_lad"]:'');
+
+
+
+
+                            if (resultados["acu_dis"] === "Si") {
+                            } else {
+                                $('#acu_mod').attr('disabled', 'disabled');
+                                $('#acu_con').attr('disabled', 'disabled');
+                                $('#acu_dir').attr('disabled', 'disabled');
+                            }
+                            if (resultados["alc_dis"] === "Si") {
+                            } else {
+                                $('#alc_mod').attr('disabled', 'disabled');
+                                $('#alc_con').attr('disabled', 'disabled');
+                                $('#alc_dir').attr('disabled', 'disabled');
+                            }
+                            if (resultados["ase_dis"] === "Si") {
+                            } else {
+                                $('#ase_mod').attr('disabled', 'disabled');
+                                $('#ase_con').attr('disabled', 'disabled');
+                                $('#ase_dir').attr('disabled', 'disabled');
+                            }
+                            if (resultados["ene_dis"] === "Si") {
+                            } else {
+                                $('#ene_mod').attr('disabled', 'disabled');
+                                $('#ene_con').attr('disabled', 'disabled');
+                                $('#ene_dir').attr('disabled', 'disabled');
+                            }
+                            if (resultados["gas_dis"] === "Si") {
+                            } else {
+                                $('#gas_mod').attr('disabled', 'disabled');
+                                $('#gas_con').attr('disabled', 'disabled');
+                                $('#gas_dir').attr('disabled', 'disabled');
+                            }
+                            if (resultados["tel_dis"] === "Si") {
+                            } else {
+                                $('#tel_mod').attr('disabled', 'disabled');
+                                $('#tel_con').attr('disabled', 'disabled');
+                                $('#tel_dir').attr('disabled', 'disabled');
+                            }
+
+                            var compare='{"colors":{"primary":"hsla(0, 0%, 0%, 1)","secondary":"hsla(0, 100%, 42%, 1)","background":"hsla(0, 0%, 100%, 1)"},"position":{"x":0,"y":0},"scale":1,"shapes":[],"backgroundShapes":[{"className":"Image","data":{"x":0,"y":0,"imageSrc":"http://sig-reas/Reas/img/grid.png","imageObject":{},"scale":0.4},"id":"e4824dc9-281c-5a0c-e3e9-909e69f0c595"}],"imageSize":{"width":"infinite","height":"infinite"}}';
+                             
+                            var plano = (resultados["plano"]?resultados["plano"]:compare);
+                           
+
+            
+                            if (plano!==compare) {
+                                var st1 = '\\"';
+                                plano = plano.replace(/@/g, st1);
+                                lc.loadSnapshot(JSON.parse(plano));
+                            }
+
+                            
+                            var img_vacia='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQYV2NgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII=';
+                            
+                            var imp = (resultados["foto_plano"]?resultados["foto_plano"]:img_vacia);
+                            var img_ubicacion = (resultados["foto_ubicacion"]?resultados["foto_ubicacion"]:img_vacia);
+
+
+                            var im1 = resultados["img_ext"];
+                            var im2 = resultados["img_esp"];
+                            var im3 = resultados["img_coc"];
+                            var im4 = resultados["img_nom"];
+                            var im5 = resultados["img_hab"];
+                            var im6 = resultados["img_usa"];
+
+                            if (!!img_ubicacion) {
+                                var img_ubi = img_ubicacion.replace(/"/, "");
+                                document.getElementById('img_plano1').setAttribute('src', img_ubi);
+                            }
+                            if (typeof imp !== "undefined") {
+                                var datp = imp.replace(/"/, "");
+                                document.getElementById('img_plano').setAttribute('src', datp);
+                            }
+                            if (!!im1) {
+                                var dat1 = im1.replace(/"/, "");
+                                document.getElementById('img_ext').setAttribute('src', dat1);
+
+                            }
+                            if (!!im2) {
+                                var dat2 = im2.replace(/"/, "");
+                                document.getElementById('img_esp').setAttribute('src', dat2);
+                            }
+                            if (!!im3) {
+                                var dat3 = im3.replace(/"/, "");
+                                document.getElementById('img_coc').setAttribute('src', dat3);
+                            }
+                            if (!!im4) {
+                                var dat4 = im4.replace(/"/, "");
+                                document.getElementById('img_nom').setAttribute('src', dat4);
+                            }
+                            if (!!im5) {
+                                var dat5 = im5.replace(/"/, "");
+                                document.getElementById('img_hab').setAttribute('src', dat5);
+                            }
+                            if (!!im6) {
+                                var dat6 = im6.replace(/"/, "");
+                                document.getElementById('img_usa').setAttribute('src', dat6);
+                            }
+
+
+                            for (i = 1; i < 7; i++) {
+
+                                if (!!eval('im' + i)) {
+
+                                    $("#folder").append("<div id='div" + k + "' style='position:relative; display:inline-block; margin: 5px; width:200; height:200; box-shadow: 10px 10px 5px #888888;'> </div>");
+                                    $('#div' + k).append("<button type='button' onclick='close_div(this.id)' class='btn btn-default' id='but" + k + "' style='z-index:10;'>x</button>");
+                                    $('#div' + k).append("<button id='rot" + k + "' type='button' style='z-index:10;' class='btn btn-success' ><span class='glyphicon glyphicon-repeat'></span></button>");
+
+                                    $('#div' + k).append("<img id='" + k + "' src='#' alt='your image' style='z-index:-10;position:absolute; margin:auto; top: 5px; left: 5px;'/>");
+                                    $('#div' + k).append("<select class='form-control' onclick='asig_img(this.id)' style='position:absolute; border-color: black; border-style:solid; opacity: 0.9; margin:auto; top: 160px; left: 5px; width:190px'  id='sel" + k + "'><option value='' >Seleccione..</option><option value='1'>Exterior/Entorno</option><option value='2'>Espacio Social</option><option value='3'>Cocina</option><option value='4'>Nomenclatura</option><option value='5'>Habitaciones</option><option value='6'>Unidad Sanitaria</option></select>");
+
+
+                                    var x = document.getElementById('folder');
+                                    if (x.style.display === 'none') {
+                                        x.style.display = 'inline';
+                                    }
+
+                                    $('#' + k)
+                                            .attr('src', eval('dat' + i))
+                                            .width(190)
+                                            .height(190);
+
+                                    $('#sel' + k).val(i);
+
+                                    document.getElementById("div" + k).style.cursor = "url('img/zoom.png'), auto";
+                                    k++;
+                                    
+
+
+                                }
+                                j = k;
+
+
+
+                            }
+
+                    
+                    
+                            var angulo = 0;
+                            $("#rot1").bind("click", function (e) {
+                                e.stopPropagation();
+                                angulo += 90;                                
+                                $('#1').attr('src',rotcanvas(angulo,1));
+                                asig_img($('#sel1').attr('id'));
+                                
+                            });
+                            $("#rot2").bind("click", function (e) {
+                                e.stopPropagation();
+                                angulo += 90;
+                                 $('#2').attr('src',rotcanvas(angulo,2));
+                                 asig_img($('#sel2').attr('id'));
+                            });
+                            $("#rot3").bind("click", function (e) {
+                                e.stopPropagation();
+                                angulo += 90;
+                                 $('#3').attr('src',rotcanvas(angulo,3));
+                                 asig_img($('#sel3').attr('id'));
+                            });
+                            $("#rot4").bind("click", function (e) {
+                                e.stopPropagation();
+                                angulo += 90;
+                                 $('#4').attr('src',rotcanvas(angulo,4));
+                                 asig_img($('#sel4').attr('id'));
+                            });
+                            $("#rot5").bind("click", function (e) {
+                                e.stopPropagation();
+                                angulo += 90;
+                                 $('#5').attr('src',rotcanvas(angulo,5));
+                                 asig_img($('#sel5').attr('id'));
+                            });
+                            $("#rot6").bind("click", function (e) {
+                                e.stopPropagation();
+                                angulo += 90;
+                                 $('#6').attr('src',rotcanvas(angulo,6));
+                                 asig_img($('#sel6').attr('id'));
+                            });
+
+
+                            document.getElementById("img_plano1").style.cursor = "url('img/zoom.png'), auto";
+                            $('#img_plano1').click(function () {
+                                $('#myModalu').modal('show');
+                                var temp = document.getElementById('img_plano1').src;
+                                document.getElementById('img_ubica').setAttribute('src', temp);
+                                $('#logu').css('display', 'inline');
+                            });
+
+                            document.getElementById("img_plano").style.cursor = "url('img/zoom.png'), auto";
+                            $('#img_plano').click(function () {
+                                $('#myModalp').modal('show');
+                                var temp = document.getElementById('img_plano').src;
+                                document.getElementById('img_viv').setAttribute('src', temp);
+                                $('#logp').css('display', 'inline');
+                            });
+
+                            function show_modal(idt) {
+                                if ($('#sel' + idt).val() === "1") {
+                                    $('#myModal1').modal('show');
+                                    $('#log1').css('display', 'inline');
+                                }
+                                if ($('#sel' + idt).val() === "2") {
+                                    $('#myModal3').modal('show');
+                                    $('#log3').css('display', 'inline');
+                                }
+                                if ($('#sel' + idt).val() === "3") {
+                                    $('#myModal5').modal('show');
+                                    $('#log5').css('display', 'inline');
+                                }
+                                if ($('#sel' + idt).val() === "4") {
+                                    $('#myModal2').modal('show');
+                                    $('#log2').css('display', 'inline');
+                                }
+                                if ($('#sel' + idt).val() === "5") {
+                                    $('#myModal4').modal('show');
+                                    $('#log4').css('display', 'inline');
+                                }
+                                if ($('#sel' + idt).val() === "6") {
+                                    $('#myModal6').modal('show');
+                                    $('#log6').css('display', 'inline');
+                                }
+                            }
+
+
+
+
+                            $('#div1').click(function () {
+                                show_modal(1);
+                            });
+                            $('#div2').click(function () {
+                                show_modal(2);
+                            });
+
+                            $('#div3').click(function () {
+                                show_modal(3);
+                            });
+                            $('#div4').click(function () {
+                                show_modal(4);
+                            });
+                            $('#div5').click(function () {
+                                show_modal(5);
+                            });
+                            $('#div6').click(function () {
+                                show_modal(6);
+                            });
+
+
+
+
+                            document.getElementById("observ").value = (resultados["observ"]?resultados["observ"]:'');
+                            document.getElementById("nom_ela").value = (resultados["nom_ela"]?resultados["nom_ela"]:'');
+                            document.getElementById("car_ela").value = (resultados["car_ela"]?resultados["car_ela"]:'');
+                            document.getElementById("nom_rev").value = (resultados["nom_rev"]?resultados["nom_rev"]:'');
+                            document.getElementById("car_rev").value = (resultados["car_rev"]?resultados["car_rev"]:'');
+
+
+
+                        } else {
+                            $("#alerta").modal(); 
+                            
+                        }
+                    }
+                });
+
+
+
+
+
+                $('#acu_dis').on('change', function () {
+
+                    var others = $(this).val();
+                    if (others === "Si") {
+                        $('#acu_mod').removeAttr('disabled');
+                        $('#acu_con').removeAttr('disabled');
+                        $('#acu_dir').removeAttr('disabled');
+                    } else {
+                        $('#acu_mod').attr('disabled', 'disabled');
+                        $('#acu_mod').val('');
+                        $('#acu_con').attr('disabled', 'disabled');
+                        $('#acu_con').val('');
+                        $('#acu_dir').attr('disabled', 'disabled');
+                        $('#acu_dir').val('');
+                    }
+
+                });
+                $('#alc_dis').on('change', function () {
+
+                    var others = $(this).val();
+                    if (others === "Si") {
+                        $('#alc_mod').removeAttr('disabled');
+                        $('#alc_con').removeAttr('disabled');
+                        $('#alc_dir').removeAttr('disabled');
+                    } else {
+                        $('#alc_mod').attr('disabled', 'disabled');
+                        $('#alc_mod').val('');
+                        $('#alc_con').attr('disabled', 'disabled');
+                        $('#alc_con').val('');
+                        $('#alc_dir').attr('disabled', 'disabled');
+                        $('#alc_dir').val('');
+                    }
+
+                });
+                $('#ase_dis').on('change', function () {
+
+                    var others = $(this).val();
+                    if (others === "Si") {
+                        $('#ase_mod').removeAttr('disabled');
+                        $('#ase_con').removeAttr('disabled');
+                        $('#ase_dir').removeAttr('disabled');
+                    } else {
+                        $('#ase_mod').attr('disabled', 'disabled');
+                        $('#ase_mod').val('');
+                        $('#ase_con').attr('disabled', 'disabled');
+                        $('#ase_con').val('');
+                        $('#ase_dir').attr('disabled', 'disabled');
+                        $('#ase_dir').val('');
+                    }
+
+                });
+                $('#ene_dis').on('change', function () {
+
+                    var others = $(this).val();
+                    if (others === "Si") {
+                        $('#ene_mod').removeAttr('disabled');
+                        $('#ene_con').removeAttr('disabled');
+                        $('#ene_dir').removeAttr('disabled');
+                    } else {
+                        $('#ene_mod').attr('disabled', 'disabled');
+                        $('#ene_mod').val('');
+                        $('#ene_con').attr('disabled', 'disabled');
+                        $('#ene_con').val('');
+                        $('#ene_dir').attr('disabled', 'disabled');
+                        $('#ene_dir').val('');
+                    }
+
+                });
+                $('#gas_dis').on('change', function () {
+
+                    var others = $(this).val();
+                    if (others === "Si") {
+                        $('#gas_mod').removeAttr('disabled');
+                        $('#gas_con').removeAttr('disabled');
+                        $('#gas_dir').removeAttr('disabled');
+                    } else {
+                        $('#gas_mod').attr('disabled', 'disabled');
+                        $('#gas_mod').val('');
+                        $('#gas_con').attr('disabled', 'disabled');
+                        $('#gas_con').val('');
+                        $('#gas_dir').attr('disabled', 'disabled');
+                        $('#gas_dir').val('');
+                    }
+
+                });
+                $('#tel_dis').on('change', function () {
+
+                    var others = $(this).val();
+                    if (others === "Si") {
+                        $('#tel_mod').removeAttr('disabled');
+                        $('#tel_con').removeAttr('disabled');
+                        $('#tel_dir').removeAttr('disabled');
+                    } else {
+                        $('#tel_mod').attr('disabled', 'disabled');
+                        $('#tel_mod').val('');
+                        $('#tel_con').attr('disabled', 'disabled');
+                        $('#tel_con').val('');
+                        $('#tel_dir').attr('disabled', 'disabled');
+                        $('#tel_dir').val('');
+                    }
+
+                });
+
+
+
+            }
+
+
+
+
+        </script>
+
+        <script>
+            function getURLParams(k) {
+                var p = {};
+                location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (s, k, v) {
+                    p[k] = v;
+                });
+                return k ? p[k] : p;
+            }
+            var identificador = getURLParams('identificador');
+
+            if (identificador) {
+                $('#identificador').val(identificador);
+                $('#identificador').attr('disabled', true);
+                buscar_tecnica(identificador);
+            }
+        </script>
+        
+        <script>
+            $identificador = document.getElementById("identificador");
+            console.log($($identificador).val());
+            var ruta="visor.jsp?config=viewer_editor_ficha_tecnica&id="+$($identificador).val();
+              $("#arc_visor").attr("src", ruta);
+        </script>
+
+        <script>
+            
+             $identificador = document.getElementById("identificador");
+             var resultados;
+             $datos={
+                 op: 'get_numero_ficha_tecnica',
+                 identificador: $($identificador).val()
+             };
+             console.log($datos);
+             $.ajax({
+                 type: "GET",
+                 url: "GestionConsultas",
+                 data: $datos,
+                 dataType: "json",
+                 async: false,
+                 success: function (response) {
+                         resultados = response[0];
+                         if(Number(resultados["Num_Ficha_Tecnica"]?resultados["Num_Ficha_Tecnica"]:'')!==0){
+                             document.getElementById("ficha_num").value = Number(resultados["Num_Ficha_Tecnica"]?resultados["Num_Ficha_Tecnica"]:'');
+                         }
+                         
+                 },
+                 error: function (response) {
+                 }
+             });
+
+         </script>
+
+
+
+    </body>
+
+
+
+
+
+</html>

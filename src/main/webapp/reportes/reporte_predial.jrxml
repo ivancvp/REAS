@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2017-05-15T19:50:57 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporte_predial" pageWidth="612" pageHeight="792" whenNoDataType="NoDataSection" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="33ecb2e1-26fe-47ea-b0be-2efe1e9e3ed1">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="curso_interlis_2017_abril"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="254"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="738"/>
+	<parameter name="predio_id" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="map_url" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT 
+    zonaot.t_id AS "ID",
+    zonaot.atype AS "Tipo",
+    zonaot.suelo,
+    zonaot.descripcion ,
+    zonaot.estructura ,
+    zonaot.subestructura ,
+    zonaot.sueloproteccion , 
+    zonaot.aname ,
+    rest.atype AS "Tipo_restriccion",
+    rest.description AS "Descripcion_restriccion"
+   FROM curso_dnp_mayo_2017_ladm_ot.zonaot
+     JOIN curso_dnp_mayo_2017_ladm_ot.restriccionot rest ON zonaot.t_id = rest.unit
+   where st_intersects(st_curvetoline(zonaot.geometria),(select st_curvetoline(geom) geom from ejercicio_modelado.predio where t_id::text =  $P{predio_id}  ))]]>
+	</queryString>
+	<field name="ID" class="java.lang.Long"/>
+	<field name="Tipo" class="java.lang.String"/>
+	<field name="suelo" class="java.lang.String"/>
+	<field name="descripcion" class="java.lang.String"/>
+	<field name="estructura" class="java.lang.String"/>
+	<field name="subestructura" class="java.lang.String"/>
+	<field name="sueloproteccion" class="java.lang.String"/>
+	<field name="aname" class="java.lang.String"/>
+	<field name="Tipo_restriccion" class="java.lang.String"/>
+	<field name="Descripcion_restriccion" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="353" splitType="Prevent">
+			<image>
+				<reportElement x="0" y="50" width="572" height="297" uuid="7aa32ba6-b4ac-4e06-8c09-557aa643e32f">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<imageExpression><![CDATA[$P{map_url}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="0" y="1" width="572" height="29" forecolor="#187ECC" uuid="6cdedeab-b0fe-4efc-a3a5-12eb64c9a789"/>
+				<textElement textAlignment="Center" markup="styled">
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[Reporte de restricciones]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.grid.JSSGridBagLayout"/>
+			<staticText>
+				<reportElement x="0" y="0" width="81" height="30" uuid="468313dd-5f94-4ee8-9b78-4db4dcd8a2ce"/>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre de la zona]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="81" y="0" width="81" height="30" uuid="d1ee5af8-102b-4f7f-8712-b2d9811ed4a2"/>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descripción de la zona]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="162" y="0" width="81" height="30" uuid="d1d1ffee-d7f2-46b1-9e91-e6c9ef43910a"/>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo de suelo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="243" y="0" width="81" height="30" uuid="7788f8ea-d282-4050-bc20-75764ecd8a77"/>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estructura]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="324" y="0" width="81" height="30" uuid="017079b7-bb60-48ed-8c33-14a8c34a2a10"/>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[sub-estructura]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="405" y="0" width="81" height="30" uuid="cb5feac2-d541-43c6-a83d-00167eedc6e2"/>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Restricción]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="486" y="0" width="81" height="30" uuid="747ddece-dd32-41f3-aa21-f4acd4125717"/>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descripción de la Restricción]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.grid.JSSGridBagLayout"/>
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="81" height="21" uuid="ff71ee78-1964-43d2-bfbf-86a692e1a420"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#858585"/>
+				</box>
+				<textElement markup="html">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{aname}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="81" y="0" width="81" height="21" uuid="409caa15-701a-4058-823a-a4f81c9e923f"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#858585"/>
+				</box>
+				<textElement markup="html">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="162" y="0" width="81" height="21" uuid="edc80279-573a-465e-b4ff-468494b3530a">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineColor="#858585"/>
+				</box>
+				<textElement markup="html">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{suelo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="243" y="0" width="81" height="21" uuid="3a64b483-f67d-4e26-b9d0-25cc142d5da5"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#858585"/>
+				</box>
+				<textElement markup="html">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{estructura}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="324" y="0" width="81" height="21" uuid="4c7effb5-52b7-4f6e-9af2-b7d709a853a4"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#858585"/>
+				</box>
+				<textElement markup="html">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{subestructura}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="405" y="0" width="81" height="21" uuid="06d381be-6922-4295-940a-60d72547ac05"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#858585"/>
+				</box>
+				<textElement markup="html">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Tipo_restriccion}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="486" y="0" width="81" height="21" uuid="a76207ff-dd46-4747-972d-2b483666532c"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#858585"/>
+				</box>
+				<textElement markup="html">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Descripcion_restriccion}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+	<noData>
+		<band height="381">
+			<staticText>
+				<reportElement x="0" y="350" width="572" height="29" forecolor="#4D4D4D" uuid="78024c14-0214-4e7d-90b8-d36372c3e100"/>
+				<textElement textAlignment="Center">
+					<font size="14" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[No se encontraron restricciones del predio seleccionado]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="50" width="572" height="297" uuid="56725d9a-3391-45ab-b433-c565306d54a1">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<imageExpression><![CDATA[$P{map_url}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="0" y="1" width="572" height="29" forecolor="#187ECC" uuid="f9ab8c00-bc0c-4383-84cf-a96a64360beb"/>
+				<textElement textAlignment="Center">
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[Reporte de restricciones]]></text>
+			</staticText>
+		</band>
+	</noData>
+</jasperReport>

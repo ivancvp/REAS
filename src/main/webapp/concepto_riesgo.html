@@ -1,0 +1,146 @@
+<html>
+    <head>
+        <title>Concepto de riesgo</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script>
+            $("#img_visor").fileinput({
+                theme: 'fa',
+                language: 'es',
+               
+                initialPreviewFileType: 'image',
+                
+                uploadExtraData: function (previewId, index) {  // callback example        
+                    var out = {
+                        numFolios: 1,
+                        descripcion: 'imgen concepto visor',
+                        identificador: opts.identificador,
+                        tipo_documento: '5',
+                        thumbnail: ''
+                    };
+                    return out;
+                },
+                deleteExtraData: function (previewId, index) {
+
+                    var out = {
+                        op: 'delete_img_visor',
+                        identificador: identificador,
+                        descripcion: descripcion
+                    };
+                    return out;
+                },
+                uploadUrl: 'FileUploader',
+                deleteUrl: 'GestionDML',
+                allowedFileExtensions: ["jpg", "png", "gif"],
+                initialPreviewAsData: true,
+                showUpload: true,
+                overwriteInitial: true,
+                browseOnZoneClick: true
+            });
+
+            $("#img_cobertura").fileinput({
+                theme: 'fa',
+                language: 'es',
+                initialPreview: [
+                    url
+                ],
+                initialPreviewFileType: 'image',
+                initialPreviewConfig: [
+                    {caption: "fotográfia", size: 100, key: 1, id: 1, downloadUrl: url}
+                ],
+                uploadExtraData: function (previewId, index) {  // callback example        
+                    var out = {
+                        numFolios: 1,
+                        descripcion: descripcion,
+                        identificador: identificador,
+                        tipo_documento: tipo_documento,
+                        thumbnail: ''
+                    };
+                    return out;
+                },
+                deleteExtraData: function (previewId, index) {
+
+                    var out = {
+                        op: 'delete_img_covertura',
+                        identificador: opts.identificador,
+                        descripcion: descripcion
+                    };
+                    return out;
+                },
+                uploadUrl: 'FileUploader',
+                deleteUrl: 'GestionDML',
+                allowedFileExtensions: ["jpg", "png", "gif"],
+                initialPreviewAsData: true,
+                showUpload: true,
+                overwriteInitial: true,
+                browseOnZoneClick: true
+            });
+        </script>
+    </head>
+    <body>
+        <div id="form_riesgo_hidrico">
+            <div class="row form-group">
+                <div class="col-lg-12">
+                    <label class="control-label">Dirección Catastro</label>
+                    <input type="text" class="form-control" id="dir_catastral">
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-12">
+                    <label class="control-label">Chip Catastral</label>
+                    <input type="text" class="form-control" id="chip_catastral">
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-4">
+                    <label class="control-label">Manzana Catastral</label>
+                    <input type="text" class="form-control"  id="mz_catastral">
+                </div>               
+                <div class="col-lg-4">
+                    <label class="control-label">Lote Catastral</label>
+                    <input type="text" class="form-control"  id="lt_catastral">
+                </div>               
+                <div class="col-lg-4">
+                    <label class="control-label">Sector Catastral</label>
+                    <input type="text" class="form-control"  id="sector_catastral">
+                </div>               
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <label class="control-label">Afectación </label>
+                    <select class="form-control" id="tipo_afectacion">                       
+                        <option value="0" selected disabled >Seleccione...</option>
+                        <option value="1">Sin Afectación </option>
+                        <option value="2">Afectación por Corredor Ecológico o ZMPA </option>
+                        <option value="3">Afectación por Ronda Hidráulica</option>
+                    </select>
+                </div>               
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <label class="control-label">Quebrada</label>
+                    <select class="form-control" id="quebrada">
+                    </select>
+                </div>               
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <label class="control-label"> VISOR GEOGRÁFICO SECRETARÍA DISTRITAL DE AMBIENTE</label>
+                    <input   type="file"  id="img_visor" class="file form-control">                    
+                </div>    
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <label class="control-label">COBERTURA PREDIAL CATASTRO Y ESTRUCTURA ECOLÓGICA DE SDA</label>               
+                    <input   type="file"  id="img_cobertura" class="form-control">
+                </div>    
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-lg-12">
+                    <button id="imprimir_reporte" class="btn btn-success " disabled><i class="fas fa-print" ></i> Imprimir </button>
+                </div>    
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+        <title>3D Map With Elevation Services - 4.3</title>
+        <style>
+            html,
+            body,
+            #viewDiv {
+                padding: 0;
+                margin: 0;
+                height: 100%;
+                width: 100%;
+            }
+
+            #paneDiv {
+                position: absolute;
+                top: 18px;
+                right: 18px;
+                padding: 12px;
+                background-color: rgba(0, 0, 0, 0.5);
+                color: white;
+            }
+        </style>
+
+        <link rel="stylesheet" href="https://js.arcgis.com/4.3/esri/css/main.css">
+        <script src="https://js.arcgis.com/4.3/"></script>
+        <script src="js/plugins/smooth/Smooth-0.1.7.js"></script>
+
+        <script>
+            var map;
+            var view;
+            var elevationLayer;
+            var graphicsLayer;
+
+            var maxElevation = 4000;
+            var puntos = [
+                [-74.075, 4.563],
+                [-74.112, 4.574]
+            ];
+
+            var labels = ["PAR", "Reloca"];
+
+
+            function getURLParams(k) {
+                var p = {};
+                location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (s, k, v) {
+                    p[k] = v;
+                });
+                return k ? p[k] : p;
+            }
+
+
+            require([
+                "esri/Map",
+                "esri/views/SceneView",
+                "esri/layers/ElevationLayer",
+                "dojo/on",
+                "dojo/dom",
+                "esri/layers/GraphicsLayer",
+                "esri/Graphic",
+                "esri/geometry/Point",
+                "esri/geometry/Polyline",
+                "esri/geometry/Polygon",
+                "esri/geometry/Multipoint",
+                "esri/symbols/SimpleMarkerSymbol",
+                "esri/symbols/SimpleLineSymbol",
+                "esri/symbols/SimpleFillSymbol",
+                "esri/symbols/TextSymbol",
+                "esri/symbols/TextSymbol3DLayer",
+                "esri/tasks/Locator",
+                "dojo/domReady!"
+            ], function (Map, SceneView, ElevationLayer, on, dom, GraphicsLayer,
+                    Graphic, Point, Polyline, Polygon, Multipoint,
+                    SimpleMarkerSymbol, SimpleLineSymbol, SimpleFillSymbol, TextSymbol, TextSymbol3DLayer,
+                    Locator) {
+
+                function initMap() {
+
+                    // Create the Map
+                    map = new Map({
+                        basemap: "topo",
+                        ground: "world-elevation"
+                    });
+
+                    // Create the MapView
+                    view = new SceneView({
+                        container: "viewDiv",
+                        map: map,
+                        center: [-74.083, 4.632],
+                        zoom: 11
+                    });
+
+                    // Create elevation layer and add to the map
+                    elevationLayer = new ElevationLayer({
+                        url: "https://sampleserver6.arcgisonline.com/arcgis/rest/services/OsoLandslide/OsoLandslide_After_3DTerrain/ImageServer",
+                        visible: true
+                    });
+
+                    map.ground.layers.add(elevationLayer);
+
+                    graphicsLayer = new GraphicsLayer();
+                    map.add(graphicsLayer);
+
+
+                    graphicsLayer.add(create3DLabel(puntos[0], labels[0]));
+                    graphicsLayer.add(create3DLabel(puntos[1], labels[1]));
+
+
+                    var points = puntos;
+
+
+                    map.ground.queryElevation(new Multipoint(points), {returnSampleInfo: true})
+                            .then(onQueryElevationResult)
+                            .otherwise(function (error) {
+                                console.error("Failed to query elevation:", error);
+                            });
+
+                    locateAndAddPoint("CL 72 SUR 22 30 ,BRISAS DEL VOLADOR, Ciudad Bolívar, Bogotá, D.C.","nuevo");
+
+                }
+
+                function locateAndAddPoint(address, alias) {
+                    var locator = new Locator("http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer");
+                    var params = {address: {"singleLine": address}, searchExtent: map.extent};
+
+                    locator.addressToLocations(params)
+                            .then(function (candidates) {
+
+                                if (candidates && candidates.length > 0) {
+
+                                    var maxScore = 0;
+                                    var maxIndex;
+                                    for (var i = 0; i < candidates.length; i++) {
+                                        var score = candidates[i].score;
+                                        if (maxScore < score) {
+                                            maxScore = score;
+                                            maxIndex = i;
+                                        }
+                                    }
+                                    if (maxIndex !== undefined) {
+                                        var point = candidates[maxIndex].location;
+                                        var graphicsLabel = create3DLabel([point.x, point.y], alias || candidates[maxIndex].address);
+                                        graphicsLayer.add(graphicsLabel);
+
+                                        var markerSymbol = new SimpleMarkerSymbol({
+                                            color: [226, 119, 40],
+                                            outline: {// autocasts as new SimpleLineSymbol()
+                                                color: [255, 255, 255],
+                                                width: 2
+                                            }
+                                        });
+
+                                        var pointGraphic = new Graphic({
+                                            geometry: point,
+                                            symbol: markerSymbol
+                                        });
+                                        graphicsLayer.add(pointGraphic);
+
+                                    }
+
+                                }
+                            })
+                            .otherwise(function (error) {
+                                console.error("Failed to query address:", error);
+                            });
+                }
+
+                function onQueryElevationResult(result) {
+                    var pointsElevations = [];
+                    result.geometry.points.forEach(function (point, index) {
+                        pointsElevations.push(point);
+                    });
+
+                    var polyline = new Polyline(create3DPath(pointsElevations, maxElevation));
+                    var lineSymbol = new SimpleLineSymbol({
+                        color: [226, 119, 40],
+                        width: 4
+                    });
+                    var polylineGraphic = new Graphic({
+                        geometry: polyline,
+                        symbol: lineSymbol
+                    });
+                    graphicsLayer.add(polylineGraphic);
+                }
+
+                function create3DLabel(punto, label) {
+                    var point = new Point(punto);
+                    var textSymbol = new TextSymbol({
+                        //color: "white",
+                        haloColor: "white",
+                        haloSize: "1px",
+                        text: label,
+                        xoffset: 3,
+                        yoffset: 3,
+                        font: {// autocast as esri/symbols/Font
+                            size: 10,
+                            family: "sans-serif",
+                            weight: "bolder"
+                        }
+                    });
+
+                    var pointGraphic = new Graphic({
+                        geometry: point,
+                        symbol: textSymbol
+                    });
+
+                    return pointGraphic;
+                }
+
+                function create3DPath(points, maxElevation) {
+                    var startPoint = points[0];
+                    var endPoint = points[1];
+                    var numPoints = 100;
+                    var dx = (endPoint[0] - startPoint[0]) / (numPoints);
+                    var dy = (endPoint[1] - startPoint[1]) / (numPoints);
+
+                    var points = [
+                        [0, startPoint[2]],
+                        [Math.sqrt(
+                                    Math.pow(endPoint[0] - startPoint[0], 2) +
+                                    Math.pow(endPoint[1] - startPoint[1], 2)
+                                    ) / 2, maxElevation],
+                        [Math.sqrt(
+                                    Math.pow(endPoint[0] - startPoint[0], 2) +
+                                    Math.pow(endPoint[1] - startPoint[1], 2)
+                                    ), endPoint[2]]
+                    ];
+
+                    var path = Smooth(points, {
+                        method: Smooth.METHOD_LANCZOS
+                    });
+
+                    var results = [startPoint];
+                    for (var i = 1; i < numPoints; i++) {
+                        var x = results[results.length - 1][0] + dx;
+                        var y = results[results.length - 1][1] + dy;
+                        results.push([x, y, path(i * 2.0 / numPoints)[1]]);
+                    }
+                    results.push(endPoint);
+                    return results;
+                }
+
+                initMap();
+
+            });
+
+
+        </script>
+    </head>
+
+    <body>
+        <div id="viewDiv"></div>
+    </body>
+</html>

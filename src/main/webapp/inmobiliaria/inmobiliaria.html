@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <meta charset='utf-8'>
+  <title>Proceso Seleccion Vivienda</title>
+  <script src='build/pdfmake.min.js'></script>
+  <script src='build/vfs_fonts.js'></script>
+
+
+
+
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+<link href="../font-awesome/css/font-awesome.css" rel="stylesheet">
+
+<!-- Text spinners style -->
+<link href="../css/plugins/textSpinners/spinners.css" rel="stylesheet">
+
+<link href="../css/animate.css" rel="stylesheet">
+
+
+
+<link rel="stylesheet" href="../js/vendors/viewerjs-master/viewerjs-master/dist/viewer.css">
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="../js/vendors/viewerjs-master/viewerjs-master/dist/viewer.js"></script>
+
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<!--Leaflet-->
+
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
+   integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
+   crossorigin=""/>
+ <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
+   integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
+   crossorigin=""></script>
+   
+ <!--Leaflet-->
+
+
+
+<!--Formato de impresiones-->
+<script src="formatos.js"></script>
+<script src="form_proyecto_nuevo.js"></script>
+<!--Formato de impresiones-->
+<script src="visualizar_proyecto.js"></script>
+<script src="proy_propio.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+
+
+
+
+
+  <style>
+  .pictures {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .pictures > li {
+      float: left;
+      width: 33.3%;
+      height: 33.3%;
+      margin: 0 -1px -1px 0;
+      border: 1px solid transparent;
+      overflow: hidden;
+    }
+
+    .pictures > li > img {
+      width: 100%;
+      cursor: -webkit-zoom-in;
+      cursor: zoom-in;
+    }
+  </style>
+
+
+</head>
+
+<body>
+
+
+<div class="container">
+  <h1>Proceso de selección de vivienda</h1>
+  <p>Dirección de reasentamientos</p>
+  <h1>Formatos</h1>
+
+  <button type="button" class="btn btn-primary" onclick="modal_formato()">Ver</button>
+  
+  <h1>Portafolio de proyectos</h1>
+
+ <button type="button" class="btn btn-success" onclick="ver_modal()">ver</button>
+  
+ <h1>Base de datos Loretta</h1>
+
+ <button type="button" class="btn btn-danger" onclick="">ver</button>
+ 
+ 
+  <div class="modal fade" tabindex="-1" data-focus-on="input:first" style="display: none;" id="modal_form">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" id="form">
+
+        </div>
+    </div>
+
+</div>
+ 
+ 
+ 
+  <div class="modal fade" tabindex="-1" data-focus-on="input:first" style="display: none;" id="modal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" id="form1">
+                
+        </div>
+    </div>
+
+</div>
+
+ 
+ 
+ 
+ 
+ 
+
+</div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+</body>
+
+</html>

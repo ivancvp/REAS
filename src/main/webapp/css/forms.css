@@ -1,0 +1,38 @@
+#step-3 .panel-default,#step-4 .panel-default,#step-5 .panel-default{
+    text-align: justify;
+    border-color: #777 !important;
+    border: solid 1px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    
+}
+
+#step-4 .row,#step-5 .row,#step-6 .row, #step-7 .row{
+    margin: 5px;
+    margin-bottom: 5px;
+}
+
+.actividad-inmueble{
+    display: none;
+}
+.casa input{
+    max-width: 70px;
+    display: initial;
+    margin-left: 5px;
+}
+.orden input{
+    max-width: 40px;
+    display: initial;
+    margin-left: 5px;
+}
+#step-3, .checkit{
+    text-align: left;
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"] {
+    -moz-appearance: textfield;
+}

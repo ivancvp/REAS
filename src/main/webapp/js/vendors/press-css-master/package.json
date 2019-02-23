@@ -1,0 +1,27 @@
+{
+  "name": "press-css",
+  "version": "2.0.8",
+  "description": "A flat, material, no bullshit CSS button library.",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/codyogden/press-css.git"
+  },
+  "author": "Cody Ogden <cody@codyogden.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "node-sass --output-style compressed ./scss/_import-now.scss ./css/press.css",
+    "dev": "node-sass ./scss/_import-now.scss ./css/press.css"
+  },
+  "dependencies": {
+    "node-sass": "^4.9.0"
+  },
+  "bugs": {
+    "url": "https://github.com/codyogden/press-css/issues"
+  },
+  "homepage": "https://github.com/codyogden/press-css#readme",
+  "main": "index.js",
+  "keywords": [
+    "css",
+    "ui"
+  ]
+}
