@@ -1,4 +1,4 @@
-function imp_adenda(elaboro,aprobo){
+function imp_adenda(elaboro,aprobo,tipo_estudio){
 
 var imprimir="Documento preliminar - NO OFICIAL";
 
@@ -6,7 +6,7 @@ if(aprobo.length>0){
   imprimir="";  
 }
 
-var dat=get_datos_estudio($('#id_adenda').val(),'255');
+var dat=get_datos_estudio($('#id_adenda').val(),tipo_estudio);
 
 var data=dat[0];
 

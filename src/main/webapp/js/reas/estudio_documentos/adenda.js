@@ -433,12 +433,9 @@ alertify.error("Revise los campos obligatorios");
 }
 
 
-    
-
-
 if(sector==='Vereditas'){
     vereditas=true; 
-    tipo_estudio='457';
+    tipo_estudio=get_decreto_vereditas(identificador);
 }else{
      vereditas=false; 
 }
@@ -608,7 +605,7 @@ $('#save_adenda').click(function () {
 
 $('#impr_adenda').click(function(){
   
- var doc = imp_adenda(nom_ela,nom_apr);
+ var doc = imp_adenda(nom_ela,nom_apr,tipo_estudio);
 
     
 $('#pdf_adenda').css('display', 'inline');
@@ -841,11 +838,7 @@ if(!jQuery.isEmptyObject( resultado )){
        $('#quitar_noti').hide();
        borrar_pdf=false;
        $('.disponible').prop('disabled', false);
-         if(vereditas){
-            $('#temporal').hide();
-        }else{
-            
-        }
+         
    }  
    
 }

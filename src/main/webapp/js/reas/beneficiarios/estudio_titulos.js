@@ -128,6 +128,12 @@ $('#etitulos').on('click', function () {
                     }
                     
                 }
+                if(response[i].tipo_estudio==="651"){
+                    if(response[i].consecutivo===1){
+                        $('#tabla1 tr:last').after('<tr><th>651</th><td>'+(resultado[0].procede?resultado[0].procede:'')+'</td><td><button type="button" class="btn btn-primary outline" id="ver_651"><i class="fas fa-search-plus"></i></button></td><td><button type="button" class="btn btn-primary outline"><i class="far fa-file-alt"></i></button></td><td><button type="button" class="btn btn-primary outline" id="ver_adenda_651" ><i class="fas fa-plus"></i></button></td><td><button type="button" class="btn btn-primary outline" id="ver_acta_cierre"><i class="far fa-calendar-times"></i></button></td></tr>');
+                    }
+                    
+                }
                 if(response[i].tipo_estudio==="511"){
                     if(response[i].consecutivo===1){
                         $('#tabla1 tr:last').after('<tr><th>511</th><td>'+(resultado[i].procede?resultado[i].procede:'')+'</td><td><button type="button" class="btn btn-primary outline" id="ver_511"><i class="fas fa-search-plus"></i></button></td><td><button type="button" class="btn btn-primary outline"><i class="far fa-file-alt"></i></button></td><td><button type="button" class="btn btn-primary outline" id="ver_adenda_511"><i class="fas fa-plus"></i></button></td><td><button type="button" class="btn btn-primary outline" ><i class="far fa-calendar-times"></i></button></td></tr>');
@@ -150,6 +156,9 @@ $('#etitulos').on('click', function () {
     $("#ver_457").click(function(){
         ver_estado_estudio(identificador,'457');
     });
+    $("#ver_651").click(function(){
+        ver_estado_estudio(identificador,'651');
+    });
     
     $("#ver_511").click(function(){
         ver_estado_estudio(identificador,'511');
@@ -160,6 +169,9 @@ $('#etitulos').on('click', function () {
     });
     
     $("#ver_adenda_511").click(function(){
+        hola({formulario:26,index:identificador,modo:4});
+    });
+    $("#ver_adenda_651").click(function(){
         hola({formulario:26,index:identificador,modo:4});
     });
     

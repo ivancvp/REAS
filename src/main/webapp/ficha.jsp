@@ -32,6 +32,7 @@
             var id_user = '<%                    if ((session.getAttribute("user") != null)) {
                     out.print(((Map<String, Object>) session.getAttribute("info")).get("usuario_id"));
                 }
+            
             %>';
 
         </script>
@@ -2109,7 +2110,8 @@
 
         <script>
 
-
+        var sector="";
+        
             function buscar_tecnica(identificador) {
 
                 $buscar = document.getElementById("buscar");
@@ -2146,7 +2148,7 @@
                         {
                             resultados = response[0];
 
-                            var sector = (resultados["sector"] ? resultados["sector"] : '');
+                            sector = (resultados["sector"] ? resultados["sector"] : '');
                             sector = sector.toUpperCase();
 
                             if (sector === "VEREDITAS" || sector === "GAVILANES") {
@@ -2491,7 +2493,8 @@
                                 $("#revisar_aldemar").html('Ficha Técnica Aprobada');
                                 $("#revisar_aldemar").attr("disabled", true);
                                 
-                                if (usuario_usuario === 'agalviss') {
+                                
+                                if (usuario_funcionalidades.includes("300")) {
                                     $('#no_revisar_aldemar').css("display", "block");
                                 }
                                 $('#no_revisar_aldemar').click(function () {
@@ -2769,9 +2772,13 @@
 
 
                     var asignado_a='196';
-
+                    
                     if (identificador.includes("CP19")){
                         asignado_a='246';
+                    }
+                    
+                    if(sector==="VEREDITAS"){
+                        asignado_a='306';
                     }
 
                     var tipo_proceso=4;

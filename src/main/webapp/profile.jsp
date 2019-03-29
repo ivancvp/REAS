@@ -460,17 +460,10 @@
                                                             <br><br>
                                                             <a href="#" class="btn btn-sm btn-primary" id="fcaracterizacion" >2.  <i class="fas fa-users"></i>  Ficha de caracterización</a>
                                                             <br><br>
-
+                                                            <a href="#" class="btn btn-sm btn-primary" id="fichasocial" >2.  <i class="fas fa-users"></i>  Nueva Ficha Social</a>
 
                                                             <%  if (session.getAttribute("user") != null) {
-                                                                    if (((ArrayList) ((Map<String, Object>) session.getAttribute("info")).get("funcionalidades")).contains("50")) {
-                                                                        out.print("<button type='button' id='lista_chequeo_btn'  class='btn btn-sm btn-success' onclick='hola({formulario:1,index:getURLParams(\"identificador\"),modo:3})'>3. <i class='fas fa-list-ol'></i> Lista de Chequeo</button>");
-                                                                    }
-                                                                }
-                                                            %><%  if (session.getAttribute("user") != null) {
-                                                                    if (((ArrayList) ((Map<String, Object>) session.getAttribute("info")).get("funcionalidades")).contains("24")) {
-                                                                        out.print("<button type='button' id='lista_chequeo_btn'  class='btn btn-sm btn-success' onclick='hola({formulario:1,index:getURLParams(\"identificador\"),modo:3})'>3. <i class='fas fa-list-ol'></i> Lista de Chequeo</button>");
-                                                                    }
+                                                                    out.print("<button type='button' id='lista_chequeo_btn'  class='btn btn-sm btn-success' onclick='hola({formulario:1,index:getURLParams(\"identificador\"),modo:3})'>3. <i class='fas fa-list-ol'></i> Lista de Chequeo</button>");
                                                                 }
                                                             %>
                                                             <br><br>
@@ -763,6 +756,9 @@
        
         <%= CacheBuster.bust(application.getRealPath("/"), "alerta/mensajes.js", "js")%>
         <%= CacheBuster.bust(application.getRealPath("/"), "alerta/notificaciones.js", "js")%>
+        
+        <!-- Logica de la ficha social -->
+        <%= CacheBuster.bust(application.getRealPath("/"), "js/reas/FichaSocial/logica.js", "js")%>
 
         <!--Acta de entrega del Predio PAR-->
         <script type="text/javascript" src="js/reas/tecnica/pasos.js"></script>
@@ -821,8 +817,7 @@
         <!--Plugin para descargar excel-->
         <script src='js/vendors/export-excel/excelexportjs.js'></script>
         
-        <!-- librerias para el select con la opción de busqueda.
-        
+        <!-- librerias para el select con la opción de busqueda.        
         -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>

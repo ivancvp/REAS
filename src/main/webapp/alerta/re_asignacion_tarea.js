@@ -16,10 +16,7 @@ function re_asignacion (nom_crea,des_actividad,obs_inicial,datos){
         async: false,
         success: function (response) {           
               resultado = response;          
-        },
-        error: function (response) {
-          
-            }
+        }
         });
         return resultado;
         }

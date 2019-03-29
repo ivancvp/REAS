@@ -4,16 +4,8 @@ function gen_est_documentos(datos){
 
 var est_511='';
 
-if(data.cerrado===true && data.procede==='No'){
+if((data["cerrado"]?data["cerrado"]:'')===true && (data["procede"]?data["procede"]:'')==='No' && datos[0].tipo_estudio!=='457' && datos[0].tipo_estudio!=='651'){
     est_511='<button type="button" class="btn btn-link" id="ver_511">511</button>';
-}
-
-
-
-var tip_est='255';
-
-if(datos[0].Sector==='Vereditas'){
-    tip_est='457';
 }
 
  var cont1=
@@ -64,6 +56,7 @@ cont_edit_est+
         '               <option value="255">255</option>'+
         '               <option value="511">511</option>'+
         '               <option value="457">457</option>'+
+        '               <option value="651">651</option>'+
         '           </select>'+
         '            <label class="error" style="display:none" id="error_tipo_estudio">Campo Obligatorio</label>'+
         '        </div>'+
@@ -509,39 +502,46 @@ function logica_est_documentos(index,res,datos,modo){
     if(datos.tipo_estudio==='511'){
         tipo_estudio_documentos=2202;    
     }
-   
+    
     $('#ver_255').css("border", " 2px solid #4CAF50");
     
+    var tip_est=datos.tipo_estudio;
+    
     $('#ver_511').click(function(){
+        var estudio=$(this).text();        
         tipo_estudio_documentos=2202;
+        tip_est="511";
         $( "#refresh_estudio" ).remove(); 
         $('#ver_511').css("border", " 2px solid #4CAF50");
         $('#ver_255').css("border", "none");
-        var dat=get_datos_estudio(datos.identificador,'511');
+        var dat=get_datos_estudio(datos.identificador,estudio);
         $('#contenedor_estudio').append(contenido_refresh(dat[0]));
-        reload(dat[0]);
+        reload(dat[0],estudio);
     });
     
-    var tip_est='255';
+    
     if(datos.Sector==='Vereditas'){
         tip_est='457';
     }
+   
     
     $('#ver_255').click(function(){
+       var estudio=$(this).text();
        tipo_estudio_documentos=2102;
        $( "#refresh_estudio" ).remove(); 
        $('#ver_255').css("border", " 2px solid #4CAF50");
        $('#ver_511').css("border", "none");
-       var dat=get_datos_estudio(datos.identificador,tip_est);
+       var dat=get_datos_estudio(datos.identificador,estudio);
        $('#contenedor_estudio').append(contenido_refresh(dat[0]));
-       reload(dat[0]);
+       reload(dat[0],estudio);
     });
-    
-    reload(datos);
+
+    reload(datos,tip_est);
 
     
-    function reload(datos){
-    
+    function reload(datos,tip_est){
+        $('#tipo_estudio').val(tip_est);
+        
         /*Verifcación de Fechas*/
         var dia_de_hoy=moment(new Date()).format("DD/MM/YYYY");
         $('.sandbox-container input').datepicker({
@@ -583,9 +583,13 @@ function logica_est_documentos(index,res,datos,modo){
         
         var vereditas=false;
 
-        if(datos["Sector"]==="Vereditas"){
-              $('#tipo_estudio').val("457");
-              vereditas=true;
+        if(datos["Sector"].toUpperCase()==="VEREDITAS"){
+            
+        var tip_est=get_decreto_vereditas(datos.identificador);
+        
+        $('#tipo_estudio').val(tip_est);
+        vereditas=true;
+        
         }
 
         $("input:disabled").css({"backgroundColor":"white"});
@@ -793,7 +797,7 @@ function logica_est_documentos(index,res,datos,modo){
         document.getElementById("fecha_doc_est").value = (datos_est["fecha_doc"]?datos_est["fecha_doc"]:'');        
         document.getElementById("fecha_clt_est").value = (datos_est["fecha_clt"]?datos_est["fecha_clt"]:'');
         document.getElementById("fecha_avaluo_est").value = (datos_est["fecha_avaluo"]?datos_est["fecha_avaluo"]:'');
-        document.getElementById("tipo_estudio").value=(datos_est["tipo_estudio"]?datos_est["tipo_estudio"]:'');
+        //document.getElementById("tipo_estudio").value=(datos_est["tipo_estudio"]?datos_est["tipo_estudio"]:'');
         
         $('#msg_pdf').hide();
 
@@ -804,15 +808,17 @@ function logica_est_documentos(index,res,datos,modo){
             $(".upd_check").attr("disabled", true);            
 
             $("#reviso_estudio,#aprobo_estudio").val(datos["aprobado"]);
-
+            
+            
+            
             if(vereditas){
                 $('#envio_res').hide();
             }else{
                 $('#envio_res span').text('Finalizar Estudio');
             }
             
-            if(contar){
-                $('#envio_res ,#crear_res,#subir_adenda').show();
+            if(contar){               
+                $('#crear_res,#subir_adenda').show();
                 $('#msg_pdf').hide();
             }else{
                 $('#envio_res,#crear_res,#subir_adenda').hide();
@@ -833,6 +839,7 @@ function logica_est_documentos(index,res,datos,modo){
             }else{
                 $('#crear_res').hide();
             }
+            
             $('#save_res').css("display","none");
             $(".div_obs").hide();
 
@@ -963,7 +970,7 @@ function logica_est_documentos(index,res,datos,modo){
                         }
                         else{
                             if(vereditas){
-                                asignado_a='168';
+                                asignado_a='199';
                             }else if((datos["Sector"]?datos["Sector"]:'').toUpperCase()==='GAVILANES'){ 
                                 asignado_a='199';
                             }else if(identificador.includes("CP19")){
@@ -1181,14 +1188,7 @@ function logica_est_documentos(index,res,datos,modo){
             $('#error_est').css('display', 'none');
         }  
         
-        if(vereditas){
-            if(contar){
-                $('#alerta_input-b2').css('display', 'none');
-            }else{
-                $('#alerta_input-b2').css('display', 'inline');
-                ok = 0;
-            }   
-        }
+
         
         return ok;
     }

@@ -323,6 +323,8 @@ img_ubi(function(){
                         var con_ingreso="";
                         var titulo_acta="";
                         var disponible_imprimir="Preliminar";
+                        var version="";
+                        var vigencia="";
                    
                    $datos = {
                             op: 'buscar_ficha',
@@ -670,13 +672,42 @@ img_ubi(function(){
                                         titulo_acta="ACTA DE NOTIFICACIÓN No.";
                                     }
                                     
-                                    if(sector==="VEREDITAS"){
-                                        console.log("hola");
-                                        decreto="DECRETO 457 DE 2017";
-                                        concepto="DECRETO 457 DE 2017";
-                                        acta=dir_reco;
-                                        titulo_acta="ACTA DE NOTIFICACIÓN No.";
-                                    }
+                                    version="1";
+                                    vigencia="21-09-2017"
+                                    
+                                    var obj = {};
+                                    obj["identificador"] =identificador;
+                                    obj["op"] ="impresion_vereditas_decreto";
+                                    
+                                      $.ajax({
+                                        type: "POST",
+                                        url: "GestionConsultas",
+                                        data: obj,
+                                        dataType: "json",
+                                        async: false,
+                                        success: function (response) {
+                                                
+                                                if(response.length>0){
+                                                var data=response[0];
+                                                if((data["decreto"]?data["decreto"]:'')==="457"){
+                                                    decreto="DECRETO 457 DE 2017";
+                                                    concepto="DECRETO 457 DE 2017";
+                                                    acta=dir_reco;
+                                                    titulo_acta="ACTA DE NOTIFICACIÓN No.";                                                    
+                                                }
+                                                if((data["decreto"]?data["decreto"]:'')==="651"){
+                                                    decreto="DECRETO DISTRITAL 457 DE 2017 \n MODIFICADO POR EL DECRETO DISTRITAL 651 DE 2018";
+                                                    concepto="DECRETO DISTRITAL 651 DE 2018";
+                                                    acta=dir_reco;
+                                                    titulo_acta="ACTA DE NOTIFICACIÓN No.";
+                                                    version="2";
+                                                    vigencia="13/03/2019";
+                                                }                                                    
+                                                }
+
+                                        },
+                                    });
+
        
          
                                 }else{
@@ -767,8 +798,8 @@ img_ubi(function(){
                     width: 50,
                     height: 50
                          },{text:'\n FICHA TÉCNICA DE RECONOCIMIENTO \n '+decreto,rowSpan:3},{text:'Código: 208-REAS-Ft-95',colSpan:2,style:'tableExample'},{}],
-                     ['','',{text:'Versión: 1',style:'tableExample'},{text:'Pág: 1 de 3',style:'tableExample'}],
-                     ['','',{text:'Vigente desde: 21-09-2017 ',colSpan:2,style:'tableExample'},{}]
+                     ['','',{text:'Versión: '+version,style:'tableExample'},{text:'Pág: 1 de 3',style:'tableExample'}],
+                     ['','',{text:'Vigente desde: '+vigencia,colSpan:2,style:'tableExample'},{}]
 
                         ]
                 }

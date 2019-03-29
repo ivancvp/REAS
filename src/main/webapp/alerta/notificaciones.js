@@ -131,13 +131,22 @@ var opciones = jQuery.extend({
 
         }
         
+        var sector=get_sector(identificador);
+        var texto='<option selected  value="255">255</option> <option value="511">511</option>';
+        if(sector.toUpperCase()==="VEREDITAS"){
+            
+            var tip_est=get_decreto_vereditas(identificador);
+            
+            texto='<option selected  value="'+tip_est+'">'+tip_est+'</option>'
+        }
+        
         $.confirm({
         title: 'Lista de chequeo',
         content: '' +
         '<form action="" class="formName">' +
         '<div class="form-group">' +
         '<label>Seleccione el tipo</label>' +
-        '<select class="form-control" id="tipo_lista_chequeo" ><option selected  value="255">255</option> <option value="511">511</option> </select>'+
+        '<select class="form-control" id="tipo_lista_chequeo" >'+texto+'</select>'+
         '</div>' +
         '</form>',
     buttons: {
@@ -218,8 +227,8 @@ var opciones = jQuery.extend({
         
         var tipo_estudio='255';
 
-        if(res[index]["Sector"]==="Vereditas"){
-            tipo_estudio='457';
+        if((res[index]["Sector"]).toUpperCase()==="VEREDITAS"){
+            tipo_estudio=get_decreto_vereditas(identificador);
         }
         
         var data_est = get_datos_estudio(identificador,tipo_estudio);
@@ -467,6 +476,16 @@ var opciones = jQuery.extend({
         if(id_user==='348'){            
             lista = 'est_doc_caracoli';
         }
+        
+        //Litsado de funcionarios a los que se reasigna la tarea para elaborar estudio de documentos
+        var tipo_actividad = res[index]["id_tipo_actividad"];
+        if(tipo_actividad===2){
+            lista = 'listado_funcionarios_elaboracion_est_documentos';
+        }
+        if(tipo_actividad===6){
+            lista = 'listado_funcionarios_aprobacion_est_documentos';
+        }
+
         var nom_crea = res[index]["creado_por"];
         var datos = lista_tareas_funcionarios(lista);
         var des_actividad = res[index]["desc_actividad"];
@@ -630,7 +649,7 @@ function puede_reasignar(i) {
     var lider = '';
 
 
-    if (usuario_identificador === '348' || usuario_identificador === '168' || usuario_identificador === '76' || usuario_identificador === '117' || usuario_identificador === '9' || usuario_identificador === '199' || usuario_identificador === '16' || usuario_identificador === '196') {
+    if (usuario_identificador === '152' || usuario_identificador === '348' || usuario_identificador === '168' || usuario_identificador === '76' || usuario_identificador === '117' || usuario_identificador === '9' || usuario_identificador === '199' || usuario_identificador === '16' || usuario_identificador === '196') {
         var lider = '<button type="button" class="btn btn-link btn-xs" onclick="hola({formulario:\'reasignar\',index:' + i + ',modo:1})" data-toggle="tooltip" data-placement="bottom" title="Reasignar">' +
                     '<i class="fas fa-list-ul"></i>' +
                     '</button>';

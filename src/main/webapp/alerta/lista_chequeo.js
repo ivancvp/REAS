@@ -370,7 +370,7 @@ function logica_lista_chequeo(identificador,datos,dat_not,modo){
     
     $('#envio_est_doc').click(function () {
         
-        save_lista_cheq(identificador);
+        save_lista_cheq(identificador,datos["tipo_estudio"]);
         
         if(verifica_obligatorios()===0){
          if(dat_not===0){
@@ -378,7 +378,7 @@ function logica_lista_chequeo(identificador,datos,dat_not,modo){
             var responsable_proceso='199';
             
             if(vereditas){
-                responsable_proceso='168';
+                responsable_proceso='199';
             }
             if((data["Sector"]?data["Sector"]:'').toUpperCase()==='GAVILANES'){
                 responsable_proceso='199';

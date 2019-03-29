@@ -434,7 +434,7 @@ function insertar_observaciones_est(id,obs,tipo_estudio,consecutivo,estado){
  
 
     $.ajax({
-        type: "GET",
+        type: "POST",
         url: "GestionConsultas",
         data: $datos,
         dataType: "json",
@@ -717,6 +717,12 @@ function lista_tareas_funcionarios(lista){
      if(lista==='est_doc_caracoli'){
          consulta_str='lista_tareas_est_doc_caracoli';
      }
+     if(lista==='listado_funcionarios_aprobacion_est_documentos'){
+         consulta_str='listado_funcionarios_aprobacion_est_documentos';
+     }
+     if(lista==='listado_funcionarios_elaboracion_est_documentos'){
+         consulta_str='listado_funcionarios_elaboracion_est_documentos';
+     }
      
 
      
@@ -732,11 +738,9 @@ function lista_tareas_funcionarios(lista){
         dataType: "json",
         async: false,
         success: function (response) {           
-              resultado = response;          
-        },
-        error: function (response) {
-          
-            }
+              resultado = response; 
+              console.log(response)
+        }
         }); 
     
     
@@ -1379,4 +1383,58 @@ function set_estado_ficha_tecnica(id,estado){
     }); 
     return resultado; 
  
+}
+
+function get_sector(identificador){
+    
+        var obj = {}
+        obj["id"] =identificador;
+        obj["op"] ='get_sector';
+            
+        var sector="";
+        $.ajax({
+          type: "GET",
+          url: "GestionConsultas",
+          data: obj,
+          dataType: "json",
+          async: false,
+          success: function (response) {
+
+             if(response.length>0){
+                  var data=response[0];
+                  sector=data["Sector"];
+             }
+          },
+        });
+
+        return sector;
+}
+
+function get_decreto_vereditas(identificador){
+    
+    var obj = {};
+    obj["identificador"] =identificador;
+    obj["op"] ="impresion_vereditas_decreto";
+    
+    var tip_est="";
+      $.ajax({
+        type: "POST",
+        url: "GestionConsultas",
+        data: obj,
+        dataType: "json",
+        async: false,
+        success: function (response) {
+                if(response.length>0){
+                var data=response[0];
+                if((data["decreto"]?data["decreto"]:'')==="457"){
+                    tip_est="457"
+                }
+                if((data["decreto"]?data["decreto"]:'')==="651"){
+                    tip_est="651"
+                }                                                    
+                }
+
+        },
+    });
+    return tip_est;
 }
