@@ -1,10 +1,13 @@
 
-$('#fichasocial').click(function(){
-  var ficha="";
 
+$('#fichasocial').click(function(){
+
+
+  var ficha="";
   $.ajax({
-   url:'js/reas/FichaSocial/FichaSocial.html',
+   url:'js/reas/FichaSocial/inicioFicha.html',
    type:'GET',
+   async:false,
    success: function(data){
        ficha=data;
 
@@ -25,20 +28,38 @@ $('#fichasocial').click(function(){
     $('.modal-body').css('max-height', 'calc(100% - 120px)');
     $('.modal-body').css('width', '70%');
     $('.modal-body').css('overflow','scroll');
+    $('.modal-body').css('padding-top','0px');
     $('#form1').empty();
     $('#form1').append(contenido);
     $('#modal').modal('show');
 
-/*
-    $.getScript('js/reas/FichaSocial/traerdatos.js', function() {
-        //script is loaded and executed put your dependent JS here
-    });
-*/
-
 
    }
-});
+  });
 
 
+
+
+  $('#edit_ficha_social').click(function(){
+
+    var ficha="";
+    $.ajax({
+     url:'js/reas/FichaSocial/FichaSocial.html',
+     type:'POST',
+     async:false,
+     success: function(data){
+
+      ficha=data;
+
+      $('.modal-body').empty();
+
+      $('.modal-body').append(ficha);
+
+      
+
+     }
+  });
+
+  });
 
 })

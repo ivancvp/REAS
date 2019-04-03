@@ -36,3 +36,4 @@ nb-configuration.xml
 !/src/main/webapp/js/vendors/Easy-Date-Range-Picker/dist/
 !/src/main/webapp/js/vendors/jquery.timeline-master/dist/
 !/src/main/webapp/js/vendors/timeline/dist/
+src/main/resources/com/frmejia/backend/util/Conexiones.xml

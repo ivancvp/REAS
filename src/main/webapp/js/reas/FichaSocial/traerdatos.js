@@ -1,6 +1,36 @@
 
+function getURLParams(k) {
+    var p = {};
+    location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (s, k, v) {
+        p[k] = v;
+    });
+    return k ? p[k] : p;
+}
+
+
+var identificador = getURLParams('identificador');
+
+$('#id_ficha_social').val(identificador);
+
+
+
+var obj = {}
+obj["identificador"] =identificador;
+obj["op"] ='traer_datos_ficha_social';
+$.ajax({
+  type: "GET",
+  url: "GestionConsultas",
+  data: obj,
+  dataType: "json",
+  async: false,
+  success: function (response) {
+
+  },
+});
+
+
   var obj = {}
-  obj["identificador"] ='123';
+  obj["identificador"] =identificador;
   obj["op"] ='traer_datos_ficha_social';
 
 $.ajax({
@@ -10,7 +40,6 @@ $.ajax({
   dataType: "json",
   async: false,
   success: function (response) {
-
 
   $.each( response[0], function( key, value ) {
         $("input[data-id='"+key+"'],select[data-id='"+key+"'],textarea[data-id='"+key+"']").val(value);
@@ -24,7 +53,7 @@ $.ajax({
 //parte de traer los Familiares
 
 var obj1 = {}
-obj1["identificador"] ='123';
+obj1["identificador"] =identificador;
 obj1["op"] ='get_num_familiares';
 
 var num_integrantes=0;
@@ -52,7 +81,7 @@ success: function (response) {
   for (i = 1; i <= num_integrantes; i++) {
 
   var obj = {}
-  obj["identificador"] ='123';
+  obj["identificador"] =identificador;
   obj["op"] ='get_data_familiares';
   obj["consecutivo"] =i;
 
