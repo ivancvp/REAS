@@ -275,6 +275,16 @@ function aprobacion_resolucion(identificador,id_actividad,tipo_proceso,tipo_acti
 
  function logica_aprobacion_resolucion_reas(datos,modo,identificador){
         
+        
+        var sector=get_sector(identificador);
+
+        var vereditas_sector=false;
+
+        if(sector.toUpperCase().trim()==="VEREDITAS"){
+            vereditas_sector=true;
+            $('#aprob_juridica').parent().hide();
+        }
+        
         $('#show_obs').hide();
         $("input:disabled").css({"backgroundColor":"white"});
         
@@ -338,8 +348,13 @@ function aprobacion_resolucion(identificador,id_actividad,tipo_proceso,tipo_acti
         envio_de_notificacion(identificador,1,3,7,creador,asignado_a,estado,observacion_inicial,observacion_final);       
         
         quitar_tarea_lider(id_actividad);
+        
+        var aprob_juridica=$('#aprob_juridica').val();
+        if(vereditas_sector){
+            aprob_juridica="";
+        }
 
-        insertar_aprobacion_resolucion_reas(identificador,$('#nom_crea').val(),$('#aprobo_est').val(),$('#sel_aprobacion').val(),$('#obs_regreso').val(),$('#aprob_juridica').val());
+        insertar_aprobacion_resolucion_reas(identificador,$('#nom_crea').val(),$('#aprobo_est').val(),$('#sel_aprobacion').val(),$('#obs_regreso').val(),aprob_juridica);
 
         
         var msg='<p><strong>Mensaje: </strong>En su bandeja de entrada se encuentra una notificación para el identificador <strong> '+identificador+' </strong> Estado de aprobación: <strong>'+estado_aprobacion+'</strong> Las observaciones son: '+$('#obs_regreso').val()+'  </p>';

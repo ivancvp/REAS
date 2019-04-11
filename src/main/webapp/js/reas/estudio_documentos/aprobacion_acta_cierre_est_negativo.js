@@ -38,6 +38,13 @@ function aprobacion(identificador,id_actividad,tipo_proceso,tipo_actividad,activ
                 elaboro=dat1[0]["aprobo"];
             }
         }
+        if(formulario===18){
+            if(modo===2){
+                dat1=consulta_aprobacion_ficha_social(identificador);   
+                nombre_creador=dat1[0]["nombre_elaboro"];
+                elaboro=dat1[0]["nombre_revisor"];
+            }
+        }
 
         
         function consulta(id){
@@ -128,6 +135,10 @@ function aprobacion(identificador,id_actividad,tipo_proceso,tipo_actividad,activ
             if(formulario===24){
                 dat1=consulta_fichaTecnica_aprobado(identificador);
                 dat1[0]["obs"]=datos["observacion_inicial"];
+            }
+            if(formulario===18){
+                dat1=consulta_aprobacion_ficha_social(identificador);
+                dat1[0]["obs"]=datos["observaciones"];
             }
 
             $('#obs_regreso').val((dat1[0]["obs"]?dat1[0]["obs"]:''));
@@ -227,11 +238,20 @@ function aprobacion(identificador,id_actividad,tipo_proceso,tipo_actividad,activ
                 set_estado_ficha_tecnica(identificador,0);
                 insertar_aprobacion_FichaTecnica(identificador,$('#nom_crea').val(),$('#aprobo_est').val(),$('#sel_aprobacion').val(),$('#obs_regreso').val());
             }
-            
-            
-            
+
             var msg='<p><strong>Mensaje: </strong>La ficha técnica con identificador: <strong> '+identificador+' </strong> ha sido: <strong>'+estado_aprobacion+'</strong> Las observaciones son: '+$('#obs_regreso').val()+'  </p>';
             correo(creador,asignado_a,"Aprobación de Ficha Técnica",msg,tipo_proceso);
+        }
+        if(formulario===18){
+            envio_de_notificacion(identificador,5,17,18,creador,asignado_a,estado,observacion_inicial,observacion_final);
+        
+            if($('#sel_aprobacion').val()==="true"){
+                insertar_aprobacion_FichaSocial(identificador,$('#aprobo_est').val(),'3',$('#obs_regreso').val());
+            }else{
+                insertar_aprobacion_FichaSocial(identificador,$('#aprobo_est').val(),'1',$('#obs_regreso').val());
+            }
+            var msg='<p><strong>Mensaje: </strong>La ficha Social con identificador: <strong> '+identificador+' </strong> ha sido: <strong>'+estado_aprobacion+'</strong> Las observaciones son: '+$('#obs_regreso').val()+'  </p>';
+            correo(creador,asignado_a,"Aprobación de Ficha Social",msg,tipo_proceso);
         }
         
             quitar_tarea_lider(id_actividad);

@@ -4,19 +4,17 @@ function guardarFicha(json){
 
 console.log(json)
 
-if(json.op==='1'){
-    obj["identificador"] =json.identificador;
-  }
+obj["identificador"] =$('#id_ficha_social').val();
 
   $.each(json, function(i, item) {
 
     obj[i] = item
 
   });
-console.log(obj)
+
   $.ajax({
     type: "POST",
-    url: "../../../GestionConsultas",
+    url: "GestionConsultas",
     data: obj,
     dataType: "json",
     async: false,
@@ -32,11 +30,9 @@ console.log(obj)
 
 function guardarFichaFamilia(json){
 
-
-
   $.each(json, function(i, item) {
     var obj = {}
-    obj["identificador"] ='123';
+    obj["identificador"] =$('#id_ficha_social').val();
 
     if($.isNumeric(i)){
       obj["consecutivo"] =i;
@@ -49,7 +45,7 @@ function guardarFichaFamilia(json){
       console.log(obj)
       $.ajax({
         type: "POST",
-        url: "../../../GestionConsultas",
+        url: "GestionConsultas",
         data: obj,
         dataType: "json",
         async: false,
@@ -74,13 +70,13 @@ function guardarBooleanFamilia(json){
 
   });
 
-  obj["identificador"] ='123';
+  obj["identificador"] =$('#id_ficha_social').val();
 
   console.log(obj)
 
   $.ajax({
     type: "POST",
-    url: "../../../GestionConsultas",
+    url: "GestionConsultas",
     data: obj,
     dataType: "json",
     async: false,

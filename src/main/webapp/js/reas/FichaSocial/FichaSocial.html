@@ -146,7 +146,6 @@
   z-index: 1000;
 }
 
-
  .modal-body {
    height: calc(100vh - 126px);
    overflow-y:scroll;
@@ -278,19 +277,9 @@
 
     <div class="row">
       <div class="col-md-12">
-        <h1 style="color:#117A65">Formato de caracterización de la población</h1>
+        <h1 style="color:#117A65" id="titulo_ficha_social">Formato de caracterización de la población</h1>
       </div>
     </div>
-
-    <div class="row">
-      <div class="col-md-12">
-        <div class="form-group">
-          <label>Versión de la ficha social</label>
-          <select class="form-control obligatorio" data-id="version"><option value=""></option><option value="6">Versión 6</option><option value="7">Versión 7</option></select>
-        </div>
-      </div>
-    </div>
-
 
 
   <div class="row ">
@@ -301,43 +290,36 @@
 
 <div id="tema1" class="collapse">
 
-<div class="paso" data-op="1" id="titulo1" class="collapse">
+<div class="paso"  id="titulo1" class="collapse" data-op="1">
+
+    <div class="row" >
+      <div class="col-md-12">
+        <div class="form-group">
+          <label>Versión de la ficha social</label>
+          <select class="form-control obligatorio" data-id="version"><option value=""></option><option value="6">Versión 6</option><option value="7">Versión 7</option></select>
+        </div>
+      </div>
+    </div>
 
     <div class="row">
       <div class="col-md-4">
         <div class="form-group">
           <label>1.1 Identificador REAS</label>
-          <input class="form-control" id="id_ficha_social" data-id="identificador"></input>
+          <input class="form-control" id="id_ficha_social"  disabled></input>
         </div>
       </div>
 
       <div class="col-md-4">
         <div class="form-group">
           <label>1.2 Número y fecha de concepto de ingreso (REAS)</label>
-          <div class="col-md-6">
-            <div class="form-group">
-              <input class="form-control" data-id="p1_2n"></input>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="form-group">
-              <div class="input-group">
-                <span  class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                <div class="span5 sandbox-container"><input type="text" class="form-control fecha" data-id="p1_2f"></div>
-              </div>
-            </div>
-          </div>
-
-
+          <input class="form-control" id="concepto_ingreso" disabled></input>
         </div>
       </div>
-
-
 
       <div class="col-md-4">
         <div class="form-group">
           <label>1.3 Dirección del predio recomendado</label>
-          <input class="form-control" data-id="p1_3"></input>
+          <input class="form-control" id="direccion" disabled></input>
         </div>
       </div>
     </div>
@@ -346,50 +328,28 @@
       <div class="col-md-3">
         <div class="form-group">
           <label>1.4 Manzana</label>
-          <input type="text" class="form-control numto999" data-id="p1_4"></input>
+          <input  class="form-control" id="manzana" disabled></input>
         </div>
       </div>
 
       <div class="col-md-3">
         <div class="form-group">
           <label>1.5 Lote No.</label>
-          <input class="form-control numto999" data-id="p1_5"></input>
+          <input class="form-control" id="lote" disabled></input>
         </div>
       </div>
 
       <div class="col-md-3">
         <div class="form-group">
           <label>1.6 Barrio</label>
-          <input class="form-control" data-id="p1_6"></input>
+          <input class="form-control" id="barrio" disabled></input>
         </div>
       </div>
 
       <div class="col-md-3">
         <div class="form-group">
           <label>1.7 Localidad</label>
-          <select class="form-control" data-id="p1_7">
-            <option value=""></option>
-            <option value="01">01. Usaquén</option>
-            <option value="02">02. Chapinero</option>
-            <option value="03">03. Santa Fe</option>
-            <option value="04">04. San Cristóbal</option>
-            <option value="05">05. Usme</option>
-            <option value="06">06. Tunjuelito</option>
-            <option value="07">07. Bosa</option>
-            <option value="08">08. Kennedy</option>
-            <option value="09">09. Fontibón</option>
-            <option value="10">10. Engativá</option>
-            <option value="11">11. Suba</option>
-            <option value="12">12. Barrios Unidos</option>
-            <option value="13">13. Teusaquillo</option>
-            <option value="14">14. Los Mártires</option>
-            <option value="15">15. Antonio Nariño</option>
-            <option value="16">16. Puente Aranda</option>
-            <option value="17">17. La Candelaria</option>
-            <option value="18">18. Rafael Uribe Uribe</option>
-            <option value="19">19. Ciudad Bolívar</option>
-            <option value="20">20. Sumapaz</option>
-          </select>
+          <input class="form-control" id="localidad" disabled></input>
         </div>
       </div>
     </div>
@@ -460,6 +420,7 @@
             <th scope="row">1</th>
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
             <td><select class="form-control obligatorio" data-id="p2_2">
+              <option value="">Seleccione...</option>
               <option value="1">1. Jefe de familia</option>
               <option value="2">2. Esposo(a)/Compañero(a)</option>
               <option value="3">3. Hijo(a)</option>
@@ -484,6 +445,7 @@
             </td>
             <td><input class="form-control obligatorio" data-id="p2_8"></input></td>
             <td><select class="form-control obligatorio" data-id="p2_9">
+              <option value="">Seleccione...</option>
               <option value="1">CC: Cédula de ciudadania</option>
               <option value="2">C.E: Cédula de Extranjería</option>
               <option value="3">T.I: Tarjeta de Identidad</option>
@@ -500,6 +462,7 @@
             </td>
             <td><input class="form-control obligatorio" data-id="p2_011"></input></td>
             <td><select class="form-control" data-id="p2_012" disabled>
+              <option value="">Seleccione...</option>
               <option value="1">1. Primera Infancia 0-5 años</option>
               <option value="2">2. Infancia 6-12 años</option>
               <option value="3">3. Adolescencia: 13-17 años</option>
@@ -508,6 +471,7 @@
               <option value="6">6. Adultos mayores: 60 años en adelante</option>
             </select></td>
             <td><select class="form-control obligatorio" data-id="p2_013">
+              <option value="">Seleccione...</option>
               <option value="1">1. Soltero</option>
               <option value="2">2. Casado(a)</option>
               <option value="3">3. Unión marital de hecho</option>
@@ -515,6 +479,7 @@
               <option value="5">5. Viudo(a)</option>
             </select></td>
             <td><select class="form-control obligatorio" data-id="p2_014">
+              <option value="">Seleccione...</option>
               <option value="1">1. Mujer</option>
               <option value="2">2. Hombre</option>
               <option value="3">3. Intersexual</option>
@@ -558,6 +523,7 @@
           <tr>
             <th scope="row">1</th>
             <td><select class="form-control" data-id="p3_1">
+              <option value="">Seleccione...</option>
               <option value="1">1. Indigena</option>
               <option value="2">2. Rom</option>
               <option value="3">3. Raizal de San Andres y Providencia</option>
@@ -566,16 +532,19 @@
               <option value="6">6. Ninguna de las anteriores</option>
             </select></td>
             <td><select class="form-control" data-id="p3_2">
+              <option value="">Seleccione...</option>
               <option value="1">1. Femenino</option>
               <option value="2">2. Masculino</option>
               <option value="3">3. Trasgénero</option>
             </select></td>
             <td><select class="form-control" data-id="p3_3">
+              <option value="">Seleccione...</option>
               <option value="1">1. Homosexual</option>
               <option value="2">2. Heterosexual</option>
               <option value="3">3. Bisexual</option>
             </select></td>
             <td><select class="form-control" data-id="p3_4">
+              <option value="">Seleccione...</option>
               <option value="1">1. Física</option>
               <option value="2">2. Mental</option>
               <option value="3">3. Cognitiva</option>
@@ -584,29 +553,35 @@
               <option value="6">6. Ninguna</option>
             </select></td>
             <td><select class="form-control" data-id="p3_5">
+              <option value="">Seleccione...</option>
               <option value="SI">Si</option>
               <option value="NO">No</option>
             </select></td>
             <td><select class="form-control" data-id="p3_6">
+              <option value="">Seleccione...</option>
               <option value="SI">Si</option>
               <option value="NO">No</option>
             </select></td>
             <td><select class="form-control" data-id="p3_7">
+              <option value="">Seleccione...</option>
               <option value="SI">Si</option>
               <option value="NO">No</option>
               <option value="NO APLICA">No aplica</option>
             </select></td>
             <td><select class="form-control" data-id="p3_8">
+              <option value="">Seleccione...</option>
               <option value="SI">Si</option>
               <option value="NO">No</option>
               <option value="NO APLICA">No aplica</option>
             </select></td>
             <td><select class="form-control" data-id="p3_9">
+              <option value="">Seleccione...</option>
               <option value="SI">Si</option>
               <option value="NO">No</option>
               <option value="NO APLICA">No aplica</option>
             </select></td>
             <td><select class="form-control" data-id="p3_010">
+              <option value="">Seleccione...</option>
               <option value="SI">Si</option>
               <option value="NO">No</option>
             </select></td>
@@ -693,7 +668,10 @@
               <option value="9">9. Ninguno</option>
               <option value="10">10. Otro</option>
             </select></td>
-            <td><select class="form-control" data-id="p5_3"><option></option><option>Si</option><option>No</option></select></td>
+            <td><select class="form-control" data-id="p5_3">
+              <option value="SI">Si</option>
+              <option value="NO">No</option>
+            </select></td>
             <td><select class="form-control" data-id="p5_4">
                 <option></option>
                 <option value="1">1. Considera que no está en edad de estudiar.</option>
@@ -1314,10 +1292,16 @@
     </div>
 
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-6">
         <div class="form-group">
-          <label>10.2 Cuantos y de que tipo?</label>
-          <input class="form-control" data-id="p10_2"></input>
+          <label>10.2 Cuantos?</label>
+          <input class="form-control numto999" data-id="p10_2a"></input>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>10.2 ... y de que tipo?</label>
+          <input class="form-control" data-id="p10_2b"></input>
         </div>
       </div>
     </div>
@@ -1331,16 +1315,6 @@
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-md-12">
-          <div class="form-group">
-            <button type="button" class="btn btn-success" id="getJsonCheck">Get Json Checkbox</button>
-        </div>
-      </div>
-    </div>
-
-Enviar el correo a estos mks para quitar lo del RAA
-analistafinanciero@ana.org.co
 
 
       <table class="table  check" >
@@ -2384,7 +2358,7 @@ analistafinanciero@ana.org.co
           <label>a. Fábricas o industrias</label>
             </div>
           <div class="col-sm-4">
-            <select class="form-control" data-id="p11_1_a"><option value=""></option><option value="SI">Si</option><option value="NO">No</option></select>
+            <div class="checkbox"><label style="font-size: 1.5em"><input data-id="p11_1_a" type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div>
           </div>
         </div>
       </div>
@@ -2394,7 +2368,7 @@ analistafinanciero@ana.org.co
           <label>G. Expendios de droga (ollas)</label>
             </div>
           <div class="col-sm-4">
-            <select class="form-control" data-id="p11_1_g"><option></option><option>Si</option><option>No</option></select>
+            <div class="checkbox"><label style="font-size: 1.5em"><input data-id="p11_1_g" type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div>
           </div>
         </div>
       </div>
@@ -2407,7 +2381,8 @@ analistafinanciero@ana.org.co
           <label>b. Aeropuertos</label>
             </div>
           <div class="col-sm-4">
-            <select class="form-control" data-id="p11_1_b"><option></option><option>Si</option><option>No</option></select>
+            <div class="checkbox"><label style="font-size: 1.5em"><input data-id="p11_1_b" type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div>
+
           </div>
         </div>
       </div>
@@ -2417,7 +2392,8 @@ analistafinanciero@ana.org.co
           <label>h. Lotes baldíos o sitios oscuros y peligrosos</label>
             </div>
           <div class="col-sm-4">
-            <select class="form-control" data-id="p11_1_h"><option></option><option>Si</option><option>No</option></select>
+            <div class="checkbox"><label style="font-size: 1.5em"><input data-id="p11_1_h" type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div>
+
           </div>
         </div>
       </div>
@@ -2430,7 +2406,7 @@ analistafinanciero@ana.org.co
           <label>c. Basureros y/o botaderos de basuras</label>
             </div>
           <div class="col-sm-4">
-            <select class="form-control" data-id="p11_1_c"><option></option><option>Si</option><option>No</option></select>
+            <div class="checkbox"><label style="font-size: 1.5em"><input data-id="p11_1_c" type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div>
           </div>
         </div>
       </div>
@@ -2440,7 +2416,7 @@ analistafinanciero@ana.org.co
           <label>i. Antenas de comuniación, de radiotrasmisión (radio, beeper, celular, radioaficionados, etc.) Lineasde alta tensión o centrales eléctricas.</label>
             </div>
           <div class="col-sm-4">
-            <select class="form-control" data-id="p11_1_i"><option></option><option>Si</option><option>No</option></select>
+            <div class="checkbox"><label style="font-size: 1.5em"><input data-id="p11_1_i" type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div>
           </div>
         </div>
       </div>
@@ -2455,7 +2431,8 @@ analistafinanciero@ana.org.co
           <label>d. plazas de mercado</label>
             </div>
           <div class="col-sm-4">
-            <select class="form-control" data-id="p11_1_d"><option></option><option>Si</option><option>No</option></select>
+            <div class="checkbox"><label style="font-size: 1.5em"><input data-id="p11_1_d" type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div>
+
           </div>
         </div>
       </div>
@@ -2465,7 +2442,8 @@ analistafinanciero@ana.org.co
           <label>j. Caños de aguas negras</label>
             </div>
           <div class="col-sm-4">
-            <select class="form-control" data-id="p11_1_j"><option></option><option>Si</option><option>No</option></select>
+            <div class="checkbox"><label style="font-size: 1.5em"><input data-id="p11_1_j" type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div>
+
           </div>
         </div>
       </div>
@@ -2477,7 +2455,8 @@ analistafinanciero@ana.org.co
           <label>e. Terminales de buses</label>
             </div>
           <div class="col-sm-4">
-            <select class="form-control" data-id="p11_1_e"><option></option><option>Si</option><option>No</option></select>
+            <div class="checkbox"><label style="font-size: 1.5em"><input data-id="p11_1_e" type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div>
+
           </div>
         </div>
       </div>
@@ -2487,7 +2466,8 @@ analistafinanciero@ana.org.co
           <label>k. Mataderos</label>
             </div>
           <div class="col-sm-4">
-            <select class="form-control" data-id="p11_1_k"><option></option><option>Si</option><option>No</option></select>
+            <div class="checkbox"><label style="font-size: 1.5em"><input data-id="p11_1_k" type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div>
+
           </div>
         </div>
       </div>
@@ -2500,7 +2480,8 @@ analistafinanciero@ana.org.co
           <label>f. Bares o Prostibulos</label>
             </div>
           <div class="col-sm-4">
-            <select class="form-control" data-id="p11_1_f"><option></option><option>Si</option><option>No</option></select>
+            <div class="checkbox"><label style="font-size: 1.5em"><input data-id="p11_1_f" type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div>
+
           </div>
         </div>
       </div>
@@ -2510,7 +2491,7 @@ analistafinanciero@ana.org.co
           <label>l. Talleres de mecánica, servitecas y/o estaciones de gasolina.</label>
             </div>
           <div class="col-sm-4">
-            <select class="form-control" data-id="p11_1_l"><option></option><option>Si</option><option>No</option></select>
+            <div class="checkbox"><label style="font-size: 1.5em"><input data-id="p11_1_l" type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div>
           </div>
         </div>
       </div>
@@ -2537,7 +2518,8 @@ analistafinanciero@ana.org.co
       <label>a. Ruido</label>
         </div>
       <div class="col-sm-4">
-        <select class="form-control" data-id="p11_2_a"><option></option><option>Si</option><option>No</option></select>
+        <div class="checkbox"><label style="font-size: 1.5em"><input data-id="p11_2_a" type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div>
+
       </div>
     </div>
   </div>
@@ -2547,7 +2529,8 @@ analistafinanciero@ana.org.co
       <label>f. Generación y manejo inadecuado de basuras</label>
         </div>
       <div class="col-sm-4">
-        <select class="form-control" data-id="p11_2_f"><option></option><option>Si</option><option>No</option></select>
+        <div class="checkbox"><label style="font-size: 1.5em"><input data-id="p11_2_f" type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div>
+
       </div>
     </div>
   </div>
@@ -2560,7 +2543,8 @@ analistafinanciero@ana.org.co
       <label>b. Exceso de anuncios publicitarios</label>
         </div>
       <div class="col-sm-4">
-        <select class="form-control" data-id="p11_2_b"><option></option><option>Si</option><option>No</option></select>
+        <div class="checkbox"><label style="font-size: 1.5em"><input data-id="p11_2_b" type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div>
+
       </div>
     </div>
   </div>
@@ -2570,7 +2554,8 @@ analistafinanciero@ana.org.co
       <label>g. Invasión de andenes y calles</label>
         </div>
       <div class="col-sm-4">
-        <select class="form-control" data-id="p11_2_g"><option></option><option>Si</option><option>No</option></select>
+        <div class="checkbox"><label style="font-size: 1.5em"><input data-id="p11_2_g" type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div>
+
       </div>
     </div>
   </div>
@@ -2585,7 +2570,8 @@ analistafinanciero@ana.org.co
       <label>c. inseguridad</label>
         </div>
       <div class="col-sm-4">
-        <select class="form-control" data-id="p11_2_c"><option></option><option>Si</option><option>No</option></select>
+        <div class="checkbox"><label style="font-size: 1.5em"><input data-id="p11_2_c" type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div>
+
       </div>
     </div>
   </div>
@@ -2595,7 +2581,8 @@ analistafinanciero@ana.org.co
       <label>h. invasión del espacio publico</label>
         </div>
       <div class="col-sm-4">
-        <select class="form-control" data-id="p11_2_h"><option></option><option>Si</option><option>No</option></select>
+        <div class="checkbox"><label style="font-size: 1.5em"><input data-id="p11_2_h" type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div>
+
       </div>
     </div>
   </div>
@@ -2608,7 +2595,8 @@ analistafinanciero@ana.org.co
       <label>d. Contaminación del aire</label>
         </div>
       <div class="col-sm-4">
-        <select class="form-control" data-id="p11_2_d"><option></option><option>Si</option><option>No</option></select>
+        <div class="checkbox"><label style="font-size: 1.5em"><input data-id="p11_2_d" type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div>
+
       </div>
     </div>
   </div>
@@ -2618,7 +2606,8 @@ analistafinanciero@ana.org.co
       <label>i. Presencia de animales que causan molestias</label>
         </div>
       <div class="col-sm-4">
-        <select class="form-control" data-id="p11_2_i"><option></option><option>Si</option><option>No</option></select>
+        <div class="checkbox"><label style="font-size: 1.5em"><input data-id="p11_2_i" type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div>
+
       </div>
     </div>
   </div>
@@ -2631,7 +2620,8 @@ analistafinanciero@ana.org.co
       <label>e. Malos olores</label>
         </div>
       <div class="col-sm-4">
-        <select class="form-control" data-id="p11_2_e"><option></option><option>Si</option><option>No</option></select>
+        <div class="checkbox"><label style="font-size: 1.5em"><input data-id="p11_2_e" type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div>
+
       </div>
     </div>
   </div>
@@ -2641,7 +2631,8 @@ analistafinanciero@ana.org.co
       <label>j. Presencia de insectos, roedores</label>
         </div>
       <div class="col-sm-4">
-        <select class="form-control" data-id="p11_2_j"><option></option><option>Si</option><option>No</option></select>
+        <div class="checkbox"><label style="font-size: 1.5em"><input data-id="p11_2_j" type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div>
+
       </div>
     </div>
   </div>
@@ -2656,26 +2647,28 @@ analistafinanciero@ana.org.co
   </div>
 
   <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-6">
     <div class="form-group">
       <div class="col-sm-8">
       <label>a. Desperdicios de alimentos y desechos orgánicos</label>
         </div>
       <div class="col-sm-4">
-        <select class="form-control" data-id="p11_3_a"><option></option><option>Si</option><option>No</option></select>
+        <div class="checkbox"><label style="font-size: 1.5em"><input data-id="p11_3_a" type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div>
+
       </div>
     </div>
   </div>
   </div>
 
   <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-6">
     <div class="form-group">
       <div class="col-sm-8">
       <label>b. Vidrio</label>
         </div>
       <div class="col-sm-4">
-        <select class="form-control" data-id="p11_3_b"><option></option><option>Si</option><option>No</option></select>
+        <div class="checkbox"><label style="font-size: 1.5em"><input data-id="p11_3_b" type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div>
+
       </div>
     </div>
   </div>
@@ -2683,13 +2676,14 @@ analistafinanciero@ana.org.co
 
 
   <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-6">
     <div class="form-group">
       <div class="col-sm-8">
       <label>c. Papel  y cartón</label>
         </div>
       <div class="col-sm-4">
-        <select class="form-control" data-id="p11_3_c"><option></option><option>Si</option><option>No</option></select>
+        <div class="checkbox"><label style="font-size: 1.5em"><input data-id="p11_3_c" type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div>
+
       </div>
     </div>
   </div>
@@ -2697,39 +2691,42 @@ analistafinanciero@ana.org.co
 
 
   <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-6">
     <div class="form-group">
       <div class="col-sm-8">
       <label>d. Plástico</label>
         </div>
       <div class="col-sm-4">
-        <select class="form-control" data-id="p11_3_d"><option></option><option>Si</option><option>No</option></select>
+        <div class="checkbox"><label style="font-size: 1.5em"><input data-id="p11_3_d" type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div>
+
       </div>
     </div>
   </div>
   </div>
 
   <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-6">
     <div class="form-group">
       <div class="col-sm-8">
       <label>e. Pilas y baterias</label>
         </div>
       <div class="col-sm-4">
-        <select class="form-control" data-id="p11_3_e"><option></option><option>Si</option><option>No</option></select>
+        <div class="checkbox"><label style="font-size: 1.5em"><input data-id="p11_3_e" type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div>
+
       </div>
     </div>
   </div>
   </div>
 
   <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-6">
     <div class="form-group">
       <div class="col-sm-8">
       <label>f. envases metalicos o de aluminio</label>
         </div>
       <div class="col-sm-4">
-        <select class="form-control" data-id="p11_3_f"><option></option><option>Si</option><option>No</option></select>
+        <div class="checkbox"><label style="font-size: 1.5em"><input data-id="p11_3_f" type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div>
+
       </div>
     </div>
   </div>
@@ -2738,13 +2735,14 @@ analistafinanciero@ana.org.co
 
 
   <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-6">
     <div class="form-group">
       <div class="col-sm-8">
       <label>g. Medicamentos</label>
         </div>
       <div class="col-sm-4">
-        <select class="form-control" data-id="p11_3_g"><option></option><option>Si</option><option>No</option></select>
+        <div class="checkbox"><label style="font-size: 1.5em"><input data-id="p11_3_g" type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div>
+
       </div>
     </div>
   </div>
@@ -2761,13 +2759,14 @@ analistafinanciero@ana.org.co
 
 
   <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-6">
     <div class="form-group">
       <div class="col-sm-8">
       <label>a. Usar bombillas de bajo consumo</label>
         </div>
       <div class="col-sm-4">
-        <select class="form-control" data-id="p11_4_a"><option></option><option>Si</option><option>No</option></select>
+        <div class="checkbox"><label style="font-size: 1.5em"><input data-id="p11_4_a" type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div>
+
       </div>
     </div>
   </div>
@@ -2775,39 +2774,42 @@ analistafinanciero@ana.org.co
 
 
   <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-6">
     <div class="form-group">
       <div class="col-sm-8">
       <label>b. Apagar las luces</label>
         </div>
       <div class="col-sm-4">
-        <select class="form-control" data-id="p11_4_b"><option></option><option>Si</option><option>No</option></select>
+        <div class="checkbox"><label style="font-size: 1.5em"><input data-id="p11_4_b" type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div>
+
       </div>
     </div>
   </div>
   </div>
 
   <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-6">
     <div class="form-group">
       <div class="col-sm-8">
       <label>c. Reutilizar agua</label>
         </div>
       <div class="col-sm-4">
-        <select class="form-control" data-id="p11_4_c"><option></option><option>Si</option><option>No</option></select>
+        <div class="checkbox"><label style="font-size: 1.5em"><input data-id="p11_4_c" type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div>
+
       </div>
     </div>
   </div>
   </div>
 
   <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-6">
     <div class="form-group">
       <div class="col-sm-8">
       <label>d. Recolectar agua lluvia.</label>
         </div>
       <div class="col-sm-4">
-        <select class="form-control" data-id="p11_4_d"><option></option><option>Si</option><option>No</option></select>
+        <div class="checkbox"><label style="font-size: 1.5em"><input data-id="p11_4_d" type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div>
+
       </div>
     </div>
   </div>
@@ -2815,13 +2817,14 @@ analistafinanciero@ana.org.co
 
 
   <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-6">
     <div class="form-group">
       <div class="col-sm-8">
       <label>e. Usar tanque sanitario de bajo consumo de agua</label>
         </div>
       <div class="col-sm-4">
-        <select class="form-control" data-id="p11_4_e"><option></option><option>Si</option><option>No</option></select>
+        <div class="checkbox"><label style="font-size: 1.5em"><input data-id="p11_4_e" type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div>
+
       </div>
     </div>
   </div>
@@ -2829,26 +2832,28 @@ analistafinanciero@ana.org.co
 
 
   <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-6">
     <div class="form-group">
       <div class="col-sm-8">
       <label>f. Planchar la amyor cantidad de ropa en cada ocasión o no planchar.</label>
         </div>
       <div class="col-sm-4">
-        <select class="form-control" data-id="p11_4_f"><option></option><option>Si</option><option>No</option></select>
+        <div class="checkbox"><label style="font-size: 1.5em"><input data-id="p11_4_f" type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div>
+
       </div>
     </div>
   </div>
   </div>
 
   <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-6">
     <div class="form-group">
       <div class="col-sm-8">
       <label>g. Cambiar electrodomesticos por otros de bajo consumo</label>
         </div>
       <div class="col-sm-4">
-        <select class="form-control" data-id="p11_4_g"><option></option><option>Si</option><option>No</option></select>
+        <div class="checkbox"><label style="font-size: 1.5em"><input data-id="p11_4_g" type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div>
+
       </div>
     </div>
   </div>
@@ -2856,6 +2861,7 @@ analistafinanciero@ana.org.co
   </div>
   </div>
 </div>
+
 
   <div class="row">
     <div class="col-md-12 " data-toggle="collapse" data-target="#tema12">
@@ -2878,9 +2884,8 @@ analistafinanciero@ana.org.co
     <div class="form-group">
       <label>Si/No</label>
       <select class="form-control" data-id="p12_1_1_a">
-        <option></option>
-        <option>Si</option>
-        <option>No</option>
+        <option value="SI">Si</option>
+        <option value="NO">No</option>
       </select>
     </div>
   </div>
@@ -2913,9 +2918,9 @@ analistafinanciero@ana.org.co
       <div class="form-group">
         <label>Si/No</label>
         <select class="form-control" data-id="p12_1_2_a">
-          <option></option>
-          <option>Si</option>
-          <option>No</option></select>
+          <option value="SI">Si</option>
+          <option value="NO">No</option>
+        </select>
       </div>
     </div>
     <div class="col-md-4">
@@ -2946,9 +2951,8 @@ analistafinanciero@ana.org.co
         <div class="form-group">
           <label>Si/No</label>
           <select class="form-control" data-id="p12_1_3_a" >
-            <option></option>
-            <option>Si</option>
-            <option>No</option>
+            <option value="SI">Si</option>
+            <option value="NO">No</option>
           </select>
         </div>
       </div>
@@ -3791,9 +3795,6 @@ analistafinanciero@ana.org.co
     </div>
 
 
-
-
-
 </body>
 
 
@@ -3805,9 +3806,7 @@ analistafinanciero@ana.org.co
 <script src="js/reas/FichaSocial/adicionarfamilia.js"></script>
 <script src="js/reas/FichaSocial/guardarFicha.js"></script>
 <script src="js/reas/FichaSocial/traerdatos.js"></script>
-
-
-
+<script src="js/reas/FichaSocial/aprobacion.js"></script>
 
 <script>
 

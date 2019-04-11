@@ -13,10 +13,9 @@ var identificador = getURLParams('identificador');
 $('#id_ficha_social').val(identificador);
 
 
-
 var obj = {}
 obj["identificador"] =identificador;
-obj["op"] ='traer_datos_ficha_social';
+obj["op"] ='insertar_ficha_social_general';
 $.ajax({
   type: "GET",
   url: "GestionConsultas",
@@ -24,9 +23,28 @@ $.ajax({
   dataType: "json",
   async: false,
   success: function (response) {
-
   },
 });
+
+var obj = {}
+obj["identificador"] =identificador;
+obj["op"] ='get_datos_generales';
+$.ajax({
+  type: "GET",
+  url: "GestionConsultas",
+  data: obj,
+  dataType: "json",
+  async: false,
+  success: function (response) {
+    $.each( response[0], function( key, value ) {
+          $("#"+key).val(value);
+       });
+  },
+});
+
+
+
+
 
 
   var obj = {}

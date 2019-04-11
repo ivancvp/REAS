@@ -120,6 +120,7 @@
                     out.print("var usuario_usuario = '" + ((Map<String, Object>) session.getAttribute("info")).get("usuario_usuario") + "';\n");
                     out.print("var usuario_nombre = '" + ((Map<String, Object>) session.getAttribute("info")).get("usuario_nombre") + "';\n");
                     out.print("var usuario_cargo = '" + ((Map<String, Object>) session.getAttribute("info")).get("usuario_cargo") + "';\n");
+                    out.print("var usuario_contrato = '" + ((Map<String, Object>) session.getAttribute("info")).get("usuario_contrato") + "';\n");
                     out.print("var usuario_identificador = '" + ((Map<String, Object>) session.getAttribute("info")).get("usuario_id") + "';\n");
                     out.print("var usr_funct= '" + ((Map<String, Object>) session.getAttribute("info")).get("funcionalidades") + "';\n");
                 }
@@ -797,6 +798,7 @@
         <!-- Impresiones-->
         <%= CacheBuster.bust(application.getRealPath("/"), "pdf/impresion_estudio.js", "js")%>
         <%= CacheBuster.bust(application.getRealPath("/"), "pdf/impresion_resolucion.js", "js")%>
+        <%= CacheBuster.bust(application.getRealPath("/"), "pdf/impresion_resolucion_vereditas.js", "js")%>
         <%= CacheBuster.bust(application.getRealPath("/"), "pdf/impresion_adenda.js", "js")%>
         <%= CacheBuster.bust(application.getRealPath("/"), "pdf/impresion_concepto_zona_hidrica.js", "js")%>
         
@@ -892,12 +894,21 @@
                 </div>
             </div>
         </div>
+        
         <div class="modal fade" tabindex="-1" data-focus-on="input:first" style="display: none;" id="modal">
             <div class="modal-dialog modal-lg" style="width:80%">
                 <div class="modal-content" id="form1">
                 </div>
             </div>
         </div>
+        
+        <div class="modal fade" tabindex="-1" data-focus-on="input:first" style="display: none;" id="modal_nueva_ficha_social">
+            <div class="modal-dialog modal-lg" style="width:80%">
+                <div class="modal-content" id="modalsocial1">
+                </div>
+            </div>
+        </div>
+        
         <script>
             function getURLParams(k) {
                 var p = {};

@@ -63,6 +63,10 @@ return contenido;
 
 
 function logica_gen_acta_entrega_vereditas(datos,modo){
+
+/*Provisional para identificadores de CARACOLI*/
+
+$('#enviar_acta_vereditas').text("Guardar");
     
 var identificador='';
 
@@ -127,6 +131,8 @@ setTimeout(function(){
             borrar_pdf=(resultado["cerrado"]?resultado["cerrado"]:false);
             $('#ben1').val(resultado["nombre_beneficiario"]?resultado["nombre_beneficiario"]:'');
             $('#ced').val(resultado["cedula"]?resultado["cedula"]:'');
+            
+            /*
             if(resultado["cerrado"]?resultado["cerrado"]:false){
                 
                 $( "#titulo" ).after( '<p>Acta de Entrega cargada por: <b>'+resultado["elaboro"]+' </b></p>' );
@@ -137,7 +143,7 @@ setTimeout(function(){
                 $(".disponible").css({"backgroundColor":"white"});
                 $('#enviar_acta_vereditas').text("Enviar a Financiera");               
                 
-            }
+            }*/
         },
         error: function (response) {
             alert("Ocurrió un error al almacenar la información");
@@ -156,13 +162,13 @@ var url_preview1='';
         type: "POST",
         url: "GestionConsultas",
         data: {
-            op: "consulta_pdf_acta_entrega",
+            op: "consulta_pdf_acta_entrega_vereditas",
             identificador: identificador
         },
         dataType: "json",
         async: false,
         success: function (response) {
-
+            console.log(response)
             if (response)
             {
                 if (response.length > 0) {
@@ -213,7 +219,7 @@ $("#input-b2").fileinput({
     uploadExtraData: function (previewId, index) {  // callback example        
             var out = {
                 numFolios: 1,
-                descripcion: 'Documento acta de entrega PAR Vereditas',
+                descripcion: 'Documento acta de entrega Ocupación',
                 identificador: identificador,
                 tipo_documento: '240011',
                 thumbnail: ''
@@ -235,12 +241,13 @@ $("#input-b2").fileinput({
     showUpload: true,
     overwriteInitial: false,
     browseOnZoneClick: true,
-    showRemove: true,
+    showRemove: false,
     autoReplace:false,
     maxFileCount: 1,
     validateInitialCount: contar
 });
 
+borrar_pdf=true;
 
 $("#input-b2").on("filepredelete", function (event, key, jqXHR, data) {
         var abort = borrar_pdf;
@@ -287,6 +294,10 @@ $(".fecha_validate").blur(function(){
 });    
 
 $( "#enviar_acta_vereditas" ).click(function() {
+    
+    /*Temporal para Caracoli*/
+    guardar(false);
+    
     var conta=0;
     
     if(seguir_archivo===0){      
@@ -336,6 +347,9 @@ $( "#enviar_acta_vereditas" ).click(function() {
 if(conta>0){
     alertify.error("Revise los campos obligatorios");
 }else{
+   
+  /* Quitar el comentario para enviar a Financiera.
+   
     var identificador=datos["identificador"];
     var id_actividad = datos["id_actividad"];       
     var actividad_padre=datos["actividad_padre"];
@@ -375,7 +389,7 @@ if(conta>0){
          });
          $('#modal_form').modal('toggle');
 
-
+*/
 }
 
          
@@ -406,7 +420,9 @@ if(conta>0){
               alertify.error("Ocurrió un error");
           }
           });
-    }  
+    } 
+    
+    
     
      if(modo===3 || modo===2 ){
         $('.disponible').attr('disabled', 'disabled');

@@ -37,21 +37,15 @@ function gen_resolucion(identificador){
                     '<div class="col-md-4"> '+
                                 '   <div class="form-group"> '+
                                 '     <label class="control-label">Folio Est. documentos</label> '+
-                                '     <input type="text" class="form-control obligatorio disponible upd" id="folio_est_documentos" placeholder="Folio Estudio de documentos" > '+
+                                '     <input type="text" class="form-control disponible upd" id="folio_est_documentos" placeholder="Folio Estudio de documentos" > '+
                                 '   </div> '+
                     '</div> '+
-                    '<div class="col-md-4"> '+
-                                '   <div class="form-group"> '+
-                                '     <label class="control-label">Zona</label> '+
-                                '     <input type="text" class="form-control obligatorio disponible upd" id="zona" placeholder="Zona" > '+
-                                '   </div> '+
-                    '</div> '+                    
+                   
                     '</div> '+
    '                 <div class="row"> '+
  '                     <div class="col-md-4"> '+
                                 '   <div class="form-group"> '+
                                 '     <label  class="control-label">Valor del CDP</label> '+
-                                ' <small class="text-muted">(Valor establecido para Caracolí)</small>'+
                                 '<div class="input-group"> '+
                                 '<span style="border-color:#5DADE2"  class="input-group-addon">$</span>'+
                                 '     <input type="text" style="border-color:#5DADE2" class="form-control obligatorio moneda disponible upd" id="valor_cdp" placeholder="Valor del CDP"> '+
@@ -73,7 +67,14 @@ function gen_resolucion(identificador){
  '                     </div> '+      
         
   '                 </div> '+ 
-
+                    '<div class="row"> '+  
+                      '<div class="col-md-4"> '+
+                                '   <div class="form-group"> '+
+                                '     <label class="control-label">Zona</label> '+
+                                '     <input type="text" class="form-control obligatorio disponible upd" id="zona" placeholder="Zona" > '+
+                                '   </div> '+
+                    '</div> '+ 
+  '                 </div> '+ 
                     '<div class="row"> '+
                         '<div class="col-md-12"> '+
                             '<div class="form-group"> '+
@@ -87,7 +88,6 @@ function gen_resolucion(identificador){
     '                     <div class="col-md-4"> '+
                                 '   <div class="form-group"> '+
                                 '     <label for="val_res" class="control-label">Valor de la Resolución</label> '+
-                                ' <small class="text-muted">(Valor establecido para Caracolí)</small>'+
                                 '<div class="input-group"> '+
                                 '<span style="border-color:#5DADE2"  class="input-group-addon">$</span>'+
                                 '     <input style="border-color:#5DADE2"  type="text" class="form-control obligatorio moneda disponible upd" id="valor_resol" placeholder="Valor de la Resolución"> '+
@@ -139,6 +139,7 @@ function gen_resolucion(identificador){
 '                           <button type="button" class="btn btn-success" id="save_res_vereditas"><i class="glyphicon glyphicon-floppy-disk"></i> Guardar</button>'+
 '                           <button type="button" class="btn btn-primary" id="enviar_res_vereditas"><i class="glyphicon glyphicon-share-alt"></i> Enviar a revisión</button>'+
 '                           <button type="button" class="btn btn-danger" id="impr_resolucion"><i class="far fa-file-pdf"></i> Resolución preliminar</button>'+
+'                           <button type="button" class="btn btn-primary" id="enviar_acta_entrega"><i class="glyphicon glyphicon-share-alt"></i> Enviar para Acta de Ocupación</button>'+
 /*'                           <button type="button" class="btn btn-info" id="quitar_tarea"><i class="fas fa-times"></i> Quitar tarea</button>'+*/
 '</div>'+
  '<h4 id="info_elaboracion"></h4>'+
@@ -176,7 +177,14 @@ return contenido;
  function logica_resolucion(identificador,modo,tipo_proceso,id_actividad,usuario_creador){
  
 
+var sector=get_sector(identificador);
 
+var vereditas_sector=false;
+
+if(sector.toUpperCase().trim()==="VEREDITAS"){
+    $('#folio_est_documentos').parent().hide();
+    vereditas_sector=true;
+}
  
 $("input:disabled").css({"backgroundColor":"white"});
 
@@ -202,8 +210,15 @@ var dia_de_hoy=moment(new Date()).format("DD/MM/YYYY");
 
 
 $('#impr_resolucion').click(function(){
-  
- var doc = imp_resolucion_caracoli(identificador,'ivan','lei');
+
+    var doc='';
+
+    if(vereditas_sector){
+        doc = imp_resolucion_vereditas(identificador,'ivan','lei');
+    }else{
+        doc = imp_resolucion_caracoli(identificador,'ivan','lei');
+    }
+ 
                 
 $('#pdf_resolucion').css('display', 'inline');
 
@@ -287,9 +302,10 @@ if(identificador.includes("CP19")){
                 $('#div_posterior_aprobacion').show();
                 $("#div_posterior_aprobacion").css("color", "#2874A6");
                 /*$("#quitar_tarea").show();*/
+                $('#enviar_acta_entrega').show();
 
             }else{
-                
+                $('#enviar_acta_entrega').hide();
                 $('#div_posterior_aprobacion').hide();
                 $('#ver_pdf').hide();
                 $(".disponible1").attr('disabled', 'disabled');
@@ -304,16 +320,18 @@ if(identificador.includes("CP19")){
     });
 
 
-    
 
-$('#valor_cdp').val('54686940');
-$('#valor_resol').val('54686940');
-$('#valor_cdp, #valor_resol').attr('disabled', 'disabled');
-$("#valor_cdp, #valor_resol").css({"backgroundColor":"white"});
+$('#valor_resol').attr('disabled', 'disabled');
+$("#valor_resol").css({"backgroundColor":"white"});
 
 $('#valor_resol').val($('#valor_resol').val().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 $('#valor_cdp').val($('#valor_cdp').val().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 
+
+
+$('#valor_cdp').change(function(){ 
+ $('#valor_resol').val($(this).val());
+});
 
 
 
@@ -501,11 +519,69 @@ $('#quitar_tarea').click(function(){
 });
 */
 
+$('#enviar_acta_entrega').click(function(){
+    
+$('#no_resol').addClass( "obligatorio" );
+$('#fecha_resol').addClass( "obligatorio" );
+
+  var conta=0;
+  
+  $('.obligatorio').each(function() {
+
+    var str=$(this).attr('id');
+    
+    if($(this).val()==='' || $(this).val()==='Seleccione...' || $(this).val()==='0'){
+        if($("#"+str+"_error").length===0) {
+           $(this).after( $( "<label id="+$(this).attr('id')+'_error'+" class='error'>Campo Obligatorio</label>" ) );
+           conta=conta+1;
+          }else{
+           $("#"+str+"_error").show();
+            conta=conta+1;
+          }
+    }else{
+          $("#"+str+'_error').hide();
+    }
+
+});
+
+    if(conta===0){
+       if(seguir_archivo===1){
+
+           var creador=usuario_identificador;
+            var asignado_a=246;
+            
+            if(vereditas_sector){
+                asignado_a=306;
+            }
+            
+            
+            var observacion_inicial='Solicitud de Cargue de Acta de Ocupación';
+            envio_de_notificacion(identificador,1,8,3,creador,asignado_a,1,observacion_inicial,''); 
+            var msg='<p><strong>Mensaje: </strong>En su bandeja de entrada se encuentra una notificación para el identificador <strong> '+identificador+' </strong> Para Solicitud de Cargue de Acta de Entrega de la Ocupación</p>';
+            correo(creador,asignado_a,"Solicitud de Cargue de Acta de Ocupación",msg,tipo_proceso);
+            quitar_tarea_lider(id_actividad);
+            
+             $("#not_update").remove();
+                $.getScript("alerta/notificaciones.js", function(){
+             });
+            $('#modal_form').modal('toggle');
+ 
+       }else{
+           alertify.error("Debe subir el PDF con la resolución");
+       }
+    }else{
+        alertify.error("Revise los campos obligatorios");
+    }  
+
+
+
+});
 
 
   $( "#enviar_res_vereditas" ).click(function() {
   
   var conta=0;
+  
   $('.obligatorio').each(function() {
 
     var str=$(this).attr('id');
@@ -537,6 +613,10 @@ if(conta>0){
         guardar();  
         
         var asignado_a=usuario_creador;
+        console.log(vereditas_sector)
+        if(vereditas_sector){
+            asignado_a=394;
+        }
         
         var observacion_inicial='Envio Cargue de resolución para su aprobación';
 
@@ -629,7 +709,7 @@ console.log(obj)
  
 
   if(modo===3 || modo===2){
-     
+    $('#enviar_acta_entrega').hide(); 
     $('.disponible, .disponible1').attr('disabled', 'disabled');
     $(".disponible , .disponible1").css({"backgroundColor":"white"});
     $('#save_res_vereditas').hide();

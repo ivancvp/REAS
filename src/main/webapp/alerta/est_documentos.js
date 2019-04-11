@@ -655,6 +655,7 @@ function logica_est_documentos(index,res,datos,modo){
 
         try {
            var obs=JSON.parse(obtener_observaciones_est(identificador));
+           
             $('#obs_est_1').val(obs[0].obs1);
             $('#obs_est_2').val(obs[1].obs2);
             $('#obs_est_3').val(obs[2].obs3);
@@ -833,13 +834,13 @@ function logica_est_documentos(index,res,datos,modo){
             if(datos_est.procede==="Si"){
                 siguiente=2;
             }
-            
+           /* 
             if(identificador.includes("CP19")){
                 $('#envio_res').hide();
             }else{
                 $('#crear_res').hide();
             }
-            
+            */
             $('#save_res').css("display","none");
             $(".div_obs").hide();
 

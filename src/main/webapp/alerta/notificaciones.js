@@ -501,9 +501,7 @@ var opciones = jQuery.extend({
         generar_modal(contenido);
         logica_aprobacion_sig(res[index]);
     }
-function holis(){
-    console.log("hola")
-}
+
     /*Formulario para visualizar la Ficha Técnica */
     if (formulario === 16) {
         var contenido=contenido_modal(ver_ficha_tecnica(res[index]["identificador"]),'Ficha Técnica'); 
@@ -511,21 +509,47 @@ function holis(){
     }
     /*Formulario para visualizar la Ficha Social */
     if (formulario === 17) {
-        var identificador = res[index]["identificador"];
-        var contenido=contenido_modal(verFichaSocial(res[index]["identificador"]),'Ficha Social'); 
-        generar_modal(contenido);
-        $('.modal-lg').css('width', '95%');
-        $('.modal-content').css('height', '90%');
-        $("#ficha_v7").load('caracterizacion_form_v7.html', {identificador: res[index]["identificador"]});
-         pasos();
+        
+        var ficha="";
+        $.ajax({
+         url:'js/reas/FichaSocial/FichaSocial.html',
+         type:'POST',
+         async:false,
+         success: function(data){
+           ficha=data;
+          var contenido=
+          '<div class="modal-header">' +
+          '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>' +
+          '<h4 class="modal-title">Formulario de la Ficha Social</h4>' +
+          '</div>' +
+          '<div class="modal-body">' +
+          ficha+
+          '</div>' +
+          '<div class="modal-footer">' +
+          '<button type="button" data-dismiss="modal" class="btn btn-default">Cerrar</button>' +
+          '</div>';
+          generar_modal(contenido);
+          
+         }
+        });
     }
     /*Formulario para aprobar ficha social */
     if (formulario === 18) {
-        var contenido=contenido_modal(aprobacionFichaSocialForm(res[index]["identificador"]),'Aprobación de Ficha Social'); 
+        var identificador = res[index]["identificador"];
+        var asignado_a = res[index]["creado_por"];
+        var id_actividad = res[index]["id_actividad"];
+        var actividad_padre = res[index]["actividad_padre"];
+        var tipo_actividad = res[index]["id_tipo_actividad"];
+        var tipo_proceso = res[index]["id_proceso"];
+
+        var observacion = "";
+        if (modo === 3) {
+            observacion = res[index]["observacion_inicial"];
+        }
+        var contenido=contenido_modal(aprobacion(identificador, id_actividad, tipo_proceso, tipo_actividad, actividad_padre, asignado_a, observacion, modo,18),' Aprobación de Ficha Social');
         generar_modal(contenido);
-        $('#aprobar_ficha_social_btn').on('click', function () {
-            aprobacionFichaSocial(res[index]["identificador"],id_user);
-        });
+        logica_aprobacion(res[index], modo, identificador,18);
+        
     }
     /* Formulario de Acta de Cierre de estudio de documentos Negativo */
     if (formulario === 19) {

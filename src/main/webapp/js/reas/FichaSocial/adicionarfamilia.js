@@ -51,6 +51,22 @@ $('#addFamily').click(function(){
     miembros_nuevos=miembros_nuevos_title;
     $(".check thead").find('th:eq('+miembros_nuevos_title+')').show();
     $(".check tr").find('td:eq('+miembros_nuevos_body+')').show();
+
+    var obj = {}
+    obj["identificador"] =  $('#id_ficha_social').val();
+    obj["miembro"] =miembros_nuevos_title;
+    obj["op"] ='insertar_ficha_social_miembro';
+    $.ajax({
+      type: "GET",
+      url: "GestionConsultas",
+      data: obj,
+      dataType: "json",
+      async: false,
+      success: function (response) {
+        console.log(response);
+      },
+    });
+
   }
 
 
@@ -69,6 +85,7 @@ $('#fondo').show();
 setTimeout(guardado, 1);
 
 function guardado(){
+
   $('.paso').each(function(i,j) {
 
    var str=data_json1($(this),$(this).attr('data-op'),"input,select,textarea")
@@ -83,9 +100,12 @@ function guardado(){
 
   var str=data_json($(this),$(this).attr('data-op'),"tbody tr");
   var str1=escapeSpecialChars(str);
+
   guardarFichaFamilia(JSON.parse(str1));
 
   });
+
+  guardar_checkbox();
 
 }
 
@@ -129,10 +149,7 @@ function data_json1(html,op,selector){
 
 
 //Get JSON checkbox
-
-
-$('#getJsonCheck').click(function(){
-
+function guardar_checkbox(){
 
 for (i = 1; i <= num_integrantes; i++) {
   var j=i-1;
@@ -168,9 +185,7 @@ for (i = 1; i <= num_integrantes; i++) {
 
 }
 
-
-});
-
+}
 
 
 

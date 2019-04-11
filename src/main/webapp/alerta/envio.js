@@ -302,7 +302,34 @@ function insertar_aprobacion_FichaTecnica(identificador,elaboro,aprobo,concepto,
 
     
 }
+function insertar_aprobacion_FichaSocial(identificador,nombre_revisor,estado_ficha,observaciones){
+    
 
+    $datos = {
+        op: 'insertar_aprobacion_FichaSocial',
+        identificador: identificador,
+        nombre_revisor: nombre_revisor,
+        estado_ficha: estado_ficha,
+        observaciones:observaciones
+    };
+
+    $.ajax({
+        type: "GET",
+        url: "GestionConsultas",
+        data: $datos,
+        dataType: "json",
+        async: true,
+        success: function (response) {
+            alertify.success("Revisión Almacenada");
+        },
+        error: function (response) {
+            alertify.success("Revisión No Almacenada");
+        }
+    });
+
+
+    
+}
 
 
 function insertar_aprobacion_adenda_nombres(id,elaboro,aprobo,tipo_estudio){
@@ -575,6 +602,23 @@ function consulta_adenda_aprobado(id){
 } 
 function consulta_adenda_aprobado_511(id){
         $datos = { op: 'consulta_adenda_aprobado_511',id:id};
+        $.ajax({
+    type: "GET",
+    url: "GestionConsultas",
+    data: $datos,
+    dataType: "json",
+    async: false,
+    success: function (response) {           
+          resultado = response; 
+    },
+    error: function (response) {
+
+        }
+    });
+    return resultado;
+}
+function consulta_aprobacion_ficha_social(id){
+        $datos = { op: 'consulta_aprobacion_ficha_social',id:id};
         $.ajax({
     type: "GET",
     url: "GestionConsultas",

@@ -966,7 +966,15 @@
         <permisos>*</permisos>
         <es_dml_complejo>true</es_dml_complejo>
     </Consulta>
-
+    <Consulta id="consulta_aprobacion_ficha_social">
+        <sql>
+            select * 
+            from fichasocial.aprobacion where identificador='@id';
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>true</es_dml_complejo>
+    </Consulta>
     <Consulta id="consulta_adenda_aprobado_sistema">
         <sql>
             select * 
@@ -1449,11 +1457,11 @@
         select rv.*,ar.*,df.*,"Cedula 1" as cedula, "Nombre 1" as nom_ben,
 	(select fecha_est from procesos.est_documentos where identificador ='@identificador' and procede='Si'),
         (select folio_est_documentos from procesos.lista_chequeo where identificador ='@identificador'),
-        (select zona from caracoli.caracoli where num_sdh=(SELECT "IDENTIFICA_ANTERIOR" from definitiva where "IDENTIFICADOR"='@identificador')),
+        (select zona from ficha_reconocimiento_v1 where identificador ='@identificador'),
         (select concepto from procesos.aprob_resolucion where identificador='@identificador'),
         (select elaboro from procesos.aprob_resolucion where identificador='@identificador'),
         (select aprobo from procesos.aprob_resolucion where identificador='@identificador'),
-        (select aprob_juridica from procesos.aprob_resolucion where identificador='@identificador')
+        (select aprob_juridica from procesos.aprob_resolucion where identificador='@identificador')  
 	from definitiva df
 	left join financiera_reas.cdp_rp rv 
 	on df."IDENTIFICADOR"=rv.identificador
@@ -1511,7 +1519,7 @@
             
         update procesos.lista_chequeo set folio_est_documentos='@folio_est_documentos' where identificador='@identificador';  
             
-        update caracoli.caracoli set zona ='@zona' where num_sdh=(SELECT "IDENTIFICA_ANTERIOR" from definitiva where "IDENTIFICADOR"='@identificador');
+        update ficha_reconocimiento_v1 set zona ='@zona' where identificador='@identificador';  
     
         WITH 
         sel as (
@@ -3545,7 +3553,16 @@
             left join (
             select identificador, case when tidoc_id=2102 then '255' when tidoc_id=2202 then '511' else '' end as tipo_estudio from documento_adjunto) as sub1 on pe.identificador=sub1.identificador and pe.tipo_estudio=sub1.tipo_estudio
             WHERE
-             pa.fecha BETWEEN '@desde' AND '@hasta' and pa.concepto=true;
+             pa.fecha BETWEEN '@desde' AND '@hasta' and pa.concepto=true and pe.tipo_estudio in('255','511')
+        UNION
+            select pe.identificador,fecha_est as "Fecha Est. Documentos",procede,pe.tipo_estudio as "Tipo de Estudio",pa.elaboro as "Funcionario que elabora el est. documentos",
+            pa.aprobo as "Funcionario que aprueba el est. documentos",fecha as "Fecha Aprobación", case when sub1.tipo_estudio is null then 'No' else 'Si' end as "Tiene Documento"
+            from procesos.est_documentos pe 
+            left join procesos.aprob_est_documentos pa on pe.identificador=pa.identificador and pe.tipo_estudio=pa.tipo_estudio 
+            left join (
+            select identificador, case when tidoc_id=2102 then '651' else '' end as tipo_estudio from documento_adjunto) as sub1 on pe.identificador=sub1.identificador and pe.tipo_estudio=sub1.tipo_estudio
+            WHERE
+             pa.fecha BETWEEN '@desde' AND '@hasta' and pa.concepto=true and pe.tipo_estudio ='651';
         </sql>
         <conexion>atencion_reloca</conexion>
         <permisos>*</permisos>
@@ -3986,6 +4003,7 @@
             usuario_time_upd as usuario_time_upd,
             usuario_correo as usuario_correo,
             usuario_cargo as usuario_cargo,
+            usuario_contrato as usuario_contrato,
             usuario_activo AND (usuario_fecha_vigencia &gt;= current_date) as usuario_activo,
             usuario_fecha_vigencia as usuario_fecha_vigencia,
             tius_id as tius_id,
@@ -4501,7 +4519,7 @@
             to_char(doc_time,'dd-mm-yyyy HH:MM') fecha           
             from 
             documento_adjunto d
-            where identificador = '@identificador' and doc_descripcion like '%Documento acta de entrega PAR Vereditas%'
+            where identificador = '@identificador' and tidoc_id=240011
         </sql>
         <conexion>atencion_reloca</conexion>
         <permisos>*</permisos>
@@ -5592,14 +5610,8 @@
     <Consulta id="1">
         <sql>
             UPDATE FichaSocial.fichasocial
-            SET 	
-                p1_2n='@p1_2n',
-                p1_2f='@p1_2f',
-                p1_3='@p1_3',
-                p1_4='@p1_4',
-                p1_5='@p1_5',
-                p1_6='@p1_6',
-                p1_7='@p1_7'
+            SET 
+                version='@version'
             WHERE identificador='@identificador'
         </sql>
         <conexion>atencion_reloca</conexion>
@@ -5695,7 +5707,8 @@
             UPDATE FichaSocial.fichasocial
             SET 	
             p10_1='@p10_1',
-            p10_2='@p10_2'
+            p10_2a='@p10_2a',
+            p10_2b='@p10_2b'
             WHERE identificador='@identificador'
         </sql>
         <conexion>atencion_reloca</conexion>
@@ -6018,8 +6031,131 @@
         </sql>
         <conexion>atencion_reloca</conexion>
         <permisos>*</permisos>       
-    </Consulta>                   
-                             
+    </Consulta>     
+    <Consulta id="insertar_ficha_social_general">
+        <sql>
+            with rows as(INSERT INTO fichasocial.fichasocial
+                (identificador)
+            SELECT '@identificador'
+            WHERE
+                NOT EXISTS (
+                    SELECT identificador FROM fichasocial.fichasocial WHERE identificador = '@identificador'
+                ) returning identificador) select identificador from rows;
+            
+            with rows as(
+            INSERT INTO fichasocial.fichasocial_familia
+                (identificador,consecutivo)
+            SELECT '@identificador','1' 
+            WHERE
+            NOT EXISTS (
+            SELECT identificador FROM fichasocial.fichasocial_familia WHERE identificador = '@identificador' and consecutivo='1'
+            )
+            returning identificador) select identificador from rows;
+            
+            with rows as(
+            INSERT INTO fichasocial.aprobacion
+            (identificador)
+            SELECT '@identificador' 
+            WHERE
+            NOT EXISTS (
+            SELECT identificador FROM fichasocial.aprobacion WHERE identificador = '@identificador'
+            )
+            returning identificador) select identificador from rows;
+            
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>       
+    </Consulta>      
+                  
+    <Consulta id="insertar_ficha_social_miembro">
+        <sql>
+            with rows as(
+            INSERT INTO fichasocial.fichasocial_familia
+                (identificador,consecutivo)
+            SELECT '@identificador','@miembro' 
+            WHERE
+            NOT EXISTS (
+            SELECT identificador FROM fichasocial.fichasocial_familia WHERE identificador = '@identificador' and consecutivo='@miembro'
+            )
+            returning identificador) select identificador from rows;
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>       
+    </Consulta>                                
+    <Consulta id="get_datos_generales">
+        <sql>
+            select "Dirección" as direccion,
+            "MZ" as manzana,
+            "LT" as lote,
+            "Barrio" as barrio,
+            "Localidad" as localidad,
+            (SELECT string_agg(concat(concepto_ingreso,' de ' ,fecha_concepto), ', ')
+           from concepto_ingreso where identificador ='@identificador') as concepto_ingreso
+           from definitiva where "IDENTIFICADOR"='@identificador'
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>       
+    </Consulta>                                                           
+    <Consulta id="get_toda_la_familia_vista">
+        <sql>
+        select 
+        trim(regexp_replace(concat(p2_3,' ',p2_4,' ',p2_5,' ',p2_6), '\s+', ' ', 'g')) as nombre,
+        CASE 
+             WHEN p2_9='1'  THEN 'Cédula de ciudadania'
+             WHEN p2_9='2'  THEN 'Cédula de Extranjería'
+             WHEN p2_9='3'  THEN 'Tarjeta de Identidad'
+             WHEN p2_9='4'  THEN 'Registro Civil'
+             WHEN p2_9='5'  THEN 'Pasaporte'
+             WHEN p2_9='6'  THEN 'NUIP'
+             WHEN p2_9='7'  THEN 'Tarjeta de Extranjería'
+        END as tipo_identificacion,
+        p2_011 as nro_identificacion,
+        EXTRACT(YEAR FROM(
+        age((COALESCE( NULLIF(p2_7,''),to_char(current_date,'YYYY-MM-DD') ))::date)
+        ))as edad,
+        CASE 
+             WHEN p2_2='1'  THEN 'Jefe de familia'
+             WHEN p2_2='2'  THEN 'Esposo(a)/Compañero(a)'
+             WHEN p2_2='3'  THEN 'Hijo(a)'
+             WHEN p2_2='4'  THEN 'Hermano(a)'
+             WHEN p2_2='5'  THEN 'Padre o Madre'
+             WHEN p2_2='6'  THEN 'Abuelo(a)'
+             WHEN p2_2='7'  THEN 'Nuera/Yerno'
+             WHEN p2_2='8'  THEN 'Nieto(a)'
+             WHEN p2_2='9'  THEN 'Suegro(a)'
+             WHEN p2_2='10'  THEN 'Otro Pariente'
+             WHEN p2_2='11'  THEN 'Otro no pariente'
+        END as parentesco
+        from fichasocial.fichasocial_familia where identificador='@identificador'
+        order by edad
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>       
+    </Consulta>       
+    <Consulta id="insertar_pre_aprobacion_social">
+        <sql>
+            update fichasocial.aprobacion
+            set nombre_elaboro='@nombre_elaboro',
+            estado_ficha='@estado_ficha' where identificador='@identificador';
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>       
+    </Consulta>                             
+                                                     
+    <Consulta id="insertar_aprobacion_FichaSocial">
+        <sql>
+            update fichasocial.aprobacion
+            set nombre_revisor='@nombre_revisor',
+            estado_ficha='@estado_ficha',
+            observaciones='@observaciones',
+            fecha=current_timestamp
+            where identificador='@identificador';
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>       
+    </Consulta>                                                                              
+                                                                                                     
+                                                                                                                                                     
                 
 </Consultas>
 

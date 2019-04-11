@@ -144,6 +144,7 @@ public class loginGreas extends HttpServlet {
                     info.put("usuario_time_upd", tablaUsuario.getValueAt(0, tablaUsuario.findColumn("usuario_time_upd")));
                     info.put("usuario_correo", tablaUsuario.getValueAt(0, tablaUsuario.findColumn("usuario_correo")));
                     info.put("usuario_cargo", tablaUsuario.getValueAt(0, tablaUsuario.findColumn("usuario_cargo")));
+                    info.put("usuario_contrato", tablaUsuario.getValueAt(0, tablaUsuario.findColumn("usuario_contrato")));
                     info.put("usuario_activo", tablaUsuario.getValueAt(0, tablaUsuario.findColumn("usuario_activo")));
                     info.put("usuario_fecha_vigencia", tablaUsuario.getValueAt(0, tablaUsuario.findColumn("usuario_fecha_vigencia")));
                     info.put("codigo", tablaUsuario.getValueAt(0, tablaUsuario.findColumn("codigo")));
