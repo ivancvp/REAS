@@ -1456,7 +1456,7 @@
 
         select rv.*,ar.*,df.*,"Cedula 1" as cedula, "Nombre 1" as nom_ben,
 	(select fecha_est from procesos.est_documentos where identificador ='@identificador' and procede='Si'),
-        (select folio_est_documentos from procesos.lista_chequeo where identificador ='@identificador'),
+        (select string_agg(folio_est_documentos, ', ') from procesos.lista_chequeo where identificador ='@identificador'),
         (select zona from ficha_reconocimiento_v1 where identificador ='@identificador'),
         (select concepto from procesos.aprob_resolucion where identificador='@identificador'),
         (select elaboro from procesos.aprob_resolucion where identificador='@identificador'),
@@ -1519,7 +1519,7 @@
             
         update procesos.lista_chequeo set folio_est_documentos='@folio_est_documentos' where identificador='@identificador';  
             
-        update ficha_reconocimiento_v1 set zona ='@zona' where identificador='@identificador';  
+        update ficha_reconocimiento_v1 set zona = '@zona' where identificador='@identificador';  
     
         WITH 
         sel as (

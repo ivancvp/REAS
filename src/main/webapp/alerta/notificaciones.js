@@ -301,7 +301,7 @@ var opciones = jQuery.extend({
 
                                     }
                                     });
-                                    
+                                    /*
                                     if(sector==='Vereditas'){
                                         contenido=contenido_modal(gen_resolucion_vereditas(identificador),' Resolución Vereditas');
                                         generar_modal(contenido);
@@ -310,8 +310,10 @@ var opciones = jQuery.extend({
                                         contenido=contenido_modal(gen_resolucion(identificador),' Resolución VUR');
                                         generar_modal(contenido);
                                         logica_resolucion(identificador,modo,id_proceso,id_actividad,usuario_creador);
-                                    }
-                           
+                                    }*/
+                                        contenido=contenido_modal(gen_resolucion(identificador),' Resolución VUR');
+                                        generar_modal(contenido);
+                                        logica_resolucion(identificador,modo,id_proceso,id_actividad,usuario_creador);
                            
                            
                            
