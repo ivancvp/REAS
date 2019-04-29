@@ -60,7 +60,17 @@ $.ajax({
   success: function (response) {
 
   $.each( response[0], function( key, value ) {
-        $("input[data-id='"+key+"'],select[data-id='"+key+"'],textarea[data-id='"+key+"']").val(value);
+
+
+    var str1 = key;
+    var str2 = "p11_";
+    if(str1.indexOf(str2) != -1){
+      $("input[data-id='"+key+"']").prop('checked',JSON.parse(value));
+
+    }else {
+      $("input[data-id='"+key+"'],select[data-id='"+key+"'],textarea[data-id='"+key+"']").val(value);
+    }
+
      });
 
 
@@ -184,5 +194,18 @@ for (var i = 1; i < rowCount; i++) {
   });
 
   }
+
+  var loop=1;
+  $('select[data-id="p2_012"]').each(function(key,value) {
+
+  if($(this).val()=="1"){
+    $('table[data-op="5m"] tr').eq(loop).find('select[data-id="p5_5"]').attr("disabled", false);
+  }else{
+    $('table[data-op="5m"] tr').eq(loop).find('select[data-id="p5_5"]').val("NO APLICA").attr("disabled", true);;
+
+  }
+
+  loop=loop+1;
+  });
 
 });

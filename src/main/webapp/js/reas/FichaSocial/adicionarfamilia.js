@@ -17,6 +17,50 @@ function adicion(){
   validacion('validation.js');
   $(".adicionar > tbody > tr:last-child").find("input").val("");
 
+  $('table[data-op="2m"] tr:not(:last-child)').find('div.checkbox').hide();
+
+
+}
+
+
+
+$('#verificar_miembro').click(function(){
+
+var tipo=$('#sel_tipo_identificacion').val();
+var num=$('#num_identificacion').val();
+var tipo_identificacion_nueva=tipo+num;
+
+if(tipo=="" || num==""){
+  $.alert({
+    title: 'Alerta.',
+    content: 'Campos incompletos',
+});
+
+}else{
+
+  var valida=0;
+
+  $('input[data-id="p2_011"]').each(function(key,value) {
+
+  var tipo_identificacion=$(this).parents("tr").find('select[data-id="p2_9"]').val()+$(this).val();
+
+  if(tipo_identificacion_nueva==tipo_identificacion){
+    valida=1;
+  }
+
+  });
+
+if(valida==1){
+  $.alert({
+    title: 'Alerta.',
+    content: 'El miembro ya existe en el nucleo familiar.',
+});
+}else{
+    $('#myModal').modal('toggle');
+    new_member();
+    $('table[data-op="2m"] tr:last').find('input[data-id="p2_011"]').val(num);
+    $('table[data-op="2m"] tr:last').find('select[data-id="p2_9"]').val(tipo);
+}
 
 
 
@@ -24,7 +68,15 @@ function adicion(){
 
 
 
+});
+
+$("#cerrar_modal").click(function(){
+  $('#myModal').modal('toggle');
+})
+
 $('#addFamily').click(function(){
+
+
 
   $.confirm({
       title: 'Mensaje de confirmación!',
@@ -35,7 +87,11 @@ $('#addFamily').click(function(){
           confirmar: {
 
             action: function(){
-                new_member();
+              $('#myModal').modal('toggle');
+
+              $('#myModal .modal-body').css('max-height', '300px');
+              $('#myModal .modal-body').css('overflow', 'hidden');
+
             }
           },
           cancelar: {
@@ -44,38 +100,112 @@ $('#addFamily').click(function(){
       }
   });
 
-  function new_member(){
-    adicion();
-    miembros_nuevos_title=miembros_nuevos+1;
-    miembros_nuevos_body=miembros_nuevos_title-1;
-    miembros_nuevos=miembros_nuevos_title;
-    $(".check thead").find('th:eq('+miembros_nuevos_title+')').show();
-    $(".check tr").find('td:eq('+miembros_nuevos_body+')').show();
 
-    var obj = {}
-    obj["identificador"] =  $('#id_ficha_social').val();
-    obj["miembro"] =miembros_nuevos_title;
-    obj["op"] ='insertar_ficha_social_miembro';
+
+
+});
+
+function new_member(){
+  adicion();
+  miembros_nuevos_title=miembros_nuevos+1;
+  miembros_nuevos_body=miembros_nuevos_title-1;
+  miembros_nuevos=miembros_nuevos_title;
+  $(".check thead").find('th:eq('+miembros_nuevos_title+')').show();
+  $(".check tr").find('td:eq('+miembros_nuevos_body+')').show();
+
+  var obj = {}
+  obj["identificador"] =  $('#id_ficha_social').val();
+  obj["miembro"] =miembros_nuevos_title;
+  obj["op"] ='insertar_ficha_social_miembro';
+  $.ajax({
+    type: "GET",
+    url: "GestionConsultas",
+    data: obj,
+    dataType: "json",
+    async: false,
+    success: function (response) {
+      console.log(response);
+    },
+  });
+
+}
+
+
+$('#del_fam').click(function(){
+
+  $.confirm({
+      title: 'Mensaje de confirmación!',
+      content: 'Usted va a eliminar un miembro de la familia',
+      type: 'dark',
+      typeAnimated: true,
+      buttons: {
+          confirmar: {
+
+            action: function(){
+              borrar_miembro();
+            }
+          },
+          cancelar: {
+
+          }
+      }
+  });
+
+function borrar_miembro(){
+
+
+var conta=0;
+$('table[data-op="2m"] tr:last').find("input,select").each(function(key,value) {
+
+
+if($(this).val()==""){
+  conta=conta+1;
+}
+
+});
+
+if(conta==14){
+
+
+  obj["identificador"] =$('#id_ficha_social').val();
+  obj["op"] ="borrar_miembro_ficha_social";
+
     $.ajax({
-      type: "GET",
+      type: "POST",
       url: "GestionConsultas",
       data: obj,
       dataType: "json",
       async: false,
       success: function (response) {
-        console.log(response);
+
       },
-    });
-
-  }
+  });
 
 
+  $.alert({
+    title: 'Confirmado.',
+    content: 'Miembro borrado exitoamente!',
+    type: 'green'
+  });
 
+//cargando la ficha nuevamente
+$('#form').empty();
+cuerpo_ficha();
 
+}else{
+  $.alert({
+    title: 'No procede.',
+    content: 'Por favor borre todos los datos del miembro agregado.',
+    type: 'red'
+});
+}
 
+}
 
 
 });
+
+
 
 $('#save_ficha').click(function(){
 
@@ -85,6 +215,9 @@ $('#fondo').show();
 setTimeout(guardado, 1);
 
 function guardado(){
+
+
+guardar_beneficiario();
 
   $('.paso').each(function(i,j) {
 
@@ -136,8 +269,12 @@ function data_json1(html,op,selector){
   var json = '{"op":"'+op+'"';
   var str="";
   var tbl2 = $(html).find(selector).each(function(i) {
-     x = $(this).find('input,select,textarea');
-        str=str+',"' + $(this).attr("data-id") + '":"' + $(this).val() + '"';
+    x = $(this).find(selector);
+    var valor='"'+ $(this).val() + '"';
+    if($(this).attr('type')=="checkbox"){
+      valor=$(this).prop('checked');
+    }
+    str=str+',"' + $(this).attr("data-id") + '":' + valor ;
   })
   json += str+ '}'
 

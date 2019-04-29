@@ -771,6 +771,7 @@
         <!-- Impresiones-->
         <%= CacheBuster.bust(application.getRealPath("/"), "pdf/impresion_estudio.js", "js")%>
         <%= CacheBuster.bust(application.getRealPath("/"), "pdf/impresion_resolucion.js", "js")%>
+        <%= CacheBuster.bust(application.getRealPath("/"), "pdf/impresion_resolucion_vereditas.js", "js")%>
         <%= CacheBuster.bust(application.getRealPath("/"), "pdf/formato_ficha_caracoli.js", "js")%>
         <%= CacheBuster.bust(application.getRealPath("/"), "pdf/impresion_adenda.js", "js")%>
         <script src='pdf/pdfmake.min.js'></script>

@@ -1453,7 +1453,6 @@
     </Consulta>
     <Consulta id="datos_resolucion">
         <sql>
-
         select rv.*,ar.*,df.*,"Cedula 1" as cedula, "Nombre 1" as nom_ben,
 	(select fecha_est from procesos.est_documentos where identificador ='@identificador' and procede='Si'),
         (select string_agg(folio_est_documentos, ', ') from procesos.lista_chequeo where identificador ='@identificador'),
@@ -1461,14 +1460,15 @@
         (select concepto from procesos.aprob_resolucion where identificador='@identificador'),
         (select elaboro from procesos.aprob_resolucion where identificador='@identificador'),
         (select aprobo from procesos.aprob_resolucion where identificador='@identificador'),
-        (select aprob_juridica from procesos.aprob_resolucion where identificador='@identificador')  
+        (select aprob_juridica from procesos.aprob_resolucion where identificador='@identificador'),
+        (select dir_campo from ficha_reconocimiento_v1 where identificador='@identificador'),
+        (select dir_cat from ficha_reconocimiento_v1 where identificador='@identificador')    
 	from definitiva df
 	left join financiera_reas.cdp_rp rv 
 	on df."IDENTIFICADOR"=rv.identificador
 	left join financiera_reas.asignaciones_resoluciones ar 
 	on rv.identificador=ar.identificador
 	where df."IDENTIFICADOR"='@identificador';
-
         </sql>
         <conexion>atencion_reloca</conexion>
         <permisos>*</permisos>
@@ -5718,42 +5718,42 @@
         <sql>
             UPDATE FichaSocial.fichasocial
             SET 	
-            p11_1_a='@p11_1_a',
-            p11_1_b='@p11_1_b',
-            p11_1_c='@p11_1_c',
-            p11_1_d='@p11_1_d',
-            p11_1_e='@p11_1_e',
-            p11_1_f='@p11_1_f',
-            p11_1_g='@p11_1_g',
-            p11_1_h='@p11_1_h',
-            p11_1_i='@p11_1_i',
-            p11_1_j='@p11_1_j',
-            p11_1_k='@p11_1_k',
-            p11_1_l='@p11_1_l',
-            p11_2_a='@p11_2_a',
-            p11_2_b='@p11_2_b',
-            p11_2_c='@p11_2_c',
-            p11_2_d='@p11_2_d',
-            p11_2_e='@p11_2_e',
-            p11_2_f='@p11_2_f',
-            p11_2_g='@p11_2_g',
-            p11_2_h='@p11_2_h',
-            p11_2_i='@p11_2_i',
-            p11_2_j='@p11_2_j',
-            p11_3_a='@p11_3_a',
-            p11_3_b='@p11_3_b',
-            p11_3_c='@p11_3_c',
-            p11_3_d='@p11_3_d',
-            p11_3_e='@p11_3_e',
-            p11_3_f='@p11_3_f',
-            p11_3_g='@p11_3_g',
-            p11_4_a='@p11_4_a',
-            p11_4_b='@p11_4_b',
-            p11_4_c='@p11_4_c',
-            p11_4_d='@p11_4_d',
-            p11_4_e='@p11_4_e',
-            p11_4_f='@p11_4_f',
-            p11_4_g='@p11_4_g'
+            p11_1_a=@p11_1_a,
+            p11_1_b=@p11_1_b,
+            p11_1_c=@p11_1_c,
+            p11_1_d=@p11_1_d,
+            p11_1_e=@p11_1_e,
+            p11_1_f=@p11_1_f,
+            p11_1_g=@p11_1_g,
+            p11_1_h=@p11_1_h,
+            p11_1_i=@p11_1_i,
+            p11_1_j=@p11_1_j,
+            p11_1_k=@p11_1_k,
+            p11_1_l=@p11_1_l,
+            p11_2_a=@p11_2_a,
+            p11_2_b=@p11_2_b,
+            p11_2_c=@p11_2_c,
+            p11_2_d=@p11_2_d,
+            p11_2_e=@p11_2_e,
+            p11_2_f=@p11_2_f,
+            p11_2_g=@p11_2_g,
+            p11_2_h=@p11_2_h,
+            p11_2_i=@p11_2_i,
+            p11_2_j=@p11_2_j,
+            p11_3_a=@p11_3_a,
+            p11_3_b=@p11_3_b,
+            p11_3_c=@p11_3_c,
+            p11_3_d=@p11_3_d,
+            p11_3_e=@p11_3_e,
+            p11_3_f=@p11_3_f,
+            p11_3_g=@p11_3_g,
+            p11_4_a=@p11_4_a,
+            p11_4_b=@p11_4_b,
+            p11_4_c=@p11_4_c,
+            p11_4_d=@p11_4_d,
+            p11_4_e=@p11_4_e,
+            p11_4_f=@p11_4_f,
+            p11_4_g=@p11_4_g
             WHERE identificador='@identificador'
         </sql>
         <conexion>atencion_reloca</conexion>
@@ -5808,11 +5808,20 @@
         </sql>
         <conexion>atencion_reloca</conexion>
         <permisos>*</permisos>       
+    </Consulta> 
+    <Consulta id="borrar_miembro_ficha_social">
+        <sql>
+        delete from fichasocial.fichasocial_familia 
+        where identificador='@identificador' and consecutivo = (select max(consecutivo) from fichasocial.fichasocial_familia where identificador='@identificador')
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>       
     </Consulta>  
     <Consulta id="2m">
         <sql>
             UPDATE FichaSocial.fichasocial_familia
-            SET 	
+            SET
+            tipo_beneficiario='@tipo_beneficiario', 	
             p2_2='@p2_2',
             p2_3='@p2_3',
             p2_4='@p2_4',
@@ -6155,8 +6164,34 @@
         <permisos>*</permisos>       
     </Consulta>                                                                              
                                                                                                      
-                                                                                                                                                     
-                
+    <Consulta id="update_ben_principal">
+        <sql>
+            update definitiva set 
+            "Nombre 1"='@nombre_completo',
+            "1er_Nombre_Ben1"='@nom1',
+            "2do_Nombre_Ben1"='@nom2',
+            "1er_Apellido_Ben1"='@ape1',
+            "2do_Apellido_Ben1"='@ape2',
+            "Cedula 1"='@ced'
+            where "IDENTIFICADOR"='@identificador';
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>       
+    </Consulta>                                                                                                                                                      
+    <Consulta id="update_ben_secundario">
+        <sql>
+            update definitiva set 
+            "Nombre 2"='@nombre_completo',
+            "1er_Nombre_Ben2"='@nom1',
+            "2do_Nombre_Ben2"='@nom2',
+            "1er_Apellido_Ben2"='@ape1',
+            "2do_Apellido_Ben2"='@ape2',
+            "Cedula 2"='@ced'
+            where "IDENTIFICADOR"='@identificador';
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>       
+    </Consulta>                
 </Consultas>
 
 

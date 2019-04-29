@@ -29,7 +29,14 @@
     cursor: pointer;
     color: #5499C7;
   }
-
+  .titulo_ficha::after{
+    content: '\f0da';
+   font-family: FontAwesome;
+   font-weight: normal;
+   font-style: normal;
+   margin:0px 0px 0px 10px;
+   text-decoration:none;
+  }
 
   .grupo{
     padding: 10px;
@@ -390,6 +397,10 @@
           <div class="form-group">
             <button type="button" class="btn btn-success" id="addFamily"><span class="glyphicon glyphicon-plus"></span> Adicionar Miembro</button>
         </div>
+
+          <div class="form-group">
+            <button type="button" class="btn btn-danger" id="del_fam"><i class="far fa-trash-alt"></i> Borrar Miembro</button>
+        </div>
       </div>
     </div>
 
@@ -400,6 +411,7 @@
           <tr>
             <th style="width:20px" scope="col">#</th>
             <th style="width:80px" scope="col">Selección</th>
+            <th style="width:200px" scope="col">Tipo de beneficiario</th>
             <th style="width:200px" scope="col">2.2 Parentesco</th>
             <th style="width:200px" scope="col">2.3 Primer Nombre</th>
             <th style="width:200px" scope="col">2.4 Segundo Nombre</th>
@@ -418,7 +430,12 @@
         <tbody>
           <tr>
             <th scope="row">1</th>
-            <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
+            <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" class="drop_family" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
+            <td><select class="form-control tipo_ben" data-id="tipo_beneficiario">
+              <option value="">Seleccione...</option>
+              <option value="PRINCIPAL">1. Principal</option>
+              <option value="SECUNDARIO">2. Secundario</option>
+            </select></td>
             <td><select class="form-control obligatorio" data-id="p2_2">
               <option value="">Seleccione...</option>
               <option value="1">1. Jefe de familia</option>
@@ -460,7 +477,7 @@
                 <div class="span5 sandbox-container"><input type="text" class="form-control fecha obligatorio" data-id="p2_010"></div>
               </div>
             </td>
-            <td><input class="form-control obligatorio" data-id="p2_011"></input></td>
+            <td><input class="form-control obligatorio documento" data-id="p2_011"></input></td>
             <td><select class="form-control" data-id="p2_012" disabled>
               <option value="">Seleccione...</option>
               <option value="1">1. Primera Infancia 0-5 años</option>
@@ -614,6 +631,7 @@
           <tr>
             <th scope="row">1</th>
             <td><select class="form-control" data-id="p4_1">
+              <option value="">Seleccione...</option>
               <option value="1">1. Adulto Mayor</option>
               <option value="2">2. Madre cabeza de familia</option>
               <option value="3">3. Discapacidad</option>
@@ -653,10 +671,12 @@
           <tr>
             <th scope="row">1</th>
             <td><select class="form-control" data-id="p5_1">
+              <option value="">Seleccione...</option>
               <option value="SI">Si</option>
               <option value="NO">No</option>
             </select></td>
             <td><select class="form-control" data-id="p5_2">
+              <option value="">Seleccione...</option>
               <option value="1">1. Pre-escolar</option>
               <option value="2">2. Básica Primaria (1 a 5)</option>
               <option value="3">3. Bachillerato Básico (6 a 9)</option>
@@ -669,11 +689,12 @@
               <option value="10">10. Otro</option>
             </select></td>
             <td><select class="form-control" data-id="p5_3">
+              <option value="">Seleccione...</option>
               <option value="SI">Si</option>
               <option value="NO">No</option>
             </select></td>
             <td><select class="form-control" data-id="p5_4">
-                <option></option>
+              <option value="">Seleccione...</option>
                 <option value="1">1. Considera que no está en edad de estudiar.</option>
                 <option value="2">2. Considera que ya terminó</option>
                 <option value="3">3. Costos educativos elevados</option>
@@ -690,6 +711,7 @@
                 <option value="14">14. Otra razón:</option>
             </select></td>
             <td><select class="form-control" data-id="p5_5">
+              <option value="">Seleccione...</option>
               <option value="SI">Si</option>
               <option value="NO">No</option>
               <option value="NO APLICA">No aplica</option>
@@ -725,22 +747,26 @@
           <tr>
             <th scope="row">1</th>
             <td><select class="form-control" data-id="p6_1">
+              <option value="">Seleccione...</option>
               <option value="SI">Si</option>
               <option value="NO">No</option>
               <option value="NO SABE">No sabe</option>
             </select></td>
             <td><select class="form-control" data-id="p6_2">
+              <option value="">Seleccione...</option>
               <option value="1">1. Contributivo</option>
               <option value="2">2. Subsidiado</option>
               <option value="3">3. Especial</option>
               <option value="4">4. No sabe/No responde</option>
             </select></td>
             <td><select class="form-control" data-id="p6_3">
+              <option value="">Seleccione...</option>
               <option value="SI">Si</option>
               <option value="NO">No</option>
             </select></td>
             <td><input class="form-control" data-id="p6_4"></input></td>
             <td><select class="form-control" data-id="p6_5">
+              <option value="">Seleccione...</option>
               <option value="NO">No</option>
               <option value="NO APLICA">No aplica</option>
             </select></td>
@@ -804,6 +830,7 @@
             <th scope="row">1</th>
             <td>
               <select class="form-control" data-id="p7_2">
+                <option value="">Seleccione...</option>
                 <option value="1">1. Empleado</option>
                 <option value="2">2. Pensionado</option>
                 <option value="3">3. Estudiante</option>
@@ -818,6 +845,7 @@
               </select>
             </td>
             <td><select class="form-control" data-id="p7_3">
+              <option value="">Seleccione...</option>
               <option value="1">1. En el domicilio</option>
               <option value="2">2. En el barrio</option>
               <option value="3">3. En la localidad</option>
@@ -826,11 +854,13 @@
               <option value="6">6. No aplica</option>
             </select></td>
             <td><select class="form-control" data-id="p7_4">
+              <option value="">Seleccione...</option>
               <option value="SI">Si</option>
               <option value="NO">No</option>
             </select></td>
             <td><input class="form-control" data-id="p7_5"></input></td>
             <td><select class="form-control" data-id="p7_6a">
+              <option value="">Seleccione...</option>
               <option value="SI">Si</option>
               <option value="NO">No</option>
             </select></td>
@@ -849,6 +879,7 @@
         <div class="form-group">
           <label>7.7 Las personas de este hogar poseen motocicleta</label>
           <select class="form-control" data-id="p7_7_a">
+            <option value="">Seleccione...</option>
             <option value="SI">Si</option>
             <option value="NO">No</option>
           </select>
@@ -868,6 +899,7 @@
         <div class="form-group">
           <label>7.8 ¿Las personas de este hogar poseen carro?</label>
           <select class="form-control" data-id="p7_8_a">
+            <option value="">Seleccione...</option>
             <option value="SI">Si</option>
             <option value="NO">No</option>
           </select>
@@ -887,6 +919,7 @@
         <div class="form-group">
           <label>7.9 ¿Las personas de este hogar poseen bicicleta?</label>
           <select class="form-control" data-id="p7_9_a">
+            <option value="">Seleccione...</option>
             <option value="SI">Si</option>
             <option value="NO">No</option>
           </select>
@@ -906,6 +939,7 @@
         <div class="form-group">
           <label>7.10 Destinación del inmueble <button type="button" class="btn btn-success btn-sm" data-toggle="popover" data-trigger="focus" title="Información" data-content="El inmueble tiene destinación MIXTA cuando la familia lo emplea para habitar ala vez que para generar ingresos a traves de actividades de comercio, agrícola-pecuaria y/o arriendo."><span class="glyphicon glyphicon-info-sign"></span> </button></label>
           <select class="form-control" data-id="p7_010">
+            <option value="">Seleccione...</option>
             <option value="1">1. Residencial</option>
             <option value="2">2. Comercio</option>
             <option value="3">3. Industria</option>
@@ -935,6 +969,7 @@
           <div class="form-group">
             <label>7.11.2 Formalizada Si/No </label>
             <select class="form-control" data-id="p7_11_2">
+              <option value="">Seleccione...</option>
               <option value="SI">Si</option>
               <option value="NO">No</option>
             </select>
@@ -1033,6 +1068,7 @@
         <div class="form-group">
           <label>8.1 Tipo de vivienda</label>
           <select class="form-control" data-id="p8_1_a">
+            <option value="">Seleccione...</option>
             <option value="1">Apartamento</option>
             <option value="2">Casa-Lote</option>
             <option value="3">Casa</option>
@@ -1054,6 +1090,7 @@
         <div class="form-group">
           <label>8.2 Calidad en la que acredita la tenencia del predio</label>
           <select class="form-control" data-id="p8_2">
+            <option value="">Seleccione...</option>
             <option value="1">Arrendatario</option>
             <option value="2">Usufructuario</option>
             <option value="3">Poseedor</option>
@@ -1070,6 +1107,7 @@
         <div class="form-group">
           <label>8.3 Documentos que acreditan la tenencia (Marque con una X)</label>
           <select class="form-control" data-id="p8_3_a">
+            <option value="">Seleccione...</option>
             <option value="1">Escritura</option>
             <option value="2">Certificado de Libertad y Tradición</option>
             <option value="3">Promesa de Compraventa</option>
@@ -1097,6 +1135,7 @@
           <div class="form-group">
             <label>8.4.1 ¿Cuenta con servicio público de acueducto y alcantarillado? Si/No</label>
             <select class="form-control" data-id="p8_4_1_a">
+              <option value="">Seleccione...</option>
               <option value="SI">Si</option>
               <option value="NO">No</option>
             </select>
@@ -1107,6 +1146,7 @@
           <div class="form-group">
             <label>8.4.2 ¿Cuenta con servicio público de enérgia? Si/No</label>
             <select class="form-control" data-id="p8_4_2_a">
+              <option value="">Seleccione...</option>
               <option value="SI">Si</option>
               <option value="NO">No</option>
             </select>
@@ -1117,6 +1157,7 @@
           <div class="form-group">
             <label>8.4.3 ¿Cuenta con servicio de gas domiciliario? Si/No</label>
             <select class="form-control" data-id="p8_4_3_a">
+              <option value="">Seleccione...</option>
               <option value="SI">Si</option>
               <option value="NO">No</option>
             </select>
@@ -1198,7 +1239,7 @@
           <div class="form-group">
             <label>8.6.1 Las paredes son mayoritariamente de bloque, ladrillo, piedra, madera pulida, concreto vaciado y/o material prefabricado</label>
             <select class="form-control" data-id="p8_6_1">
-              <option value=""></option>
+              <option value="">Seleccione...</option>
               <option value="SI">Si</option>
               <option value="NO">No</option>
             </select>
@@ -1210,7 +1251,7 @@
           <div class="form-group">
             <label>8.6.2 La vivienda tiene mayoritariamente pisos en tierra?</label>
             <select class="form-control" data-id="p8_6_2">
-              <option value=""></option>
+              <option value="">Seleccione...</option>
               <option value="SI">Si</option>
               <option value="NO">No</option>
             </select>
@@ -1222,7 +1263,7 @@
           <div class="form-group">
             <label>8.6.3 Lasparedes son mayoritariamente de materiales de bajo impacto ambiental o ecológico (origen vegetal o biocompatible)?</label>
             <select class="form-control" data-id="p8_6_3">
-              <option value=""></option>
+              <option value="">Seleccione...</option>
               <option value="SI">Si</option>
               <option value="NO">No</option>
             </select>
@@ -1284,6 +1325,7 @@
         <div class="form-group">
           <label>10.1 ¿En este hogar convive con animales? Si/No </label><small> si la respuesta es NO pase a la pregunta 10.3)</small>
           <select class="form-control" data-id="p10_1">
+            <option value="">Seleccione...</option>
             <option value="SI">Si</option>
             <option value="NO">No</option>
           </select>
@@ -2884,6 +2926,7 @@
     <div class="form-group">
       <label>Si/No</label>
       <select class="form-control" data-id="p12_1_1_a">
+        <option value="">Seleccione...</option>
         <option value="SI">Si</option>
         <option value="NO">No</option>
       </select>
@@ -2918,6 +2961,7 @@
       <div class="form-group">
         <label>Si/No</label>
         <select class="form-control" data-id="p12_1_2_a">
+          <option value="">Seleccione...</option>
           <option value="SI">Si</option>
           <option value="NO">No</option>
         </select>
@@ -2951,6 +2995,7 @@
         <div class="form-group">
           <label>Si/No</label>
           <select class="form-control" data-id="p12_1_3_a" >
+            <option value="">Seleccione...</option>
             <option value="SI">Si</option>
             <option value="NO">No</option>
           </select>
@@ -3793,6 +3838,64 @@
 
 
     </div>
+
+
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Crear Miembro</h4>
+            </div>
+            <div class="modal-body">
+              <h3>Verificación de nuevo miembro</h3>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Tipo de identificación</label>
+                    <select class="form-control obligatorio" id="sel_tipo_identificacion">
+                      <option value="">Seleccione...</option>
+                      <option value="1">CC: Cédula de ciudadania</option>
+                      <option value="2">C.E: Cédula de Extranjería</option>
+                      <option value="3">T.I: Tarjeta de Identidad</option>
+                      <option value="4">R.C: Registro Civil</option>
+                      <option value="5">P.A: Pasaporte</option>
+                      <option value="6">NUIP: Número</option>
+                      <option value="7">T.E: Tarjeta de Extranjería</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Número de identificación</label>
+                    <input class="form-control" id="num_identificacion" ></input>
+                  </div>
+                </div>
+
+                  <div class="col-md-12">
+                    <div class="form-group">
+                        <button type="button" class="btn btn-success" id="verificar_miembro"><span class="glyphicon glyphicon-plus"></span> Agregar</button>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                      <div class="col-xs-12">
+                          <button type="button" class="btn btn-danger" id="cerrar_modal" style="float: right">x</button>
+                      </div>
+                    </div>
+
+              </div
+
+
+
+
+
+            </div>
+
+          </div>
+
+        </div>
+      </div>
 
 
 </body>

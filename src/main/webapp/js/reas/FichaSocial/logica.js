@@ -19,7 +19,6 @@ e.preventDefault();
        '</div>' +
        '<div class="modal-body" id="modal_social">' +
        ficha+
-       '<p class="hola"></p>'+
        '</div>' +
        '<div class="modal-footer">' +
        '<button type="button" data-dismiss="modal" class="btn btn-default">Cerrar</button>' +
@@ -27,12 +26,17 @@ e.preventDefault();
 
 
      $('.modal-content').css('height', '80%');
-     $('.modal-dialog').css('width', $(window).width());
-      $('#form').css('margin', 'auto');
+     $('.modal-dialog').css('width', $(window).width()-($(window).width()*0.1));
+     //$('.modal-dialog').css('width', $(window).width());
+     $('#form').css('margin', 'auto');
      $('.modal-content').css('margin', 'auto');
      $('.modal-body').css('max-height', 'calc(100% - 120px)');
      $('#form').empty();
      $('#form').append(contenido);
+     $('#modal_form').modal({
+      backdrop: 'static',
+      keyboard: false
+      });
      $('#modal_form').modal('show');
 
 
@@ -47,34 +51,42 @@ e.preventDefault();
 
     e.preventDefault();
 
-    var ficha="";
-    $.ajax({
-     url:'js/reas/FichaSocial/FichaSocial.html',
-     type:'POST',
-     async:false,
-     success: function(data){
-       ficha=data;
-      $('#form').empty();
-
-      var contenido=
-      '<div class="modal-header">' +
-      '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>' +
-      '<h4 class="modal-title">Formulario de la Ficha Social</h4>' +
-      '</div>' +
-      '<div class="modal-body">' +
-      ficha+
-      '<p class="hola"></p>'+
-      '</div>' +
-      '<div class="modal-footer">' +
-      '<button type="button" data-dismiss="modal" class="btn btn-default">Cerrar</button>' +
-      '</div>';
-
-      $('#form').append(contenido);
-
-
-     }
-  });
+    cuerpo_ficha();
 
   });
+
+
+
 
 })
+
+
+function cuerpo_ficha(){
+  var ficha="";
+  $.ajax({
+   url:'js/reas/FichaSocial/FichaSocial.html',
+   type:'POST',
+   async:false,
+   success: function(data){
+     ficha=data;
+    $('#form').empty();
+
+    var contenido=
+    '<div class="modal-header">' +
+    '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>' +
+    '<h4 class="modal-title">Formulario de la Ficha Social</h4>' +
+    '</div>' +
+    '<div class="modal-body">' +
+    ficha+
+    '<p class="hola"></p>'+
+    '</div>' +
+    '<div class="modal-footer">' +
+    '<button type="button" data-dismiss="modal" class="btn btn-default">Cerrar</button>' +
+    '</div>';
+
+    $('#form').append(contenido);
+
+
+   }
+});
+}

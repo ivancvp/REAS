@@ -28,6 +28,10 @@ var fecha_concepto_ingreso=(resultado["fecha_concepto_ingreso"]?resultado["fecha
 fecha_concepto_ingreso=moment(fecha_concepto_ingreso).format("D")+' de '+moment(fecha_concepto_ingreso).format("MMMM")+' de '+moment(fecha_concepto_ingreso).format("YYYY");
 
 var direccion=(resultado["Dirección"]?resultado["Dirección"]:'').toUpperCase();
+
+var dir_campo=(resultado["dir_campo"]?resultado["dir_campo"]:'SIN INFORMACIÓN').toUpperCase();
+var dir_cat=(resultado["dir_cat"]?resultado["dir_cat"]:'SIN INFORMACIÓN').toUpperCase();
+
 var manzana=(resultado["MZ"]?resultado["MZ"]:'');
 var lote=(resultado["LT"]?resultado["LT"]:'');
 var upz=(resultado["UPZ"]?resultado["UPZ"]:'').toUpperCase();
@@ -271,12 +275,15 @@ margin: [60, 25],
             {text:nombre1+', ',bold:true,style:'texto'},
             {text:'identificado(a) con cédula de ciudadanía No. ',style:'texto'},
             {text:cedula1,bold:true,style:'texto'},
-            {text:', no se encuentra inmerso(a) en ninguna de las causales de no inclusión previstas en el artículo 4° del Decreto Distrital 457 de 2017 modificado por el Decreto Distrital 651 de 2018 y en consecuencia cumple a cabalidad con los requerimientos señalados en la mencionada normatividad, razón por la cual se recomendó su inclusión al programa, junto con su núcleo familiar, quien actualmente habita en la zona ',style:'texto'},
-            {text:zona,style:'texto',bold:true},
-            {text:'identificada como la ocupación ',style:'texto'},
+            {text:', no se encuentra inmerso(a) en ninguna de las causales de no inclusión previstas en el artículo 4° del Decreto Distrital 457 de 2017 modificado por el Decreto Distrital 651 de 2018 y en consecuencia cumple a cabalidad con los requerimientos señalados en la mencionada normatividad, razón por la cual se recomendó su inclusión al programa, junto con su núcleo familiar, quien actualmente habita en la ',style:'texto'},
+   
+            {text:'ocupación ',style:'texto'},
             {text:ocupacion,style:'texto',bold:true},
             {text:' del predio denominado VEREDITAS SECTOR A, ubicada en la ',style:'texto'},
-            {text:direccion,style:'texto',bold:true},
+            {text:dir_campo,style:'texto',bold:true},
+            {text:'(DIRECCIÓN TOMADA EN CAMPO),',style:'texto'},
+            {text:dir_cat,style:'texto',bold:true},
+            {text:'(DIRECCIÓN CATASTRAL),',style:'texto'},
             {text:' a la altura de la UPZ ',style:'texto'},
             {text:upz,style:'texto',bold:true},
             {text:', MANZANA ',style:'texto'},            
@@ -388,14 +395,12 @@ margin: [60, 25],
                       [{text:'Proyectó:',fontSize:8},{text:elaboro+' – Dirección de Reasentamientos.',fontSize:8}],
                       [{text:'Revisó:',fontSize:8},{text:aprobo+' – Dirección de Reasentamientos.',fontSize:8}],
                       [{text:'Revisó:',fontSize:8},{text:'Yamile Patricia Castiblanco Venegas - Profesional – Dirección Jurídica.',fontSize:8}],
-                      [{text:'Revisó:',fontSize:8},{text:'__________________________________________________',fontSize:8}],
-                      [{text:'',fontSize:8},{text:'Abogado – Contratista Dirección Jurídica',fontSize:8}],
-                      [{text:'Revisó:',fontSize:8},{text:'__________________________________________________',fontSize:8}],
-                      [{text:'',fontSize:8},{text:'Abogado – Contratista Dirección Jurídica',fontSize:8}],
+                      [{text:'Revisó:',fontSize:8},{text:aprob_juridica+' – Dirección Jurídica.',fontSize:8}],
+                      [{text:'Revisó:',fontSize:8},{text:'Martha Patricia Ortiz - Contrato No. 288 de 2019 - Dirección Jurídica.',fontSize:8}],
+                      [{text:'Revisó:',fontSize:8},{text:'Nelson Villarraga Quijano - Contrato No. 146 de 2019 - Dirección Jurídica.',fontSize:8}],
                       [{text:'Vo.Bo:',fontSize:8},{text:'Oscar Eduardo Pinilla Pinilla - Director Jurídico',fontSize:8}],
                       [{text:'Aprobó:',fontSize:8},{text:'Isis Paola Díaz Muníz - Directora Técnica de Reasentamientos.',fontSize:8}],
-                      [{text:'\n\nArchivado en:',fontSize:8},{text:'\n\nSerie Resoluciones-Dirección General ',fontSize:8}],
-
+                      [{text:'\n\nArchivado en:',fontSize:8},{text:'\n\nSerie Resoluciones-Dirección General.',fontSize:8}]
                       ]
               },
               layout: 'noBorders'

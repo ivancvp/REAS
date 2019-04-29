@@ -10,6 +10,8 @@ if(!usr_funct.includes(3)){
 validacion();
 
 
+//oculta boton de borrar miembro de la familia
+$('#del_fam').hide();
 
 $('.checkbox').click(function(e){
   e.preventDefault();
@@ -45,6 +47,11 @@ function validacion(){
     }
   });
 
+  $('.documento').keyup(function() {
+   this.value = this.value.replace(/\s/g,'');
+   this.value = this.value.replace(/\./g, "");
+   this.value = this.value.replace(/\,/g, "");
+  });
 
 //Todos los textos a mayusculas
 
@@ -169,9 +176,49 @@ if(age<0 || age>120){
   $(this).val("");
   alert("fecha de nacimiento no valida");
 }
+var indice=$(this).parents("tr").find("th").text();
+
+if(rango_edad=="1"){
+  $('table[data-op="5m"] tr').eq(indice).find('select[data-id="p5_5"]').attr("disabled", false);
+}else {
+  $('table[data-op="5m"] tr').eq(indice).find('select[data-id="p5_5"]').val("NO APLICA").attr("disabled", true);
+}
 
 $(this).parents("tr").find("select[data-id='p2_012']").val(rango_edad);
 
+});
+
+//tipo de beneficiario validación.
+
+$('.tipo_ben').on("change",function(e){
+  e.preventDefault();
+  e.stopImmediatePropagation();
+
+  var indice= $(this).index('.tipo_ben');
+  var valor=$(this).val();
+
+  $('.tipo_ben').each(function(key,value) {
+    if($(this).val()==valor){
+      if($(this).index('.tipo_ben')!==indice){
+        $(this).val("");
+      }
+    }
+
+  });
+
+
+})
+
+//ocultar el checkbox para todos menos el ultimo miembro de la familia
+$('table[data-op="2m"] tr:not(:last-child)').find('div.checkbox').hide();
+
+//borrado de miembro en la familia
+$('.drop_family').change(function(){
+  if($(this).is(":checked")) {
+    $('#del_fam').show();
+  }else {
+    $('#del_fam').hide();
+  }
 });
 
 
@@ -223,6 +270,7 @@ if($(this).val()==="NO"){
 }
 
 });
+
 
 
 //validación pregunta 6.1

@@ -26,7 +26,69 @@ obj["identificador"] =$('#id_ficha_social').val();
 
 
 
+
 }
+
+function guardar_beneficiario(){
+
+  $('.tipo_ben').each(function(key,value) {
+
+    if($(this).val()=="PRINCIPAL" || $(this).val()=="SECUNDARIO"){
+      var identificador=$('#id_ficha_social').val();
+
+      var nom1 = $(this).parents("tr").find('input[data-id="p2_3"]').val().trim();
+      var nom2 = $(this).parents("tr").find('input[data-id="p2_4"]').val().trim();
+
+      var ape1 = $(this).parents("tr").find('input[data-id="p2_5"]').val().trim();
+      var ape2 = $(this).parents("tr").find('input[data-id="p2_6"]').val().trim();
+
+      var ced = $(this).parents("tr").find('input[data-id="p2_011"]').val().trim();
+
+      var nombre_completo=nom1+" "+nom2+" "+ape1+" "+ape2;
+      nombre_completo=nombre_completo.replace(/ +(?= )/g,'');
+    }
+
+    if($(this).val()=="PRINCIPAL"){
+      save_ben("update_ben_principal",identificador,nombre_completo,nom1,nom2,ape1,ape2,ced);
+    }
+    if($(this).val()=="SECUNDARIO"){
+      save_ben('update_ben_secundario',identificador,nombre_completo,nom1,nom2,ape1,ape2,ced);
+    }
+
+  });
+
+  function save_ben(op,identificador,nombre_completo,nom1,nom2,ape1,ape2,ced){
+
+    $datos = {
+         op: op,
+         identificador:identificador,
+         nombre_completo:nombre_completo,
+         nom1:nom1,
+         nom2:nom2,
+         ape1:ape1,
+         ape2:ape2,
+         ced:ced
+     };
+
+     $.ajax({
+       type: "POST",
+       url: "GestionConsultas",
+       data: $datos,
+       dataType: "json",
+       async: false,
+       success: function (response) {
+
+       },
+   });
+  }
+
+
+
+}
+
+
+
+
 
 function guardarFichaFamilia(json){
 
