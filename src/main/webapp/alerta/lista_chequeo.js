@@ -359,6 +359,7 @@ function logica_lista_chequeo(identificador,datos,dat_not,modo){
     
        
         if(modo==2 || usr_funct.includes(24)){
+            
             $('.upd_lista').attr('disabled', 'disabled');
             $(".upd_lista").css({"backgroundColor":"white"});
             $('.rem_lista').remove(); 
@@ -384,7 +385,7 @@ function logica_lista_chequeo(identificador,datos,dat_not,modo){
                 responsable_proceso='199';
             }
             if (identificador.includes("CP19")){
-                responsable_proceso='348';
+                responsable_proceso='351';
             }
             
             var act_padre=1;

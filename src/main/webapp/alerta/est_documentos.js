@@ -819,7 +819,12 @@ function logica_est_documentos(index,res,datos,modo){
             }
             
             if(contar){               
+                
+
                 $('#crear_res,#subir_adenda').show();
+                
+                
+                
                 $('#msg_pdf').hide();
             }else{
                 $('#envio_res,#crear_res,#subir_adenda').hide();
@@ -834,15 +839,25 @@ function logica_est_documentos(index,res,datos,modo){
             if(datos_est.procede==="Si"){
                 siguiente=2;
             }
-           /* 
-            if(identificador.includes("CP19")){
+           
+            if(identificador.includes("CP19") || vereditas){
                 $('#envio_res').hide();
             }else{
                 $('#crear_res').hide();
             }
-            */
+            
+           if(tip_est==='255' || tip_est==='511'){
+               
+           }else{
+               $('#subir_adenda').hide();
+           }
+            
+            
             $('#save_res').css("display","none");
+            
+            
             $(".div_obs").hide();
+
 
             $('#subir_adenda').click(function(){
                 var formulario=21;
@@ -975,7 +990,7 @@ function logica_est_documentos(index,res,datos,modo){
                             }else if((datos["Sector"]?datos["Sector"]:'').toUpperCase()==='GAVILANES'){ 
                                 asignado_a='199';
                             }else if(identificador.includes("CP19")){
-                                asignado_a='348';
+                                asignado_a='351';
                             }
                             else{
                                 asignado_a='199';

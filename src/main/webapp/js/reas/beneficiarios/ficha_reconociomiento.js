@@ -130,13 +130,14 @@ $('#freconocimiento').on('click', function () {
         //                            });
                         });
                         
-                       $('#visita_fallida').on('click', function () {
+
+                    }
+                    
+                  if(usr_funct.includes(25)){
+                        $('#visita_fallida').on('click', function () {
                             gen_visita_fallida(identificador);
                         });
-                        
-                        
-                    }
-                  
+                  }
 
          
                 $('#imprimir_reconocimiento').on('click',function () {

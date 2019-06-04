@@ -121,6 +121,7 @@
                     out.print("var usuario_nombre = '" + ((Map<String, Object>) session.getAttribute("info")).get("usuario_nombre") + "';\n");
                     out.print("var usuario_cargo = '" + ((Map<String, Object>) session.getAttribute("info")).get("usuario_cargo") + "';\n");
                     out.print("var usuario_contrato = '" + ((Map<String, Object>) session.getAttribute("info")).get("usuario_contrato") + "';\n");
+                    out.print("var usuario_contrato1 = '" + ((Map<String, Object>) session.getAttribute("info")).get("usuario_contrato") + "';\n");
                     out.print("var usuario_identificador = '" + ((Map<String, Object>) session.getAttribute("info")).get("usuario_id") + "';\n");
                     out.print("var usr_funct= '" + ((Map<String, Object>) session.getAttribute("info")).get("funcionalidades") + "';\n");
                 }
@@ -459,11 +460,13 @@
                                                             <a href="#" class="btn btn-sm btn-primary" id="freconocimiento">1. <i class="fas fa-file-alt"></i> Ficha de reconocimiento</a>
 
                                                             <br><br>
+                                                         
                                                             <a href="#" class="btn btn-sm btn-primary" id="fcaracterizacion" >2.  <i class="fas fa-users"></i>  Ficha de caracterización</a>
+                                                   
                                                             <br><br>
-                                                           
+                                                           <!--
                                                             <a href="#" class="btn btn-sm btn-primary" id="fichasocial" >2.  <i class="fas fa-users"></i>  Nueva Ficha Social</a>
-                                                       
+                                                            -->
                                                             <%  if (session.getAttribute("user") != null) {
                                                                     out.print("<button type='button' id='lista_chequeo_btn'  class='btn btn-sm btn-success' onclick='hola({formulario:1,index:getURLParams(\"identificador\"),modo:3})'>3. <i class='fas fa-list-ol'></i> Lista de Chequeo</button>");
                                                                 }

@@ -123,7 +123,7 @@ if(!$fecha_elaboracion.value){
     $ape2_2 = document.getElementById("ape2_2").value.toUpperCase().replace("\t", "").trim();
     $ced1 = document.getElementById("cedula_prin").value;
     $ced2 = document.getElementById("cedula_sec").value;
-
+    
     if($ced1===''){
         $ced1=0;
     } 
@@ -205,6 +205,7 @@ if(!$fecha_elaboracion.value){
     
 
 }
+
 function upd_user(){
     
     $identificador = document.getElementById("identificador");
@@ -240,7 +241,9 @@ function upd_user(){
 
 
 function paso2() {
-    $identificador = document.getElementById("identificador");
+    
+
+$identificador = document.getElementById("identificador");
 $dir_campo = document.getElementById("dir_campo").value.toUpperCase().replace("\t", "");
     $dir_cat = document.getElementById("dir_cat");
     $man_cat = document.getElementById("man_cat");

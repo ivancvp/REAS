@@ -579,14 +579,14 @@
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label class="control-label">Manzana</label>
-                                <input type="text" id="man_cat"  class="form-control upd" />
+                                <input type="number" max="10000"  min="0" id="man_cat"  class="form-control upd" />
                             </div>
 
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label class="control-label">Lote</label>
-                                <input type="text" id="lot_cat"  class="form-control upd" />
+                                <input type="number" max="10000" min="0" id="lot_cat"  class="form-control upd" />
                             </div>
 
 
@@ -2941,6 +2941,10 @@
                     uploadUrl: 'FileUploader', // you must set a valid URL here else you will get an error
                     deleteUrl: 'GestionConsultas',
                     allowedFileExtensions: ['jpg', 'png', 'gif'],
+                    maxImageWidth: 1000,
+                    maxFileCount: 1,
+                    resizeImage: true,
+                    showPreview:true,
                         overwriteInitial: false,
                         maxFileCount: 1,
                         validateInitialCount:true,
@@ -2980,6 +2984,7 @@
                 });
  };
 initPlugin();
+
                 fileInput["fileInput" + li].on("filepredelete", function (event, key, jqXHR, data) {
                     var abort = true;
                     if (confirm("Esta seguro de borrar la imágen?")) {
@@ -2991,11 +2996,10 @@ initPlugin();
 
 
                 fileInput["fileInput" + li].on('fileimageloaded', function (event, previewId) {
-                    $('body').loading({
-                        message: 'Cargando imágen, por favor espere'
-                    });
+                    
+                    
                     var src = $('#' + previewId + ' img').attr('src');
-
+                    
                     id_img = $(event.currentTarget).attr('id');
                     if (id_img === 'file-1') {
                         id_img = 1;
@@ -3016,39 +3020,7 @@ initPlugin();
                         id_img = 6;
                     }
 
-                    var canvas = document.getElementById("canvas_pru");
-                    var ctx = canvas.getContext("2d");
-                    var img = new Image();
-
-                    img.onload = function () {
-
-                        // set size proportional to image
-                        canvas.height = canvas.width * (img.height / img.width);
-
-                        // step 1 - resize to 50%
-                        var oc = document.createElement('canvas'),
-                                octx = oc.getContext('2d');
-
-                        oc.width = img.width * 0.5;
-                        oc.height = img.height * 0.5;
-                        octx.drawImage(img, 0, 0, oc.width, oc.height);
-
-                        // step 2
-                        octx.drawImage(oc, 0, 0, oc.width * 0.5, oc.height * 0.5);
-
-                        // step 3, resize to final size
-                        ctx.drawImage(oc, 0, 0, oc.width * 0.5, oc.height * 0.5,
-                                0, 0, canvas.width, canvas.height);
-                        $('body').loading('stop');
-
-                        thumbnail[id_img] = canvas.toDataURL('image/jpeg');
-
-                        $('body').loading('stop');
-                    };
-                    img.src = src;
-
-
-
+                            
 
                 });
 
@@ -3079,12 +3051,12 @@ initPlugin();
                     $identificador = document.getElementById("identificador");
                     identificador_predio = $($identificador).val();
 
-                    var src = $('#' + previewId + ' img').attr('src');
-                    
                     $( this ).parent().parent().hide();
 
 
                 });
+
+
 
                 fileInput["fileInput" + li].on('fileuploaded', function (event, data, previewId, index) {
                     var form = data.form, files = data.files, extra = data.extra,

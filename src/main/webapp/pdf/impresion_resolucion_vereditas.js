@@ -1,5 +1,19 @@
 function imp_resolucion_vereditas(identificador,elaboro,aprobo){
 
+
+
+var fecha_ocupacion="22 de enero de 2019";
+var myStringArray = ["2019-08-385942","2019-08-385947","2019-08-385946","2019-08-385943","2019-08-385944"];
+var arrayLength = myStringArray.length;
+for (var i = 0; i < arrayLength; i++) {
+   if(identificador===myStringArray[i]){
+       fecha_ocupacion="15 de febrero de 2019";
+   }
+}
+
+
+
+
       $datos = {
           op: 'datos_resolucion',
           identificador: identificador
@@ -84,6 +98,9 @@ var aprobo=(resultado["aprobo"]?resultado["aprobo"]:'');
 var aprob_juridica=(resultado["aprob_juridica"]?resultado["aprob_juridica"]:'');
 
 var valor_resol=(resultado["valor_resol"]?resultado["valor_resol"]:'');
+
+
+
 
 var valor_letras=numeroALetras(Number(valor_resol), {
   plural: '',
@@ -269,7 +286,7 @@ margin: [60, 25],
 
 
         {text:[
-            {text:'\nQue de conformidad con el acta de notificación e identificación de la ocupación de fecha 22 de enero de 2019, efectuada por la Alcaldía Local de Kennedy y remitida a la Dirección de Reasentamientos de la Caja de la Vivienda Popular y de acuerdo con lo preceptuado en el estudio de documentos de ',style:'texto'},
+            {text:'\nQue de conformidad con el acta de notificación e identificación de la ocupación de fecha '+fecha_ocupacion+', efectuada por la Alcaldía Local de Kennedy y remitida a la Dirección de Reasentamientos de la Caja de la Vivienda Popular y de acuerdo con lo preceptuado en el estudio de documentos de ',style:'texto'},
             {text:fecha_est+', ',bold:true,style:'texto'},
             {text:' elaborado por el equipo jurídico de la Dirección Técnica de Reasentamientos de la Caja de la Vivienda Popular, se determinó que el señor(a) ',style:'texto'},
             {text:nombre1+', ',bold:true,style:'texto'},

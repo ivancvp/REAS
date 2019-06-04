@@ -57,6 +57,51 @@ function guardar_beneficiario(){
 
   });
 
+save_tel();
+save_elaboro_ficha();
+
+function save_elaboro_ficha(){
+
+  $datos = {
+       op: "update_elaboro_ficha_social",
+       identificador:$('#id_ficha_social').val(),
+       nombre_elaboro:$('#elaboro_nombre').val(),
+       elaboro_contrato:$('#elaboro_contrato').val(),
+       elaboro_fecha:$('#elaboro_fecha').val()
+   };
+
+   $.ajax({
+     type: "POST",
+     url: "GestionConsultas",
+     data: $datos,
+     dataType: "json",
+     async: false,
+     success: function (response) {
+
+     },
+ });
+
+}
+
+function save_tel(){
+  $datos = {
+       op: "save_telefono_ficha_social",
+       identificador:$('#id_ficha_social').val(),
+       telefono:$('#telefono').val(),
+   };
+
+   $.ajax({
+     type: "POST",
+     url: "GestionConsultas",
+     data: $datos,
+     dataType: "json",
+     async: false,
+     success: function (response) {
+
+     },
+ });
+}
+
   function save_ben(op,identificador,nombre_completo,nom1,nom2,ape1,ape2,ced){
 
     $datos = {

@@ -1455,7 +1455,7 @@
         <sql>
         select rv.*,ar.*,df.*,"Cedula 1" as cedula, "Nombre 1" as nom_ben,
 	(select fecha_est from procesos.est_documentos where identificador ='@identificador' and procede='Si'),
-        (select string_agg(folio_est_documentos, ', ') from procesos.lista_chequeo where identificador ='@identificador'),
+        (select string_agg(folio_est_documentos, ', ')as folio_est_documentos from procesos.lista_chequeo where identificador ='@identificador'),
         (select zona from ficha_reconocimiento_v1 where identificador ='@identificador'),
         (select concepto from procesos.aprob_resolucion where identificador='@identificador'),
         (select elaboro from procesos.aprob_resolucion where identificador='@identificador'),
@@ -3138,12 +3138,12 @@
     <Consulta id="get_info_financiera">
         <sql>
             select "IDENTIFICADOR" as id,"Nombre 1" as nom_ben,
-            "Cedula 1" as num_doc, cdp_res as num_cdp, fecha_cdp, num_res,fecha_res,
-            pf.num_rep,fecha_rp,num_cta,ent_ban,val_gir,elaboro,aprobo,concepto
-            from definitiva df inner join procesos.resolucion_vur rv on
+            "Cedula 1" as num_doc, no_cdp as num_cdp, fecha_cdp, no_resol as num_res,fecha_resol as fecha_res,
+            pf.num_rep,rv.fecha_rp,num_cta,ent_ban,val_gir,elaboro,aprobo,concepto
+            from definitiva df inner join financiera_reas.cdp_rp rv on
             df."IDENTIFICADOR"= rv.identificador left join procesos.financiera pf
             on df."IDENTIFICADOR"= pf.identificador left join procesos.aprob_financiera af on df."IDENTIFICADOR"= af.identificador
-            where rv.identificador='@identificador'     
+            where rv.identificador='@identificador' 
             
         </sql>
         <conexion>atencion_reloca</conexion>
@@ -5820,7 +5820,8 @@
     <Consulta id="2m">
         <sql>
             UPDATE FichaSocial.fichasocial_familia
-            SET 	
+            SET
+            tipo_beneficiario='@tipo_beneficiario', 	
             p2_2='@p2_2',
             p2_3='@p2_3',
             p2_4='@p2_4',
@@ -6095,6 +6096,7 @@
             select "Dirección" as direccion,
             "MZ" as manzana,
             "LT" as lote,
+            "Telefono"as telefono,
             "Barrio" as barrio,
             "Localidad" as localidad,
             (SELECT string_agg(concat(concepto_ingreso,' de ' ,fecha_concepto), ', ')
@@ -6163,8 +6165,63 @@
         <permisos>*</permisos>       
     </Consulta>                                                                              
                                                                                                      
-                                                                                                                                                     
-                
+    <Consulta id="update_ben_principal">
+        <sql>
+            update definitiva set 
+            "Nombre 1"='@nombre_completo',
+            "1er_Nombre_Ben1"='@nom1',
+            "2do_Nombre_Ben1"='@nom2',
+            "1er_Apellido_Ben1"='@ape1',
+            "2do_Apellido_Ben1"='@ape2',
+            "Cedula 1"='@ced'
+            where "IDENTIFICADOR"='@identificador';
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>       
+    </Consulta>                                                                                                                                                      
+    <Consulta id="update_ben_secundario">
+        <sql>
+            update definitiva set 
+            "Nombre 2"='@nombre_completo',
+            "1er_Nombre_Ben2"='@nom1',
+            "2do_Nombre_Ben2"='@nom2',
+            "1er_Apellido_Ben2"='@ape1',
+            "2do_Apellido_Ben2"='@ape2',
+            "Cedula 2"='@ced'
+            where "IDENTIFICADOR"='@identificador';
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>       
+    </Consulta>
+    <Consulta id="get_municipios_ficha_social">
+        <sql>
+            select * from "tbl_Municipios";
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>       
+    </Consulta>    
+     <Consulta id="save_telefono_ficha_social">
+        <sql>
+            update definitiva set "Telefono" ='@telefono' where "IDENTIFICADOR"='@identificador';
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>       
+    </Consulta>
+    <Consulta id="update_elaboro_ficha_social">
+        <sql>
+          update fichasocial.aprobacion set 
+            nombre_elaboro='@nombre_elaboro',
+            elaboro_contrato='@elaboro_contrato',
+            elaboro_fecha='@elaboro_fecha',
+            estado_ficha=1 
+            where identificador='@identificador';
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>       
+    </Consulta>    
+                                            
+                                    
+                                                                    
 </Consultas>
 
 

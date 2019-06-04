@@ -475,7 +475,7 @@ var opciones = jQuery.extend({
             lista = 'social_reas';
         }
        
-        if(id_user==='348'){            
+        if(id_user==='351'){            
             lista = 'est_doc_caracoli';
         }
         
@@ -675,7 +675,7 @@ function puede_reasignar(i) {
     var lider = '';
 
 
-    if (usuario_identificador === '152' || usuario_identificador === '348' || usuario_identificador === '168' || usuario_identificador === '76' || usuario_identificador === '117' || usuario_identificador === '9' || usuario_identificador === '199' || usuario_identificador === '16' || usuario_identificador === '196') {
+    if (usuario_identificador === '351' || usuario_identificador === '152' || usuario_identificador === '351' || usuario_identificador === '168' || usuario_identificador === '76' || usuario_identificador === '117' || usuario_identificador === '9' || usuario_identificador === '199' || usuario_identificador === '16' || usuario_identificador === '196') {
         var lider = '<button type="button" class="btn btn-link btn-xs" onclick="hola({formulario:\'reasignar\',index:' + i + ',modo:1})" data-toggle="tooltip" data-placement="bottom" title="Reasignar">' +
                     '<i class="fas fa-list-ul"></i>' +
                     '</button>';
@@ -713,7 +713,7 @@ function notificacion(i) {
     function seguir_form(act_previa,act_nueva){
         var str='';
         
-        if(act_previa===6 || act_nueva===6 || act_previa===7 || act_nueva===7 || act_previa===9 || act_nueva===9 || act_previa===11 || act_nueva===11 || act_previa===20 || act_nueva===20 || act_previa===22 || act_nueva===22 || act_previa===24 || act_nueva===24){
+        if(act_previa===6 || act_nueva===6 || act_previa===7 || act_nueva===7 || act_previa===9 || act_nueva===9 || act_previa===11 || act_nueva===11 || act_previa===20 || act_nueva===20 || act_previa===22 || act_nueva===22 || act_previa===24 || act_nueva===27 || act_nueva===26){
             
         }else{
             str= '<button type="button" class="btn btn-link btn-xs" id="reg'+i+'" onclick="hola({formulario:5,index:' + i + ',modo:1})" data-toggle="tooltip" data-placement="bottom" title="Regresar tarea">' +

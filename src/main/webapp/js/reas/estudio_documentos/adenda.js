@@ -319,6 +319,8 @@ var seguir_archivo=false;
 
  function logica_adenda(identificador,modo,id_proceso,id_actividad,tipo_estudio,creado_por){
 
+
+
 id_act=id_actividad;
 
 $('#quitar_noti').hide();
@@ -605,6 +607,8 @@ $('#save_adenda').click(function () {
 
 $('#impr_adenda').click(function(){
   
+
+  
  var doc = imp_adenda(nom_ela,nom_apr,tipo_estudio);
 
     
@@ -657,6 +661,11 @@ $('#rev_adenda').unbind("click").one('click',function(){
         guardar($('#select_adenda').val(),1,tipo_estudio);
         
         var asignado_a=get_usuario_tarea(22);
+        
+        
+        if(identificador.includes("CP19")){
+           asignado_a=get_usuario_tarea(26);
+        }
         
         if(creado_por!==asignado_a){
             asignado_a=creado_por;

@@ -158,22 +158,35 @@ $.reas('reas', {
                                             '</div>' +
                                             ' </div>' +
                                             '</div>');
+
+
+if($('#fech_act').val()===''){
+   $('button[name="fech_ver"]').hide();
+}
                                     
 $('.pdf_fecha').click(function(){
+
+
     
 var fecha_btn=$('#'+this.attributes["name"].value).val();   
 var fecha_input=this.attributes["name"].value;
 
+var fecha_inicial="1950-01-01";
 
 
 if(this.attributes["name"].value==='fech_ver'){
   var tipo='Acta de verificación de traslado';
-  var codigo_pdf='7201';  
+  var codigo_pdf='7201';
+  
+  fecha_inicial=$('#fech_act').val();
 }
+
 if(this.attributes["name"].value==='fech_act'){
   var tipo='Acta de entrega alternativa habitacional';
-  var codigo_pdf='7101';  
+  var codigo_pdf='7101';
+  fecha_inicial=fecha_inicial_mes_habil_2_dias();
 }
+
 if(this.attributes["name"].value==='fech_par'){
   var tipo='Acta de Entrega del Predio en Alto Riesgo a CVP';
   var codigo_pdf='7305';  
@@ -181,10 +194,36 @@ if(this.attributes["name"].value==='fech_par'){
 
 
 
-generar_contenedor_pdf_fecha(tipo,false);
+generar_contenedor_pdf_fecha(tipo,fecha_inicial,false);
 
 
-function generar_contenedor_pdf_fecha(tipo,contar){
+function fecha_inicial_mes_habil_2_dias(){
+    
+    var daystartOfMonth = moment().startOf('month').day();
+
+var startOfMonth=moment().startOf('month').format("YYYY-MM-DD"); 
+
+var dayIncrement = 1;
+
+if(daystartOfMonth===4 ){
+    dayIncrement=2;
+}
+else if(daystartOfMonth===5){
+    dayIncrement=4;
+}
+else if(daystartOfMonth===6){
+    dayIncrement=4;
+}
+else if(daystartOfMonth===7){
+    dayIncrement=3;
+}else{
+    dayIncrement=2;
+}
+
+return moment(startOfMonth).add(dayIncrement, 'd').format("YYYY-MM-DD");
+}
+
+function generar_contenedor_pdf_fecha(tipo,date_inicial,contar){
 
     var identificador = document.getElementById("identificador").innerHTML;
     var contenido=
@@ -226,14 +265,26 @@ function generar_contenedor_pdf_fecha(tipo,contar){
     $('#modal_form').modal('show');  
 
 
+
 var date = moment(fecha_btn);
 var dia_de_hoy=moment(new Date()).format("YYYY-MM-DD"); 
-var fecha_inicial=moment("1950-01-01");
+var fecha_inicial=moment(date_inicial);
 
-if(date.isBetween(fecha_inicial,dia_de_hoy)){
+if(fecha_btn!==""){
     $('#fecha_pdf').val(fecha_btn);
     $('#fecha_pdf').attr('disabled', true);
 }
+
+
+$('#fecha_pdf').focusout(function(){
+    var fecha=moment($(this).val());
+    if(fecha.isBetween(fecha_inicial,dia_de_hoy)){
+
+}else{
+ $(this).val("");   
+}
+
+})
 
     
 $('#input-b1_error').hide();
@@ -241,6 +292,7 @@ $('#input-b1_error').hide();
 
 
  $('.sandbox-container input').datepicker({
+    startDate: date_inicial,
     format: "yyyy-mm-dd",
     weekStart: 1,
     todayBtn: "linked",

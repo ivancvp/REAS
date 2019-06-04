@@ -108,7 +108,7 @@ function img_ubi(callback){
 
 Jimp.read(img_ubicacion).then(function (lenna) {
             
-            lenna.getBase64(Jimp.MIME_PNG, function (err, src) {                
+            lenna.resize(500, 500).getBase64(Jimp.MIME_PNG, function (err, src) {                
                 img_ubicacion=src;
                
                 callback();
@@ -121,7 +121,7 @@ function img_plano(callback){
 
 Jimp.read(can).then(function (lenna) {
             
-            lenna.getBase64(Jimp.MIME_PNG, function (err, src) {                
+            lenna.resize(500, 500).getBase64(Jimp.MIME_PNG, function (err, src) {                
                 can=src;
                
                 callback();
@@ -134,7 +134,7 @@ function img_1(callback){
 
 Jimp.read(img_ext).then(function (lenna) {
             
-            lenna.getBase64(Jimp.MIME_PNG, function (err, src) {                
+            lenna.resize(500, 500).getBase64(Jimp.MIME_PNG, function (err, src) {                
                 img_ext=src;
                 
                 callback();
@@ -146,7 +146,7 @@ function img_2(callback){
 
 Jimp.read(img_esp).then(function (lenna) {
             
-            lenna.getBase64(Jimp.MIME_PNG, function (err, src) {                
+            lenna.resize(500, 500).getBase64(Jimp.MIME_PNG, function (err, src) {                
                 img_esp=src;
                 
                 callback();
@@ -158,7 +158,7 @@ function img_3(callback){
 
 Jimp.read(img_coc).then(function (lenna) {
             
-            lenna.getBase64(Jimp.MIME_PNG, function (err, src) {                
+            lenna.resize(500, 500).getBase64(Jimp.MIME_PNG, function (err, src) {                
                 img_coc=src;
                 
                 callback();
@@ -170,7 +170,7 @@ Jimp.read(img_coc).then(function (lenna) {
 
 Jimp.read(img_nom).then(function (lenna) {
             
-            lenna.getBase64(Jimp.MIME_PNG, function (err, src) {                
+            lenna.resize(500, 500).getBase64(Jimp.MIME_PNG, function (err, src) {                
                 img_nom=src;
                 
                 callback();
@@ -182,7 +182,7 @@ function img_5(callback){
 
 Jimp.read(img_hab).then(function (lenna) {
             
-            lenna.getBase64(Jimp.MIME_PNG, function (err, src) {                
+            lenna.resize(500, 500).getBase64(Jimp.MIME_PNG, function (err, src) {                
                 img_hab=src;
                
                 callback();
@@ -195,7 +195,7 @@ function img_6(callback){
 
 Jimp.read(img_usa).then(function (lenna) {
             
-            lenna.getBase64(Jimp.MIME_PNG, function (err, src) {                
+            lenna.resize(500, 500).getBase64(Jimp.MIME_PNG, function (err, src) {                
                 img_usa=src;
                 
                 callback();

@@ -260,6 +260,11 @@
 
 
   </style>
+
+
+  <link href="js/vendors/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet">
+
+
 </head>
 
 
@@ -303,7 +308,7 @@
       <div class="col-md-12">
         <div class="form-group">
           <label>Versión de la ficha social</label>
-          <select class="form-control obligatorio" data-id="version"><option value=""></option><option value="6">Versión 6</option><option value="7">Versión 7</option></select>
+          <select class="form-control obligatorio" data-id="version"><option value=""></option><option value="6">Versión 6</option><option value="7">Versión 7</option><option value="8">Versión 8</option></select>
         </div>
       </div>
     </div>
@@ -359,7 +364,29 @@
           <input class="form-control" id="localidad" disabled></input>
         </div>
       </div>
+
+
     </div>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="form-group">
+      <label>1.8 Telefono</label>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6 form-inline">
+
+    <div class="form-group">
+        <input class="form-control obligatorio" id="telefono"></input>
+    </div>
+    <div class="form-group">
+       <button type="button" class="btn btn-default" id="sin_telefono" ><i class="fas fa-phone-slash"></i> Sin telefono</button>
+    </div>
+  </div>
+
+</div>
 
 </div>
 </div>
@@ -411,7 +438,7 @@
           <tr>
             <th style="width:20px" scope="col">#</th>
             <th style="width:80px" scope="col">Selección</th>
-            <th style="width:200px" scope="col">Tipo de beneficiario</th>
+            <th style="width:200px" scope="col" id="tit_tipo_beneficiario">Tipo de beneficiario</th>
             <th style="width:200px" scope="col">2.2 Parentesco</th>
             <th style="width:200px" scope="col">2.3 Primer Nombre</th>
             <th style="width:200px" scope="col">2.4 Segundo Nombre</th>
@@ -460,7 +487,7 @@
                 <div class="span5 sandbox-container"><input type="text" class="form-control fecha obligatorio fecha_nacimiento" data-id="p2_7"></div>
               </div>
             </td>
-            <td><input class="form-control obligatorio" data-id="p2_8"></input></td>
+            <td><select class="form-control obligatorio selectpicker" data-id="p2_8">  <option value="">Seleccione...</option></select></td>
             <td><select class="form-control obligatorio" data-id="p2_9">
               <option value="">Seleccione...</option>
               <option value="1">CC: Cédula de ciudadania</option>
@@ -532,8 +559,10 @@
             <th style="width:100px" scope="col">3.6 <button type="button" class="btn btn-primary btn-xs" data-toggle="popover" data-trigger="focus" title="¿Es victima del conflicto armado? (Si/No)"  data-content="Si la respuesta es No pase al numeral 3.10"><span class="glyphicon glyphicon-info-sign"></span> </button></th>
             <th style="width:100px" scope="col">3.7 <button type="button" class="btn btn-primary btn-xs" data-toggle="popover" data-trigger="focus" title="Para victimas del conflicto armado:" data-content="¿Se encuentra inscrito en el registro Unico de victimas? (Si/No/No Aplica) Solicite ver resolución"><span class="glyphicon glyphicon-info-sign"></span> </button></th>
             <th style="width:100px" scope="col">3.8 <button type="button" class="btn btn-primary btn-xs" data-toggle="popover" data-trigger="focus" title="Ha sufrido desplazamiento por el conflicto armado?" data-content="(Si/No/No Aplica)"><span class="glyphicon glyphicon-info-sign"></span> </button></th>
-            <th style="width:100px" scope="col">3.9 <button type="button" class="btn btn-primary btn-xs" data-toggle="popover" data-trigger="focus" title="Para desplazados: ¿Quisiera retornar?" data-content="(Si/No/No Aplica)"><span class="glyphicon glyphicon-info-sign"></span> </button></th>
-            <th style="width:100px" scope="col">3.10 <button type="button" class="btn btn-primary btn-xs" data-toggle="popover" data-trigger="focus" title="Desmovilizado de grupos armados" data-content="Si/No"><span class="glyphicon glyphicon-info-sign"></span> </button></th>
+            <th style="width:100px" scope="col">3.9 <button id="btn_msg_3_9a" type="button" class="btn btn-primary btn-xs" data-toggle="popover" data-trigger="focus" title="Para desplazados: ¿Quisiera retornar?" data-content="(Si/No/No Aplica)"><span class="glyphicon glyphicon-info-sign"></span> </button>
+                                                    <button id="btn_msg_3_9b" type="button" class="btn btn-primary btn-xs" data-toggle="popover" data-trigger="focus" title="Para desplazados: ¿Desearía Retornar, o adquirir una vivienda fuera de la ciudad?" data-content="(Si/No/No Aplica)"><span class="glyphicon glyphicon-info-sign"></span> </button></th>
+            <th style="width:100px" scope="col">3.10 <button id="btn_msg_3_10_a" type="button" class="btn btn-primary btn-xs" data-toggle="popover" data-trigger="focus" title="Desmovilizado de grupos armados" data-content="Si/No"><span class="glyphicon glyphicon-info-sign"></span> </button>
+                                                     <button id="btn_msg_3_10_b" type="button" class="btn btn-primary btn-xs" data-toggle="popover" data-trigger="focus" title="Desmovilizado de grupos armados" data-content="Si/No"><span class="glyphicon glyphicon-info-sign"></span> </button></th>
           </tr>
         </thead>
         <tbody>
@@ -638,6 +667,7 @@
               <option value="4">4. Primera infancia</option>
               <option value="5">5. Madre Gestante/lactante</option>
               <option value="6">6. Otro</option>
+              <option value="NO">No</option>
             </select></td>
             <td><input class="form-control" data-id="p4_2"></input></td>
           </tr>
@@ -661,8 +691,8 @@
           <tr>
             <th style="width:20px" scope="col">#</th>
             <th style="width:100px" scope="col">5.1 ¿Sabe leer y escribir?</th>
-            <th style="width:100px" scope="col">5.2 ¿Ultimo grado aprobado</th>
-            <th style="width:100px" scope="col">5.3 ¿Actualmente estudia? <button type="button" class="btn btn-primary btn-xs" data-toggle="popover" data-trigger="focus" title="Si la respuesta es SI pase al numeral 5.5" data-content=""><span class="glyphicon glyphicon-info-sign"></span> </button></th>
+            <th style="width:100px" scope="col">5.2 ¿Actualmente estudia? <button type="button" class="btn btn-primary btn-xs" data-toggle="popover" data-trigger="focus" title="Si la respuesta es SI pase al numeral 5.5" data-content=""><span class="glyphicon glyphicon-info-sign"></span> </button></th>
+            <th style="width:100px" scope="col">5.3 ¿Último grado aprobado</th>
             <th style="width:100px" scope="col">5.4 ¿Cuál es la principal razón para que ... no estudie?</th>
             <th style="width:100px" scope="col">5.5 Menores de 5 años. <button type="button" class="btn btn-primary btn-xs" data-toggle="popover" data-trigger="focus" title="¿Asiste a hogar del ICBF, Jardín Infantil o Casa Vecinal de la SDIS? (Si/No/No aplica)" data-content=""><span class="glyphicon glyphicon-info-sign"></span> </button></th>
           </tr>
@@ -677,6 +707,11 @@
             </select></td>
             <td><select class="form-control" data-id="p5_2">
               <option value="">Seleccione...</option>
+              <option value="SI">Si</option>
+              <option value="NO">No</option>
+            </select></td>
+            <td><select class="form-control" data-id="p5_3">
+              <option value="">Seleccione...</option>
               <option value="1">1. Pre-escolar</option>
               <option value="2">2. Básica Primaria (1 a 5)</option>
               <option value="3">3. Bachillerato Básico (6 a 9)</option>
@@ -687,11 +722,6 @@
               <option value="8">8. Especialización/Maestria</option>
               <option value="9">9. Ninguno</option>
               <option value="10">10. Otro</option>
-            </select></td>
-            <td><select class="form-control" data-id="p5_3">
-              <option value="">Seleccione...</option>
-              <option value="SI">Si</option>
-              <option value="NO">No</option>
             </select></td>
             <td><select class="form-control" data-id="p5_4">
               <option value="">Seleccione...</option>
@@ -768,6 +798,7 @@
             <td><select class="form-control" data-id="p6_5">
               <option value="">Seleccione...</option>
               <option value="NO">No</option>
+              <option value="SI">Si</option>
               <option value="NO APLICA">No aplica</option>
             </select></td>
           </tr>
@@ -951,7 +982,7 @@
       </div>
     </div>
 
-    <div class="grupo">
+    <div class="grupo" id="condition_p710">
       <div class="row">
         <div class="col-md-12">
           <h4 >7.11 Si el inmueble tiene destinación mixta (opción 6) diligencie los siguientes campos</h4>
@@ -1042,7 +1073,7 @@
 
         <div class="col-md-4">
           <div class="form-group">
-            <label>7.11.10 Área de la vivienda para realizar la actividad (en metros)</label>
+            <label>7.11.10 Área de la vivienda para realizar la actividad (en metros cuadrados)</label>
             <input class="form-control numto999" data-id="p7_11_010"></input>
           </div>
         </div>
@@ -1240,8 +1271,15 @@
             <label>8.6.1 Las paredes son mayoritariamente de bloque, ladrillo, piedra, madera pulida, concreto vaciado y/o material prefabricado</label>
             <select class="form-control" data-id="p8_6_1">
               <option value="">Seleccione...</option>
-              <option value="SI">Si</option>
-              <option value="NO">No</option>
+              <option version="old" value="SI">Si</option>
+              <option version="old" value="NO">No</option>
+              <option version="8" value="1">Bloque, ladrillo, piedra, madera pulida</option>
+              <option version="8" value="2">Tapia pisada, adobe</option>
+              <option version="8" value="3">Bahareque revocado</option>
+              <option version="8" value="4">Bahareque sin revocar</option>
+              <option version="8" value="5">Madera burda, tabla, tablón</option>
+              <option version="8" value="6">Material prefabricado</option>
+
             </select>
           </div>
         </div>
@@ -1252,8 +1290,14 @@
             <label>8.6.2 La vivienda tiene mayoritariamente pisos en tierra?</label>
             <select class="form-control" data-id="p8_6_2">
               <option value="">Seleccione...</option>
-              <option value="SI">Si</option>
-              <option value="NO">No</option>
+              <option version="old" value="SI">Si</option>
+              <option version="old" value="NO">No</option>
+              <option version="8" value="1">Alfombra o tapete de pared a pared</option>
+              <option version="8" value="2">Madera pulida y lacada, parqué </option>
+              <option version="8" value="3">Mármol </option>
+              <option version="8" value="4">Baldosa, vinilo, tableta, ladrillo, laminado o flotante.</option>
+              <option version="8" value="5">Madera burda, tabla o tablón, otro vegetal.</option>
+              <option version="8" value="5">Cemento gravilla, Tierra arena.</option>
             </select>
           </div>
         </div>
@@ -1276,7 +1320,7 @@
       <div class="col-md-12">
         <div class="form-group">
           <label>8.7 Cuántas unidades habitacionales se identifican? (Consultar guia de apoyo) <button type="button" class="btn btn-success btn-sm" data-toggle="popover" data-trigger="focus" title="Información" data-content="Unidad habitacional se entiende como: Espacio independiente con habitación(es) y cocina de uso exclusivo por parte del hogar, entendido por tal la persona o grupo de personas, vinculados o no por lazos de parentesco, que atienden necesidades básicas con cargo a un presupuesto común y que generalmente comparten comidas"><span class="glyphicon glyphicon-info-sign"></span> </button></label>
-          <input class="form-control" data-id="p8_7"></input>
+          <input class="form-control numto999" data-id="p8_7"></input>
         </div>
       </div>
     </div>
@@ -3819,19 +3863,19 @@
         <div class="col-md-4">
           <div class="form-group">
             <label>Fecha:</label>
-            <input class="form-control" ></input>
+            <input class="form-control" id="elaboro_fecha" disabled></input>
           </div>
         </div>
         <div class="col-md-4">
           <div class="form-group">
             <label>Contrato</label>
-            <input class="form-control" ></input>
+            <input class="form-control" id="elaboro_contrato" disabled></input>
           </div>
         </div>
         <div class="col-md-4">
           <div class="form-group">
             <label>Nombre</label>
-            <input class="form-control" ></input>
+            <input class="form-control"  id="elaboro_nombre" disabled></input>
           </div>
         </div>
       </div>
@@ -3911,7 +3955,22 @@
 <script src="js/reas/FichaSocial/traerdatos.js"></script>
 <script src="js/reas/FichaSocial/aprobacion.js"></script>
 
+
+
+<script src="js/vendors/bootstrap-select/js/bootstrap-select.min.js"></script>
+
+
+
 <script>
+
+$('select[data-id="p2_8"]').selectpicker({
+  liveSearch: true,
+
+});
+
+$('select[data-id="p2_8"]').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
+  $('select[data-id="p2_8"]').selectpicker('toggle');
+});
 
 $('[data-toggle="popover"]').popover();
 

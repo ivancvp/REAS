@@ -190,7 +190,8 @@ $("input:disabled").css({"backgroundColor":"white"});
 
 setTimeout(function(){
 
-    
+
+ 
 var dia_de_hoy=moment(new Date()).format("DD/MM/YYYY");
 
 

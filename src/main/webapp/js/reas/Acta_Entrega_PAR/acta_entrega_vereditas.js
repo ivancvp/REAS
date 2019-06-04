@@ -132,7 +132,7 @@ setTimeout(function(){
             $('#ben1').val(resultado["nombre_beneficiario"]?resultado["nombre_beneficiario"]:'');
             $('#ced').val(resultado["cedula"]?resultado["cedula"]:'');
             
-            /*
+           
             if(resultado["cerrado"]?resultado["cerrado"]:false){
                 
                 $( "#titulo" ).after( '<p>Acta de Entrega cargada por: <b>'+resultado["elaboro"]+' </b></p>' );
@@ -143,7 +143,7 @@ setTimeout(function(){
                 $(".disponible").css({"backgroundColor":"white"});
                 $('#enviar_acta_vereditas').text("Enviar a Financiera");               
                 
-            }*/
+            }
         },
         error: function (response) {
             alert("Ocurrió un error al almacenar la información");
@@ -296,7 +296,7 @@ $(".fecha_validate").blur(function(){
 $( "#enviar_acta_vereditas" ).click(function() {
     
     /*Temporal para Caracoli*/
-    guardar(false);
+    guardar(true);
     
     var conta=0;
     
@@ -348,7 +348,7 @@ if(conta>0){
     alertify.error("Revise los campos obligatorios");
 }else{
    
-  /* Quitar el comentario para enviar a Financiera.
+
    
     var identificador=datos["identificador"];
     var id_actividad = datos["id_actividad"];       
@@ -389,7 +389,6 @@ if(conta>0){
          });
          $('#modal_form').modal('toggle');
 
-*/
 }
 
          

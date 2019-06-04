@@ -58,7 +58,7 @@ e.preventDefault();
 
 
 
-})
+});
 
 
 function cuerpo_ficha(){
@@ -85,7 +85,6 @@ function cuerpo_ficha(){
     '</div>';
 
     $('#form').append(contenido);
-
 
    }
 });

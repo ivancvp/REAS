@@ -28,7 +28,7 @@ $('#verificar_miembro').click(function(){
 
 var tipo=$('#sel_tipo_identificacion').val();
 var num=$('#num_identificacion').val();
-var tipo_identificacion_nueva=tipo+num;
+var tipo_identificacion_nueva=num;
 
 if(tipo=="" || num==""){
   $.alert({
@@ -42,7 +42,7 @@ if(tipo=="" || num==""){
 
   $('input[data-id="p2_011"]').each(function(key,value) {
 
-  var tipo_identificacion=$(this).parents("tr").find('select[data-id="p2_9"]').val()+$(this).val();
+  var tipo_identificacion=$(this).val();
 
   if(tipo_identificacion_nueva==tipo_identificacion){
     valida=1;
@@ -155,13 +155,13 @@ function borrar_miembro(){
 
 
 var conta=0;
-$('table[data-op="2m"] tr:last').find("input,select").each(function(key,value) {
+$('table[data-op="2m"] tr:last').find("input:not([type='checkbox'],[role='combobox']),select").each(function(key,value) {
 
 
 if($(this).val()==""){
   conta=conta+1;
 }
-
+console.log($(this))
 });
 
 if(conta==14){

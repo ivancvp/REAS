@@ -43,7 +43,25 @@ $.ajax({
 });
 
 
+var obj = {}
+obj["identificador"] =identificador;
+obj["op"] ='get_municipios_ficha_social';
+$.ajax({
+  type: "GET",
+  url: "GestionConsultas",
+  data: obj,
+  dataType: "json",
+  async: false,
+  success: function (response) {
+    console.log(response)
 
+  for(i=0;i<=response.length;i++){
+    $('select[data-id="p2_8"]').append('<option val="'+response[i].Nom_Municipio+'">'+response[i].Nom_Municipio+'</option>');
+  }
+
+
+  },
+});
 
 
 
@@ -195,6 +213,7 @@ for (var i = 1; i < rowCount; i++) {
 
   }
 
+validacion();
   var loop=1;
   $('select[data-id="p2_012"]').each(function(key,value) {
 
@@ -207,5 +226,13 @@ for (var i = 1; i < rowCount; i++) {
 
   loop=loop+1;
   });
+
+
+
+
+
+
+
+
 
 });
