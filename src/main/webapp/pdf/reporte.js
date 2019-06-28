@@ -345,7 +345,8 @@ img_ubi(function(){
                                     
                                     
                                     fecha_elaboracion = resultados["fecha_elaboracion"];
-                                    concepto =(resultados["con_ingreso"]?resultados["con_ingreso"]:'').trim();  
+                                    
+                                    concepto =(resultados["con_ingreso"]?resultados["con_ingreso"]:'');
                                     
                                     nombre_visita =(resultados["nombre_visita"]?resultados["nombre_visita"]:'Sin Información').trim().replace(/(\r\n|\n|\r|\t)/gm,"").replace(/ +(?= )/g,'');                                    
                                     cedula_visita =(resultados["cedula_visita"]?resultados["cedula_visita"]:'Sin Información').trim();

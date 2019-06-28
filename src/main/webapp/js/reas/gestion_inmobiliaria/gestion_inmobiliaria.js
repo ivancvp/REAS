@@ -1,5 +1,5 @@
  
- function general_gestion_inmobiliaria(){
+ function general_gestion_inmobiliaria(identificador){
      var contenido=
 '<div class="modal-header">' +
                 '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>' +
@@ -20,8 +20,9 @@
 '        <li><a href="#step-1"><i class="fas fa-building"></i><br /><small>Proyectos</small></a></li>'+
 '        <li><a href="#step-2"><i class="fas fa-home"></i><br /><small>Selección de vivienda</small></a></li>'+
 '        <li><a href="#step-3"><i class="fas fa-info"></i><br /><small>Cruces de información</small></a></li>'+
-'        <li><a href="#step-4"><i class="fas fa-file-alt"></i><br /><small>Desestimientos</small></a></li>'+
-'        <li><a href="#step-5"><i class="fas fa-gavel"></i><br /><small>Sanciones</small></a></li>'+
+'        <li><a href="#step-4"><i class="fas fa-info"></i><br /><small>Estados</small></a></li>'+
+'        <li><a href="#step-5"><i class="fas fa-file-alt"></i><br /><small>Desestimientos</small></a></li>'+
+'        <li><a href="#step-6"><i class="fas fa-gavel"></i><br /><small>Sanciones</small></a></li>'+
 '    </ul>'+
 '<div>'+
 '        <div id="step-1" class="">'+
@@ -106,17 +107,8 @@
                         '<div class="form-group"> '+
                            '<label class="control-label">Nombre del beneficiario</label> '+
                            '<div class="row" > '+
-                                '<div class="col-md-3" style="padding-right:0"> '+
-                                     '<input type="text" class="form-control" style="text-transform: uppercase" id="nom1" placeholder="Nombre 1" > '+
-                                '</div> '+
-                                '<div class="col-md-3" style="padding-right:0;padding-left:0"> '+
-                                    '<input type="text" class="form-control" style="text-transform: uppercase" id="nom2" placeholder="Nombre 2" > '+
-                                '</div> '+
-                                '<div class="col-md-3" style="padding-right:0;padding-left:0"> '+
-                                    '<input type="text" class="form-control" style="text-transform: uppercase" id="ape1" placeholder="Apellido 1" > '+
-                                '</div> '+
-                                '<div class="col-md-3" style="padding-left:0"> '+
-                                    '<input type="text" class="form-control" style="text-transform: uppercase" id="ape2" placeholder="Apellido 2" > '+
+                                '<div class="col-md-12" style="padding-right:0"> '+
+                                     '<input type="text" class="form-control nombre" style="text-transform: uppercase" placeholder="Nombre" disabled> '+
                                 '</div> '+
                            '</div> '+
                        '</div> '+
@@ -125,7 +117,7 @@
                     '<div class="col-md-3"> '+
                        '<div class="form-group"> '+
                            '<label class="control-label">Cédula</label> '+
-                           '<input type="text" class="form-control numeric tel" id="cedula" placeholder="Cédula" > '+
+                           '<input type="text" class="form-control cedula"  placeholder="Cédula" disabled> '+
                        '</div> '+
                    '</div> '+
                 '</div> '+  
@@ -134,19 +126,19 @@
                     '<div class="col-md-6"> '+
                         '<div class="form-group"> '+
                         '<label class="control-label">Proyecto escogido</label> '+
-                        '<input type="text" class="form-control for_table " > '+
+                        '<input type="text" class="form-control db sel_proyecto" id="sel_proyecto"> '+
                         '</div> '+ 
                     '</div> '+                        
                     '<div class="col-md-3"> '+
                         '<div class="form-group"> '+
                         '<label class="control-label">Torre</label> '+
-                        '<input type="text" class="form-control for_table " > '+
+                        '<input type="text" class="form-control db" id="sel_torre"> '+
                         '</div> '+ 
                     '</div> '+                       
                     '<div class="col-md-3"> '+
                         '<div class="form-group"> '+
                         '<label class="control-label">Apartamento</label> '+
-                        '<input type="text" class="form-control for_table " > '+
+                        '<input type="text" class="form-control db" id="sel_apto" > '+
                         '</div> '+ 
                     '</div> '+                        
                 '</div> '+                 
@@ -155,14 +147,14 @@
                         '<div class="col-md-4"> '+
                             '<div class="form-group"> '+
                                 '<label for="sandbox-container" class="control-label">Fecha de selección </label> '+
-                                '<div class="span5 sandbox-container"><input  type="text" class="form-control upd fecha" id="fecha_acta" placeholder="Fecha"></div>'+
+                                '<div class="span5 sandbox-container"><input  type="text" class="form-control upd fecha db" id="sel_fecha_sel" placeholder="Fecha"></div>'+
                             '</div> '+
                         '</div> '+
                 '</div> '+                 
                 
 
+        '<button type="button" class="btn btn-primary" id="save_sel_vivienda"><i class="fas fa-save"></i> Guardar</button>' +
 
-          
 
 
 '        </div> '+ 
@@ -179,7 +171,7 @@
                 '<div class="col-md-12"> '+
                     '<div class="form-group"> '+
                     '<label class="control-label">Sentencia (origen)</label> '+
-                    '<input type="text" class="form-control for_table " > '+
+                    '<input type="text" class="form-control db" id="cru_sentencia" > '+
                     '</div> '+ 
                 '</div> '+                        
             '</div> '+   
@@ -188,7 +180,7 @@
                 '<div class="col-md-12"> '+
                     '<div class="form-group"> '+
                     '<label class="control-label">Causal</label> '+
-                    '<input type="text" class="form-control for_table " > '+
+                    '<input type="text" class="form-control db" id="cru_causal" > '+
                     '</div> '+ 
                 '</div> '+                        
             '</div> '+ 
@@ -198,7 +190,7 @@
                 '<div class="col-md-12"> '+
                     '<div class="form-group"> '+
                     '<label class="control-label">Nombre de la entidad</label> '+
-                    '<input type="text" class="form-control for_table" > '+
+                    '<input type="text" class="form-control db" id="cru_entidad"> '+
                     '</div> '+ 
                 '</div> '+                        
             '</div> '+ 
@@ -208,7 +200,7 @@
                 '<div class="col-md-12"> '+
                     '<div class="form-group"> '+
                     '<label class="control-label">Inscripción (Si/No)</label> '+
-                    '<select class="form-control for_table " ><option value="">Seleccione</option><option value="SI">SI</option><option value="NO">NO</option></select> '+
+                    '<select class="form-control db" id="cru_inscripcion" ><option value="">Seleccione</option><option value="SI">SI</option><option value="NO">NO</option></select> '+
                     '</div> '+ 
                 '</div> '+                        
             '</div> '+ 
@@ -218,27 +210,29 @@
                 '<div class="col-md-12"> '+
                     '<div class="form-group"> '+
                     '<label class="control-label">Fecha de inscripción</label> '+
-                    '<div class="span5 sandbox-container"><input  type="text" class="form-control upd fecha" id="fecha_acta" placeholder="Fecha"></div>'+
+                    '<div class="span5 sandbox-container"><input  type="text" class="form-control upd fecha db" id="cru_fecha_inscripcion" placeholder="Fecha"></div>'+
                     '</div> '+ 
                 '</div> '+                        
             '</div> '+ 
             
-            '<div class="row"> '+
+ 
+                
+        '<button type="button" class="btn btn-primary" id="save_cruces_informacion"><i class="fas fa-save"></i> Guardar</button>' +
+             
+             
+'        </div> '+ 
+
+'        <div id="step-4" class="">'+
+        '<h2>Estados</h2>'+
+        
+        
+                    '<div class="row"> '+
                 '<div class="col-md-9"> '+
                    '<div class="form-group"> '+
                        '<label class="control-label">Nombre del beneficiario</label> '+
                        '<div class="row" > '+
-                            '<div class="col-md-3" style="padding-right:0"> '+
-                                 '<input type="text" class="form-control " style="text-transform: uppercase" id="nom1" placeholder="Nombre 1" > '+
-                            '</div> '+
-                            '<div class="col-md-3" style="padding-right:0;padding-left:0"> '+
-                                '<input type="text" class="form-control" style="text-transform: uppercase" id="nom2" placeholder="Nombre 2" > '+
-                            '</div> '+
-                            '<div class="col-md-3" style="padding-right:0;padding-left:0"> '+
-                                '<input type="text" class="form-control" style="text-transform: uppercase" id="ape1" placeholder="Apellido 1" > '+
-                            '</div> '+
-                            '<div class="col-md-3" style="padding-left:0"> '+
-                                '<input type="text" class="form-control " style="text-transform: uppercase" id="ape2" placeholder="Apellido 2" > '+
+                            '<div class="col-md-12" style="padding-right:0"> '+
+                                 '<input type="text" class="form-control nombre" style="text-transform: uppercase" placeholder="Nombre" disabled> '+
                             '</div> '+
                        '</div> '+
                    '</div> '+
@@ -246,7 +240,7 @@
                 '<div class="col-md-3"> '+
                    '<div class="form-group"> '+
                        '<label class="control-label">Cédula</label> '+
-                       '<input type="text" class="form-control numeric tel" id="cedula" placeholder="Cédula" > '+
+                       '<input type="text" class="form-control cedula" placeholder="Cédula" disabled> '+
                    '</div> '+
                '</div> '+
             '</div> '+  
@@ -256,7 +250,7 @@
                 '<div class="col-md-12"> '+
                     '<div class="form-group"> '+
                     '<label class="control-label">Proyecto escogido</label> '+
-                    '<input type="text" class="form-control numeric tel " > '+
+                    '<input type="text" class="form-control db sel_proyecto" disabled> '+
                     '</div> '+ 
                 '</div> '+                        
             '</div> '+ 
@@ -265,17 +259,19 @@
                 '<div class="col-md-12"> '+
                     '<div class="form-group"> '+
                     '<label class="control-label">Estado</label> '+
-                    '<input type="text" class="form-control numeric tel " > '+
+                    '<input type="text" class="form-control db" id="estado_estado" > '+
                     '</div> '+ 
                 '</div> '+                        
-            '</div> '+ 
-                
+            '</div> '+
+            
+            
+        '<button type="button" class="btn btn-primary" id="save_estado"><i class="fas fa-save"></i> Guardar</button>' +
 
-             
-             
+            
+            
 '        </div> '+ 
 
-'        <div id="step-4">'+
+'        <div id="step-5">'+
 
         '<h2>Desestimientos</h2>'+
             
@@ -374,7 +370,7 @@
 
 
 
-'        <div id="step-5">'+
+'        <div id="step-6">'+
 
             '<h2>Sanciones</h2>'+
 
@@ -492,13 +488,6 @@
 
 
 
-
-
-
-
-
-
-
         '</div> '+  
 
 
@@ -509,6 +498,7 @@
         '</div>' +
         '<div class="modal-footer">' +
         '<button type="button" data-dismiss="modal" class="btn btn-default"><i class="fas fa-times"></i> Cerrar</button>' +
+
         '</div>';
 
    $('#form').empty();
@@ -542,6 +532,142 @@
 $(".sw-btn-prev").removeClass("btn-secondary").addClass("btn-primary"); 
 $(".sw-btn-next").removeClass("btn-secondary").addClass("btn-success");  
 $('#save_caracoli').append('<i class="glyphicon glyphicon-floppy-disk"></i>');  
+
+
+function datos_formulario(){
+    
+var obj = {}
+
+obj['identificador'] = identificador;
+obj['usuario']=usuario_nombre;
+
+$('.db').each(function(index) {
+    
+    var valor=$(this).val().toUpperCase().trim();
+
+    obj[$(this).prop('id')] = valor
+       
+    
+});
+console.log(obj)
+
+return obj;
+    
+}
+
+$('#save_sel_vivienda').click(function(){
+    
+    var obj=datos_formulario();
+    obj['op'] = "save_sel_vivienda_inmobiliaria";
+        
+      $.ajax({
+      type: "POST",
+      url: "GestionConsultas",
+      data: obj,
+      dataType: "json",
+      async: false,
+      success: function (response) {
+          
+          console.log(response)
+            
+      }
+  });
+   
+});
+
+$('#save_estado').click(function(){
+    
+    var obj=datos_formulario();
+    obj['op'] = "save_estado_inmobiliaria";
+        
+      $.ajax({
+      type: "POST",
+      url: "GestionConsultas",
+      data: obj,
+      dataType: "json",
+      async: false,
+      success: function (response) {
+          
+          console.log(response)
+            
+      }
+  });
+    
+});
+
+$('#save_cruces_informacion').click(function(){
+    
+    var obj=datos_formulario();
+    obj['op'] = "save_cruces_inmobiliaria";
+    
+        
+      $.ajax({
+      type: "POST",
+      url: "GestionConsultas",
+      data: obj,
+      dataType: "json",
+      async: false,
+      success: function (response) {
+          
+          console.log(response)
+            
+      }
+  });
+});
+
+
+traer_info_gestion();
+
+function traer_info_gestion(){
+    
+     $datos = {
+         op: 'get_data_inmobiliaria',
+         identificador:identificador
+     };
+       
+    ajax($datos);
+
+     $datos = {
+         op: 'get_data_sel_vivienda_inmobiliaria',
+         identificador:identificador
+     };
+     
+    ajax($datos);
+    
+    $datos = {
+         op: 'get_data_cruces_inmobiliaria',
+         identificador:identificador
+     };
+     
+    ajax($datos);
+        
+    
+}
+
+function ajax(datos){
+      $.ajax({
+      type: "POST",
+      url: "GestionConsultas",
+      data: datos,
+      dataType: "json",
+      async: false,
+      success: function (response) {
+           if(response.length>0){
+               
+           $.each( response[0], function( key, value ) {               
+                   $('#'+key).val(value);
+            });
+            $.each( response[0], function( key, value ) {               
+                   $('.'+key).val(value);
+            }); 
+            
+            }
+            
+      }
+
+  }); 
+    
+}
 
 
 
@@ -659,6 +785,7 @@ function refresh(){
 $('#add_row').click(function() {
     add_info();
  }); 
+ 
 
 $('.edit:checkbox').click(function() {            
             
@@ -722,6 +849,8 @@ $('.data').each(function(index) {
   }); 
     
 }
+
+
 
 $('#del_row').click(function() {
     borrar();

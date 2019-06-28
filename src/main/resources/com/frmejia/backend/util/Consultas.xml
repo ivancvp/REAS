@@ -763,12 +763,12 @@
             upd as(
             UPDATE	procesos.aprob_adenda
             SET 	
-            elaboro='@elaboro',aprobo='@aprobo',concepto=@concepto,obs='@obs'              
+            elaboro='@elaboro',aprobo='@aprobo',concepto=@concepto,obs='@obs',fecha_aprobacion=current_timestamp              
             WHERE identificador=(select identificador from sel) and consecutivo=(select max(consecutivo) from procesos.aprob_adenda where identificador='@id' and tipo_estudio='@tipo_estudio') and concepto=false and tipo_estudio='@tipo_estudio'
             returning identificador
             ),ins as(
-            INSERT INTO procesos.aprob_adenda(identificador,elaboro,aprobo, concepto,obs,consecutivo,tipo_estudio)
-            SELECT '@id' ,'@elaboro','@aprobo',@concepto,'@obs',(select coalesce(max(consecutivo)+1,1) from procesos.aprob_adenda where identificador='@id' and tipo_estudio='@tipo_estudio'),'@tipo_estudio'
+            INSERT INTO procesos.aprob_adenda(identificador,elaboro,aprobo, concepto,obs,consecutivo,tipo_estudio,fecha_aprobacion)
+            SELECT '@id' ,'@elaboro','@aprobo',@concepto,'@obs',(select coalesce(max(consecutivo)+1,1) from procesos.aprob_adenda where identificador='@id' and tipo_estudio='@tipo_estudio'),'@tipo_estudio',current_timestamp
             WHERE NOT EXISTS (select 1 from upd )
             returning identificador	
             )
@@ -1462,7 +1462,14 @@
         (select aprobo from procesos.aprob_resolucion where identificador='@identificador'),
         (select aprob_juridica from procesos.aprob_resolucion where identificador='@identificador'),
         (select dir_campo from ficha_reconocimiento_v1 where identificador='@identificador'),
-        (select dir_cat from ficha_reconocimiento_v1 where identificador='@identificador')    
+        (select dir_cat from ficha_reconocimiento_v1 where identificador='@identificador'),
+        (select no_radicado from caracoli.caracoli where num_sdh=(select "IDENTIFICA_ANTERIOR" from definitiva where "IDENTIFICADOR" ='@identificador')),
+        (select fecha_radicado from caracoli.caracoli where num_sdh=(select "IDENTIFICA_ANTERIOR" from definitiva where "IDENTIFICADOR" ='@identificador')),
+        (select fecha_acta from caracoli.caracoli where num_sdh=(select "IDENTIFICA_ANTERIOR" from definitiva where "IDENTIFICADOR" ='@identificador')),
+        (select fecha_seleccion from gestion_inmobiliaria.seleccion_vivienda where identificador ='@identificador'),
+        (select beneficiario_resolucion_especie from caracoli.caracoli where num_sdh=(select "IDENTIFICA_ANTERIOR" from definitiva where "IDENTIFICADOR" ='@identificador')),
+        (select fecha_afirmacion from caracoli.caracoli where num_sdh=(select "IDENTIFICA_ANTERIOR" from definitiva where "IDENTIFICADOR" ='@identificador')),
+        (select tipo_notificacion from caracoli.caracoli where num_sdh=(select "IDENTIFICA_ANTERIOR" from definitiva where "IDENTIFICADOR" ='@identificador'))                
 	from definitiva df
 	left join financiera_reas.cdp_rp rv 
 	on df."IDENTIFICADOR"=rv.identificador
@@ -1521,6 +1528,16 @@
             
         update ficha_reconocimiento_v1 set zona = '@zona' where identificador='@identificador';  
     
+        update caracoli.caracoli set no_radicado='@no_radicado' where num_sdh=(select "IDENTIFICA_ANTERIOR" from definitiva where "IDENTIFICADOR" ='@identificador');
+  
+        update caracoli.caracoli set fecha_radicado=CASE WHEN to_date('@fecha_radicado','DD MM YYYY') = '0001-01-01 BC' THEN NULL ELSE to_date('@fecha_radicado','DD MM YYYY') END where num_sdh=(select "IDENTIFICA_ANTERIOR" from definitiva where "IDENTIFICADOR" ='@identificador');
+            
+        update caracoli.caracoli set beneficiario_resolucion_especie='@beneficiario_resolucion_especie' where num_sdh=(select "IDENTIFICA_ANTERIOR" from definitiva where "IDENTIFICADOR" ='@identificador');
+        
+        update caracoli.caracoli set tipo_notificacion='@tipo_notificacion' where num_sdh=(select "IDENTIFICA_ANTERIOR" from definitiva where "IDENTIFICADOR" ='@identificador');
+        
+        update caracoli.caracoli set fecha_afirmacion=CASE WHEN to_date('@fecha_afirmacion','DD MM YYYY') = '0001-01-01 BC' THEN NULL ELSE to_date('@fecha_afirmacion','DD MM YYYY') END where num_sdh=(select "IDENTIFICA_ANTERIOR" from definitiva where "IDENTIFICADOR" ='@identificador');
+                     
         WITH 
         sel as (
         Select identificador from financiera_reas.asignaciones_resoluciones where identificador='@identificador' 
@@ -1529,19 +1546,19 @@
         UPDATE financiera_reas.asignaciones_resoluciones
         SET 	
         conse=1,
-        vigencia=2018,
+        vigencia=2019,
         no_resol=CASE WHEN @no_resol=-1 THEN NULL ELSE @no_resol END ,
         fecha_resol=CASE WHEN to_date('@fecha_resol','DD MM YYYY') = '0001-01-01 BC' THEN NULL ELSE to_date('@fecha_resol','DD MM YYYY') END,
         valor_resol=CASE WHEN @valor_resol=-1 THEN NULL ELSE @valor_resol END ,
-        tipo_resol='VUR'
+        tipo_resol='@tipo_resol'
         WHERE identificador=(select identificador from sel)
         returning identificador
         ),ins as(
         INSERT INTO financiera_reas.asignaciones_resoluciones(identificador,conse,vigencia,no_resol,fecha_resol,valor_resol,tipo_resol)
-        SELECT '@identificador',1,2018,CASE WHEN @no_resol=-1 THEN NULL ELSE @no_resol END ,
+        SELECT '@identificador',1,2019,CASE WHEN @no_resol=-1 THEN NULL ELSE @no_resol END ,
             CASE WHEN to_date('@fecha_resol','DD MM YYYY') = '0001-01-01 BC' THEN NULL ELSE to_date('@fecha_resol','DD MM YYYY') END,
             CASE WHEN @valor_resol=-1 THEN NULL ELSE @valor_resol END ,
-            'VUR'
+            '@tipo_resol'
         WHERE NOT EXISTS (select 1 from upd )
         returning identificador	
         )
@@ -2489,7 +2506,7 @@
             "LT" as lot_reco,
             "Código Chip Catastro" as chip,
             "Sector" as sector,
-            "Concepto de Ingreso" as con_ingreso,
+            (SELECT array_to_string(array_agg(distinct concat(concepto_ingreso,' del ',to_char(fecha_concepto, 'DD/MM/YYYY'))),', ') from concepto_ingreso where identificador=ft.identificador) as con_ingreso,
             identificador,
             fecha_elaboracion,
             nombre_visita,
@@ -2882,8 +2899,172 @@
         <es_dml_complejo>true</es_dml_complejo>
     </Consulta>
     
+    <Consulta id="get_data_inmobiliaria">
+        <sql>           
+            select "Nombre 1" as nombre, "Cedula 1" as cedula from definitiva where "IDENTIFICADOR" ='@identificador';
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>true</es_dml_complejo>
+    </Consulta> 
     
+    <Consulta id="get_data_sel_vivienda_inmobiliaria">
+        <sql>           
+            select identificador as id,proyecto_escogido as sel_proyecto, torre as sel_torre, apartamento as sel_apto, fecha_seleccion as sel_fecha_sel, estado as estado_estado
+            from gestion_inmobiliaria.seleccion_vivienda
+            where identificador='@identificador'
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>true</es_dml_complejo>
+    </Consulta>  
+
+    <Consulta id="get_data_cruces_inmobiliaria">
+        <sql>           
+            select sentencia as cru_sentencia, causal as cru_causal, entidad as cru_entidad, inscripcion as cru_inscripcion, fecha_inscripcion as cru_fecha_inscripcion
+            from gestion_inmobiliaria.cruces_informacion
+            where identificador='@identificador'
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>true</es_dml_complejo>
+    </Consulta>       
     
+      <Consulta id="save_sel_vivienda_inmobiliaria">
+        <sql>           
+            WITH 
+            sel as (
+            Select "IDENTIFICADOR" as identificador from definitiva where "IDENTIFICADOR"='@identificador'
+            ),
+            upd as(
+            UPDATE gestion_inmobiliaria.seleccion_vivienda
+            SET 
+            proyecto_escogido= '@sel_proyecto',
+            torre='@sel_torre',
+            apartamento='@sel_apto',
+            fecha_seleccion=CASE WHEN to_date('@sel_fecha_sel','YYYY MM DD') = '0001-01-01 BC' THEN NULL ELSE to_date('@sel_fecha_sel','YYYY MM DD') END,
+            contrato_upd_user='@usuario',
+            contrato_upd_time=current_timestamp
+            WHERE identificador=(select identificador from sel)
+            returning identificador
+            ),ins as(
+            INSERT INTO gestion_inmobiliaria.seleccion_vivienda(
+            identificador,
+            proyecto_escogido,
+            torre,
+            apartamento,
+            fecha_seleccion,
+            contrato_user,
+            contrato_time
+            )
+            SELECT
+            '@identificador',
+            '@sel_proyecto',
+            '@sel_torre',
+            '@sel_apto',
+            CASE WHEN to_date('@sel_fecha_sel','YYYY MM DD') = '0001-01-01 BC' THEN NULL ELSE to_date('@sel_fecha_sel','YYYY MM DD') END,
+            '@usuario',
+            current_timestamp
+            WHERE NOT EXISTS (select 1 from upd )
+            returning identificador	
+            )
+            select * from upd union select * from ins            
+            
+            
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>true</es_dml_complejo>
+    </Consulta>     
+  
+    <Consulta id="save_cruces_inmobiliaria">
+        <sql> 
+                      
+	    WITH 
+            sel as (
+            Select "IDENTIFICADOR" as identificador from definitiva where "IDENTIFICADOR"='@identificador'
+            ),
+            upd as(
+            UPDATE gestion_inmobiliaria.cruces_informacion
+            SET 
+            sentencia= '@cru_sentencia',
+            causal='@cru_causal',
+            entidad='@cru_entidad',
+            inscripcion='@cru_inscripcion',
+            fecha_inscripcion=CASE WHEN to_date('@cru_fecha_inscripcion','YYYY MM DD') = '0001-01-01 BC' THEN NULL ELSE to_date('@cru_fecha_inscripcion','YYYY MM DD') END,
+            contrato_upd_user='@usuario',
+            contrato_upd_time=current_timestamp
+            WHERE identificador=(select identificador from sel)
+            returning identificador
+            ),ins as(
+            INSERT INTO gestion_inmobiliaria.cruces_informacion(
+            identificador,
+            sentencia,
+            causal,
+            entidad,
+            inscripcion,
+            fecha_inscripcion,
+            contrato_user,
+            contrato_time
+            )
+            SELECT
+            '@identificador',
+            '@cru_sentencia',
+            '@cru_causal',
+            '@cru_entidad',
+            '@cru_inscripcion',
+            CASE WHEN to_date('@cru_fecha_inscripcion','YYYY MM DD') = '0001-01-01 BC' THEN NULL ELSE to_date('@cru_fecha_inscripcion','YYYY MM DD') END,
+            '@usuario',
+            current_timestamp
+            WHERE NOT EXISTS (select 1 from upd )
+            returning identificador	
+            )
+            select * from upd union select * from ins;                   
+   
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>true</es_dml_complejo>
+    </Consulta>     
+      
+    <Consulta id="save_estado_inmobiliaria">
+        <sql> 
+            
+  	    WITH 
+            sel as (
+            Select "IDENTIFICADOR" as identificador from definitiva where "IDENTIFICADOR"='@identificador'
+            ),
+            upd as(
+            UPDATE gestion_inmobiliaria.seleccion_vivienda
+            SET 
+            estado= '@estado_estado',
+            contrato_upd_user='@usuario',
+            contrato_upd_time=current_timestamp
+            WHERE identificador=(select identificador from sel)
+            returning identificador
+            ),ins as(
+            INSERT INTO gestion_inmobiliaria.seleccion_vivienda(
+            identificador,
+            estado,
+            contrato_user,
+            contrato_time
+            )
+            SELECT
+            '@identificador',
+            '@estado_estado',
+            '@usuario',
+            current_timestamp
+            WHERE NOT EXISTS (select 1 from upd )
+            returning identificador	
+            )
+            select * from upd union select * from ins                      
+                
+   
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>true</es_dml_complejo>
+    </Consulta>     
     
     <Consulta id="guardar_datos_sensibles_adenda">
         <sql>           
@@ -6219,7 +6400,17 @@
         <conexion>atencion_reloca</conexion>
         <permisos>*</permisos>       
     </Consulta>    
+            
                                             
+     <Consulta id="get_familia_resolucion">
+        <sql>
+          select concat(primer_nombre,' ',segundo_nombre,' ',"B01_Primer_Apellido",' ',"B02_Segundo_Apellido") as nombre 
+          from "tbl_Miembros" where "Identificador"='@identificador'
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>       
+    </Consulta>                                                                           
+                                                                                                                                            
                                     
                                                                     
 </Consultas>

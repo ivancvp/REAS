@@ -564,10 +564,10 @@
                                                             <div class="row">
                                                                 <h2>Solución de vivienda</h2>
                                                                 <p >Gestión inmobiliaria, vivienda nueva y vivienda usada.</p>                                                          
-                                                                <!--<button  class="btn btn-sm yellow-bg" onclick="general_gestion_inmobiliaria()" ><i class="fas fa-home"></i> Gestión inmobiliaria</button>-->
+                                                                <button  class="btn btn-sm yellow-bg" onclick="general_gestion_inmobiliaria(getURLParams('identificador'))" ><i class="fas fa-home"></i> Gestión inmobiliaria</button>
                                                                 <button  class="btn btn-sm yellow-bg" onclick="gestion_inmobiliaria_escrituras(getURLParams('identificador'))" ><i class="fas fa-newspaper"></i> Escrituras</button>
                                                             </div>
-                                                                <!--
+                                                              
                                                             <div  class="row ">
                                                                 <label class="control-label col-sm-6">Portafolio de proyectos:</label>
                                                                 <button type='button' class='btn btn-sm btn-success' onclick="ver_modal()">Ver</button>
@@ -576,7 +576,7 @@
                                                                 <label class="control-label col-sm-6">Formatos:</label>
                                                                 <button type='button' class='btn btn-sm btn-primary' onclick="modal_formato()">Ver</button>
                                                             </div>
-                                                            -->
+                                                 
                                                             <div class="row">
                                                             <p id="vivienda"></p>
                                                             <span class="vertical-date">P-4 <br/><small></small></span>

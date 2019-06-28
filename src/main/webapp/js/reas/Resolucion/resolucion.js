@@ -74,6 +74,23 @@ function gen_resolucion(identificador){
                                 '     <input type="text" class="form-control obligatorio disponible upd" id="zona" placeholder="Zona" > '+
                                 '   </div> '+
                     '</div> '+ 
+                    
+                    '<div class="col-md-4"> '+
+                                '   <div class="form-group"> '+
+                                '     <label class="control-label">Número radicado</label> '+
+                                '     <input type="text" class="form-control obligatorio disponible upd" id="no_radicado" placeholder="Radicado" > '+
+                                '   </div> '+
+                    '</div> '+ 
+                    
+                            '          <div class="col-md-4"> '+
+                           '   <div class="form-group"> '+
+                           '     <label class="control-label">Fecha Radicado</label> '+
+                           ' <small class="text-muted">(dd/mm/yyyy)</small>'+
+                           '     <div class="span5 sandbox-container"><input id="fecha_radicado" type="text" class="form-control upd obligatorio disponible fecha fecha_validate" placeholder="Fecha Radicado" ></div>'+
+                           '   </div> '+
+ '                     </div> '+  
+                    
+                    
   '                 </div> '+ 
                     '<div class="row"> '+
                         '<div class="col-md-12"> '+
@@ -135,6 +152,60 @@ function gen_resolucion(identificador){
 '</div> '+
 '</div> '+
 
+
+
+
+
+'<div style="border-style: solid;border-color:#84DEC3";margin:3px>'+
+
+'<div class="row"> '+
+'    <div class="col-md-8">'+
+'      <div class="form-group">'+
+'        <label>Tipo de notificación</label>'+
+'        <select class="form-control upd" id="tipo_notificacion">'+
+'          <option value="">Seleccione...</option>'+
+'          <option value="Acta de Notificacion">Acta de notificación para las familias ocupantes, caso caracoli Fecha 8 de octubre de 2018</option>'+
+'          <option value="Afirmacion">Afirmación hecha ante la alcaldía local de Ciudad Bolivar Sector "Caracoli" de Fecha: </option>'+
+'        </select>'+
+'      </div>'+
+'    </div>'+
+
+'          <div class="col-md-4 control_tipo_notificacion"> '+
+                '   <div class="form-group"> '+
+                '     <label class="control-label">Fecha de la afirmación</label> '+
+                ' <small class="text-muted">(dd/mm/yyyy)</small>'+
+                '     <div class="span5 sandbox-container"><input id="fecha_afirmacion" type="text" class="form-control upd disponible fecha fecha_validate" placeholder="Fecha RES" ></div>'+
+                '   </div> '+
+'                     </div> '+    
+
+'    </div>'+
+
+'<div class="row"> '+
+'    <div class="col-md-12">'+
+'      <div class="form-group">'+
+'        <label>Tipo de resolución por imprimir</label>'+
+'        <select class="form-control upd" id="tipo_resol">'+
+'          <option value="0">Seleccione...</option>'+
+'          <option value="VUR">Asignación de recursos</option>'+
+'          <option value="VUR ESPECIE">Asignación en especie</option>'+
+'        </select>'+
+'      </div>'+
+'    </div>'+
+'    </div>'+
+
+'<div class="row control_tipo_resol"> '+
+'    <div class="col-md-12">'+
+'      <div class="form-group">'+
+'        <label>Señor(a) que suscribió el "Formato para la selección de vivienda nueva" (Solo resolución en especie)</label>'+
+'        <select class="form-control upd" id="beneficiario_resolucion_especie">'+
+'          <option value="">Seleccione...</option>'+
+'        </select>'+
+'      </div>'+
+'    </div>'+
+'    </div>'+
+
+'</div>'+
+
 '<div class="btn-group">'+
 '                           <button type="button" class="btn btn-success" id="save_res_vereditas"><i class="glyphicon glyphicon-floppy-disk"></i> Guardar</button>'+
 '                           <button type="button" class="btn btn-primary" id="enviar_res_vereditas"><i class="glyphicon glyphicon-share-alt"></i> Enviar a revisión</button>'+
@@ -177,6 +248,9 @@ return contenido;
  function logica_resolucion(identificador,modo,tipo_proceso,id_actividad,usuario_creador){
  
 
+
+
+
 var sector=get_sector(identificador);
 
 var vereditas_sector=false;
@@ -208,7 +282,31 @@ var dia_de_hoy=moment(new Date()).format("DD/MM/YYYY");
     endDate:dia_de_hoy
 });
       
+get_familia_resolucion();
 
+function get_familia_resolucion(){
+    
+    $datos={
+       op: 'get_familia_resolucion',        
+       identificador:identificador
+    };
+    
+    $.ajax({
+        type: "GET",
+        url: "GestionConsultas",
+        data: $datos,
+        dataType: "json",
+        async: true,
+        success: function (response) {           
+            if(response.length>0){
+                for(var i=0;i<response.length;i++){
+                    $('#beneficiario_resolucion_especie').append('<option value="'+response[i].nombre+'">'+response[i].nombre+'</option>');
+                }
+            }
+        }
+    });
+    
+}
 
 $('#impr_resolucion').click(function(){
 
@@ -217,7 +315,16 @@ $('#impr_resolucion').click(function(){
     if(vereditas_sector){
         doc = imp_resolucion_vereditas(identificador,'ivan','lei');
     }else{
-        doc = imp_resolucion_caracoli(identificador,'ivan','lei');
+        var tipo_impresion=$('#tipo_resol').val();
+
+        if(tipo_impresion==="0"){
+            alertify.error("Seleccione un tipo de resolución por imprimir");
+        }else if(tipo_impresion==="VUR"){
+            doc = imp_resolucion_caracoli_version_2(identificador,'ivan','lei');
+        }else if(tipo_impresion==="VUR ESPECIE"){
+            doc = imp_resolucion_caracoli_version_3(identificador,'ivan','lei');
+        }
+        
     }
  
                 
@@ -226,7 +333,8 @@ $('#pdf_resolucion').css('display', 'inline');
 pdfMake.createPdf(doc).getDataUrl(function (outDoc) {
     document.getElementById('pdf_resolucion').src = outDoc;
 });   
-    
+
+
 });
 
 $(".fecha_validate").blur(function(){   
@@ -278,9 +386,11 @@ if(identificador.includes("CP19")){
         url: "GestionConsultas",
         data: $datos,
         dataType: "json",
-        async: false,
+        async: true,
         success: function (response) {
-            
+           
+console.log(response)
+           
            if(response.length> 0) {
             resultado=response;
            $.each( response[0], function( key, value ) {
@@ -291,6 +401,18 @@ if(identificador.includes("CP19")){
                         $('#'+key).val(value);
                     }
            });
+           
+    if($('#tipo_notificacion').val()==="Afirmacion"){
+        $('.control_tipo_notificacion').show();
+    }else{
+        $('.control_tipo_notificacion').hide();
+    }
+    
+    if($('#tipo_resol').val()==="VUR ESPECIE"){
+        $('.control_tipo_resol').show();
+    }else{
+        $('.control_tipo_resol').hide();
+    }
            
             if(resultado[0]["concepto"]?resultado[0]["concepto"]:false){
                 $('#info_elaboracion').append("<p style='color:#EB984E'>Elaboro: "+(resultado[0]["elaboro"]?resultado[0]["elaboro"]:'')
@@ -319,6 +441,31 @@ if(identificador.includes("CP19")){
            
         }
     });
+
+
+
+
+$('#tipo_notificacion').change(function(){
+    
+    
+    if($(this).val()==="Afirmacion"){
+        $('.control_tipo_notificacion').show();
+    }else{
+        $('.control_tipo_notificacion').hide();
+    }
+    
+});
+
+$('#tipo_resol').change(function(){
+    
+    if($(this).val()==="VUR ESPECIE"){
+        $('.control_tipo_resol').show();
+    }else{
+        $('.control_tipo_resol').hide();
+    }
+    
+});
+
 
 
 

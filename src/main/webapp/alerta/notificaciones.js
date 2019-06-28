@@ -603,6 +603,12 @@ var opciones = jQuery.extend({
         
         var papa=get_usuario_tarea(22);
         
+        if(identificador.includes("CP19")){
+
+           papa=get_usuario_tarea(26);
+           
+        }
+        
         if (typeof res[index] !== "undefined") {
            papa= res[index]["creado_por"]; 
          }

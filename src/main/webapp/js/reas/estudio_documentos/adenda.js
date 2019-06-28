@@ -320,7 +320,6 @@ var seguir_archivo=false;
  function logica_adenda(identificador,modo,id_proceso,id_actividad,tipo_estudio,creado_por){
 
 
-
 id_act=id_actividad;
 
 $('#quitar_noti').hide();
@@ -664,7 +663,9 @@ $('#rev_adenda').unbind("click").one('click',function(){
         
         
         if(identificador.includes("CP19")){
+
            asignado_a=get_usuario_tarea(26);
+           
         }
         
         if(creado_por!==asignado_a){
@@ -917,6 +918,16 @@ obj['tipo_estudio'] = tipo_estudio;
 obj['usuario_nombre'] = usuario_nombre; 
 obj['identificador'] = $('#id_adenda').val();
 obj['estado'] = estado;
+var adenda_pro="";
+
+if($('#est_procede').val()==="POSITIVO"){
+    adenda_pro="Si";
+}else if($('#est_procede').val()==="NEGATIVO"){
+    adenda_pro="No";
+}
+
+obj['adenda_procede'] = adenda_pro;
+
 
 $('.data').each(function(index) {
     
