@@ -579,14 +579,14 @@
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label class="control-label">Manzana</label>
-                                <input type="number" max="10000"  min="0" id="man_cat"  class="form-control upd" />
+                                <input type="text"  id="man_cat"  class="form-control upd" />
                             </div>
 
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label class="control-label">Lote</label>
-                                <input type="number" max="10000" min="0" id="lot_cat"  class="form-control upd" />
+                                <input type="text"  id="lot_cat"  class="form-control upd" />
                             </div>
 
 
@@ -2120,7 +2120,7 @@
                 $datos = {
                     op: 'buscar_ficha',
                     identificador: identificador,
-                    contrato_user: usuario_usuario
+                    usuario_nombre: usuario_nombre
                 };
 
 
@@ -2147,7 +2147,7 @@
                         if (response.length > 0)
                         {
                             resultados = response[0];
-
+                                    
                             sector = (resultados["sector"] ? resultados["sector"] : '');
                             sector = sector.toUpperCase();
 

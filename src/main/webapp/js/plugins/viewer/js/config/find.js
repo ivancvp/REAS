@@ -9,7 +9,7 @@ define([
         queries: [
             {
                 description: 'Predios en alto riesgo',
-                url: 'http://201.245.172.43:6080/arcgis/rest/services/REAS/predios_alto_riesgo/MapServer',
+                url: 'http://192.168.2.98:6080/arcgis/rest/services/REAS/predios_alto_riesgo/MapServer',
                 layerIds: [0],
                 searchFields: ['id', 'direccion', 'chip', 'barrio', 'localidad', 'sector_cvp'],
                 minChars: 1,
@@ -39,7 +39,7 @@ define([
             },
             {
                 description: 'Proyectos de vivienda',
-                url: 'http://201.245.172.43:6080/arcgis/rest/services/REAS/proyectos_vivienda/MapServer',
+                url: 'http://192.168.2.98:6080/arcgis/rest/services/REAS/proyectos_vivienda/MapServer',
                 layerIds: [0],
                 searchFields: ['nombre','dirección','localidad','barrio'],
                 minChars: 1,

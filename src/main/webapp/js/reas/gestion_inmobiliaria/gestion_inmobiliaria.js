@@ -275,17 +275,40 @@
 
         '<h2>Desestimientos</h2>'+
             
+
+        '<div class="row">'+
+            '<div class="col-md-6"> '+
+                '<div class="form-group"> '+
+                '<label class="control-label">Proyecto escogido</label> '+
+                '<input type="text" class="form-control " id="proyecto_escogido_des" disabled> '+
+                '</div> '+ 
+            '</div> '+                        
+            '<div class="col-md-3"> '+
+                '<div class="form-group"> '+
+                '<label class="control-label">Torre</label> '+
+                '<input type="text" class="form-control " disabled > '+
+                '</div> '+ 
+            '</div> '+                       
+            '<div class="col-md-3"> '+
+                '<div class="form-group"> '+
+                '<label class="control-label">Apartamento</label> '+
+                '<input type="text" class="form-control" disabled > '+
+                '</div> '+ 
+            '</div> '+                        
+        '</div> '+   
+             
+            
         '<div class="row"> '+
             '<div class="col-md-6"> '+
                 '<div class="form-group"> '+
                     '<label for="sandbox-container" class="control-label">Fecha de registro</label> '+
-                    '<div class="span5 sandbox-container"><input  type="text" class="form-control upd  fecha" id="fecha_acta" placeholder="Fecha"></div>'+
+                    '<div class="span5 sandbox-container"><input  type="text" class="form-control upd  fecha data" id="fecha_registro_des" placeholder="Fecha"></div>'+
                 '</div> '+
             '</div> '+
             '<div class="col-md-6"> '+
                 '<div class="form-group"> '+
                     '<label for="sandbox-container" class="control-label">Fecha de desestimiento</label> '+
-                    '<div class="span5 sandbox-container"><input  type="text" class="form-control upd  fecha" id="fecha_acta" placeholder="Fecha"></div>'+
+                    '<div class="span5 sandbox-container"><input  type="text" class="form-control upd  fecha data" id="fecha_desestimiento_des" placeholder="Fecha"></div>'+
                 '</div> '+
             '</div> '+
         '</div> '+   
@@ -297,7 +320,7 @@
             '<div class="col-md-12"> '+
                 '<div class="form-group"> '+
                 '<label class="control-label">Causal</label> '+
-                '<input type="text" class="form-control for_table " id="doc_ide"> '+
+                '<input type="text" class="form-control data " id="causal_des"> '+
                 '</div> '+ 
             '</div> '+                        
         '</div> '+    
@@ -306,39 +329,20 @@
             '<div class="col-md-12"> '+
                 '<div class="form-group"> '+
                 '<label class="control-label">Fecha de selección</label> '+
-                '<div class="span5 sandbox-container"><input  type="text" class="form-control upd  fecha" id="fecha_acta" placeholder="Fecha"></div>'+
+                '<div class="span5 sandbox-container"><input  type="text" class="form-control upd  fecha data" id="" placeholder="Fecha" disabled></div>'+
                 '</div> '+ 
             '</div> '+                        
         '</div> '+         
         
-        '<div class="row">'+
-            '<div class="col-md-6"> '+
-                '<div class="form-group"> '+
-                '<label class="control-label">Proyecto escogido</label> '+
-                '<input type="text" class="form-control for_table " > '+
-                '</div> '+ 
-            '</div> '+                        
-            '<div class="col-md-3"> '+
-                '<div class="form-group"> '+
-                '<label class="control-label">Torre</label> '+
-                '<input type="text" class="form-control for_table " > '+
-                '</div> '+ 
-            '</div> '+                       
-            '<div class="col-md-3"> '+
-                '<div class="form-group"> '+
-                '<label class="control-label">Apartamento</label> '+
-                '<input type="text" class="form-control for_table " > '+
-                '</div> '+ 
-            '</div> '+                        
-        '</div> '+                 
+              
      
 
  
         '<div class="row"> '+ 
         '  <div class="col-md-12">  '+
-                '<button type="button" class="btn btn-primary" id="add_row"><i class="fas fa-plus"></i></button>'+
-                '<button type="button" class="btn btn-success" id="save_row" style="display:none"><i class="fas fa-save"></i></button>'+
-                '<button type="button" class="btn btn-danger" id="del_row" style="display:none"><i class="far fa-trash-alt"></i></button>'+
+                '<button type="button" class="btn btn-primary" id="add_row1"><i class="fas fa-plus"></i></button>'+
+                '<button type="button" class="btn btn-success" id="save_row1" style="display:none"><i class="fas fa-save"></i></button>'+
+                '<button type="button" class="btn btn-danger" id="del_row1" style="display:none"><i class="far fa-trash-alt"></i></button>'+
             '</div>'+  
         '</div>'+  
 
@@ -346,7 +350,7 @@
  
         '<div class="row">'+
            '<div class="col-md-12">'+ 
-            '<table class="table table-bordered" id="tabla">'+
+            '<table class="table table-bordered" id="tabla2">'+
             '<thead>'+
               '<tr>'+
                 '<th width="10px">#</th>'+
@@ -379,34 +383,29 @@
             '<div class="col-md-6"> '+
                 '<div class="form-group"> '+
                 '<label class="control-label">Proyecto escogido</label> '+
-                '<input type="text" class="form-control for_table " > '+
+                '<input type="text" class="form-control for_table " id="proyecto_escogido_sancion"  disabled> '+
                 '</div> '+ 
             '</div> '+                        
             '<div class="col-md-3"> '+
                 '<div class="form-group"> '+
                 '<label class="control-label">Torre</label> '+
-                '<input type="text" class="form-control for_table " > '+
+                '<input type="text" class="form-control for_table " disabled> '+
                 '</div> '+ 
             '</div> '+                       
             '<div class="col-md-3"> '+
                 '<div class="form-group"> '+
                 '<label class="control-label">Apartamento</label> '+
-                '<input type="text" class="form-control for_table " > '+
+                '<input type="text" class="form-control for_table " disabled> '+
                 '</div> '+ 
             '</div> '+                        
         '</div> '+  
-
-
-
-
-
 
 
         '<div class="row">'+
             '<div class="col-md-12"> '+
                 '<div class="form-group"> '+
                 '<label class="control-label">Estados</label> '+
-                '<input type="text" class="form-control for_table " id="doc_ide"> '+
+                '<input type="text" class="form-control for_table " id="estado_sancion"> '+
                 '</div> '+ 
             '</div> '+                        
         '</div> '+  
@@ -416,20 +415,17 @@
             '<div class="col-md-12"> '+
                 '<div class="form-group"> '+
                 '<label class="control-label">Observaciones</label> '+
-                '<input type="text" class="form-control for_table " id="doc_ide"> '+
+                '<input type="text" class="form-control for_table " id="observaciones_sancion"> '+
                 '</div> '+ 
             '</div> '+                        
         '</div> '+         
         
-        
-        
-        
-        
+
            '<div class="row">'+
             '<div class="col-md-12"> '+
                 '<div class="form-group"> '+
                 '<label class="control-label">Fecha de registro</label> '+
-                '<div class="span5 sandbox-container"><input  type="text" class="form-control upd  fecha" id="fecha_acta" placeholder="Fecha"></div>'+
+                '<div class="span5 sandbox-container"><input  type="text" class="form-control upd  fecha" id="fecha_registro_sancion" placeholder="Fecha"></div>'+
                 '</div> '+ 
             '</div> '+                        
         '</div> '+      
@@ -438,7 +434,7 @@
             '<div class="col-md-12"> '+
                 '<div class="form-group"> '+
                 '<label class="control-label">Fecha de sanción</label> '+
-                '<div class="span5 sandbox-container"><input  type="text" class="form-control upd  fecha" id="fecha_acta" placeholder="Fecha"></div>'+
+                '<div class="span5 sandbox-container"><input  type="text" class="form-control upd  fecha" id="fecha_sancion_sancion" placeholder="Fecha"></div>'+
                 '</div> '+ 
             '</div> '+                        
         '</div> '+   
@@ -457,9 +453,9 @@
  
         '<div class="row"> '+ 
         '  <div class="col-md-12">  '+
-                '<button type="button" class="btn btn-primary" id="add_row"><i class="fas fa-plus"></i></button>'+
-                '<button type="button" class="btn btn-success" id="save_row" style="display:none"><i class="fas fa-save"></i></button>'+
-                '<button type="button" class="btn btn-danger" id="del_row" style="display:none"><i class="far fa-trash-alt"></i></button>'+
+                '<button type="button" class="btn btn-primary" id="add_row2"><i class="fas fa-plus"></i></button>'+
+                '<button type="button" class="btn btn-success" id="save_row2" style="display:none"><i class="fas fa-save"></i></button>'+
+                '<button type="button" class="btn btn-danger" id="del_row2" style="display:none"><i class="far fa-trash-alt"></i></button>'+
             '</div>'+  
         '</div>'+  
 
@@ -467,7 +463,7 @@
  
         '<div class="row">'+
            '<div class="col-md-12">'+ 
-            '<table class="table table-bordered" id="tabla">'+
+            '<table class="table table-bordered" id="tabla3">'+
             '<thead>'+
               '<tr>'+
                 '<th width="10px">#</th>'+
@@ -549,7 +545,7 @@ $('.db').each(function(index) {
        
     
 });
-console.log(obj)
+
 
 return obj;
     
@@ -715,7 +711,7 @@ if (re.test(term)) {
 }
 }); 
 
-var conta=1;
+
 var indice=0;
 var indice_guardar=0;
 
@@ -732,107 +728,246 @@ var indice_guardar=0;
 
        for ( var i = 0, l = response.length; i < l; i++ ) {
           var data=response[i];
-          generar_filas(data.consecutivo,data.nombre,data.constructor,data.fecha_entrega,data.tipo_proyecto);
+          generar_filas_tabla1(data.consecutivo,data.nombre,data.constructor,data.fecha_entrega,data.tipo_proyecto);
           
        }
-       if(response.length>0){
-           conta=response[response.length-1].consecutivo+1;
-       }
-      
 
       }, error: function (a) {
 
       }
   });
+  
+     $datos = {
+        op: 'get_info_inmobiliaria_desestimientos',
+        identificador:identificador
+    };
+    $.ajax({
+      type: "POST",
+      url: "GestionConsultas",
+      data: $datos,
+      dataType: "json",
+      async: false,
+      success: function (response) {
+
+    
+
+       for ( var i = 0, l = response.length; i < l; i++ ) {
+          var data=response[i];
+          //generar_filas(data.consecutivo,data.nombre,data.constructor,data.fecha_entrega,data.tipo_proyecto);
+          generar_filas_tabla2(data.consecutivo,data.fecha_registro_desestimiento,data.fecha_desestimiento,data.causal_desestimiento,data.proyecto_escogido);
+          
+       }
+
+      }, error: function (a) {
+
+      }
+  }); 
 
 
-function add_info(){
+var indice_seleccion=0;
 
+function add_info(no_tabla){
 
-     if(obligatorio()>0){
-         alertify.error("Revise los campos obligatorios antes de ingresar la información");
-     }else{
-
-      var button= 
-             '<div class="checkbox abc-checkbox abc-checkbox-primary">'+
-             '   <input type="checkbox" class="upd_check styled edit" ><label></label>'+
-             '</div>';
-             
-     refresh();
-     
-     guardar(conta);
-
-     $(".for_table1").each(function(){
-         $(this).val("");
-     });
-
-
-
-     conta=conta+1;  
-
+     if(no_tabla===1){
+        var fila = $('#tabla1 >tbody >tr').length;
+        refresh(no_tabla,fila);
+        guardar(fila,1);
+     }
+     else if(no_tabla===2){
+         var fila = $('#tabla2 >tbody >tr').length;
+         refresh(no_tabla,fila);
+         guardar(fila,2);
+     }
+     else if(no_tabla===3){
+         var fila = $('#tabla3 >tbody >tr').length;
+         refresh(no_tabla,fila);
+         guardar(fila,3);
      }
 
+
+ 
+
 }
 
 
-function refresh(){
+function refresh(no_tabla,fila){
    
-  $('#tabla1 tr:last').after('<tr><td>'+conta+'</td><td>'+button+'</td><td>'+$('#crea_nom_proy').val()+'</td><td>'+$('#crea_nom_cons').val()+'</td><td>'+$('#crea_fecha_entrega').val()+'</td><td>'+$('#crea_tipo_proy').val()+'</td></tr>'); 
+    var button= 
+        '<div class="checkbox abc-checkbox abc-checkbox-primary">'+
+        '   <input type="checkbox" class="upd_check styled edit" ><label></label>'+
+        '</div>';
+   
+   if(no_tabla===1){
+       $('#tabla1 tr:last').after('<tr><td>'+fila+'</td><td>'+button+'</td><td>'+$('#crea_nom_proy').val()+'</td><td>'+$('#crea_nom_cons').val()+'</td><td>'+$('#crea_fecha_entrega').val()+'</td><td>'+$('#crea_tipo_proy').val()+'</td></tr>'); 
+   }
+   else if(no_tabla===2){
+       $('#tabla2 tr:last').after('<tr><td>'+fila+'</td><td>'+button+'</td><td>'+$('#fecha_registro_des').val()+'</td><td>'+$('#fecha_desestimiento_des').val()+'</td><td>'+$('#causal_des').val()+'</td><td>'+$('#proyecto_escogido_des').val()+'</td></tr>'); 
+   }else if(no_tabla===3){
+       $('#tabla3 tr:last').after('<tr><td>'+fila+'</td><td>'+button+'</td><td>'+$('#proyecto_escogido_sancion').val()+'</td><td>'+$('#estado_sancion').val()+'</td><td>'+$('#fecha_sancion_sancion').val()+'</td><td>'+$('#observaciones_sancion').val()+'</td></tr>'); 
+   }
+
+    activar_check();  
  
 }
 
+function refrescar_campo(consecutivo,no_tabla){
+    
+    var button= 
+     '<div class="checkbox abc-checkbox abc-checkbox-primary">'+
+     '   <input type="checkbox" class="upd_check styled edit" ><label></label>'+
+     '</div>';
 
+if(no_tabla===1){
+    
+    $('#tabla1 tr:eq('+indice_seleccion+')').find("td:eq(2)").text($('#crea_nom_proy').val());
+    $('#tabla1 tr:eq('+indice_seleccion+')').find("td:eq(3)").text($('#crea_nom_cons').val());
+    $('#tabla1 tr:eq('+indice_seleccion+')').find("td:eq(4)").text($('#crea_fecha_entrega').val());
+    $('#tabla1 tr:eq('+indice_seleccion+')').find("td:eq(5)").text($('#crea_tipo_proy').val());
+        
+}else if(no_tabla===2){
+    
+    
+    $('#tabla2 tr:eq('+indice_seleccion+')').find("td:eq(2)").text($('#fecha_registro_des').val());
+    $('#tabla2 tr:eq('+indice_seleccion+')').find("td:eq(3)").text($('#fecha_desestimiento_des').val());
+    $('#tabla2 tr:eq('+indice_seleccion+')').find("td:eq(4)").text($('#causal_des').val());
+    $('#tabla2 tr:eq('+indice_seleccion+')').find("td:eq(5)").text($('#proyecto_escogido_des').val());
+}
+else if(no_tabla===3){
+    
+    
+    $('#tabla3 tr:eq('+indice_seleccion+')').find("td:eq(2)").text($('#proyecto_escogido_sancion').val());
+    $('#tabla3 tr:eq('+indice_seleccion+')').find("td:eq(3)").text($('#estado_sancion').val());
+    $('#tabla3 tr:eq('+indice_seleccion+')').find("td:eq(4)").text($('#fecha_sancion_sancion').val());
+    $('#tabla3 tr:eq('+indice_seleccion+')').find("td:eq(5)").text($('#observaciones_sancion').val());
+    
+}
+        
+}
+
+
+/*parte de adicion de registros en las tablas */
 $('#add_row').click(function() {
-    add_info();
+    add_info(1);
  }); 
  
+$('#add_row1').click(function() {
+    add_info(2);
+ }); 
+ $('#add_row2').click(function() {
+    add_info(3);
+ }); 
 
-$('.edit:checkbox').click(function() {            
-            
+
+
+activar_check();
+function activar_check(){
+   $('.edit:checkbox').click(function() {            
+
         $('.edit:checkbox').not(this).prop('checked', false);
 
         var editar=(this).closest("tr");
         indice=$(editar).index()+1;
         indice_guardar=$(editar).index();
 
+        indice_seleccion=indice;
 
+    var tabla=$(this).closest('.table').attr('id');
+
+    if(tabla==="tabla1"){
+        
         $('#crea_nom_proy').val($('#tabla1 tr:eq('+indice+')').find("td:eq(2)").text());              
         $('#crea_nom_cons').val($('#tabla1 tr:eq('+indice+')').find("td:eq(3)").text());               
         $('#crea_fecha_entrega').val($('#tabla1 tr:eq('+indice+')').find("td:eq(4)").text());               
-        $('#crea_tipo_proy').val($('#tabla1 tr:eq('+indice+')').find("td:eq(5)").text());
+        $('#crea_tipo_proy').val($('#tabla1 tr:eq('+indice+')').find("td:eq(5)").text()); 
+        
+    }else if(tabla==="tabla2"){
+       
+        $('#fecha_registro_des').val($('#tabla2 tr:eq('+indice+')').find("td:eq(2)").text());              
+        $('#fecha_desestimiento_des').val($('#tabla2 tr:eq('+indice+')').find("td:eq(3)").text());               
+        $('#causal_des').val($('#tabla2 tr:eq('+indice+')').find("td:eq(4)").text());               
+        $('#proyecto_escogido_des').val($('#tabla2 tr:eq('+indice+')').find("td:eq(5)").text()); 
+        
+    }else if(tabla==="tabla3"){
+       
+
+        $('#proyecto_escogido_sancion').val($('#tabla3 tr:eq('+indice+')').find("td:eq(2)").text());              
+        $('#estado_sancion').val($('#tabla3 tr:eq('+indice+')').find("td:eq(3)").text());               
+        $('#fecha_sancion_sancion').val($('#tabla3 tr:eq('+indice+')').find("td:eq(4)").text());               
+        $('#observaciones_sancion').val($('#tabla3 tr:eq('+indice+')').find("td:eq(5)").text());     
+           
+           
+    }
 
 
     if($('.edit:checked').length === 0){
-        $(".for_table1").each(function(){
-            $(this).val("");
-        });
-        $('#save_row').hide();
-        $('#del_row').hide();
-        $('#add_row').show();
+        if(tabla==="tabla1"){
+            $('#save_row').hide();
+            $('#del_row').hide();
+            $('#add_row').show();
+        }else if(tabla==="tabla2"){
+            $('#save_row1').hide();
+            $('#del_row1').hide();
+            $('#add_row1').show();
+        }
+        else if(tabla==="tabla3"){
+            $('#save_row2').hide();
+            $('#del_row2').hide();
+            $('#add_row2').show();
+        }
+        
     }else{
-        $('#save_row').show();
-        $('#del_row').show();
-        $('#add_row').hide();
+        if(tabla==="tabla1"){
+            $('#save_row').show();
+            $('#del_row').show();
+            $('#add_row').hide();
+        }else if(tabla==="tabla2"){
+            $('#save_row1').show();
+            $('#del_row1').show();
+            $('#add_row1').hide();
+        }
+        else if(tabla==="tabla3"){
+            $('#save_row2').show();
+            $('#del_row2').show();
+            $('#add_row2').hide();
+        }
     } 
           
-});
+}); 
+    
+}
 
 
 
-function guardar(consecutivo){
-refresh();
-var obj = {}
-obj['op'] = "save_proy_inmobiliaria";
-obj['usuario_nombre'] = usuario_nombre; 
-obj['consecutivo'] = consecutivo;
+function guardar(consecutivo,no_tabla){
 
-$('.data').each(function(index) {
+    refrescar_campo(consecutivo,no_tabla);
+    
 
-    var valor=$(this).val().toUpperCase().trim();        
-    obj[$(this).prop('id')] = valor;
+    var obj = {}
+    
+    if(no_tabla===1){
+        obj['op'] = "save_proy_inmobiliaria";
+    }else if(no_tabla===2){
+        obj['op'] = "save_des_inmobiliaria";
+    }
+    
+    
+    obj['identificador'] = identificador; 
+    obj['usuario_nombre'] = usuario_nombre; 
+    obj['consecutivo'] = consecutivo;
 
-});
+    $('.data').each(function(index) {
 
+        var valor=$(this).val().toUpperCase().trim();        
+        obj[$(this).prop('id')] = valor;
+        $(this).val("");
+        
+    });
+    
+
+    console.log(obj)
+
+    /* guardado de la información*/
     $.ajax({
       type: "POST",
       url: "GestionConsultas",
@@ -846,7 +981,9 @@ $('.data').each(function(index) {
       }
 
 
-  }); 
+        }); 
+
+
     
 }
 
@@ -856,16 +993,22 @@ $('#del_row').click(function() {
     borrar();
 });
 
-$('#save_row').click(function() {
-    if(obligatorio()>0){
-        alertify.error("Revise los campos obligatorios antes de ingresar la información");
-    }else{
-        guardar($('#tabla1 tr:eq('+indice+')').find("td:eq(0)").text());
-    }
 
+$('#save_row').click(function() {
+
+    guardar($('#tabla1 tr:eq('+indice+')').find("td:eq(0)").text(),1);
 
 });
 
+$('#save_row1').click(function() {
+    guardar($('#tabla2 tr:eq('+indice+')').find("td:eq(0)").text(),2);
+
+});
+$('#save_row2').click(function() {
+
+    guardar($('#tabla3 tr:eq('+indice+')').find("td:eq(0)").text(),3);
+
+});
 
 function borrar(){
     
@@ -896,17 +1039,28 @@ function borrar(){
     $('#del_row').hide();
     $('#add_row').show();
     
+    
 }
 
 
 
-function generar_filas(contador,crea_nom_proy,crea_nom_cons,crea_fecha_entrega,crea_tipo_proy){
+function generar_filas_tabla1(contador,crea_nom_proy,crea_nom_cons,crea_fecha_entrega,crea_tipo_proy){
     var button= 
         '<div class="checkbox abc-checkbox abc-checkbox-primary">'+
         '   <input type="checkbox" class="upd_check styled edit" ><label></label>'+
         '</div>';
 
         $('#tabla1 tr:last').after('<tr><td>'+contador+'</td><td>'+button+'</td><td>'+crea_nom_proy+'</td><td>'+crea_nom_cons+'</td><td>'+crea_fecha_entrega+'</td><td>'+crea_tipo_proy+'</td></tr>'); 
+
+}
+
+function generar_filas_tabla2(consecutivo,fecha_registro_desestimiento,fecha_desestimiento,causal_desestimiento,proyecto_escogido){
+    var button= 
+        '<div class="checkbox abc-checkbox abc-checkbox-primary">'+
+        '   <input type="checkbox" class="upd_check styled edit" ><label></label>'+
+        '</div>';
+
+        $('#tabla2 tr:last').after('<tr><td>'+consecutivo+'</td><td>'+button+'</td><td>'+fecha_registro_desestimiento+'</td><td>'+fecha_desestimiento+'</td><td>'+causal_desestimiento+'</td><td>'+proyecto_escogido+'</td></tr>'); 
 
 }
 

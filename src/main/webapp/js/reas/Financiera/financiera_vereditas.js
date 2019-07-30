@@ -28,7 +28,7 @@ function gen_financiera_vereditas(){
  '                     <div class="col-md-3"> '+
                                 '   <div class="form-group"> '+
                                 '     <label for="identificador" class="control-label">Identificador</label> '+
-                                '     <input type="text" class="form-control data" id="id" placeholder="identificador" disabled> '+
+                                '     <input type="text" class="form-control data" id="identificador" placeholder="identificador" disabled> '+
                                 '   </div> '+
 
  '                     </div> '+
@@ -90,7 +90,7 @@ function gen_financiera_vereditas(){
  '                     <div class="col-md-6"> '+
                                 '   <div class="form-group"> '+
                                 '     <label for="numero_res" class="control-label">Número del certificado de registro presupuestal</label> '+
-                                '     <input type="text" class="form-control numeric data obligatorio disponible" id="num_rep" placeholder="Número RP"> '+
+                                '     <input type="text" class="form-control numeric data obligatorio disponible" id="no_rp" placeholder="Número RP"> '+
                                 '   </div> '+
                        '   </div> '+
  '                     <div class="col-md-6"> '+
@@ -282,7 +282,10 @@ var puede_borrar=false;
         async: false,
         success: function (response) {
 
+        
+        
            $.each( response[0], function( key, value ) {
+               console.log(key);
                if (key.indexOf('fecha') >= 0) {
                    
                    $('#'+key).val(moment(value).format("DD/MM/YYYY") );
@@ -471,7 +474,7 @@ obj['usuario_nombre'] = usuario_nombre;
 $('.data').each(function(index) {
     
  
-    var valor=$(this).val().toUpperCase().trim().replace(/\s+/g, " ").replace(/,/g, "");;
+    var valor=$(this).val().toUpperCase().trim().replace(/\s+/g, " ").replace(/,/g, "");
     if($(this).hasClass('fecha')){
         if($(this).val()===""){
             valor='0001-01-01';
@@ -481,6 +484,8 @@ $('.data').each(function(index) {
         obj[$(this).prop('id')] = valor;
 
 });
+
+console.log(obj)
 
     $.ajax({
         type: "POST",

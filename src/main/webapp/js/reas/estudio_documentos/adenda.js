@@ -195,17 +195,23 @@ return contenido;
 
 '    </div>'+
 
-'<div id="temporal">'+
-
+'<div id="fecha">'+
 
  '                 <div class="row"> '+
  '                     <div class="col-md-12"> '+
                                 '   <div class="form-group"> '+
                                 '       <h4>Fecha de la adenda </h4>'+
-                                '       <div class="span5 sandbox-container"><input  type="text" class="form-control disponible data fecha" id="fecha_adenda" placeholder="Fecha de la adenda"></div> '+
+                                '       <div class="span5 sandbox-container"><input  type="text" class="form-control disponible data fecha obligatorio" id="fecha_adenda" placeholder="Fecha de la adenda"></div> '+
                                 '   </div> '+
  '                     </div> '+
  '                 </div> '+
+
+'    </div>'+
+
+'<div id="temporal">'+
+
+
+
  
 
  '                 <div class="row"> '+
@@ -326,6 +332,7 @@ $('#quitar_noti').hide();
 
 tip_estudio=tipo_estudio;
 modo_adenda=modo;
+console.log(modo_adenda)
 var dia_de_hoy=moment(new Date()).format("YYYY-MM-DD"); 
 
  $('.sandbox-container input').datepicker({
@@ -497,7 +504,18 @@ if(sector==='Vereditas'){
  function refresh_data(){
          $(".data").val("");
          get_info_adenda(identificador,$('#select_adenda').val(),tipo_estudio);
-         file.fileinput('destroy');
+         
+         
+         try {
+file.fileinput('destroy');
+}
+catch(error) {
+  console.error(error);
+
+}
+         
+         
+         
          get_pdf(identificador,$('#select_adenda').val());
      
  }
@@ -564,7 +582,7 @@ if(seguir){
     
   $.confirm({
     title: 'Problema de creación de adenda',
-    content: 'La adenda no puede ser creada dado que no ha sido aprobada',
+    content: 'La adenda no puede ser creada dado que la actual no ha sido aprobada',
     type: 'red',
     typeAnimated: true,
     buttons: {
@@ -587,6 +605,7 @@ function ocultar(){
     $('#temporal').hide();
     $('#save_adenda').hide();
     $('#rev_adenda').hide(); 
+    $('#fecha').hide();
 }
 
 
@@ -632,7 +651,7 @@ $("input:disabled").css({"backgroundColor":"white"});
 
 
 
-get_pdf(identificador,1);
+//get_pdf(identificador,1);
 
 if(modo===2){
     bloqueo(); 
@@ -653,10 +672,33 @@ if(modo===4){
 
 
 /*Enviar a revisión la adenda*/
-$('#rev_adenda').unbind("click").one('click',function(){
+$('#rev_adenda').click(function(){
     
     if(contar){
+        var str=$(this).attr('id');
+        var conta=0;
+         $('.obligatorio').each(function() {
+
+                var str=$(this).attr('id');
+
+                if($(this).val()==='' || $(this).val()==='Seleccione...' ){
+                    if($("#"+str+"_error").length===0) {
+                       $(this).after( $( "<label id="+$(this).attr('id')+'_error'+" class='error'>Campo Obligatorio</label>" ) );
+                       conta=conta+1;
+                      }else{
+                        $("#"+str+"_error").show();
+                        conta=conta+1;
+                      }
+                }else{
+
+                      $("#"+str+'_error').hide();
+                }
+
+            });
         
+        if(conta>0){
+            alertify.error("Revise los campos obligatorios"); 
+        }else{
         guardar($('#select_adenda').val(),1,tipo_estudio);
         
         var asignado_a=get_usuario_tarea(22);
@@ -687,16 +729,22 @@ $('#rev_adenda').unbind("click").one('click',function(){
         correo(creador,asignado_a,"Revisión de Cargue de adenda",msg,id_proceso);
         
        
-        if(modo===3 || modo===2 || modo===1){
-            quitar_tarea_lider(id_actividad);
-        }
-        
-        
-        $("#not_update").remove();
+       $("#not_update").remove();
             $.getScript("alerta/notificaciones.js", function(){
          });
 
         $('#modal_form').modal('toggle'); 
+        
+        if(modo===3 || modo===2 || modo===1){
+            quitar_tarea_lider(id_actividad);
+        }else{
+            location.reload();
+        }
+        
+        }
+       
+
+
 
     }else{
        alertify.error("Por favor suba un documento pdf con la adenda"); 
@@ -716,9 +764,10 @@ $('#quitar_noti').unbind("click").click(function(){
         $('#modal_form').modal('hide'); 
 
         $("#not_update").remove();
-                $.getScript("alerta/notificaciones.js", function(){
+          $.getScript("alerta/notificaciones.js", function(){
         });
         
+     
     }else{
         $.alert({
           title: 'Tarea incompleta',
@@ -738,14 +787,16 @@ function verificar_div(){
         $('#temporal').show();
         $('#save_adenda').show();
         $('#rev_adenda').show();
+        $('#fecha').show();
     }else if($('#tipo_cargue_adenda').val()==="SUBIR PDF"){
         $('#temporal').hide();
         $('#div_pdf').show();
         $('#save_adenda').show();
         $('#rev_adenda').show();
+        $('#fecha').show();
        
     }else{
-       
+       $('#fecha').hide();
         $('#div_pdf').hide();
         $('#temporal').hide();
         $('#save_adenda').hide();
@@ -838,12 +889,13 @@ if(!jQuery.isEmptyObject( resultado )){
   nom_apr=(resultado[0].aprobo?resultado[0].aprobo:'');
   seguir=(resultado[0].concepto?resultado[0].concepto:false);
   
-   if(resultado[0].concepto===true){
+   if((resultado[0].concepto?resultado[0].concepto:'')===true){
        $('#div_pdf').show();
        bloqueo();
        borrar_pdf=true;
     
        $('#quitar_noti').show();
+       
    }else{
        $('#quitar_noti').hide();
        borrar_pdf=false;
@@ -851,29 +903,37 @@ if(!jQuery.isEmptyObject( resultado )){
          
    }  
    
-}
+
 
 if(modo_adenda===4){
     $('#quitar_noti').hide();
 }
 
-if(resultado[0].estado===1){
+if((resultado[0].estado?resultado[0].estado:'')===1){
     bloqueo();
  $('#msg_noaprob').show().text("Adenda en Aprobación.");
 }
 
-if(resultado[0].estado===2){
+if((resultado[0].estado?resultado[0].estado:'')===2){
 
  $('#msg_noaprob').show().text("Adenda devuelta por modificaciones.");
 }
+if((resultado[0].estado?resultado[0].estado:'')===2 && modo_adenda==4){
+bloqueo(); 
+}
 
-if(resultado[0].estado===3){
+if((resultado[0].estado?resultado[0].estado:'')===3){
     
     bloqueo();
  $('#msg_noaprob').show().text("Adenda Aprobada.");
+ $('#subir_adenda').hide();
 }
 
+if((resultado[0].estado?resultado[0].estado:'')===3 && modo_adenda===4){
+    $('#subir_adenda').show();
+}
 
+}
 
 
 if($('#select_adenda').val()!==""){
@@ -1050,6 +1110,7 @@ $('.sensible').each(function(index) {
     
     
 function get_pdf(identificador,consecutivo){
+
 
 var datos1 = {};
 var url_preview1='';

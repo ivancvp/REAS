@@ -144,7 +144,7 @@ if(!$fecha_elaboracion.value){
         ape2_2: $ape2_2,
         ced1: $ced1,
         ced2: $ced2,
-        user_upd:usuario_usuario
+        user_upd:usuario_nombre
     };
   
 
@@ -212,7 +212,7 @@ function upd_user(){
     $datos = {
         op: 'ficha1_upd_user',
         identificador: $($identificador).val(),
-        usuario:usuario_usuario
+        usuario:usuario_nombre
     };
   
 
@@ -356,7 +356,7 @@ $dir_campo = document.getElementById("dir_campo").value.toUpperCase().replace("\
         op: 'ficha_chip',
         identificador: $($identificador).val(),
         chip: $chip,
-        user_upd:usuario_usuario
+        user_upd:usuario_nombre
     };
   
 

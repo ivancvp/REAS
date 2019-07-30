@@ -25,6 +25,59 @@ function gen_resolucion(identificador){
                                 '   </div> '+
  '                     </div> '+
  '                 </div> '+
+ 
+ '<div >'+
+
+'<div class="row"> '+
+'    <div class="col-md-8">'+
+'      <div class="form-group">'+
+'        <label>Tipo de notificación</label>'+
+'        <select class="form-control upd disponible" id="tipo_notificacion">'+
+'          <option value="">Seleccione...</option>'+
+'          <option value="Acta de Notificacion">Acta de notificación para las familias ocupantes, caso caracoli Fecha 8 de octubre de 2018</option>'+
+'          <option value="Afirmacion">Afirmación hecha ante la alcaldía local de Ciudad Bolivar Sector "Caracoli" de Fecha: </option>'+
+'        </select>'+
+'      </div>'+
+'    </div>'+
+
+'          <div class="col-md-4 control_tipo_notificacion"> '+
+                '   <div class="form-group"> '+
+                '     <label class="control-label">Fecha de la afirmación</label> '+
+                ' <small class="text-muted">(dd/mm/yyyy)</small>'+
+                '     <div class="span5 sandbox-container"><input id="fecha_afirmacion" type="text" class="form-control upd disponible fecha fecha_validate" placeholder="Fecha RES" ></div>'+
+                '   </div> '+
+'                     </div> '+    
+
+'    </div>'+
+
+'<div class="row"> '+
+'    <div class="col-md-12">'+
+'      <div class="form-group">'+
+'        <label>Tipo de resolución por imprimir</label>'+
+'        <select class="form-control upd disponible" id="tipo_resol">'+
+'          <option value="0">Seleccione...</option>'+
+'          <option value="VUR">Asignación de recursos</option>'+
+'          <option value="VUR ESPECIE">Asignación en especie</option>'+
+'        </select>'+
+'      </div>'+
+'    </div>'+
+'    </div>'+
+
+'<div class="row control_tipo_resol"> '+
+'    <div class="col-md-12">'+
+'      <div class="form-group">'+
+'        <label>Señor(a) que suscribió el "Formato para la selección de vivienda nueva" (Solo resolución en especie)</label>'+
+'        <select class="form-control upd obligatorio disponible" id="beneficiario_resolucion_especie">'+
+'          <option value="">Seleccione...</option>'+
+'        </select>'+
+'      </div>'+
+'    </div>'+
+'    </div>'+
+
+'</div>'+
+ 
+ 
+ 
   '                 <div class="row"> '+
 /*
  '                     <div class="col-md-6"> '+
@@ -37,36 +90,69 @@ function gen_resolucion(identificador){
                     '<div class="col-md-4"> '+
                                 '   <div class="form-group"> '+
                                 '     <label class="control-label">Folio Est. documentos</label> '+
-                                '     <input type="text" class="form-control disponible upd" id="folio_est_documentos" placeholder="Folio Estudio de documentos" > '+
+                                '     <input type="text" class="form-control disponible upd obligatorio" id="folio_est_documentos" placeholder="Folio Estudio de documentos" > '+
                                 '   </div> '+
                     '</div> '+
                    
                     '</div> '+
+                    
+  '  <div class="div_cdp"> '+                    
    '                 <div class="row"> '+
  '                     <div class="col-md-4"> '+
                                 '   <div class="form-group"> '+
                                 '     <label  class="control-label">Valor del CDP</label> '+
                                 '<div class="input-group"> '+
                                 '<span style="border-color:#5DADE2"  class="input-group-addon">$</span>'+
-                                '     <input type="text" style="border-color:#5DADE2" class="form-control obligatorio moneda disponible upd" id="valor_cdp" placeholder="Valor del CDP"> '+
+                                '     <input type="text" style="border-color:#5DADE2" class="form-control obligatorio moneda disponible upd especie" id="valor_cdp" placeholder="Valor del CDP"> '+
                                 '   </div> '+
                                 '   </div> '+
                        '   </div> '+
  '                     <div class="col-md-4"> '+
                             '   <div class="form-group"> '+
                                 '     <label for="cdp_res" class="control-label">Número del (CDP)</label> '+
-                                '     <input type="number" class="form-control obligatorio numeric disponible upd" id="no_cdp" placeholder="(CDP)" > '+
+                                '     <input type="number" class="form-control obligatorio numeric disponible upd especie" id="no_cdp" placeholder="(CDP)" > '+
          '                     </div> '+
         '                 </div> '+
          '          <div class="col-md-4"> '+
                             '   <div class="form-group"> '+
                             '     <label class="control-label">Fecha CDP</label> '+
                             ' <small class="text-muted">(dd/mm/yyyy)</small>'+
-                            '     <div class="span5 sandbox-container"><input id="fecha_cdp" type="text" class="form-control upd obligatorio disponible fecha fecha_validate" placeholder="Fecha CDP" ></div>'+
+                            '     <div class="span5 sandbox-container"><input id="fecha_cdp" type="text" class="form-control upd obligatorio disponible fecha fecha_validate especie" placeholder="Fecha CDP" ></div>'+
                             '   </div> '+
  '                     </div> '+      
         
   '                 </div> '+ 
+  
+  
+                      '<div class="row"> '+
+                        '<div class="col-md-12"> '+
+                            '<div class="form-group"> '+
+                                '<label class="control-label">Objeto CDP</label> '+
+                                '<textarea class="form-control disponible upd especie" rows="3" id="objeto_cdp"></textarea>'+
+                            '</div> '+
+                        '</div> '+ 
+                    '</div> '+ 
+
+   '                 <div class="row"> '+
+    '                     <div class="col-md-4"> '+
+                                '   <div class="form-group"> '+
+                                '     <label for="val_res" class="control-label">Valor de la Resolución</label> '+
+                                '<div class="input-group"> '+
+                                '<span style="border-color:#5DADE2"  class="input-group-addon">$</span>'+
+                                '     <input style="border-color:#5DADE2"  type="text" class="form-control obligatorio moneda disponible upd especie" id="valor_resol" placeholder="Valor de la Resolución"> '+
+                                '   </div> '+
+                                '   </div> '+
+                       '   </div > '+
+
+
+ '</div> '+
+
+   
+   
+   
+   '                 </div> '+ 
+ 
+
                     '<div class="row"> '+  
                       '<div class="col-md-4"> '+
                                 '   <div class="form-group"> '+
@@ -92,26 +178,8 @@ function gen_resolucion(identificador){
                     
                     
   '                 </div> '+ 
-                    '<div class="row"> '+
-                        '<div class="col-md-12"> '+
-                            '<div class="form-group"> '+
-                                '<label class="control-label">Objeto CDP</label> '+
-                                '<textarea class="form-control disponible upd" rows="3" id="objeto_cdp"></textarea>'+
-                            '</div> '+
-                        '</div> '+ 
-                    '</div> '+ 
 
-   '                 <div class="row"> '+
-    '                     <div class="col-md-4"> '+
-                                '   <div class="form-group"> '+
-                                '     <label for="val_res" class="control-label">Valor de la Resolución</label> '+
-                                '<div class="input-group"> '+
-                                '<span style="border-color:#5DADE2"  class="input-group-addon">$</span>'+
-                                '     <input style="border-color:#5DADE2"  type="text" class="form-control obligatorio moneda disponible upd" id="valor_resol" placeholder="Valor de la Resolución"> '+
-                                '   </div> '+
-                                '   </div> '+
-                       '   </div > '+
-                       '   <div id="div_posterior_aprobacion"> '+
+                        '   <div id="div_posterior_aprobacion"> '+
  '                     <div class="col-md-4"> '+
                             '   <div class="form-group"> '+
                                 '     <label for="cdp_res" class="control-label">Número de la resolución</label> '+
@@ -126,10 +194,7 @@ function gen_resolucion(identificador){
                             '   </div> '+
  '                     </div> '+    
                        '   </div> '+
-   
-   
-   
-   '                 </div> '+ 
+
 
     '                 <div class="row"> '+
     '                   <div class="col-md-12"> '+
@@ -156,55 +221,7 @@ function gen_resolucion(identificador){
 
 
 
-'<div style="border-style: solid;border-color:#84DEC3";margin:3px>'+
 
-'<div class="row"> '+
-'    <div class="col-md-8">'+
-'      <div class="form-group">'+
-'        <label>Tipo de notificación</label>'+
-'        <select class="form-control upd" id="tipo_notificacion">'+
-'          <option value="">Seleccione...</option>'+
-'          <option value="Acta de Notificacion">Acta de notificación para las familias ocupantes, caso caracoli Fecha 8 de octubre de 2018</option>'+
-'          <option value="Afirmacion">Afirmación hecha ante la alcaldía local de Ciudad Bolivar Sector "Caracoli" de Fecha: </option>'+
-'        </select>'+
-'      </div>'+
-'    </div>'+
-
-'          <div class="col-md-4 control_tipo_notificacion"> '+
-                '   <div class="form-group"> '+
-                '     <label class="control-label">Fecha de la afirmación</label> '+
-                ' <small class="text-muted">(dd/mm/yyyy)</small>'+
-                '     <div class="span5 sandbox-container"><input id="fecha_afirmacion" type="text" class="form-control upd disponible fecha fecha_validate" placeholder="Fecha RES" ></div>'+
-                '   </div> '+
-'                     </div> '+    
-
-'    </div>'+
-
-'<div class="row"> '+
-'    <div class="col-md-12">'+
-'      <div class="form-group">'+
-'        <label>Tipo de resolución por imprimir</label>'+
-'        <select class="form-control upd" id="tipo_resol">'+
-'          <option value="0">Seleccione...</option>'+
-'          <option value="VUR">Asignación de recursos</option>'+
-'          <option value="VUR ESPECIE">Asignación en especie</option>'+
-'        </select>'+
-'      </div>'+
-'    </div>'+
-'    </div>'+
-
-'<div class="row control_tipo_resol"> '+
-'    <div class="col-md-12">'+
-'      <div class="form-group">'+
-'        <label>Señor(a) que suscribió el "Formato para la selección de vivienda nueva" (Solo resolución en especie)</label>'+
-'        <select class="form-control upd" id="beneficiario_resolucion_especie">'+
-'          <option value="">Seleccione...</option>'+
-'        </select>'+
-'      </div>'+
-'    </div>'+
-'    </div>'+
-
-'</div>'+
 
 '<div class="btn-group">'+
 '                           <button type="button" class="btn btn-success" id="save_res_vereditas"><i class="glyphicon glyphicon-floppy-disk"></i> Guardar</button>'+
@@ -300,8 +317,11 @@ function get_familia_resolucion(){
         success: function (response) {           
             if(response.length>0){
                 for(var i=0;i<response.length;i++){
-                    $('#beneficiario_resolucion_especie').append('<option value="'+response[i].nombre+'">'+response[i].nombre+'</option>');
+                    var nombre=response[i].nombre;
+                        nombre=nombre.trim().replace(/\s+/g, " ");           
+                    $('#beneficiario_resolucion_especie').append('<option value="'+nombre+'">'+nombre+'</option>');
                 }
+ 
             }
         }
     });
@@ -399,8 +419,10 @@ console.log(response)
                         $('#'+key).val(moment(value).format("DD/MM/YYYY"));
                     }else{
                         $('#'+key).val(value);
+
                     }
            });
+           
            
     if($('#tipo_notificacion').val()==="Afirmacion"){
         $('.control_tipo_notificacion').show();
@@ -410,9 +432,29 @@ console.log(response)
     
     if($('#tipo_resol').val()==="VUR ESPECIE"){
         $('.control_tipo_resol').show();
+        $('.div_cdp').hide();
+        
+        
+        $('.especie').each(function(i, obj) {
+            $(this ).removeClass( "obligatorio" );
+            $(this ).val('');
+        });
+        
+        
     }else{
+        
+        $('#beneficiario_resolucion_especie').removeClass( "obligatorio" );
+        
         $('.control_tipo_resol').hide();
+        $('.div_cdp').show();
+        
+        $('.especie').each(function(i, obj) {
+            $(this ).addClass( "obligatorio" );
+        });
     }
+    
+
+    
            
             if(resultado[0]["concepto"]?resultado[0]["concepto"]:false){
                 $('#info_elaboracion').append("<p style='color:#EB984E'>Elaboro: "+(resultado[0]["elaboro"]?resultado[0]["elaboro"]:'')
@@ -460,8 +502,24 @@ $('#tipo_resol').change(function(){
     
     if($(this).val()==="VUR ESPECIE"){
         $('.control_tipo_resol').show();
+        
+        $('.div_cdp').hide();
+        
+        $('.especie').each(function(i, obj) {
+            $(this ).removeClass( "obligatorio" );
+            $(this ).val('');
+        });
+        $('#beneficiario_resolucion_especie').addClass( "obligatorio" );
+        
     }else{
         $('.control_tipo_resol').hide();
+        $('.div_cdp').show();
+        
+        $('.especie').each(function(i, obj) {
+            $(this ).addClass( "obligatorio" );
+        });
+        $('#beneficiario_resolucion_especie').removeClass( "obligatorio" );
+        
     }
     
 });
@@ -669,6 +727,8 @@ $('#quitar_tarea').click(function(){
 
 $('#enviar_acta_entrega').click(function(){
     
+    guardar();
+    
 $('#no_resol').addClass( "obligatorio" );
 $('#fecha_resol').addClass( "obligatorio" );
 
@@ -836,6 +896,7 @@ $('.upd').each(function(index) {
 });
 
 console.log(obj)
+
 
     $.ajax({
       type: "POST",

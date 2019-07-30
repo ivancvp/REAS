@@ -28,9 +28,24 @@ if(usr_funct.includes(21)){
     cont_edit_est='<button type="button" class="press press-purple press-ghost" id="hab_est_docu"><i class="fas fa-pencil-alt"></i> Editar</button>';
 }
 
+
+
+
+
+
 function contenido_refresh(datos){
     
+
 var data = datos;
+
+
+var manzana=(data["MZ"]?data["MZ"]:'');
+var lote=(data["LT"]?data["LT"]:'');
+
+if(data.IDENTIFICADOR.includes("CP19")){
+    manzana=(data["man_cat"]?data["man_cat"]:'');
+    lote=(data["lot_cat"]?data["lot_cat"]:'');
+}
 
 var contenido=
 '<div id="refresh_estudio">'+
@@ -95,11 +110,11 @@ cont_edit_est+
      ' <div class="row"> '+
         '    <div class="form-group col-sm-3">'+
         '     <label >Manzana</label>'+
-        '    <input type="text" class="form-control " value="'+(data["MZ"]?data["MZ"]:'')+'" disabled> '+
+        '    <input type="text" class="form-control " value="'+manzana+'" disabled> '+
         '   </div>'+
         '    <div class="form-group col-sm-3">'+
         '     <label >Lote</label>'+
-        '     <input type="text" class="form-control " value="'+(data["LT"]?data["LT"]:'')+'" disabled>'+
+        '     <input type="text" class="form-control " value="'+lote+'" disabled>'+
         '   </div>'+
         '    <div class="form-group col-sm-6">'+
         '     <label >Concepto Técnico</label>'+
@@ -456,8 +471,7 @@ cont_edit_est+
         ' <hr />  '+
         '<button type="button" class="btn btn-danger btn_hide" id="imp_est_docu">Imprimir</button>'+
         '<button class="btn btn-success btn_hide" type="button" id="envio_res"><span>Enviar a revisión y aprobación</span></button>'+ 
-        '<button class="btn btn-primmary btn_hide" style="display:none" type="button" id="crear_res">Crear Resolución</button>'+ 
-        '<button class="btn btn-warning btn_hide" style="display:none" type="button" id="subir_adenda">Subir Adenda</button>'+ 
+        '<button class="btn btn-primmary btn_hide" style="display:none" type="button" id="crear_res">Crear Resolución</button>'+  
         ' <hr />  '+
         '<div class="form-group" id="msg_pdf">'+
             ' <label class="text-warning">Para completar el estudio de documentos, por favor suba el estudio de documentos firmado en la sección 6.</label>'+
@@ -780,9 +794,15 @@ function logica_est_documentos(index,res,datos,modo){
             $('.fileinput-upload').hide();
             $('.btn-file').hide();     
             if(proceder){
-                $('#envio_res').show();
+                
+            if(identificador.includes("CP19") || vereditas){
+                $('#envio_res').hide();
                 $('#crear_res').show();
-                $('#subir_adenda').show();
+            }else{
+                $('#crear_res').hide();
+                $('#envio_res').show();
+            }
+
                 $('#msg_pdf').hide();
             }
         });
@@ -821,13 +841,13 @@ function logica_est_documentos(index,res,datos,modo){
             if(contar){               
                 
 
-                $('#crear_res,#subir_adenda').show();
+                $('#crear_res').show();
                 
                 
                 
                 $('#msg_pdf').hide();
             }else{
-                $('#envio_res,#crear_res,#subir_adenda').hide();
+                $('#envio_res,#crear_res').hide();
                 $('#msg_pdf,#imp_est_docu').show();
             }
                       
@@ -841,17 +861,13 @@ function logica_est_documentos(index,res,datos,modo){
             }
            
             if(identificador.includes("CP19") || vereditas){
+                
                 $('#envio_res').hide();
             }else{
                 $('#crear_res').hide();
             }
             
-           if(tip_est==='255' || tip_est==='511'){
-               
-           }else{
-               $('#subir_adenda').hide();
-           }
-            
+           
             
             $('#save_res').css("display","none");
             
@@ -859,31 +875,6 @@ function logica_est_documentos(index,res,datos,modo){
             $(".div_obs").hide();
 
 
-            $('#subir_adenda').click(function(){
-                var formulario=21;
-                if($('#tipo_estudio').val()==='511'){
-                    formulario=26;
-                }
-                $.confirm({
-                    title: 'Aviso de confirmacion!',
-                    icon: 'fa fa-warning',
-                    content: 'Desea comenzar el cargue de la Adenda?',
-                    theme: 'modern',
-                    buttons: {
-                        confirmar:{
-                            btnClass: 'btn-primary',
-                            action:function () {
-                                hola({formulario:formulario,index:identificador,modo:3,id_proceso:res[index]["id_proceso"],id_actividad:res[index]["id_actividad"]});
-                            }            
-                        },
-                        cancelar:{
-                            btnClass: 'btn-danger',
-                            action:function () {
-                            }
-                        }
-                    }
-                });
-            });
             
             $('#crear_res').click(function () {
                 if(siguiente===1){
@@ -941,6 +932,7 @@ function logica_est_documentos(index,res,datos,modo){
                 $("#not_update").remove();
                 $.getScript("alerta/notificaciones.js", function(){});
                 $('#modal_form').modal('toggle');
+                
             });
             
             $('#imp_est_docu').on('click', function () {
@@ -1130,7 +1122,7 @@ function logica_est_documentos(index,res,datos,modo){
             $(".upd_check").css({"backgroundColor":"white"});
             $("#save_res").hide();
             $('#crear_res').hide();
-            $('#subir_adenda').hide();
+            
         }
 
         $('#hab_est_docu').click(function(){

@@ -216,7 +216,7 @@ function aprobacion(identificador,id_actividad,tipo_proceso,tipo_actividad,activ
             insertar_aprobacion_adenda(identificador,$('#nom_crea').val(),$('#aprobo_est').val(),$('#sel_aprobacion').val(),$('#obs_regreso').val(),'511');
             
             if($('#sel_aprobacion').val()==="true"){
-                insertar_aprobacion_adenda_nombres(identificador,$('#nom_crea').val(),$('#aprobo_est').val());
+                insertar_aprobacion_adenda_nombres(identificador,$('#nom_crea').val(),$('#aprobo_est').val(),'511');
                 insertar_aprobacion_adenda_estado(identificador,'511',3);
             }else{
                 insertar_aprobacion_adenda_estado(identificador,'511',2);

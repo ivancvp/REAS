@@ -56,7 +56,7 @@ $.reas('reas', {
                             if (response.length > 0) {
                                 for (var i = 0; i < response.length; i++) {
                                     var resultado = response[i];
-//                                    console.log(resultado);
+                                   console.log(resultado);
 //                                    console.log(typeof resultado['Código Chip Catastro']);
                                     var unidades = '<h4><small>Unidades habitacionales: ' + (resultado['unidades_habitacionales'] > 1 ? '<span id="habitacional_btn" class="badge badge-default badge-pill">' + resultado['unidades_habitacionales'] + '</span>' : '<span id="habitacional_btn" class="badge badge-default badge-pill">1</span>') + '</small></h4>';
                                     unidades = resultado['padre'] !== undefined ? '<h4><small>Identificador principal <span id="padre_btn" class="badge badge-default badge-pill">' + resultado['padre'] + '</span></small></h4>' : unidades;
@@ -670,6 +670,7 @@ $.ajax({
                                         $('#freconocimiento').show();
                                       
                                     }
+                                    console.log(resultado['registro_caracterizacion'])
                                     if (resultado['registro_caracterizacion'] > 0) {
                                         $('#fcaracterizacion').show();
                                     }

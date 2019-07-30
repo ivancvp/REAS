@@ -2479,8 +2479,8 @@
             returning identificador
             ),
             ins as(
-            INSERT INTO ficha_reconocimiento_v1(identificador)
-            SELECT '@identificador'
+            INSERT INTO ficha_reconocimiento_v1(identificador,ficha_reconocimiento_v1_user,ficha_reconocimiento_v1_time)
+            SELECT '@identificador','@usuario_nombre',current_timestamp
             WHERE NOT EXISTS (select 1 from upd )
             returning identificador	
             ),
@@ -2898,6 +2898,55 @@
         <permisos>*</permisos>
         <es_dml_complejo>true</es_dml_complejo>
     </Consulta>
+    
+    
+    <Consulta id="save_des_inmobiliaria">
+        <sql>           
+	WITH 
+	sel as (
+	Select consecutivo,identificador from  gestion_inmobiliaria.desestimientos where consecutivo=@consecutivo and identificador='@identificador'
+	),
+	upd as(
+	UPDATE gestion_inmobiliaria.desestimientos
+	SET 
+	fecha_registro_desestimiento=CASE WHEN to_date('@fecha_registro_des','YYYY MM DD') = '0001-01-01 BC' THEN NULL ELSE to_date('@fecha_registro_des','YYYY MM DD') END,
+	fecha_desestimiento=CASE WHEN to_date('@fecha_desestimiento_des','YYYY MM DD') = '0001-01-01 BC' THEN NULL ELSE to_date('@fecha_desestimiento_des','YYYY MM DD') END,
+	causal_desestimiento= '@causal_des',
+	user_upd='@usuario_nombre',
+	user_upd_time =current_timestamp
+	WHERE consecutivo=(select consecutivo from sel) and identificador=(select identificador from sel)
+	returning identificador
+	),ins as(
+	INSERT INTO gestion_inmobiliaria.desestimientos(
+	identificador,
+	consecutivo,
+	fecha_registro_desestimiento,
+	fecha_desestimiento,
+	causal_desestimiento,
+	user_ins,
+	user_ins_time
+	)
+	SELECT
+	'@identificador',
+	@consecutivo,                
+	CASE WHEN to_date('@fecha_registro_des','YYYY MM DD') = '0001-01-01 BC' THEN NULL ELSE to_date('@fecha_registro_des','YYYY MM DD') END,
+	CASE WHEN to_date('@fecha_desestimiento_des','YYYY MM DD') = '0001-01-01 BC' THEN NULL ELSE to_date('@fecha_desestimiento_des','YYYY MM DD') END,
+	'@causal_des',
+	'@usuario_nombre',
+	current_timestamp
+	WHERE NOT EXISTS (select 1 from sel)
+	returning identificador	
+	)
+	select * from upd union select * from ins;
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>true</es_dml_complejo>
+    </Consulta>   
+    
+    
+    
+    
     
     <Consulta id="get_data_inmobiliaria">
         <sql>           
@@ -3318,14 +3367,13 @@
     </Consulta> 
     <Consulta id="get_info_financiera">
         <sql>
-            select "IDENTIFICADOR" as id,"Nombre 1" as nom_ben,
+            select "IDENTIFICADOR" as identificador,"Nombre 1" as nom_ben,
             "Cedula 1" as num_doc, no_cdp as num_cdp, fecha_cdp, no_resol as num_res,fecha_resol as fecha_res,
-            pf.num_rep,rv.fecha_rp,num_cta,ent_ban,val_gir,elaboro,aprobo,concepto
+            no_rp,rv.fecha_rp as fecha_rp,num_cta,ent_ban,val_gir,elaboro,aprobo,concepto
             from definitiva df inner join financiera_reas.cdp_rp rv on
             df."IDENTIFICADOR"= rv.identificador left join procesos.financiera pf
             on df."IDENTIFICADOR"= pf.identificador left join procesos.aprob_financiera af on df."IDENTIFICADOR"= af.identificador
-            where rv.identificador='@identificador' 
-            
+            where rv.identificador='@identificador'  
         </sql>
         <conexion>atencion_reloca</conexion>
         <permisos>*</permisos>
@@ -3444,7 +3492,7 @@
         <permisos>*</permisos>
         <es_dml_complejo>true</es_dml_complejo>
     </Consulta> 
-        <Consulta id="get_info_inmobiliaria_proyecto">
+    <Consulta id="get_info_inmobiliaria_proyecto">
         <sql>
             
 
@@ -3455,7 +3503,22 @@
         <conexion>atencion_reloca</conexion>
         <permisos>*</permisos>
         <es_dml_complejo>true</es_dml_complejo>
-    </Consulta>    
+    </Consulta>
+ 
+    <Consulta id="get_info_inmobiliaria_desestimientos">
+        <sql>
+            
+
+            select * from gestion_inmobiliaria.desestimientos where identificador ='@identificador' order by consecutivo;
+
+            
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>true</es_dml_complejo>
+    </Consulta>       
+        
+                
     <Consulta id="delete_fam_caracoli">
         <sql>
             delete  from caracoli.familia where num_sdh='@num_sdh' and  doc_ide='@doc_ide';
@@ -3614,16 +3677,19 @@
     
     <Consulta id="save_info_financiera">
         <sql>
-            WITH 
+            
+        update financiera_reas.cdp_rp set no_rp='@no_rp', fecha_rp=CASE WHEN to_date('@fecha_rp','DD MM YYYY') = '0001-01-01 BC' THEN NULL ELSE to_date('@fecha_rp','DD MM YYYY') END
+        where identificador='@identificador' and conse=1;
+        
+            
+        WITH 
             sel as (
-            Select identificador from procesos.financiera where identificador='@id'
+            Select identificador from procesos.financiera where identificador='@identificador'
             ),
             upd as(
             UPDATE	procesos.financiera
             SET 
-            identificador= '@id',
-            num_rep=@num_rep,
-            fecha_rp=CASE WHEN to_date('@fecha_rp','DD MM YYYY') = '0001-01-01' THEN NULL ELSE to_date('@fecha_rp','DD MM YYYY') END,
+            identificador= '@identificador',
             num_cta='@num_cta',
             ent_ban='@ent_ban',
             val_gir=@val_gir,
@@ -3634,8 +3700,6 @@
             ),ins as(
             INSERT INTO procesos.financiera(
             identificador,
-            num_rep,
-            fecha_rp,
             num_cta,
             ent_ban,
             val_gir,
@@ -3644,8 +3708,6 @@
             )
             SELECT
             '@id',
-            @num_rep,
-            CASE WHEN to_date('@fecha_rp','DD MM YYYY') = '0001-01-01' THEN NULL ELSE to_date('@fecha_rp','DD MM YYYY') END,
             '@num_cta',
             '@ent_ban',
             @val_gir,
@@ -3654,8 +3716,13 @@
             WHERE NOT EXISTS (select 1 from upd )
             returning identificador	
             )
-            select * from upd union select * from ins
-
+            select * from upd union select * from ins    
+                
+            
+            
+            
+            
+            
             
         </sql>
         <conexion>atencion_reloca</conexion>
@@ -4894,7 +4961,7 @@
             select fecha_creacion,usuario_nombre,usuario_correo from procesos.actividad pa natural join procesos.proceso 
             inner join usuario us on
             us.usuario_id=pa.asignado_a
-            where identificador ='@identificador' and id_tipo_actividad=2 
+            where identificador ='@identificador' and id_tipo_actividad=2 and estado=1
             order by id_actividad desc limit 1;
         </sql>
         <conexion>atencion_reloca</conexion>

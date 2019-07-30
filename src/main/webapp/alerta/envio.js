@@ -105,7 +105,8 @@ function quitar_tarea_lider(id){
         dataType: "json",
         async: false,
         success: function (response) {           
-            alertify.success("Notificación resuelta satisfactoriamente");            
+            alertify.success("Notificación resuelta satisfactoriamente"); 
+            location.reload();
         },
         error: function (response) {
             alertify.error("Ocurrió un error ");

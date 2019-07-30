@@ -19,6 +19,14 @@ if($('#est_procede').val()==='POSITIVO'){
     procede='Si';
 }
 
+var manzana=(data["MZ"]?data["MZ"]:'');
+var lote=(data["LT"]?data["LT"]:'');
+
+if(data.identificador.includes("CP19")){
+    manzana=(data["man_cat"]?data["man_cat"]:'');
+    lote=(data["lot_cat"]?data["lot_cat"]:'');
+}
+
 
 pdfMake.fonts = {
     // Default font should still be available
@@ -90,7 +98,7 @@ margin: [60, 25],
         table: {
              widths: ['*'],
                 body: [                     
-                        [{text:'Lote de terreno, ubicado en Bogotá, D.C. en la Localidad '+(data["Localidad"]?data["Localidad"]:'')+', Barrio '+(data["Barrio"]?data["Barrio"]:'')+', Dirección: '+(data["Dirección"]?data["Dirección"]:'')+', Manzana '+(data["MZ"]?data["MZ"]:'')+', Lote '+(data["LT"]?data["LT"]:'')+', Concepto '+
+                        [{text:'Lote de terreno, ubicado en Bogotá, D.C. en la Localidad '+(data["Localidad"]?data["Localidad"]:'')+', Barrio '+(data["Barrio"]?data["Barrio"]:'')+', Dirección: '+(data["Dirección"]?data["Dirección"]:'')+', Manzana '+manzana+', Lote '+lote+', Concepto '+
                                 'Técnico '+(data["Concepto de Ingreso"]?data["Concepto de Ingreso"]:'')+' del Fondo de Prevención y atención de Emergencias - FOPAE anteriormente DPAE. De acuerdo'+
                                 'a los documentos aportados se encuentra comprendido dentro de los siguientes linderos:',style:'texto1',fontSize: 10}]
                       ]

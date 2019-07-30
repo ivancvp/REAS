@@ -2,12 +2,12 @@
 <Conexiones>
     <Conexion id="atencion_reloca">
         <!--Produccion en intranet-->
-        <url>jdbc:postgresql://atencion_reloca:5432/atencion_reloca</url>
+        <!--<url>jdbc:postgresql://atencion_reloca:5432/atencion_reloca</url>-->
         <!--<url>jdbc:postgresql://sig-reas:5432/atencion_reloca</url>-->
         <!--<url>jdbc:postgresql://192.168.0.4:5432/atencion_reloca</url>-->
         <!--<url>jdbc:postgresql://10.216.160.195:5432/atencion_reloca</url>-->
         <!--Produccion en Ip publica-->
-        <!--<url>jdbc:postgresql://localhost:5432/atencion_reloca</url>-->
+        <url>jdbc:postgresql://localhost:5432/atencion_reloca</url>
         <user>postgres</user>
         <password>123456</password>
         <!--Clave de la Base de Datos en ip publica-->

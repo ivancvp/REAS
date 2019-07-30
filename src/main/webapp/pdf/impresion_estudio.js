@@ -173,6 +173,7 @@ return docDefinition;
 function imp_estudio(datos){
 
 
+
     var concepto='';
     
 
@@ -225,7 +226,7 @@ function imp_estudio(datos){
     $lin_ori = (datos[0].lin_ori_est?datos[0].lin_ori_est:'');
     $lin_occ = (datos[0].lin_occ_est?datos[0].lin_occ_est:'');
 
-     $tradicion_est = (datos[0].tradicion?datos[0].tradicion:'');
+    $tradicion_est = (datos[0].tradicion?datos[0].tradicion:'');
     $tipo_doc_est =(datos[0].tipo_doc?datos[0].tipo_doc:'');
     $nro_doc_est =(datos[0].nro_doc?datos[0].nro_doc:'');
     $notaria_est =(datos[0].notaria?datos[0].notaria:'');
@@ -277,6 +278,10 @@ function ischeck(ic){
 }
 
 
+
+
+
+
 pdfMake.fonts = {
     // Default font should still be available
     Roboto: {
@@ -296,6 +301,16 @@ pdfMake.fonts = {
 
 
 var data = datos[0];
+
+var manzana=(data["MZ"]?data["MZ"]:'');
+var lote=(data["LT"]?data["LT"]:'');
+
+if(data.identificador.includes("CP19")){
+    manzana=(data["man_cat"]?data["man_cat"]:'');
+    lote=(data["lot_cat"]?data["lot_cat"]:'');
+}
+
+
 
 var docDefinition = {
     pageSize: 'FOLIO',
@@ -347,7 +362,7 @@ function(currentPage, pageCount) {
              widths: [55,190,120,'*'],
                 body: [                     
                         [{text:'DESCRIPCIÓN DEL INMUEBLE\n',colSpan:4,style:'subtitulo',border: [false, false, false, true]},{},{},{}],
-                        [{text:'Lote de terreno, ubicado en Bogotá, D.C. en la Localidad '+(data["Localidad"]?data["Localidad"]:'')+', Barrio '+(data["Barrio"]?data["Barrio"]:'')+', Dirección: '+(data["Dirección"]?data["Dirección"]:'')+', Manzana '+(data["MZ"]?data["MZ"]:'')+', Lote '+(data["LT"]?data["LT"]:'')+', '+
+                        [{text:'Lote de terreno, ubicado en Bogotá, D.C. en la Localidad '+(data["Localidad"]?data["Localidad"]:'')+', Barrio '+(data["Barrio"]?data["Barrio"]:'')+', Dirección: '+(data["Dirección"]?data["Dirección"]:'')+', Manzana '+manzana+', Lote '+lote+', '+
                         concepto+' De acuerdo a los documentos aportados se encuentra comprendido dentro de los siguientes linderos:',colSpan:4,style:'texto'},{},{},{}],
                         [{text:'\nLINDEROS\n',colSpan:4,style:'subtitulo',border: [false, false, false, true]},{},{},{}],
                         [{text:'Norte:',style:'textobold'},{text:$lin_nor,colSpan:3,style:'texto'},{},{}],
