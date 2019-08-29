@@ -32,7 +32,7 @@ function gen_resolucion(identificador){
 '    <div class="col-md-8">'+
 '      <div class="form-group">'+
 '        <label>Tipo de notificación</label>'+
-'        <select class="form-control upd disponible" id="tipo_notificacion">'+
+'        <select class="form-control upd disponible obligatorio" id="tipo_notificacion">'+
 '          <option value="">Seleccione...</option>'+
 '          <option value="Acta de Notificacion">Acta de notificación para las familias ocupantes, caso caracoli Fecha 8 de octubre de 2018</option>'+
 '          <option value="Afirmacion">Afirmación hecha ante la alcaldía local de Ciudad Bolivar Sector "Caracoli" de Fecha: </option>'+
@@ -53,11 +53,12 @@ function gen_resolucion(identificador){
 '<div class="row"> '+
 '    <div class="col-md-12">'+
 '      <div class="form-group">'+
-'        <label>Tipo de resolución por imprimir</label>'+
-'        <select class="form-control upd disponible" id="tipo_resol">'+
-'          <option value="0">Seleccione...</option>'+
+'        <label>Tipo de resolución </label>'+
+'        <select class="form-control upd disponible obligatorio" id="tipo_resol">'+
+'          <option value="">Seleccione...</option>'+
 '          <option value="VUR">Asignación de recursos</option>'+
 '          <option value="VUR ESPECIE">Asignación en especie</option>'+
+'          <option value="VUR (FONVIVIENDA)">Resolución MZ. 52</option>'+
 '        </select>'+
 '      </div>'+
 '    </div>'+
@@ -93,7 +94,17 @@ function gen_resolucion(identificador){
                                 '     <input type="text" class="form-control disponible upd obligatorio" id="folio_est_documentos" placeholder="Folio Estudio de documentos" > '+
                                 '   </div> '+
                     '</div> '+
-                   
+                     '<div class="col-md-4"> '+
+                                '   <div class="form-group"> '+
+                                '     <label class="control-label">Subsidio equivalente a: (SMMLV)</label> '+
+                                '        <select class="form-control upd disponible manzana52" id="subsidio">'+
+                               '          <option value="0">Seleccione...</option>'+
+                               '          <option value="25">25</option>'+
+                               '          <option value="30">30</option>'+
+                               '        </select>'+
+ 
+                                '   </div> '+
+                    '</div> '+                  
                     '</div> '+
                     
   '  <div class="div_cdp"> '+                    
@@ -103,21 +114,21 @@ function gen_resolucion(identificador){
                                 '     <label  class="control-label">Valor del CDP</label> '+
                                 '<div class="input-group"> '+
                                 '<span style="border-color:#5DADE2"  class="input-group-addon">$</span>'+
-                                '     <input type="text" style="border-color:#5DADE2" class="form-control obligatorio moneda disponible upd especie" id="valor_cdp" placeholder="Valor del CDP"> '+
+                                '     <input type="text" style="border-color:#5DADE2" class="form-control obligatorio moneda disponible upd especie cdp" id="valor_cdp" placeholder="Valor del CDP"> '+
                                 '   </div> '+
                                 '   </div> '+
                        '   </div> '+
  '                     <div class="col-md-4"> '+
                             '   <div class="form-group"> '+
                                 '     <label for="cdp_res" class="control-label">Número del (CDP)</label> '+
-                                '     <input type="number" class="form-control obligatorio numeric disponible upd especie" id="no_cdp" placeholder="(CDP)" > '+
+                                '     <input type="number" class="form-control obligatorio numeric disponible upd especie cdp" id="no_cdp" placeholder="(CDP)" > '+
          '                     </div> '+
         '                 </div> '+
          '          <div class="col-md-4"> '+
                             '   <div class="form-group"> '+
                             '     <label class="control-label">Fecha CDP</label> '+
                             ' <small class="text-muted">(dd/mm/yyyy)</small>'+
-                            '     <div class="span5 sandbox-container"><input id="fecha_cdp" type="text" class="form-control upd obligatorio disponible fecha fecha_validate especie" placeholder="Fecha CDP" ></div>'+
+                            '     <div class="span5 sandbox-container"><input id="fecha_cdp" type="text" class="form-control upd obligatorio disponible fecha fecha_validate especie cdp" placeholder="Fecha CDP" ></div>'+
                             '   </div> '+
  '                     </div> '+      
         
@@ -128,7 +139,7 @@ function gen_resolucion(identificador){
                         '<div class="col-md-12"> '+
                             '<div class="form-group"> '+
                                 '<label class="control-label">Objeto CDP</label> '+
-                                '<textarea class="form-control disponible upd especie" rows="3" id="objeto_cdp"></textarea>'+
+                                '<textarea class="form-control disponible upd especie cdp" rows="3" id="objeto_cdp"></textarea>'+
                             '</div> '+
                         '</div> '+ 
                     '</div> '+ 
@@ -163,14 +174,14 @@ function gen_resolucion(identificador){
                     
                     '<div class="col-md-4"> '+
                                 '   <div class="form-group"> '+
-                                '     <label class="control-label">Número radicado</label> '+
+                                '     <label class="control-label">Número radicado (Alcaldía)</label> '+
                                 '     <input type="text" class="form-control obligatorio disponible upd" id="no_radicado" placeholder="Radicado" > '+
                                 '   </div> '+
                     '</div> '+ 
                     
                             '          <div class="col-md-4"> '+
                            '   <div class="form-group"> '+
-                           '     <label class="control-label">Fecha Radicado</label> '+
+                           '     <label class="control-label">Fecha Radicado (Alcaldía)</label> '+
                            ' <small class="text-muted">(dd/mm/yyyy)</small>'+
                            '     <div class="span5 sandbox-container"><input id="fecha_radicado" type="text" class="form-control upd obligatorio disponible fecha fecha_validate" placeholder="Fecha Radicado" ></div>'+
                            '   </div> '+
@@ -178,6 +189,32 @@ function gen_resolucion(identificador){
                     
                     
   '                 </div> '+ 
+  
+  
+   '                 <div class="row"> '+    
+
+                    '<div class="col-md-4"> '+
+                                '   <div class="form-group"> '+
+                                '     <label class="control-label">Folio Contrato opción de compra</label> '+
+                                '     <input type="text" class="form-control obligatorio disponible upd manzana52" id="folio_plenario" placeholder="Folio" > '+
+                                '   </div> '+
+                    '</div> '+ 
+                    
+             '          <div class="col-md-4"> '+
+                           '   <div class="form-group"> '+
+                           '     <label class="control-label">Fecha Folio Contrato opción de compra</label> '+
+                           '     <small class="text-muted">(dd/mm/yyyy)</small>'+
+                           '     <div class="span5 sandbox-container"><input id="fecha_plenario" type="text" class="form-control upd obligatorio disponible fecha fecha_validate manzana52" placeholder="Fecha Contrato" ></div>'+
+                           '   </div> '+
+ '                     </div> '+   
+            
+ 
+            
+                    
+                    
+   '                 </div> '+ 
+  
+  
 
                         '   <div id="div_posterior_aprobacion"> '+
  '                     <div class="col-md-4"> '+
@@ -266,8 +303,6 @@ return contenido;
  
 
 
-
-
 var sector=get_sector(identificador);
 
 var vereditas_sector=false;
@@ -328,6 +363,23 @@ function get_familia_resolucion(){
     
 }
 
+
+$('#subsidio').change(function(){
+    
+    var subsidio=$(this).val();
+    if(subsidio==="30"){
+
+        $('#valor_cdp,#valor_resol').val("31,829,597");
+
+    }else if(subsidio==="25"){
+
+        $('#valor_cdp,#valor_resol').val("35,735,807");
+    }
+
+});
+
+
+
 $('#impr_resolucion').click(function(){
 
     var doc='';
@@ -338,11 +390,13 @@ $('#impr_resolucion').click(function(){
         var tipo_impresion=$('#tipo_resol').val();
 
         if(tipo_impresion==="0"){
-            alertify.error("Seleccione un tipo de resolución por imprimir");
+            alertify.error("Seleccione un tipo de resolución");
         }else if(tipo_impresion==="VUR"){
             doc = imp_resolucion_caracoli_version_2(identificador,'ivan','lei');
         }else if(tipo_impresion==="VUR ESPECIE"){
             doc = imp_resolucion_caracoli_version_3(identificador,'ivan','lei');
+        }else if(tipo_impresion==="VUR (FONVIVIENDA)"){
+            doc = imp_resolucion_caracoli_version_4(identificador,'ivan','lei');
         }
         
     }
@@ -430,6 +484,8 @@ console.log(response)
         $('.control_tipo_notificacion').hide();
     }
     
+    
+    
     if($('#tipo_resol').val()==="VUR ESPECIE"){
         $('.control_tipo_resol').show();
         $('.div_cdp').hide();
@@ -440,8 +496,25 @@ console.log(response)
             $(this ).val('');
         });
         
+        $('.manzana52').closest('div.form-group').hide();
+        $('.manzana52').each(function(i, obj) {
+            $(this ).removeClass( "obligatorio" );
+        });
         
-    }else{
+    }else if($('#tipo_resol').val()==="VUR (FONVIVIENDA)"){
+        
+      $('.manzana52').closest('div.form-group').show();
+      $('.control_tipo_resol').hide();
+      $('#beneficiario_resolucion_especie').removeClass( "obligatorio" );
+      $('#valor_cdp').attr("disabled", true);  
+      
+       $('.cdp').each(function(i, obj) {
+            $(this ).addClass( "obligatorio" );
+        });
+      
+     } else{
+        
+        $('.manzana52').closest('div.form-group').hide();
         
         $('#beneficiario_resolucion_especie').removeClass( "obligatorio" );
         
@@ -451,9 +524,23 @@ console.log(response)
         $('.especie').each(function(i, obj) {
             $(this ).addClass( "obligatorio" );
         });
+        
+        $('.manzana52').each(function(i, obj) {$(this ).removeClass( "obligatorio" );});
+        
     }
     
+    
+    
+    
+    
+    
+var subsidio=$('#valor_cdp').val();
 
+if(subsidio=='31829597'){
+    $('#subsidio').val('30');
+}else if(subsidio==="35735807"){
+    $('#subsidio').val('25');
+    }
     
            
             if(resultado[0]["concepto"]?resultado[0]["concepto"]:false){
@@ -509,9 +596,41 @@ $('#tipo_resol').change(function(){
             $(this ).removeClass( "obligatorio" );
             $(this ).val('');
         });
+        
         $('#beneficiario_resolucion_especie').addClass( "obligatorio" );
         
-    }else{
+        $('.manzana52').closest('div.form-group').hide();
+        $('.manzana52').each(function(i, obj) {
+            $(this ).removeClass( "obligatorio" );
+        });
+        
+        
+        
+    }else if($('#tipo_resol').val()==="VUR (FONVIVIENDA)"){
+        
+      $('.manzana52').closest('div.form-group').show();
+      
+      $('.manzana52').each(function(i, obj) {
+            $(this ).addClass( "obligatorio" );
+        });
+      $('.control_tipo_resol').hide();
+      $('#beneficiario_resolucion_especie').removeClass( "obligatorio" );
+      
+      
+      $('.div_cdp').show();
+      
+        $('.cdp').each(function(i, obj) {
+            $(this ).addClass( "obligatorio" );
+        });
+      $('#valor_cdp').attr("disabled", true);  
+     }else{
+         console.log("hola")
+        $('.manzana52').closest('div.form-group').hide();
+        
+        $('.manzana52').each(function(i, obj) {
+            $(this ).removeClass( "obligatorio" );
+        });
+        
         $('.control_tipo_resol').hide();
         $('.div_cdp').show();
         
@@ -519,7 +638,7 @@ $('#tipo_resol').change(function(){
             $(this ).addClass( "obligatorio" );
         });
         $('#beneficiario_resolucion_especie').removeClass( "obligatorio" );
-        
+        $('#valor_cdp').attr("disabled", false);  
     }
     
 });
@@ -746,6 +865,7 @@ $('#fecha_resol').addClass( "obligatorio" );
            $("#"+str+"_error").show();
             conta=conta+1;
           }
+          console.log("campos obligatorios:"+str)
     }else{
           $("#"+str+'_error').hide();
     }

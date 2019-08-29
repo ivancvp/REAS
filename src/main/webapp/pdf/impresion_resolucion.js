@@ -1,4 +1,4 @@
-function imp_resolucion(identificador, elaboro, aprobo) {
+ function imp_resolucion(identificador, elaboro, aprobo) {
 
     $datos = {
         op: 'datos_resolucion',
@@ -2132,15 +2132,776 @@ function imp_resolucion_caracoli_version_3(identificador, elaboro, aprobo) {
 
 
 
+} 
+
+
+
+
+function imp_resolucion_caracoli_version_4(identificador, elaboro, aprobo) {
+
+    $datos = {
+        op: 'datos_resolucion',
+        identificador: identificador
+    };
+
+    var resultado;
+    $.ajax({
+        type: "GET",
+        url: "GestionConsultas",
+        data: $datos,
+        dataType: "json",
+        async: false,
+        success: function (response) {
+
+            resultado = response[0];
+        }
+    });
+
+    var ocupacion = (resultado["IDENTIFICA_ANTERIOR"] ? resultado["IDENTIFICA_ANTERIOR"] : '');
+
+    var identificador = (resultado["IDENTIFICADOR"] ? resultado["IDENTIFICADOR"] : '');
+
+    var concepto_de_ingreso = (resultado["Concepto de Ingreso"] ? resultado["Concepto de Ingreso"] : '');
+    var fecha_concepto_ingreso = (resultado["fecha_concepto_ingreso"] ? resultado["fecha_concepto_ingreso"] : '');
+
+    fecha_concepto_ingreso = moment(fecha_concepto_ingreso).format("D") + ' de ' + moment(fecha_concepto_ingreso).format("MMMM") + ' de ' + moment(fecha_concepto_ingreso).format("YYYY");
+
+    var direccion = (resultado["Dirección"] ? resultado["Dirección"] : '');
+    var manzana = (resultado["MZ"] ? resultado["MZ"] : '');
+    var lote = (resultado["LT"] ? resultado["LT"] : '');
+
+    var texto_direccion = direccion + ' MZ ' + manzana + ' LT ' + lote;
+
+    var barrio = (resultado["Barrio"] ? resultado["Barrio"] : '');
+
+    var localidad = (resultado["Localidad"] ? resultado["Localidad"] : '');
+    var upz = (resultado["UPZ"] ? resultado["UPZ"] : '');
+
+    var nombre1 = (resultado["Nombre 1"] ? resultado["Nombre 1"] : '');
+    var nombre2 = (resultado["Nombre 2"] ? resultado["Nombre 2"] : '');
+
+    var cedula1 = (resultado["Cedula 1"] ? resultado["Cedula 1"] : '');
+
+    var folio_concepto_tecnico = (resultado["folio_concepto_tecnico"] ? resultado["folio_concepto_tecnico"] : '');
+    var folio_est_documentos = (resultado["folio_est_documentos"] ? resultado["folio_est_documentos"] : '');
+
+    var fecha_est = (resultado["fecha_est"] ? resultado["fecha_est"] : '');
+
+    if (fecha_est !== '') {
+        fecha_est = moment(fecha_est).format("D") + ' de ' + moment(fecha_est).format("MMMM") + ' de ' + moment(fecha_est).format("YYYY");
+    }
+    var texto_juridico = (resultado["texto_juridico"] ? resultado["texto_juridico"] : '');
+
+    var cdp_res = (resultado["no_cdp"] ? resultado["no_cdp"] : '');
+
+
+
+    var no_radicado = (resultado["no_radicado"] ? resultado["no_radicado"] : '');
+
+    var fecha_cdp = (resultado["fecha_cdp"] ? resultado["fecha_cdp"] : '');
+    fecha_cdp = moment(fecha_cdp).format("D") + ' de ' + moment(fecha_cdp).format("MMMM") + ' de ' + moment(fecha_cdp).format("YYYY");
+
+
+    var fecha_radicado = (resultado["fecha_radicado"] ? resultado["fecha_radicado"] : '');
+    var fecha_radicado_dia = moment(fecha_radicado).format("D");
+    var fecha_radicado_mes = moment(fecha_radicado).format("MMMM");
+    var fecha_radicado_ano = moment(fecha_radicado).format("YYYY");
+
+
+
+    var fecha_seleccion = (resultado["fecha_seleccion"] ? resultado["fecha_seleccion"] : '');
+    var fecha_seleccion_dia = moment(fecha_seleccion).format("D");
+    var fecha_seleccion_mes = moment(fecha_seleccion).format("MMMM");
+    var fecha_seleccion_ano = moment(fecha_seleccion).format("YYYY");
+
+    var nombre_beneficiario_resolucion = $('#beneficiario_resolucion_especie').val();
+
+
+    var zona = $('#zona').val();
+    var folio_est_documentos = $('#folio_est_documentos').val();
+
+    var folio_plenario=$('#folio_plenario').val();
+
+
+    var fecha_plenario = (resultado["fecha_plenario"] ? resultado["fecha_plenario"] : '');
+    var fecha_plenario_dia = moment(fecha_plenario).format("D");
+    var fecha_plenario_mes = moment(fecha_plenario).format("MMMM");
+    var fecha_plenario_ano = moment(fecha_plenario).format("YYYY");
+
+
+    var rad_contructora=(resultado["rad_contructora"] ? resultado["rad_contructora"] : '');
+
+
+    var subsidio=$('#subsidio').val();
+
+
+    var marca_agua = "Documento preliminar - NO OFICIAL";
+
+    if (resultado["concepto"] ? resultado["concepto"] : false) {
+        marca_agua = "";
+    }
+
+    var elaboro = (resultado["elaboro"] ? resultado["elaboro"] : '');
+    var aprobo = (resultado["aprobo"] ? resultado["aprobo"] : '');
+    var aprob_juridica = (resultado["aprob_juridica"] ? resultado["aprob_juridica"] : '');
+
+    var valor_resol = (resultado["valor_resol"] ? resultado["valor_resol"] : '');
+
+    var valor_letras = numeroALetras(Number(valor_resol), {
+        plural: '',
+        singular: '',
+        centPlural: '',
+        centSingular: ''
+    });
+
+
+
+    valor_resol = (new Intl.NumberFormat("es-ES").format(valor_resol));
+
+
+    var valor_resol_resta = Number((resultado["valor_resol"] ? resultado["valor_resol"] : 0))-1400000;
+
+ 
+
+    var valor_letras_resta = numeroALetras(Number(valor_resol_resta), {
+        plural: '',
+        singular: '',
+        centPlural: '',
+        centSingular: ''
+    });
+
+    valor_resol_resta = (new Intl.NumberFormat("es-ES").format(valor_resol_resta));
+
+
+
+    cedula1 = (new Intl.NumberFormat("es-ES").format(cedula1));
+
+
+
+
+    var tipo_notificacion = $('#tipo_notificacion').val();
+    var texto_tipo_notificacion = '';
+
+    var fecha_acta = '';
+
+    if (tipo_notificacion === 'Acta de Notificacion') {
+        texto_tipo_notificacion = "el acta de notificación y evacuación por ocupación ilegal ";
+        fecha_acta = (resultado["fecha_acta"] ? resultado["fecha_acta"] : '');
+
+    } else if (tipo_notificacion === 'Afirmacion') {
+        texto_tipo_notificacion = "la afirmación hecha ante la Alcaldía Local de Ciudad Bolívar Sector CARCOLÍ ";
+        fecha_acta = (resultado["fecha_afirmacion"] ? resultado["fecha_afirmacion"] : '');
+    }
+
+    var fecha_acta_dia = moment(fecha_acta).format("D");
+    var fecha_acta_mes = moment(fecha_acta).format("MMMM");
+    var fecha_acta_ano = moment(fecha_acta).format("YYYY");
+
+
+
+    pdfMake.fonts = {
+        // Default font should still be available
+        Roboto: {
+            normal: 'Roboto-Regular.ttf',
+            bold: 'Roboto-Bold.ttf',
+            italics: 'Roboto-MediumItalic.ttf',
+            bolditalics: 'Roboto-Italic.ttf'
+        },
+        // Make sure you define all 4 components - normal, bold, italics, bolditalics - (even if they all point to the same font file)
+        Arial: {
+            normal: 'Arial.ttf',
+            bold: 'Arial-Bold.ttf',
+            italics: 'Arial-Italic.ttf',
+            bolditalics: 'Arial-BoldItalic.ttf'
+        }
+    };
+
+
+    var docDefinition = {
+        pageMargins: [60, 150, 60, 90],
+        pageSize: 'FOLIO',
+
+
+        header:
+
+
+            function (currentPage, pageCount) {
+                return {
+
+                    margin: [60, 25],
+                    columns: [
+                        {
+                            table: {
+                                widths: [60, '*', 60],
+                                body: [
+                                    [{
+                                        rowSpan: 3, colSpan: 3,
+                                        image: 'data:image/jpeg;base64,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',
+                                        width: 65, alignment: 'center'
+                                    }, '', ''],
+                                    ['', '', ''],
+                                    ['', '', ''],
+                                    [{ text: 'RESOLUCIÓN No', colSpan: 3, alignment: 'center', bold: true, fonSize: 11, color: '#424949' }, '', ''],
+                                    ['', '', { text: 'Hoja ' + currentPage.toString() + ' de ' + pageCount, fontSize: 8, alignment: 'center', color: '#626567' }],
+                                    [{ text: '"Por medio de la cual se asigna y se ordena el pago de un instrumento financiero para la mitigación de las acciones derivadas de la recuperación del predio denominado CARACOLÍ, Polígono de monitoreo 123, Localidad de Ciudad Bolívar, UPZ 69-Ismael Perdomo, en el marco del Decreto Distrital 227 del 12 de junio 2015”', colSpan: 3, alignment: 'center', color: '#626567', fontSize: 9 }, '', ''],
+                                ]
+                            }, layout: 'noBorders'
+                        },
+                    ],
+                };
+            },
+
+        footer: {
+            margin: [100, 0, 50, 20],
+            columns: [
+                {
+                    image: 'data:image/png;base64,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',
+                    width: 350,
+                    height: 60
+                }
+            ],
+
+        },
+        watermark: { text: marca_agua, color: 'gray', opacity: 0.3, bold: true, italics: false },
+        content: [
+
+            { text: '\n EL (LA) DIRECTOR (A) TÉCNICO (A) DE REASENTAMIENTOS HUMANOS DE LA CAJA DE LA VIVIENDA POPULAR,', style: 'textobold', fontSize: 12, alignment: 'center' },
+            { text: '\n   En uso de sus facultades legales y en especial las conferidas por los Acuerdos No. 20 de 1942 y 15 de 1959 del Concejo de Bogotá y el Decreto Ley 1421 de 1993; el Acuerdo No. 003 de 2008, Acuerdo No 004 de 2008 emanados del Consejo Directivo de la Caja de la Vivienda Popular y la Resolución No. 4400 de 26 de agosto de 2016, demás normas concordantes y complementarias, y,', style: 'texto' },
+            { text: '\n CONSIDERANDO:', style: 'textobold', fontSize: 12, alignment: 'center' },
+
+            {
+                text: [
+                    { text: '\nQue el inciso 2° del artículo 2° de la Constitución Política prescribe que: ', style: 'texto' },
+                    { text: '“Las autoridades de la República están instituidas para proteger a todas las personas residentes en Colombia, en su vida, honra, bienes, creencias y demás derechos y libertades, y para asegurar el cumplimiento de los deberes sociales del Estado y de los particulares”', italics: true, style: 'texto' }
+                ]
+            },
+            {
+                text: [
+                    { text: '\nQue el inciso 2° del artículo 113 de la Constitución Política, establece ', style: 'texto' },
+                    { text: '“Los diferentes órganos del Estado tienen funciones separadas, pero colaboran armónicamente para la realización de sus fines”.', italics: true, style: 'texto' }
+                ]
+            },
+            {
+                text: [
+                    { text: '\nQue el artículo 209 de la Constitución Política, estipula que ', style: 'texto' },
+                    { text: '“La función administrativa está al servicio de los intereses generales y se desarrolla con fundamento en los principios de igualdad, moralidad, eficacia, economía, celeridad, imparcialidad y publicidad, mediante la descentralización, la delegación y la desconcentración de funciones. Las autoridades administrativas deben coordinar sus actuaciones para el adecuado cumplimiento de los fines del Estado”.', italics: true, style: 'texto' }
+                ]
+            },
+            { text: '\nQue así mismo, el artículo 288 de la Constitución Política de Colombia prevé que uno de los aspectos que componen el núcleo esencial del principio de autonomía territorial, esto es la distribución de competencias entre el nivel nacional y las autoridades del nivel territorial, deberá hacerse con base en los principios de coordinación, concurrencia y subsidiariedad, de manera que la regulación y ejecución de las mismas sean llevadas a cabo de manera armónica. ', style: 'texto' },
+            {
+                text: [
+                    { text: '\nQue, al respecto, la jurisprudencia ha reiterado que ', style: 'texto' },
+                    { text: '“los principios de coordinación, concurrencia y subsidiariedad, previstos por el artículo 288 C.P., operan como fórmulas de articulación para el ejercicio de las competencias adscritas al poder centralizado y a las autoridades territoriales. Así, como lo ha señalado la Corte, el principio de coordinación parte de la existencia de competencias concurrentes entre distintas autoridades del Estado, lo cual impone que su ejercicio se haga de manera armónica, de modo que la acción de los distintos órganos resulte complementaria y conducente al logro de los fines de la acción estatal. (…) El principio de concurrencia se explica a partir de considerar que, en determinadas materias, la actividad del Estado debe cumplirse con la participación de los distintos niveles de la Administración. Ello implica, en primer lugar, un criterio de distribución de competencias conforme al cual las mismas deben atribuirse a distintos órganos, de manera que se garantice el objeto propio de la acción estatal, sin que sea posible la exclusión de entidades que, en razón de la materia estén llamadas a participar” 1 ', italics: true, style: 'texto' }
+                ]
+            },
+            {
+                text: [
+                    { text: '\nQue, por su parte, el artículo 6° de la Ley 489 de 1998, señala el principio de coordinación y colaboración entre las autoridades administrativas, con el fin de lograr los fines y cometidos estatales, así mismo, el artículo 95 de la citada norma indica que', style: 'texto' },
+                    { text: '“Las entidades públicas podrán asociarse con el fin de cooperar en el cumplimiento de funciones administrativas o de prestar conjuntamente servicios que se hallen a su cargo, mediante la celebración de convenios interadministrativos (…)”', italics: true, style: 'texto' }
+                ]
+            },
+
+            {
+                text: [
+                    { text: '\nQue el artículo 301 del Decreto Distrital 190 de 2004 compilatorio del Plan de Ordenamiento Territorial, al señalar los objetivos del Subprograma de reasentamiento por alto riesgo no mitigable y por obra pública, indica que ', style: 'texto' },
+                    { text: '“El programa de Reasentamiento consiste en el conjunto de acciones y actividades necesarias para lograr el traslado de las familias de estratos 1 y 2 que se encuentran asentadas en zonas declaradas de alto riesgo no mitigable por deslizamiento o inundación, las zonas objeto de intervención por obra pública ', italics: true, style: 'texto' },
+                    { text: 'o la que se requiera para cualquier intervención de reordenamiento territorial”. ', decoration: 'underline', bold: true, italics: true, style: 'texto' },
+                    { text: ' (Negrilla y Subrayado Fuera de texto).\n\n\n', style: 'texto' }
+                ]
+            },
+
+
+            {
+                text: [
+                    { text: '\n1 ', style: 'texto' },
+                    { text: 'Sentencia 2007-01598/0283-2012 de agosto 17 de 2017, Consejo de Estado, Sala de lo Contencioso Administrativo, Sección Segunda, Subsección B. M. P.: Dr. Cesar Palomino Cortés.', fontSize: 8, style: 'texto' }
+                ]
+            },
+
+
+
+
+            {
+                text: [
+                    { text: '\nQue el literal a), numeral 2, del artículo 302 ibídem, estableció como acción estratégica del Subprograma de reasentamiento por Alto Riesgo: ', style: 'texto' },
+                    { text: 'estudiar, proponer y evaluar la determinación de un valor único de reconocimiento (VUR) de los inmuebles ubicados en zonas de alto riesgo no mitigable, que permita a la Administración Distrital incluirlos en los programas de vivienda. ', italics: true, style: 'texto' }
+                ]
+            },
+            {
+                text: [
+                    { text: '\nQue el Consejo Directivo de la Caja de la Vivienda Popular mediante el Acuerdo 04 de 2008 modificó la estructura organizacional de la Entidad, creando la Dirección de Reasentamientos y asignó, entre otras funciones, la de ', style: 'texto' },
+                    { text: '“Gestionar los recursos financieros de los programas y proyectos que se adelantan en la dependencia referidos a la oferta y demanda de vivienda”.', italics: true, style: 'texto' }
+                ]
+            },
+            {
+                text: [
+                    { text: '\nQue en cumplimiento de la aplicación de los principios de la función administrativa, previstos en el artículo 3 de la Ley 1437 de 2011, ', style: 'texto' },
+                    { text: '“ (…) Las actuaciones administrativas se desarrollarán, especialmente, con arreglo a los principios del debido proceso, igualdad, imparcialidad, buena fe, moralidad, participación, responsabilidad, transparencia, publicidad, coordinación, eficacia, economía y celeridad (…)”, especialmente lo establecido en el numeral 11 de dicho artículo: “En virtud del principio de eficacia, las autoridades buscarán que los procedimientos logren su finalidad y, para el efecto, removerán de oficio los obstáculos puramente formales, evitarán decisiones inhibitorias, dilaciones o retardos y sanearán, de acuerdo con este Código las irregularidades procedimentales que se presenten, en procura de la efectividad del derecho material objeto de la actuación administrativa”.', italics: true, style: 'texto' }
+                ]
+            },
+            
+            { text: '\nQue a la Caja de la Vivienda Popular le corresponde entre otras funciones, el reasentar a las familias que se encuentren en alto riesgo no mitigable en concordancia con la política que el Distrito estructura a través de la Secretaria de Hábitat, priorizando los beneficiarios recomendados por el Instituto Distrital de Gestión del Riesgo y Cambio Climático - IDIGER - de acuerdo a lo preceptuado en las Leyes 9ª de 1989 y 388 de 1997 y el Decreto Distrital 255 del 12 junio de 2013, entre otros.', style: 'texto' },
+
+            { text: '\nQue bajo el anterior panorama, se observa que las anteriores disposiciones normativas vigentes en el Distrito Capital, no prevén el reasentamiento de familias distintas a aquellas que se encuentran en zonas de alto riesgo no mitigable, en particular, en lo que se refiere a la ocupación ilegal de bienes fiscales, y que con el inicio de acciones tendientes a su recuperación se pueden ver eventualmente  vulnerados  derechos fundamentales como la vida y la vivienda digna, razón por la cual, el Distrito Capital implementó un programa de mitigación del impacto social derivado de este tipo de acciones, por lo cual se adoptó el Decreto Distrital 227 del 12 de junio de 2015, derogando el Decreto 466 del 20 noviembre de 2006 y determinó los organismos encargados de gestionar la asignación de recursos económicos, definir la autoridad competente para el reasentamiento y los casos priorizados para ser atendidos, en los siguientes términos:', style: 'texto' },
+
+
+            {
+                text: [
+                    { text: '\n“(…) Que conforme a las atribuciones que le otorga el Decreto 1421 de 1993 al Alcalde Mayor en los artículos 38,39,40, y 53, el artículo 9 de la Ley 489 de 1998, en concordancia con los artículos 110 del Decreto Nacional 111 de 1996 y 87 del Decreto Distrital 714 de 1996,', style: 'texto', italics: true, fontSize: 11 },
+                    { text: 'se asigna a la Caja de la Vivienda Popular para que adelante las acciones que considere pertinentes, para realizar el acompañamiento integral a la población que pueda ser objeto de acciones de restitución de inmuebles de carácter público.', style: 'texto', italics: true, fontSize: 11, decoration: 'underline' }
+                ], margin: [40, 0, 0, 0]
+            },
+
+            {
+                text: [
+                    { text: '\nQue para ese mismo efecto, se hace necesario establecer una política pública distrital de acompañamiento para mitigar el Impacto Social derivado de las Acciones Judiciales o administrativas de Restitución de Bienes Inmuebles de Carácter Público, que dejan en situación de vulnerabilidad a los grupos familiares directamente afectados con la medida, que implica acompañamiento mediante acciones sociales y habitacionales, con el fin de insertar a las familias al tejido social de la ciudad de manera sostenible y contribuir al mejoramiento de su calidad de vida. (…)” ', italics: true, style: 'texto' },
+                    { text: '(Subrayado fuera de texto).', style: 'texto' }
+                ], margin: [40, 0, 0, 0]
+            },
+
+
+            { text: '\nQue el artículo 6° del Decreto Distrital 227 del 12 de junio de 2015, estableció los recursos presupuestales para la ejecución del programa en el siguiente sentido:', style: 'texto' },
+
+            {
+                text: [
+                    { text: '\n“Los recursos económicos del programa, deberán ser gestionados por los organismos y entidades distritales responsables de la ejecución de las actividades definidas en el plan de acción que se adopte en cada caso. Para esto, las entidades adoptarán las medidas necesarias para obtener los recursos ante la Secretaria Distrital de Hacienda ', style: 'texto', italics: true, fontSize: 11 },
+                    { text: 'y para el caso del proceso de reasentamiento se incluirán los gastos asociados a la capacidad de gestión administrativa para la ejecución del Decreto por parte de la Caja de la Vivienda Popular.', style: 'texto', italics: true, fontSize: 11, decoration: 'underline' }
+                ], margin: [40, 0, 0, 0]
+            },
+
+            {
+                text: [
+                    { text: '\nParágrafo.', italics: true, bold: true, style: 'texto' },
+                    { text: 'La cuantificación del instrumento financiero que permita acceso a la vivienda para los eventos de reasentamiento se determinará en el Marco Técnico”', italics: true, style: 'texto' }
+                ], margin: [40, 0, 0, 0]
+            },
+
+            {
+                text: [
+                    { text: '\nQue dando aplicación a la norma en cita, y de acuerdo a lo descrito en el ', style: 'texto' },
+                    { text: '“concepto diagnóstico de condiciones socio ambientales polígono Caracolí, localidad Ciudad Bolívar”,', italics: true, style: 'texto' },
+                    { text: 'elaborado por la Dirección de Epidemiología, Análisis y Gestión de Política de Salud Colectiva de la Secretaría Distrital de Salud, con radicado 2018EE69589, el cual concluyó', style: 'texto' },
+                    { text: '“(...) En el polígono hay una conjunción de necesidades básicas insatisfechas principalmente al acceso a servicios públicos legales y a medidas sanitarias lo Cual representa una alta predisposición a la ocurrencia de eventos patológicas que pueden derivar en mortalidad (...)” ', italics: true, style: 'texto' },
+                    { text: 'e igualmente, ', style: 'texto' },
+                    { text: '“(…) Por las condiciones de saneamiento básico del entorno y de las viviendas, se puede inferir que el polígono intervenido se encuentra en condiciones de riesgo, situación que puede llegar a afectar Ia salud humana y colectiva de los habitantes del sector”, ', italics: true, style: 'texto' },
+                    { text: 'la Alcaldía Local de Ciudad Bolívar, postuló ante la subcomisión intersectorial para la Mitigación del Impacto Social derivado de acciones de recuperación de Bienes Fiscales, Uso Público, Espacio Público u Objeto de Recuperación Ecológica o Preservación Ambiental, el caso de la ocupación denominada “Caracolí”, ubicada en el Polígono de monitoreo número 123, UPZ 69-Ismael Perdomo de la localidad 19 de Ciudad Bolívar, con el fin de decidir su ingreso al ', style: 'texto' },
+                    { text: '“Programa de Acompañamiento Integral para la Mitigación del Impacto Social derivado de las acciones de recuperación de bienes fiscales, uso público, espacio público, u objeto de recuperación ecológica o preservación ambiental”. ', italics: true, style: 'texto' }
+
+                ]
+            },
+            { text: '\nQue, en este sentido, el 12 de julio de 2018, se sometió para votación ante la citada subcomisión, el caso descrito, para ser atendido dentro del programa Distrital para la Mitigación del Impacto Social Derivado de Acciones de Recuperación de: Bienes Fiscales, Uso Público, Espacio Público u Objeto de Recuperación Ecológica o Preservación Ambiental, en virtud del Decreto Distrital 227 de 2015 y su Marco Técnico; siendo aprobado por unanimidad. ', style: 'texto' },
+
+            {
+                text: [
+                    { text: '\nQue, en consecuencia, la Secretaría Distrital de Gobierno expidió la Resolución 0740 del 7 de septiembre de 2018 ', style: 'texto' },
+                    { text: '“Por la cual se aprueba el caso ocupación Caracolí, Polígono de monitoreo número 123, Localidad de Ciudad Bolívar, UPZ 69-Ismael Perdomo, para ser atendido en el marco del Decreto Distrital 227 de 2015”, ', italics: true, style: 'texto' },
+                    { text: '”, a partir de la cual, se incluyó en el citado programa la ocupación ilegal denominada “Caracolí”.', style: 'texto' }
+                ]
+            },
+
+            { text: '\nQue, frente a las funciones de la Caja de la Vivienda Popular, de conformidad con lo expuesto en el artículo 4º y 5º de la Resolución 0740 del 7 de septiembre de 2018, tiene, entre otras, las siguientes:', style: 'texto' },
+
+            {
+                text: [
+                    { text: '\n“ARTÍCULO 4°. ', bold: true, italics: true, style: 'texto' },
+                    { text: 'La Caja de la Vivienda Popular adelantará el estudio de documentación aportada y determinará el cumplimiento de los requisitos para la continuidad o no, en el programa de reasentamiento de cada una de las familias reportadas por la Alcaldía Local de Ciudad Bolívar, y establecerá las que serán excluidas en virtud de lo señalado en el artículo 3 del Decreto Distrital 227 de 2015.', italics: true, style: 'texto', underline: 'true' }
+                ], margin: [40, 0, 0, 0]
+            },
+
+            {
+                text: [
+                    { text: '\n“ARTÍCULO 5°. ', bold: true, italics: true, style: 'texto' },
+                    { text: 'La Caja de la Vivienda Popular garantizará la relocalización transitoria de las personas identificadas por la Alcaldía Local de Ciudad Bolívar, de acuerdo con lo establecido en la Resolución 0740 de 2015, expedida por la Caja de la Vivienda Popular, adicionada por el artículo 1 de la Resolución 2947 de 2015, hasta tanto se establezca si cumplen o no con los requisitos señalados en el Decreto Distrital 227 de 2015 para continuar con su proceso de reasentamiento.', italics: true, style: 'texto' }
+                ], margin: [40, 0, 0, 0]
+            },
+
+            {
+                text: [
+                    { text: '\nQue, a su vez, la Secretaría Distrital de Gobierno de la Alcaldía Mayor de Bogotá expidió la Resolución 0269 del 29 de abril de 2019 ', style: 'texto' },
+                    { text: '“Por la cual se aclara y se adiciona el artículo 4° de la Resolución 740 de 2018 “por la cual se aprueba el caso ocupación Caracolí, Polígono de monitoreo número 123, Localidad de Ciudad Bolívar; UPZ 69-Ismael Perdomo, para ser atendido en el marco del Decreto Distrital 227 de 2015”, ', italics: true, style: 'texto' },
+                    { text: 'la cual prescribe, entre otros, que:', style: 'texto' }
+                ]
+            },
+
+            {
+                text: [
+                    { text: '\n“(…) ARTICULO 1°. Aclarar y adicionar el artículo 4° de la Resolución 740 de 2018, el cual quedará así: ', italics: true, style: 'texto', underline: 'true' }
+                ], margin: [40, 0, 0, 0]
+            },
+
+            {
+                text: [
+                    { text: '\n“Artículo 4° La Caja de la Vivienda Popular adelantará el estudio de la documentación aportada y determinará el cumplimiento de los requisitos para la continuidad o no, en el programa de reasentamiento de cada una de las familias reportadas por la Alcaldía Local de Ciudad Bolívar, y establecerá las que serán excluidas en virtud de lo señalado en el artículo 3 del Decreto Distrital 227 de 2015.', italics: true, style: 'texto', underline: 'true' }
+                ], margin: [40, 0, 0, 0]
+            },
+
+            {
+                text: [
+                    { text: '\nParágrafo: El estudio que realiza la Caja de la Vivienda Popular de la documentación aportada, que determinará el cumplimiento de los requisitos para la continuidad o no en el programa de reasentamiento de cada una de las familias reportadas por la Alcaldía Local de Ciudad Bolívar, se deberá aplicar la exclusión señalada en el numeral 1° del artículo 3° del Decreto Distrital 227 de 2015, de acuerdo con el criterio 2 del Marco normativo del referido Decreto Distrital”.', italics: true, style: 'texto' }
+                ], margin: [40, 0, 0, 0]
+            },
+
+
+            {
+                text: [
+                    { text: '\nQue de conformidad con la orden impartida mediante el parágrafo 1° del artículo 3° de la Resolución previamente citada y según comunicación de la Alcaldía Local de Ciudad Bolívar con radicado ', style: 'texto' },
+                    { text: 'No. ', bold: true, style: 'texto' },
+                    { text: no_radicado, bold: true, style: 'texto' },
+                    { text: ' del ', bold: true, style: 'texto' },
+                    { text: fecha_radicado_dia, bold: true, style: 'texto' },
+                    { text: ' de ', bold: true, style: 'texto' },
+                    { text: fecha_radicado_mes, bold: true, style: 'texto' },
+                    { text: ' de ', bold: true, style: 'texto' },
+                    { text: fecha_radicado_ano, bold: true, style: 'texto' },
+                    { text: ' se determinó la inclusión del (de la) señor(a) ', style: 'texto' },
+                    { text: nombre1 + ', ', bold: true, style: 'texto' },
+                    { text: 'identificado(a) con la C.C. No.', style: 'texto' },
+                    { text: cedula1, bold: true, style: 'texto' },
+                    { text: ' y su núcleo familiar quien habitaba en la ', style: 'texto' },
+                    { text: 'zona No. ' + zona + ', ocupación No. ' + ocupacion, bold: true, style: 'texto' },
+                    { text: ' del citado predio, tal como se evidencia en ' + texto_tipo_notificacion, style: 'texto' },
+                    { text: ' Polígono de Monitoreo 123, UPZ', style: 'texto' },
+                    { text: upz, bold: true, style: 'texto' },
+                    { text: ' de fecha ', style: 'texto' },
+                    { text: fecha_acta_dia, bold: true, style: 'texto' },
+                    { text: ' de ', bold: true, style: 'texto' },
+                    { text: fecha_acta_mes, bold: true, style: 'texto' },
+                    { text: ' de ', bold: true, style: 'texto' },
+                    { text: fecha_acta_ano + '.', bold: true, style: 'texto' }
+                ]
+            },
+
+            {
+                text: [
+                    { text: '\nQue de la documentación  que  hace parte de la  actuación administrativa se infiere que el(la) señor(a) ', style: 'texto' },
+                    { text: nombre1, bold: true, style: 'texto' },
+                    { text: ', ha demostrado ejercer la ocupación del predio ubicado en la ', style: 'texto' },
+                    { text: 'zona No. ' + zona + ', ocupación No. ' + ocupacion, bold: true, style: 'texto' },
+                    { text: ' del barrio Caracolí, de forma quieta, pacifica, e ininterrumpida, conforme se indica en las correspondientes afirmaciones administrativas ante la Caja de la Vivienda Popular,  suscritas bajo la gravedad de juramento por testigos, así mismo se encuentra registrado en la comunicación de la Alcaldía Local de Ciudad Bolívar, con radicado ', style: 'texto' },
+                    { text: 'No. ', bold: true, style: 'texto' },
+                    { text: no_radicado, bold: true, style: 'texto' },
+                    { text: ' del ', bold: true, style: 'texto' },
+                    { text: fecha_radicado_dia, bold: true, style: 'texto' },
+                    { text: ' de ', bold: true, style: 'texto' },
+                    { text: fecha_radicado_mes, bold: true, style: 'texto' },
+                    { text: ' de ', bold: true, style: 'texto' },
+                    { text: fecha_radicado_ano+'.', bold: true, style: 'texto' }
+                ]
+            },
+
+
+            {
+                text: [
+                    { text: '\nQue en vista de lo anterior, el ', style: 'texto' },
+                    { text: fecha_est, bold: true, style: 'texto' },
+                    { text: ' obrante a folio ', style: 'texto' },
+                    { text: '('+folio_est_documentos+')', bold: true, style: 'texto' },
+                    { text: ' la Dirección Técnica de Reasentamientos de la Caja de la Vivienda Popular, emitió estudio jurídico documental, mediante el cual se determinó que el(la) señor(a) ', style: 'texto' },
+                    { text: nombre1, bold: true, style: 'texto' },
+                    { text: ', identificado(a) con la C.C. No. ', style: 'texto' },
+                    { text: cedula1, bold: true, style: 'texto' },
+                    { text: ', cumple con los requisitos para ser beneficiario (a) del Programa de Reasentamientos, por lo que es viable asignar los recursos financieros para el acceso a una solución habitacional, de conformidad con lo establecido en el Decreto Distrital 227 de 2015 y la Resolución 0740 del 7 de septiembre de 2018, modificada por la Resolución N° 0269 del 29 de abril de 2019. ', style: 'texto' }
+                ]
+            },
+
+            { text: '\nQue el Marco Técnico (Decreto 227 de 2015) de fecha 20 de enero de 2016, establece en su numeral 1.3.3.- Instrumento Financiero para Soluciones Habitacionales, que para atender a las familias del PAIMIS recomendadas al programa de reasentamiento se establece un instrumento financiero para el acceso a una solución habitacional, el cual equivaldrá hasta setenta (70) Salarios Mínimos Legales Mensuales Vigentes al momento de su reconocimiento, y este será asignado por la Caja de la Vivienda Popular.', style: 'texto' },
+
+
+
+            {
+                text: [
+                    { text: '\nQue del (de la, de los) señor (a, es) ', style: 'texto' },
+                    { text: nombre1, bold: true, style: 'texto' },
+                    { text: ' ya identificado (a), y su núcleo familiar será complementado con el Subsidio Familiar de Vivienda-SFV, del Programa de Vivienda de Interés Prioritario para Ahorradores VIPA, que asigne el Ministerio de Vivienda, Ciudad y Territorio Fondo Nacional de Vivienda, para lograr el reasentamiento de familias, de conformidad con lo establecido en el artículo 7º del Decreto Distrital 255 de 2013. ', style: 'texto' }
+                ]
+            },
+
+
+            { text: '\nQue el Programa de Vivienda de Interés Prioritario para Ahorradores – VIPA, está reglamentado por el artículo 2.1.1.3.1 del Decreto 1077 de 2015, estableciendo en Subsección 5, Sección 1, Capitulo 3, Titulo 1, Parte 1, Libro 2 el procedimiento para la asignación del Subsidio Familiar de Vivienda, otorgado en el marco del programa que se desarrolle a través del patrimonio autónomo.', style: 'texto' },
+
+
+            { text: '\nQue el Programa de Vivienda de Interés Prioritario para Ahorradores (en adelante “Programa VIPA”), tiene por objeto facilitar el acceso a la vivienda a los hogares que tienen ingresos mensuales de hasta dos (2) salarios mínimos legales mensuales vigentes y que cuenten con un ahorro conforme el artículo 2.1.1.3.1.3.4 ibidem. ', style: 'texto' },
+
+
+            { text: '\nQue según prescribe el artículo 2.1.1.3.1.2.1 de la norma anteriormente citada, los hogares que resulten beneficiarios del programa de Vivienda de Interés Prioritario para Ahorradores – VIPA, recibirán un Subsidio Familiar de Vivienda así: a. Si tienen ingresos de hasta 1.6 SMLMV podrá asignarse un subsidio hasta por el monto equivalente a 30 SMLMV, y si tienen ingresos de más de 1.6 y hasta 2 SMLMV, podrá asignarse un subsidio hasta por el monto equivalente a 25 SMLMV.', style: 'texto' },
+
+
+            { text: '\nQue los hogares que resulten seleccionados en los listados presentados por el oferente, deberán aplicar el Subsidio Familiar de Vivienda y los demás beneficios a que se refiere el artículo 2.1.1.3.1.5.7 del Decreto 1077 de 2015 solamente en el proyecto seleccionado.', style: 'texto' },
+
+            {
+                text: [
+                    { text: '\nQue una vez tramitado el correspondiente estudio documental, la Dirección de Reasentamientos de la Caja de la Vivienda Popular, dio a conocer a (la, el) señor (a) ', style: 'texto' },
+                    { text: nombre1, bold: true, style: 'texto' },
+                    { text: ', los proyectos de Vivienda de Interés Prioritario disponibles, los cuales no hacen parte de los proyectos de vivienda propios de la Caja de la Vivienda Popular, para que el hogar seleccionara la unidad habitacional de su preferencia, con el fin de ser beneficiario de la asignación del instrumento financiero previsto para el caso en particular de los habitantes de la ocupación ilegal denominada “Caracolí”.', style: 'texto' }
+                ]
+            },
+
+
+
+            {
+                text: [
+                    { text: '\nQue a folio ', style: 'texto' },
+                    { text: folio_plenario, bold: true, style: 'texto' },
+                    { text: ' del plenario, obra Contrato De Opción De Compra por parte del hogar, suscrita por el (la) señor (a) ', style: 'texto' },
+                    { text: nombre1, bold: true, style: 'texto' },
+                    { text: ' de fecha ', style: 'texto' },
+                    { text: fecha_plenario_dia, bold: true, style: 'texto' },
+                    { text: ' de ', bold: true, style: 'texto' },
+                    { text: fecha_plenario_mes, bold: true, style: 'texto' },
+                    { text: ' de ', bold: true, style: 'texto' },
+                    { text: fecha_plenario_ano, bold: true, style: 'texto' },
+                    { text: ', y avalado por el oferente CG Construcciones SAS, se dejó constancia de su manifestación expresa, libre y voluntaria de seleccionar la alternativa habitacional en el Proyecto denominado “CIUDADELA EL PORVENIR MZ 52 ETAPA VII A”, ubicado en la Ciudad de Bogotá D.C.', style: 'texto' }
+                ]
+            },
+
+            {
+                text: [
+                    { text: '\nQue el oferente CG Construcciones SAS, presentó escrito a la Caja de la Vivienda Popular con radicado No. ', style: 'texto' },
+                    { text: rad_contructora, bold: true, style: 'texto' },
+                    { text: ' en el cual señala, que la familia es objeto de subsidio equivalente a ', style: 'texto' },
+                    { text: subsidio, bold: true, style: 'texto' },
+                    { text: ' SMMLV, de conformidad con la información sobre ingresos suministrada por el beneficiario.', style: 'texto' }
+                ]
+            },
+
+
+
+            {
+                text: [
+                    { text: '\nQue con la finalidad de realizar el cierre financiero de la vivienda de reposición, la Caja de la Vivienda Popular asignará el instrumento financiera equivalente a ', style: 'texto' },
+                    { text: valor_letras + '($' + valor_resol + ') MONEDA LEGAL, ', bold: true, style: 'texto' },
+                    { text: 'de los cuales se destinará el valor de ', style: 'texto' },
+                    { text: 'UN MILLÓN CUATROCIENTOS MIL PESOS ($1.400.000) MONEDA LEGAL,', bold: true, style: 'texto' },
+                    { text: ' para gastos de escrituración y registro de la solución habitacional seleccionada.', style: 'texto' }
+                ]
+            },
+
+            { text: '\nQue, en consecuencia, los indicados recursos del Instrumento Financiero asignados por la Caja de la Vivienda Popular se constituyeron en un activo financiero del patrimonio de la familia(s) beneficiaria(s) que se acreditaron como ahorro, destinado de manera exclusiva y definitiva a la adquisición por parte del (los) beneficiario (s) de una solución habitacional (Vivienda De Interés Prioritario - VIP).', style: 'texto' },
+
+
+            { text: '\nQue es preciso señalar que para ser objeto de la asignación de los recursos destinados por el Ministerio de Vivienda, Ciudad y Territorio Fondo Nacional de Vivienda, el hogar debe ceñirse a lo dispuesto en el Decreto 1077 de 2015 “Por medio del cual se expide el Decreto Único Reglamentario del Sector Vivienda, Ciudad y Territorio” y demás normas complementarias.', style: 'texto' },
+
+            { text: '\nQue, así las cosas, en caso de que el núcleo familiar objeto de asignación mediante el presente acto administrativo se encuentre incurso en causal de inhabilidad y como quiera que corresponde al mismo el atender los parámetros del subsidio, se entenderá que estamos frente al desistimiento tácito de la presente asignación del instrumento financiero, generándose la imposibilidad de ser objeto de vinculación al proyecto seleccionado.', style: 'texto' },
+
+
+            {
+                text: [
+                    { text: '\nQue, como requisito previo a la entrega de su solución habitacional definitiva como asignación del instrumento financiero, el (la) señor(a) ', style: 'texto' },
+                    { text: nombre1, bold: true, style: 'texto' },
+                    { text: ', identificado(a) con la C.C. No.', style: 'texto' },
+                    { text: cedula1, bold: true, style: 'texto' },
+                    { text: ' mediante acta realizará entrega real y material de la ', style: 'texto' },
+                    { text: 'ocupación No. ' + ocupacion,bold: true, style: 'texto' },
+                    { text: ' ubicada en la ', style: 'texto' },
+                    { text: 'zona No. ' + zona,bold: true, style: 'texto' },
+                    { text: ' del Sector Caracolí, Polígono de monitoreo número 123, de la UPZ 69 Ismael Perdomo.', style: 'texto' },
+                ]
+            },
+
+
+            { text: '\nQue lo anterior se adelanta en consideración al cumplimiento por parte del hogar frente a lo previsto en el Decreto Distrital 227 de 2015, la Resolución 0740 de 2018 modificada parcialmente por la Resolución N° 0269 del 29 de abril de 2019 expedidas por la Secretaría Distrital de Gobierno y demás normatividad aplicable para la situación particular de la ocupación denominada “Caracolí”.', style: 'texto' },
+
+
+
+            {
+                text: [
+                    {
+                        text: '\nQue para atender los compromisos asumidos en el presente acto administrativo, la Caja de la Vivienda Popular cuenta con el Certificado ' +
+                            'de Disponibilidad Presupuestal No. ', style: 'texto'
+                    },
+                    { text: '' + cdp_res + ' del ' + fecha_cdp + ',', style: 'texto', bold: true },
+                    { text: ' emitido por el responsable del presupuesto de la entidad.', style: 'texto' }
+                ]
+            },
+
+
+
+            { text: '\nEn mérito de lo expuesto, ', style: 'texto' },
+
+            { text: '\nRESUELVE:', style: 'textobold', fontSize: 12, alignment: 'center' },
+
+            {
+                text: [
+                    { text: '\n\nARTÍCULO PRIMERO:  ', bold: true, style: 'texto' },
+                    { text: 'Asignar el Instrumento Financiero para la mitigación de las acciones derivadas de la recuperación del predio denominado ', style: 'texto' },
+                    { text: 'CARACOLI' + ', ', bold: true, style: 'texto' },
+                    { text: ' en la localidad de Ciudad Bolívar de que trata el Decreto Distrital 227 de 2015, a favor del (la) señor(a) ', style: 'texto' },
+                    { text: nombre1 + ', ', bold: true, style: 'texto' },
+                    { text: 'identificado(a) con la C.C. No. ', style: 'texto' },
+                    { text: cedula1 + ', ', bold: true, style: 'texto' },
+                    { text: 'por valor de  ', style: 'texto' },
+                    { text: valor_letras + '($' + valor_resol + ') MONEDA LEGAL, ', bold: true, style: 'texto' },
+                    { text: 'de los cuales se destinará el valor de ', style: 'texto' },
+                    { text: 'UN MILLÓN CUATROCIENTOS MIL PESOS ($1.400.000) MONEDA LEGAL' + ', ', bold: true, style: 'texto' },
+                    { text: 'para gastos de escrituración y registro de la solución habitacional y el valor de', style: 'texto' },
+                    { text: valor_letras_resta + '($' + valor_resol_resta + ') MONEDA LEGAL, ', bold: true, style: 'texto' },
+                    { text: 'para cubrir el pago de la vivienda de reposición seleccionada por la familia en el marco del programa de reasentamientos Proyecto denominado ', style: 'texto' },
+                    { text: '“CIUDADELA EL PORVENIR MZ 52 ETAPA VII A”,',bold:true,italics:true, style: 'texto' },
+                    { text: ' ubicado en la Ciudad de Bogotá D.C., y cuyo oferente es CG Construcciones SAS.', style: 'texto' }
+
+                ]
+            },
+
+
+            {
+                text: [
+                    { text: '\nPARÁGRAFO.  ', bold: true, style: 'texto' },
+                    { text: 'El cierre financiero de la solución habitacional en el proyecto ', style: 'texto' },
+                    { text: '“CIUDADELA EL PORVENIR MZ 52 ETAPA VII A”, ',italics:true, bold: true, style: 'texto' },
+                    { text: 'ubicado en la Ciudad de Bogotá D.C., seleccionado por el (la, los) señor (a, es) ', style: 'texto' },
+                    { text: nombre1 + ', ', bold: true, style: 'texto' },
+                    { text: 'ya identificado (a,os) será financiado con el Subsidio Familiar de Vivienda-SFV, del Programa de Vivienda de Interés Prioritario para Ahorradores VIPA, que asigne el Ministerio de Vivienda, Ciudad y Territorio Fondo Nacional de Vivienda, siempre y cuando la familia cumpla con los parámetros establecidos para dicha asignación y con recursos de la Caja de la Vivienda Popular.', style: 'texto' }
+                ]
+            },
+
+
+            {
+                text: [
+                    { text: '\n\nARTÍCULO SEGUNDO: ', bold: true, style: 'texto' },
+                    { text: 'En caso de que la familia beneficiaria del proceso de reasentamientos, no cumpla con lo estipulado en el Decreto 1077 de 2015 y sea inhabilitado en la asignación del Subsidio Familiar de Vivienda-SFV, del Programa de Vivienda de Interés Prioritario para Ahorradores VIPA, se entenderá el desistimiento tácito frente a la asignación realizada mediante el presente acto administrativo y la Caja de la Vivienda Popular procederá a su declaratoria.', style: 'texto' }
+                ]
+            },
+
+            {
+                text: [
+                    { text: '\n\nARTÍCULO TERCERO: ', bold: true, style: 'texto' },
+                    { text: 'Ordenar a la Subdirección Financiera realizar el registro presupuestal del presente acto administrativo con observancia del procedimiento establecido según fuente de financiación y girar la suma asignada a la cuenta de ahorro programado de la cual es titular el (la) señor(a) ', style: 'texto' },
+                    { text: nombre1 + ', ', bold: true, style: 'texto' },
+                    { text: 'identificado(a) con la C.C. No. ', style: 'texto' },
+                    { text: cedula1 + ', ', bold: true, style: 'texto' },
+                    { text: 'ó girar sin situación de fondos y constituir el depósito a favor de terceros, con el fin de realizar los giros de conformidad con lo pactado en la promesa de compraventa, opción de compra y/o contrato de vinculación como beneficiario de área en el Fideicomiso, previa verificación de la entrega real y material de la ocupación a la Caja de la Vivienda Popular.', style: 'texto' }
+
+                ]
+            },
+
+            {
+                text: [
+                    { text: '\nPARAGRAFO PRIMERO:  ', bold: true, style: 'texto' },
+                    { text: 'Para el desembolso de los recursos que se encuentran en depósito a favor de terceros o en la cuenta de ahorro programado, una vez los beneficiarios hayan seleccionado vivienda de reposición y, la Entidad la haya viabilizado, la Directora Técnica de Reasentamientos previa autorización de los beneficiarios, solicitará a la Subdirección Financiera y/o a la entidad financiera el giro ó la movilización de los recursos, de conformidad con lo estipulado en la forma de pago de la promesa de compraventa, opción de compra de la vivienda de reposición y/o contrato de vinculación como beneficiario de área en el fideicomiso.', style: 'texto' }
+                ]
+            },
+
+            {
+                text: [
+                    { text: '\nPARAGRAFO SEGUNDO: ', bold: true, style: 'texto' },
+                    { text: 'Para el desembolso de los recursos destinados para gastos de escrituración e impuesto de registro y beneficencia de la alternativa habitacional seleccionada en el Proyecto denominado ', style: 'texto' },
+                    { text: '“CIUDADELA EL PORVENIR MZ 52 ETAPA VII A”, ',italics:true, bold: true, style: 'texto' },
+                    { text: 'ubicado en la Ciudad de Bogotá D.C., por valor de ', style: 'texto' },
+                    { text: 'UN MILLÓN CUATROCIENTOS MIL PESOS ($1.400.000) MONEDA LEGAL,', bold: true, style: 'texto' },
+                    { text: ' los mismos serán reembolsados a la constructora CG Construcciones SAS, identificada con el NIT No. 800.051.984-2, a la cuenta que para tal efecto se aporte, contra presentación ante la Caja de la Vivienda Popular de la escritura pública de compraventa debidamente registrada a nombre del hogar y acta de entrega de la solución habitacional.', style: 'texto' }
+
+                ]
+            },
+
+            {
+                text: [
+                    { text: '\n\nARTÍCULO CUARTO: ', bold: true, style: 'texto' },
+                    { text: 'Notificar el contenido de la presente Resolución a él (la) beneficiario (a) del valor del instrumento financiero, de conformidad con el   artículo 66 y siguientes de la Ley 1437 de 2011 ', style: 'texto' },
+                    { text: '“Por la cual se expide el Código de Procedimiento Administrativo y de lo Contencioso Administrativo”. ', italics:true, style: 'texto' }
+                ]
+            },
+
+
+            {
+                text: [
+                    { text: '\n\nARTÍCULO QUINTO: ENTREGA DE LA OCUPACIÓN, ', bold: true, style: 'texto' },
+                    { text: 'una vez notificado el presente acto administrativo, el hogar tendrá como obligación la entrega real y material de la ocupación en un término no superior a quince (15) días calendario.', style: 'texto' }
+                ]
+            },
+
+            {
+                text: [
+                    { text: '\nPARÁGRAFO.  ', bold: true, style: 'texto' },
+                    { text: 'En caso de no adelantarse la citada entrega, el hogar estará sujeto a las actuaciones judiciales que, en el marco de la recuperación de los predios fiscales, adelante la entidad competente.', style: 'texto' }
+                ]
+            },
+
+            {
+                text: [
+                    { text: '\n\nARTÍCULO SEXTO: ', bold: true, style: 'texto' },
+                    { text: 'Contra el presente acto administrativo procede el recurso de reposición, de conformidad con lo dispuesto en el artículo 76 del Código de Procedimiento Administrativo y de lo Contencioso Administrativo, dentro de los diez (10) días siguientes a la notificación personal, o a la notificación por aviso, según sea el caso.', style: 'texto' }
+                ]
+            },
+
+
+            {
+                text: [
+                    { text: '\n\nARTÍCULO SÉPTIMO: ', bold: true, style: 'texto' },
+                    { text: 'El presente acto administrativo rige a partir de la fecha de ejecutoria.', style: 'texto' }
+                ]
+            },
+
+            { text: '\n\nCOMUNÍQUESE, NOTIFÍQUESE Y CÚMPLASE', style: 'textobold', fontSize: 12, alignment: 'center' },
+            { text: '\nDada en Bogotá D.C.,  el día ', style: 'texto' },
+            { text: '\n\n ISIS PAOLA DÍAZ MUÑIZ', style: 'textobold', fontSize: 12, alignment: 'center' },
+            { text: 'Directora Técnica de Reasentamientos \n\n\n\n', style: 'texto', fontSize: 12, alignment: 'center' },
+            {
+                table: {
+                    widths: [50, '*'],
+                    body: [
+                        [{ text: 'Proyectó:', fontSize: 7 }, { text: elaboro + ' – Dirección de Reasentamientos.', fontSize: 7 }],
+                        [{ text: 'Revisó:', fontSize: 7 }, { text: aprobo + ' – Dirección de Reasentamientos.', fontSize: 7 }],
+                        [{ text: 'Revisó:', fontSize: 7 }, { text: 'Yamile Patricia Castiblanco Venegas - Profesional – Dirección Jurídica.', fontSize: 7 }],
+                        [{ text: 'Revisó:', fontSize: 7 }, { text: 'Nelson Villarraga Quijano - Contrato No. 146 de 2019 - Dirección Jurídica.', fontSize: 7 }],
+                        [{ text: 'Revisó:', fontSize: 7 }, { text: aprob_juridica + ' – Dirección Jurídica.', fontSize: 7 }],
+                        [{ text: 'Revisó:', fontSize: 7 }, { text: 'Martha Patricia Ortiz - Contrato No. 288 de 2019 - Dirección Jurídica.', fontSize: 7 }],
+
+                        [{ text: 'Aprobó C.L.:', fontSize: 7 }, { text: 'Oscar Eduardo Pinilla Pinilla - Director Jurídico', fontSize: 7 }],
+                        [{ text: '\nArchivado en:', fontSize: 7 }, { text: '\nSubserie Resolución Administrativa - Dirección General.', fontSize: 7 }]
+                    ]
+                },
+                layout: 'noBorders'
+            },
+            { text: 'ID. ' + identificador, style: 'texto', fontSize: 7, alignment: 'right' }
+
+
+
+        ],
+
+        styles: {
+            sub1: {
+                bold: true
+            },
+            superMargin: {
+                margin: [20, 0, 0, 0],
+                fontSize: 11,
+                alignment: 'justify'
+            },
+            texto: {
+                fontSize: 10,
+                alignment: 'justify'
+            },
+            texto1: {
+                fontSize: 10,
+                alignment: 'justify'
+            },
+            textobold: {
+                fontSize: 10,
+                alignment: 'justify',
+                bold: true
+            },
+            subtitulo: {
+                fontSize: 10,
+                alignment: 'center',
+                background: 'black',
+                color: 'white',
+                bold: true
+            },
+            titulo: {
+                fontSize: 11.5,
+                alignment: 'center',
+                bold: true
+            }
+        }, defaultStyle: {
+            font: 'Arial'
+        }
+
+    };
+    return docDefinition;
+
+
+
 }
-
-
-
-
-
-
-
-
 
 
 

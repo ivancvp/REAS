@@ -77,6 +77,7 @@ $.ajax({
   async: false,
   success: function (response) {
 
+
   $.each( response[0], function( key, value ) {
 
 
@@ -140,16 +141,20 @@ success: function (response) {
     success: function (response) {
 
 console.log(response)
+
  var tables=$('table').attr("data-op");
 
 $('table[data-op]').each(function(){
   var table=$(this);
-        $.each( response[0], function( key, value ) {
+      $.each( response[0], function( key, value ) {
 
-          table.find("tr:eq("+i+") input[data-id='"+key+"'],tr:eq("+i+")  select[data-id='"+key+"'],tr:eq("+i+")  textarea[data-id='"+key+"']").val(value)
+        table.find("tr:eq("+i+") input[data-id='"+key+"'],tr:eq("+i+")  select[data-id='"+key+"'],tr:eq("+i+")  textarea[data-id='"+key+"']").val(value)
 
-        });
+      });
 });
+
+
+
 
 var j=i-1;
 $.each( response[0], function( key, value ) {
@@ -165,6 +170,7 @@ $.each( response[0], function( key, value ) {
 
   $("th[data-op='"+key+"']").parent().find("td:eq("+j+") > .checkbox label input[type='checkbox']").prop('checked',bool);
   $("th[data-op='"+key+"']").parent().find("td:eq("+j+") > input,td:eq("+j+") > textarea").val(value);
+
 
 });
 

@@ -87,7 +87,8 @@ function save_tel(){
   $datos = {
        op: "save_telefono_ficha_social",
        identificador:$('#id_ficha_social').val(),
-       telefono:$('#telefono').val(),
+       telefono_fijo:$('#telefono_fijo').val().replace(new RegExp('-', 'g'),""),
+       telefono_cel:$('#telefono_cel').val().replace(new RegExp('-', 'g'),""),
    };
 
    $.ajax({
@@ -145,10 +146,11 @@ function guardarFichaFamilia(json){
       obj["consecutivo"] =i;
 
       $.each(json[i], function(i, item) {
-
+        
         obj[i] = item
 
       });
+      
       console.log(obj)
       $.ajax({
         type: "POST",

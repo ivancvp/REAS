@@ -89,7 +89,8 @@ function validacion(){
    this.value = this.value.replace(/\,/g, "");
   });
 
-  $('#telefono').keyup(function() {
+
+  $('#telefono_cel').keyup(function() {
     var term = $(this).val();
     var str = term.replace(/[a-z`~!@#$%^&*()_|+\-=?;:'",.<>\s\{\}\[\]\\\/]/gi,'');
 
@@ -97,9 +98,25 @@ function validacion(){
     $(this).val(tel);
   });
 
-  $('#sin_telefono').click(function(){
-    $('#telefono').val('SIN TELEFONO');
-  })
+  $('#sin_telefono_cel').click(function(){
+    $('#telefono_cel').val('NO INFO');
+  });
+
+  $('#sin_telefono_fijo').click(function(){
+    $('#telefono_fijo').val('NO INFO');
+  });
+
+  $('#telefono_fijo').keyup(function() {
+    var term = $(this).val();
+
+    var str = term.replace(/[a-z`~!@#$%^&*()_|+\-=?;:'",.<>\s\{\}\[\]\\\/]/gi,'');
+
+    var tel=str.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
+
+    
+  });
+
+
 //Todos los textos a mayusculas
 
     $('input:not(.fecha)').keyup(function() {
@@ -122,9 +139,10 @@ $('.moneda').keyup(function(event) {
     return value
       .replace(/\D/g, "")
       .replace(/([0-9])([0-9]{0})$/, '$1')
-      .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ",")
+      .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".")
     ;
   });
+
 
 
 });
@@ -714,6 +732,50 @@ if(i>0){
 
 
 });
+
+
+
+//validaciòn de los checkbox.
+
+
+
+$('.opc_unica').find(".checkbox label span").click(function() {
+
+  var elemento=$(this)
+
+  var seleccion_td=$(this).closest("td").index()-1;
+
+  var columna=$(this).closest("tbody")
+
+  $('.opc_unica tr').each(function () {
+
+    
+    $(this).find("td:eq("+seleccion_td+")").find(' label input[type="checkbox"]').prop('checked',false);
+
+
+
+});
+
+
+  
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 function obligatorio(){

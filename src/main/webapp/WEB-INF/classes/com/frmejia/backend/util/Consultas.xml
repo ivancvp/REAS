@@ -1469,7 +1469,10 @@
         (select fecha_seleccion from gestion_inmobiliaria.seleccion_vivienda where identificador ='@identificador'),
         (select beneficiario_resolucion_especie from caracoli.caracoli where num_sdh=(select "IDENTIFICA_ANTERIOR" from definitiva where "IDENTIFICADOR" ='@identificador')),
         (select fecha_afirmacion from caracoli.caracoli where num_sdh=(select "IDENTIFICA_ANTERIOR" from definitiva where "IDENTIFICADOR" ='@identificador')),
-        (select tipo_notificacion from caracoli.caracoli where num_sdh=(select "IDENTIFICA_ANTERIOR" from definitiva where "IDENTIFICADOR" ='@identificador'))                
+        (select tipo_notificacion from caracoli.caracoli where num_sdh=(select "IDENTIFICA_ANTERIOR" from definitiva where "IDENTIFICADOR" ='@identificador')),
+        (select folio_plenario from gestion_inmobiliaria.seleccion_vivienda where identificador='@identificador'), 
+        (select fecha_plenario from gestion_inmobiliaria.seleccion_vivienda where identificador='@identificador'),
+        (select rad_contructora from gestion_inmobiliaria.seleccion_vivienda where identificador='@identificador')                
 	from definitiva df
 	left join financiera_reas.cdp_rp rv 
 	on df."IDENTIFICADOR"=rv.identificador
@@ -1537,7 +1540,10 @@
         update caracoli.caracoli set tipo_notificacion='@tipo_notificacion' where num_sdh=(select "IDENTIFICA_ANTERIOR" from definitiva where "IDENTIFICADOR" ='@identificador');
         
         update caracoli.caracoli set fecha_afirmacion=CASE WHEN to_date('@fecha_afirmacion','DD MM YYYY') = '0001-01-01 BC' THEN NULL ELSE to_date('@fecha_afirmacion','DD MM YYYY') END where num_sdh=(select "IDENTIFICA_ANTERIOR" from definitiva where "IDENTIFICADOR" ='@identificador');
+        
+                
                      
+            
         WITH 
         sel as (
         Select identificador from financiera_reas.asignaciones_resoluciones where identificador='@identificador' 
@@ -1580,7 +1586,33 @@
         WHERE NOT EXISTS (select 1 from upd )
         returning identificador	
         )
-        select * from upd union select * from ins;      
+        select * from upd union select * from ins;   
+            
+       
+                 
+       WITH 
+        sel as (
+        Select identificador from gestion_inmobiliaria.seleccion_vivienda where identificador='@identificador' 
+        ),
+        upd as(
+        UPDATE gestion_inmobiliaria.seleccion_vivienda
+        SET 	
+        folio_plenario=NULLIF('@folio_plenario', '')::int,
+        fecha_plenario=CASE WHEN to_date('@fecha_plenario','DD MM YYYY') = '0001-01-01 BC' THEN NULL ELSE to_date('@fecha_plenario','DD MM YYYY') END    
+        WHERE identificador=(select identificador from sel)
+        returning identificador
+        ),ins as(
+        INSERT INTO gestion_inmobiliaria.seleccion_vivienda(identificador,folio_plenario,fecha_plenario)
+        SELECT 
+            '@identificador',
+            NULLIF('@folio_plenario', '')::int,
+            CASE WHEN to_date('@fecha_plenario','DD MM YYYY') = '0001-01-01 BC' THEN NULL ELSE to_date('@fecha_plenario','DD MM YYYY') END
+        WHERE NOT EXISTS (select 1 from upd )
+        returning identificador	
+        )
+        select * from upd union select * from ins;         
+            
+               
             
             
         </sql>
@@ -3369,12 +3401,11 @@
         <sql>
             select "IDENTIFICADOR" as identificador,"Nombre 1" as nom_ben,
             "Cedula 1" as num_doc, no_cdp as num_cdp, fecha_cdp, no_resol as num_res,fecha_resol as fecha_res,
-            pf.num_rep,rv.fecha_rp as fecha_rp,num_cta,ent_ban,val_gir,elaboro,aprobo,concepto
+            no_rp,rv.fecha_rp as fecha_rp,num_cta,ent_ban,val_gir,elaboro,aprobo,concepto
             from definitiva df inner join financiera_reas.cdp_rp rv on
             df."IDENTIFICADOR"= rv.identificador left join procesos.financiera pf
             on df."IDENTIFICADOR"= pf.identificador left join procesos.aprob_financiera af on df."IDENTIFICADOR"= af.identificador
-            where rv.identificador='@identificador' 
-            
+            where rv.identificador='@identificador'  
         </sql>
         <conexion>atencion_reloca</conexion>
         <permisos>*</permisos>
@@ -3678,16 +3709,19 @@
     
     <Consulta id="save_info_financiera">
         <sql>
-            WITH 
+            
+        update financiera_reas.cdp_rp set no_rp='@no_rp', fecha_rp=CASE WHEN to_date('@fecha_rp','DD MM YYYY') = '0001-01-01 BC' THEN NULL ELSE to_date('@fecha_rp','DD MM YYYY') END
+        where identificador='@identificador' and conse=1;
+        
+            
+        WITH 
             sel as (
-            Select identificador from procesos.financiera where identificador='@id'
+            Select identificador from procesos.financiera where identificador='@identificador'
             ),
             upd as(
             UPDATE	procesos.financiera
             SET 
-            identificador= '@id',
-            num_rep=@num_rep,
-            fecha_rp=CASE WHEN to_date('@fecha_rp','DD MM YYYY') = '0001-01-01' THEN NULL ELSE to_date('@fecha_rp','DD MM YYYY') END,
+            identificador= '@identificador',
             num_cta='@num_cta',
             ent_ban='@ent_ban',
             val_gir=@val_gir,
@@ -3698,8 +3732,6 @@
             ),ins as(
             INSERT INTO procesos.financiera(
             identificador,
-            num_rep,
-            fecha_rp,
             num_cta,
             ent_ban,
             val_gir,
@@ -3708,8 +3740,6 @@
             )
             SELECT
             '@id',
-            @num_rep,
-            CASE WHEN to_date('@fecha_rp','DD MM YYYY') = '0001-01-01' THEN NULL ELSE to_date('@fecha_rp','DD MM YYYY') END,
             '@num_cta',
             '@ent_ban',
             @val_gir,
@@ -3718,8 +3748,13 @@
             WHERE NOT EXISTS (select 1 from upd )
             returning identificador	
             )
-            select * from upd union select * from ins
-
+            select * from upd union select * from ins    
+                
+            
+            
+            
+            
+            
             
         </sql>
         <conexion>atencion_reloca</conexion>
@@ -5854,7 +5889,7 @@
     
     <Consulta id="1">
         <sql>
-            UPDATE FichaSocial.fichasocial
+            UPDATE fichasocial.hogar
             SET 
                 version='@version'
             WHERE identificador='@identificador'
@@ -5864,7 +5899,7 @@
     </Consulta>      
     <Consulta id="2">
         <sql>
-            UPDATE FichaSocial.fichasocial
+            UPDATE fichasocial.hogar
             SET 	
                 p2_1='@p2_1'
             WHERE identificador='@identificador'
@@ -5874,7 +5909,7 @@
     </Consulta>   
      <Consulta id="7">
         <sql>
-            UPDATE FichaSocial.fichasocial
+            UPDATE fichasocial.hogar
             SET 	
                 p7_1_1='@p7_1_1',
                 p7_1_2='@p7_1_2'
@@ -5885,7 +5920,7 @@
     </Consulta>     
      <Consulta id="7a">
         <sql>
-            UPDATE FichaSocial.fichasocial
+            UPDATE fichasocial.hogar
             SET 	
             p7_7_a='@p7_7_a',
             p7_7_b='@p7_7_b',
@@ -5911,7 +5946,7 @@
     </Consulta> 
      <Consulta id="8">
         <sql>
-            UPDATE FichaSocial.fichasocial
+            UPDATE fichasocial.hogar
             SET 	
             p8_1_a='@p8_1_a',
             p8_1_b='@p8_1_b',
@@ -5939,7 +5974,7 @@
     </Consulta>     
      <Consulta id="9">
         <sql>
-            UPDATE FichaSocial.fichasocial
+            UPDATE fichasocial.hogar
             SET 	
             p9='@p9'    
             WHERE identificador='@identificador'
@@ -5949,7 +5984,7 @@
     </Consulta>        
       <Consulta id="10">
         <sql>
-            UPDATE FichaSocial.fichasocial
+            UPDATE fichasocial.hogar
             SET 	
             p10_1='@p10_1',
             p10_2a='@p10_2a',
@@ -5961,7 +5996,7 @@
     </Consulta>            
       <Consulta id="11">
         <sql>
-            UPDATE FichaSocial.fichasocial
+            UPDATE fichasocial.hogar
             SET 	
             p11_1_a=@p11_1_a,
             p11_1_b=@p11_1_b,
@@ -6006,7 +6041,7 @@
     </Consulta>                     
     <Consulta id="12">
         <sql>
-            UPDATE FichaSocial.fichasocial
+            UPDATE fichasocial.hogar
             SET 	
             p12_1_1_a='@p12_1_1_a',
             p12_1_1_b='@p12_1_1_b',
@@ -6024,7 +6059,7 @@
     </Consulta>                
     <Consulta id="13">
         <sql>
-            UPDATE FichaSocial.fichasocial
+            UPDATE fichasocial.hogar
             SET 	
             p13_1='@p13_1',
             p13_2='@p13_2',
@@ -6039,7 +6074,7 @@
     </Consulta>    
     <Consulta id="14">
         <sql>
-            UPDATE FichaSocial.fichasocial
+            UPDATE fichasocial.hogar
             SET 	
             p14='@p14'
             WHERE identificador='@identificador'
@@ -6049,22 +6084,22 @@
     </Consulta> 
     <Consulta id="traer_datos_ficha_social">
         <sql>
-        select * from FichaSocial.fichasocial where identificador='@identificador'
+        select * from fichasocial.hogar where identificador='@identificador'
         </sql>
         <conexion>atencion_reloca</conexion>
         <permisos>*</permisos>       
     </Consulta> 
     <Consulta id="borrar_miembro_ficha_social">
         <sql>
-        delete from fichasocial.fichasocial_familia 
-        where identificador='@identificador' and consecutivo = (select max(consecutivo) from fichasocial.fichasocial_familia where identificador='@identificador')
+        delete from fichasocial.miembros 
+        where identificador='@identificador' and consecutivo = (select max(consecutivo) from fichasocial.miembros where identificador='@identificador')
         </sql>
         <conexion>atencion_reloca</conexion>
         <permisos>*</permisos>       
     </Consulta>  
     <Consulta id="2m">
         <sql>
-            UPDATE FichaSocial.fichasocial_familia
+            UPDATE fichasocial.miembros
             SET
             tipo_beneficiario='@tipo_beneficiario', 	
             p2_2='@p2_2',
@@ -6077,7 +6112,6 @@
             p2_9='@p2_9',
             p2_010='@p2_010',
             p2_011='@p2_011',
-            p2_012='@p2_012',
             p2_013='@p2_013',
             p2_014='@p2_014'
             WHERE identificador='@identificador' and consecutivo='@consecutivo'
@@ -6087,7 +6121,7 @@
     </Consulta>   
         <Consulta id="3m">
         <sql>
-            UPDATE FichaSocial.fichasocial_familia
+            UPDATE fichasocial.miembros
             SET 	
             p3_1='@p3_1',
             p3_2='@p3_2',
@@ -6106,7 +6140,7 @@
     </Consulta> 
         <Consulta id="4m">
         <sql>
-            UPDATE FichaSocial.fichasocial_familia
+            UPDATE fichasocial.miembros
             SET 	
             p4_1='@p4_1',
             p4_2='@p4_2'
@@ -6117,12 +6151,13 @@
     </Consulta>    
         <Consulta id="5m">
         <sql>
-            UPDATE FichaSocial.fichasocial_familia
+            UPDATE fichasocial.miembros
             SET 	
             p5_1='@p5_1',
             p5_2='@p5_2',
             p5_3='@p5_3',
-            p5_4='@p5_4',
+            p5_4a='@p5_4a',
+            p5_4b='@p5_4b',
             p5_5='@p5_5'
             WHERE identificador='@identificador' and consecutivo='@consecutivo'
         </sql>
@@ -6131,7 +6166,7 @@
     </Consulta>      
         <Consulta id="6m">
         <sql>
-            UPDATE FichaSocial.fichasocial_familia
+            UPDATE fichasocial.miembros
             SET 	
             p6_1='@p6_1',
             p6_2='@p6_2',
@@ -6145,7 +6180,7 @@
     </Consulta>  
     <Consulta id="7m">
         <sql>
-            UPDATE FichaSocial.fichasocial_familia
+            UPDATE fichasocial.miembros
             SET 	
             p7_2='@p7_2',
             p7_3='@p7_3',
@@ -6160,7 +6195,7 @@
     </Consulta>     
     <Consulta id="boolean">
         <sql>
-            UPDATE FichaSocial.fichasocial_familia
+            UPDATE fichasocial.miembros
             SET 	
             p10_3a='@p10_3a',
             p10_3b='@p10_3b',
@@ -6267,14 +6302,14 @@
              
      <Consulta id="get_num_familiares">
         <sql>
-        select count(*) from FichaSocial.fichasocial_familia where identificador='@identificador';
+        select count(*) from fichasocial.miembros where identificador='@identificador';
         </sql>
         <conexion>atencion_reloca</conexion>
         <permisos>*</permisos>       
     </Consulta>         
     <Consulta id="get_data_familiares">
         <sql>
-        select * from FichaSocial.fichasocial_familia where identificador='@identificador' and consecutivo='@consecutivo';
+        select * from fichasocial.miembros where identificador='@identificador' and consecutivo='@consecutivo';
         </sql>
         <conexion>atencion_reloca</conexion>
         <permisos>*</permisos>       
@@ -6288,21 +6323,21 @@
     </Consulta>     
     <Consulta id="insertar_ficha_social_general">
         <sql>
-            with rows as(INSERT INTO fichasocial.fichasocial
+            with rows as(INSERT INTO fichasocial.hogar
                 (identificador)
             SELECT '@identificador'
             WHERE
                 NOT EXISTS (
-                    SELECT identificador FROM fichasocial.fichasocial WHERE identificador = '@identificador'
+                    SELECT identificador FROM fichasocial.hogar WHERE identificador = '@identificador'
                 ) returning identificador) select identificador from rows;
             
             with rows as(
-            INSERT INTO fichasocial.fichasocial_familia
+            INSERT INTO fichasocial.miembros
                 (identificador,consecutivo)
             SELECT '@identificador','1' 
             WHERE
             NOT EXISTS (
-            SELECT identificador FROM fichasocial.fichasocial_familia WHERE identificador = '@identificador' and consecutivo='1'
+            SELECT identificador FROM fichasocial.miembros WHERE identificador = '@identificador' and consecutivo='1'
             )
             returning identificador) select identificador from rows;
             
@@ -6324,12 +6359,12 @@
     <Consulta id="insertar_ficha_social_miembro">
         <sql>
             with rows as(
-            INSERT INTO fichasocial.fichasocial_familia
+            INSERT INTO fichasocial.miembros
                 (identificador,consecutivo)
             SELECT '@identificador','@miembro' 
             WHERE
             NOT EXISTS (
-            SELECT identificador FROM fichasocial.fichasocial_familia WHERE identificador = '@identificador' and consecutivo='@miembro'
+            SELECT identificador FROM fichasocial.miembros WHERE identificador = '@identificador' and consecutivo='@miembro'
             )
             returning identificador) select identificador from rows;
         </sql>
@@ -6366,7 +6401,7 @@
         END as tipo_identificacion,
         p2_011 as nro_identificacion,
         EXTRACT(YEAR FROM(
-        age((COALESCE( NULLIF(p2_7,''),to_char(current_date,'YYYY-MM-DD') ))::date)
+        age(p2_7)
         ))as edad,
         CASE 
              WHEN p2_2='1'  THEN 'Jefe de familia'
@@ -6381,7 +6416,7 @@
              WHEN p2_2='10'  THEN 'Otro Pariente'
              WHEN p2_2='11'  THEN 'Otro no pariente'
         END as parentesco
-        from fichasocial.fichasocial_familia where identificador='@identificador'
+        from fichasocial.miembros where identificador='@identificador'
         order by edad
         </sql>
         <conexion>atencion_reloca</conexion>

@@ -307,7 +307,7 @@
 
 
                 </div>
-               <!--
+              <!--
                 <input type="file" id="myFile" multiple="multiple">   
                 <button type="button" class="btn btn-danger btn-xs" id="imp_masiva">Impresión masiva </button>
                 <button type="button" class="btn btn-danger" id="correo_masivo">Correo Masivo </button>
@@ -775,12 +775,12 @@
         <%= CacheBuster.bust(application.getRealPath("/"), "pdf/formato_ficha_caracoli.js", "js")%>
         <%= CacheBuster.bust(application.getRealPath("/"), "pdf/impresion_adenda.js", "js")%>
         
-        <!--Quitar!!!
+        
         <script src='pdf/pdfmake.min.js'></script>
         <script src='pdf/pdfmake.js'></script>
         <script src='pdf/vfs_fonts.js'></script>
 
-        -->
+        
         
         <!-- Reporte Generado en Excel para las fichas de vereditas, la de Gavilanes y reporte REAS-->
         <script src='js/reas/util/reportes.js?v=<?php echo(rand()); ?>'></script>
@@ -980,7 +980,7 @@
             
             //modulo para el cargue masivo de datos
             
-           /*
+          /*
             $('#imp_masiva').click(function(){
                 
                 
@@ -999,7 +999,7 @@
                             
                             fd.append('numFolios', 1);
                             fd.append('descripcion', 'Resolucion VUR');
-                            fd.append('identificador',fname.replace(".PDF", ""));
+                            fd.append('identificador',fname.replace(".pdf", ""));
                             fd.append('tipo_documento', '5103');
                             fd.append('thumbnail', '');                        
                             fd.append("myFile", document.getElementById("myFile").files[i]);                
@@ -1021,7 +1021,7 @@
                 
             });
           
-            */
+           */
             
         </script>
         

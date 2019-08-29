@@ -270,11 +270,25 @@ function data_json1(html,op,selector){
   var str="";
   var tbl2 = $(html).find(selector).each(function(i) {
     x = $(this).find(selector);
+
     var valor='"'+ $(this).val() + '"';
+
     if($(this).attr('type')=="checkbox"){
       valor=$(this).prop('checked');
     }
+
+    if($(this).hasClass("numto999")){
+      
+      if($(this).val()==""){
+        valor='"null"';
+      }else{
+        valor=$(this).val();
+      }
+    }
+
     str=str+',"' + $(this).attr("data-id") + '":' + valor ;
+
+
   })
   json += str+ '}'
 
@@ -293,6 +307,7 @@ for (i = 1; i <= num_integrantes; i++) {
 
   var json = '{"op": "boolean","consecutivo":"'+i+'"';
   var str="";
+
   $('.check').each(function(key,value){
 
   var tbl=value;
@@ -314,6 +329,36 @@ for (i = 1; i <= num_integrantes; i++) {
   }
 
   });
+
+
+  $('.opc_unica').each(function(key,value){
+
+    var tbl=value;
+  
+    var rowCount = $(tbl).find("tr").length;
+  
+    var data=$(tbl).find("tr:eq(1) > th:eq(0)").attr("data-op");
+
+    var k=null;
+
+    for (var i = 1; i < rowCount; i++) {
+    
+      var boolean=$(tbl).find("tr:eq("+i+") > td:eq("+j+") > .checkbox label input[type='checkbox']").prop('checked');
+  
+      if(boolean==true){
+        k=i;
+      }
+  
+    }
+
+    str=str+',"'+data+'":'+'"'+k+'"';
+  
+    });
+
+
+
+
+
   json=json+str+'}';
 
   var str1=escapeSpecialChars(json);

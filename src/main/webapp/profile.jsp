@@ -464,9 +464,9 @@
                                                             <a href="#" class="btn btn-sm btn-primary" id="fcaracterizacion" >2.  <i class="fas fa-users"></i>  Ficha de caracterización</a>
                                                    
                                                             <br><br>
-                                                           <!--
+                                                           
                                                             <a href="#" class="btn btn-sm btn-primary" id="fichasocial" >2.  <i class="fas fa-users"></i>  Nueva Ficha Social</a>
-                                                            -->
+                                                            
                                                             <%  if (session.getAttribute("user") != null) {
                                                                     out.print("<button type='button' id='lista_chequeo_btn'  class='btn btn-sm btn-success' onclick='hola({formulario:1,index:getURLParams(\"identificador\"),modo:3})'>3. <i class='fas fa-list-ol'></i> Lista de Chequeo</button>");
                                                                 }
