@@ -28,7 +28,7 @@
     padding-bottom: 5px;
     border-bottom: .5px solid rgba(0,0,0,0.5);
     cursor: pointer;
-    color: #5499C7;
+    color: #185D80;
   }
   .titulo_ficha::after{
     content: '\f0da';
@@ -258,6 +258,10 @@
   }
 }
 
+.spancito{
+
+  color:#185D80
+}
 
 
   </style>
@@ -271,29 +275,33 @@
 
 <body id="body_fichasocial">
 
+    <div class="row">
+        <div class="col-md-12">
+          <h1 style="color:#185D80;font-weight: 300;margin-top:0;margin-bottom: 20px"  id="titulo_ficha_social">Formato de caracterización de la población</h1>
+        </div>
+      </div>
 
 <div id="fondo">
   <div id="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
   <h1 id="titulo_cargando">Cargando...</h1>
 </div>
 
-  <a href="#" class="float" id="save_ficha">
+  <a href="#" class="float" id="save_ficha" style="background-color: #2689FF">
     <i class="glyphicon glyphicon-floppy-disk my-float"></i>
   </a>
 
-  <a href="#" class="float" style="bottom:160px;background-color:#5F9CE0;" id="validar_ficha">
-    <i class="glyphicon glyphicon-share-alt	my-float"></i>
-  </a>
 
 
 
 
-    <div class="row">
-      <div class="col-md-12">
-        <h1 style="color:#117A65" id="titulo_ficha_social">Formato de caracterización de la población</h1>
+
+
+
+  <div class="row ">
+      <div class="col-md-12 " >
+        <p>Ficha de caracterización de la población, por favor diligencie los campos de la misma forma en la que diligencio el formato de caracterización de la población. <strong>Nota: Para enviar a revisión se requiere escanear la ficha social.</strong></p>
       </div>
-    </div>
-
+  </div>
 
   <div class="row ">
     <div class="col-md-12 " data-toggle="collapse" data-target="#tema1">
@@ -309,7 +317,8 @@
       <div class="col-md-12">
         <div class="form-group">
           <label>Versión de la ficha social</label>
-          <select class="form-control obligatorio" data-id="version"><option value="null">Seleccione...</option><option value="7">Versión 7</option><option value="8">Versión 8</option><option value="9">Versión 9</option></select>
+          <input class="form-control" data-id="version"  disabled value="9">Version 9</input>
+          
         </div>
       </div>
     </div>
@@ -375,13 +384,18 @@
       <label>1.8 Telefono Celular</label>
     </div>
   </div>
+  <div class="col-md-6">
+      <div class="form-group">
+        <label>1.8 Telefono Fijo</label>
+      </div>
+    </div>
 </div>
 
 <div class="row">
   <div class="col-md-6 form-inline">
 
     <div class="form-group">
-        <input class="form-control obligatorio" id="telefono_cel" onfocusout="myFunction()"></input>
+        <input class="form-control " id="telefono_cel" onfocusout="myFunction()"></input>
     </div>
     <div class="form-group">
        <button type="button" class="btn btn-default" id="sin_telefono_cel" ><i class="fas fa-phone-slash"></i> Sin telefono</button>
@@ -390,32 +404,21 @@
 
   </div>
 
-
-</div>
-
-<div class="row">
-  <div class="col-md-6">
-    <div class="form-group">
-      <label>1.8 Telefono Fijo</label>
-    </div>
-  </div>
-</div>
-<div class="row">
-
   <div class="col-md-6 form-inline">
 
-    <div class="form-group">
-        <input class="form-control obligatorio" id="telefono_fijo" onfocusout="myFunction()"></input>
+      <div class="form-group">
+          <input class="form-control " id="telefono_fijo" onfocusout="myFunction()"></input>
+      </div>
+      <div class="form-group">
+         <button type="button" class="btn btn-default" id="sin_telefono_fijo" ><i class="fas fa-phone-slash"></i> Sin telefono</button>
+      </div>
+  
+      
     </div>
-    <div class="form-group">
-       <button type="button" class="btn btn-default" id="sin_telefono_fijo" ><i class="fas fa-phone-slash"></i> Sin telefono</button>
-    </div>
-
-    
-  </div>
-
 
 </div>
+
+
 
 
 </div>
@@ -433,12 +436,13 @@
 
 
 <div class="paso" data-op="2">
+    <div class="row">
     <div class="col-md-12">
       <div class="form-group">
         <label>2.1 Tipo de familia</label>
         <select class="form-control" data-id="p2_1">
           <option value="null">Seleccione...</option>
-          <option value="1"><strong>Nuclear</strong>: Ambos padres con sus hijos, sin que estos ultimos tengasn dependientes en el hogar</option>
+          <option value="1"><strong>Nuclear</strong>: Ambos padres con sus hijos, sin que estos ultimos tengan dependientes en el hogar</option>
           <option value="2"><strong>Extensa</strong>: Familia nuclear con otros parientes diferentes a padres e hijos</option>
           <option value="3"><strong>Compuesta</strong>: Cada conyugue aporta hijos de una unión anterior y a su vez exixten hijos de la presente unión</option>
           <option value="4"><strong>Monoparental</strong>: Un solo padre/madre con sus hijos, sin que estos tengan dependientes en el hogar</option>
@@ -448,6 +452,7 @@
         </select>
       </div>
     </div>
+  </div>
     </div>
 
     <div class="row">
@@ -457,7 +462,7 @@
         </div>
 
           <div class="form-group">
-            <button type="button" class="btn btn-danger" id="del_fam"><i class="far fa-trash-alt"></i> Borrar Miembro</button>
+            <button type="button" class="btn btn-danger" id="del_fam"><i class="far fa-trash-alt"></i> Borrar Registro</button>
         </div>
       </div>
     </div>
@@ -518,7 +523,17 @@
                 <div class="span5 sandbox-container"><input type="text" class="form-control fecha obligatorio fecha_nacimiento" data-id="p2_7"></div>
               </div>
             </td>
-            <td><select class="form-control obligatorio selectpicker" data-id="p2_8" style="overflow: visible;z-index: 99999">  <option value="">Seleccione...</option></select></td>
+            <td>
+
+              <div class="input-group">
+                <input type="search" class="form-control obligatorio" data-id="p2_8">
+                <span class="input-group-btn">
+                <button class="btn btn-primary agregar_lugar_nacimiento" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true">
+                </span></button>
+                </span>
+              </div>
+
+            </td>
             <td><select class="form-control obligatorio" data-id="p2_9">
               <option value="null">Seleccione...</option>
               <option value="1">CC: Cédula de ciudadania</option>
@@ -569,7 +584,7 @@
 
     <div class="row">
       <div class="col-md-12 " data-toggle="collapse" data-target="#tema3">
-        <h3 class="titulo_ficha">3. Caracterizaciòn de la Población</h3>
+        <h3 class="titulo_ficha">3. Caracterización de la Población</h3>
       </div>
     </div>
 
@@ -587,13 +602,12 @@
             <th style="width:100px" scope="col">3.3 <button type="button" class="btn btn-primary btn-xs" data-toggle="popover" data-trigger="focus" title="Orientación sexual" data-content=""><span class="glyphicon glyphicon-info-sign"></span> </button></th>
             <th style="width:100px" scope="col">3.4 <button type="button" class="btn btn-primary btn-xs" data-toggle="popover" data-trigger="focus" title="Condición de discapacidad" data-content=""><span class="glyphicon glyphicon-info-sign"></span> </button></th>
             <th style="width:100px" scope="col">3.5 <button type="button" class="btn btn-primary btn-xs" data-toggle="popover" data-trigger="focus" title="¿Es madre / padre cabeza de familia?" data-content=""><span class="glyphicon glyphicon-info-sign"></span> </button></th>
-            <th style="width:100px" scope="col">3.6 <button type="button" class="btn btn-primary btn-xs" data-toggle="popover" data-trigger="focus" title="¿Es victima del conflicto armado? (Si/No)"  data-content="Si la respuesta es No pase al numeral 3.10"><span class="glyphicon glyphicon-info-sign"></span> </button></th>
-            <th style="width:100px" scope="col">3.7 <button type="button" class="btn btn-primary btn-xs" data-toggle="popover" data-trigger="focus" title="Para victimas del conflicto armado:" data-content="¿Se encuentra inscrito en el registro Unico de victimas? (Si/No/No Aplica) Solicite ver resolución"><span class="glyphicon glyphicon-info-sign"></span> </button></th>
-            <th style="width:100px" scope="col">3.8 <button type="button" class="btn btn-primary btn-xs" data-toggle="popover" data-trigger="focus" title="Ha sufrido desplazamiento por el conflicto armado?" data-content="(Si/No/No Aplica)"><span class="glyphicon glyphicon-info-sign"></span> </button></th>
-            <th style="width:100px" scope="col">3.9 <button id="btn_msg_3_9a" type="button" class="btn btn-primary btn-xs" data-toggle="popover" data-trigger="focus" title="Para desplazados: ¿Quisiera retornar?" data-content="(Si/No/No Aplica)"><span class="glyphicon glyphicon-info-sign"></span> </button>
-                                                    <button id="btn_msg_3_9b" type="button" class="btn btn-primary btn-xs" data-toggle="popover" data-trigger="focus" title="Para desplazados: ¿Desearía Retornar, o adquirir una vivienda fuera de la ciudad?" data-content="(Si/No/No Aplica)"><span class="glyphicon glyphicon-info-sign"></span> </button></th>
-            <th style="width:100px" scope="col">3.10 <button id="btn_msg_3_10_a" type="button" class="btn btn-primary btn-xs" data-toggle="popover" data-trigger="focus" title="Desmovilizado de grupos armados" data-content="Si/No"><span class="glyphicon glyphicon-info-sign"></span> </button>
-                                                    <button id="btn_msg_3_10_b" type="button" class="btn btn-primary btn-xs" data-toggle="popover" data-trigger="focus" title="Desmovilizado de grupos armados" data-content="Si/No"><span class="glyphicon glyphicon-info-sign"></span> </button></th>
+            <th style="width:100px" scope="col">3.6 <button type="button" class="btn btn-primary btn-xs" data-toggle="popover" data-trigger="focus" title="¿Es víctima del conflicto armado, incluida en el Registro Único de Víctimas?"  data-content="*Sí (Solicite ver resolución), *No (Pase a 3.9)"><span class="glyphicon glyphicon-info-sign"></span> </button></th>
+            <th style="width:100px" scope="col">3.7 <button type="button" class="btn btn-primary btn-xs" data-toggle="popover" data-trigger="focus" title="Para victimas del conflicto armado:" data-content="¿Ha sufrido desplazamiento por conflicto armado? *No (Pase a 3.9)"><span class="glyphicon glyphicon-info-sign"></span> </button></th>
+            <th style="width:100px" scope="col">3.8 <button type="button" class="btn btn-primary btn-xs" data-toggle="popover" data-trigger="focus" title="(Para desplazados) ¿Desearía Retornar, o adquirir una vivienda fuera de la ciudad?" data-content="*No (Pase a 4.1)"><span class="glyphicon glyphicon-info-sign"></span> </button></th>
+            <th style="width:100px" scope="col">3.9 <button id="btn_msg_3_9a" type="button" class="btn btn-primary btn-xs" data-toggle="popover" data-trigger="focus" title="¿Es Desmovilizado de grupos armados?" ><span class="glyphicon glyphicon-info-sign"></span> </button>
+                                                    <button id="btn_msg_3_9b" type="button" class="btn btn-primary btn-xs" data-toggle="popover" data-trigger="focus" title="¿Es Desmovilizado de grupos armados?" ><span class="glyphicon glyphicon-info-sign"></span> </button></th>
+            
           </tr>
         </thead>
         <tbody>
@@ -643,24 +657,17 @@
               <option value="">Seleccione...</option>
               <option value="SI">Si</option>
               <option value="NO">No</option>
-              <option value="NO APLICA">No aplica</option>
             </select></td>
             <td><select class="form-control" data-id="p3_8">
               <option value="">Seleccione...</option>
               <option value="SI">Si</option>
               <option value="NO">No</option>
-              <option value="NO APLICA">No aplica</option>
             </select></td>
             <td><select class="form-control" data-id="p3_9">
               <option value="">Seleccione...</option>
               <option value="SI">Si</option>
               <option value="NO">No</option>
               <option value="NO APLICA">No aplica</option>
-            </select></td>
-            <td><select class="form-control" data-id="p3_010">
-              <option value="">Seleccione...</option>
-              <option value="SI">Si</option>
-              <option value="NO">No</option>
             </select></td>
           </tr>
         </tbody>
@@ -1061,14 +1068,22 @@
         <div class="col-md-12">
           <div class="form-group">
             <label>7.11.5 Clientes o usuarios tiene ubicación local, zonal. regional, nacional o internacional</label>
-            <input class="form-control" data-id="p7_11_5"></input>
+            <select class="form-control" data-id="p7_11_5">
+                <option value="null">Seleccione...</option>
+                <option value="1">Local</option>
+                <option value="2">Zonal</option>
+                <option value="3">Regional</option>
+                <option value="4">Nacional</option>
+                <option value="5">Internacional</option>
+              </select>
+
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-md-6">
           <div class="form-group">
-            <label>7.11.6 Valor mensual de gastos para desarrollar la actividad </label>
+            <label>7.11.6 Valor mensual de gastos para desarrollar la actividad (Aprox.) </label>
             <div class="input-group">
               <span  class="input-group-addon">$</span>
               <input class="form-control moneda" data-id="p7_11_6"></input>
@@ -1078,7 +1093,7 @@
 
         <div class="col-md-6">
           <div class="form-group">
-            <label>7.11.7 Valor de producción mensual</label>
+            <label>7.11.7 Valor de producción mensual / Canon Mensual</label>
             <div class="input-group">
               <span  class="input-group-addon">$</span>
               <input class="form-control moneda" data-id="p7_11_7"></input>
@@ -1118,7 +1133,7 @@
 
     <div class="row">
       <div class="col-md-12 " data-toggle="collapse" data-target="#tema8">
-        <h3 class="titulo_ficha">8. Caracterización de la vivienda (Marque con una X hasta la 8.3)</h3>
+        <h3 class="titulo_ficha">8. Caracterización de la vivienda</h3>
       </div>
     </div>
 
@@ -1169,7 +1184,7 @@
     <div class="row">
       <div class="col-md-6">
         <div class="form-group">
-          <label>8.3 Documentos que acreditan la tenencia (Marque con una X)</label>
+          <label>8.3 Documentos que acreditan la tenencia </label>
           <select class="form-control" data-id="p8_3a">
             <option value="null">Seleccione...</option>
             <option value="1">Escritura</option>
@@ -1295,21 +1310,21 @@
     <div class="grupo">
       <div class="row">
         <div class="col-md-12">
-          <h4 >8.6 Materiales de los que dispone la construcción Responda (Si/No) <button type="button" class="btn btn-success btn-sm" data-toggle="popover" data-trigger="focus" title="Información" data-content="La pregunta se responde con SI o No, a través de un ejercicio que combina la escucha del entrevistado y la observación de las condiciones de la vivienda"><span class="glyphicon glyphicon-info-sign"></span> </button> </h4>
+          <h4 >8.6 Materiales de los que dispone la construcción </h4>
         </div>
       </div>
       <div class="row">
         <div class="col-md-12">
           <div class="form-group">
-            <label>8.6.1 Las paredes son mayoritariamente de bloque, ladrillo, piedra, madera pulida, concreto vaciado y/o material prefabricado</label>
+            <label>8.6.1 ¿Cuál es el material predominante de las paredes exteriores?</label>
             <select class="form-control" data-id="p8_6_1">
               <option value="">Seleccione...</option>
               <option  value="1">Bloque, ladrillo, piedra, madera pulida</option>
               <option  value="2">Tapia pisada, adobe</option>
               <option  value="3">Bahareque revocado</option>
               <option  value="4">Bahareque sin revocar</option>
-              <option  value="5">Madera burda, tabla, tablón</option>
-              <option  value="6">Material prefabricado</option>
+              <option  value="5">Madera Burda, tabla, tablón</option>
+              <option  value="6">Material Prefabricado</option>
 
             </select>
           </div>
@@ -1318,7 +1333,7 @@
       <div class="row">
         <div class="col-md-12">
           <div class="form-group">
-            <label>8.6.2 La vivienda tiene mayoritariamente pisos en tierra?</label>
+            <label>8.6.2 ¿Cuál es el material predominante de los pisos?</label>
             <select class="form-control" data-id="p8_6_2">
               <option  value="null">Seleccione...</option>
               <option  value="1">Alfombra o tapete de pared a pared</option>
@@ -1326,7 +1341,8 @@
               <option  value="3">Mármol </option>
               <option  value="4">Baldosa, vinilo, tableta, ladrillo, laminado o flotante.</option>
               <option  value="5">Madera burda, tabla o tablón, otro vegetal.</option>
-              <option  value="5">Cemento gravilla, Tierra arena.</option>
+              <option  value="6">Cemento gravilla</option>
+              <option  value="7">Tierra, arena</option>
             </select>
           </div>
         </div>
@@ -1367,24 +1383,29 @@
 
 <div id="tema9" class="collapse">
 
-<small> ¿Cual de estos eventos ha afectado su barrio o vivienda en los últimos 2 años</small>
-
 
 <div class="paso" data-op="9">
-  <div class="row">
-<div class="col-md-12">
-  <div class="form-group">
-    <select class="form-control" data-id="p9a">
-      <option  value="null">Seleccione...</option>
-      <option  value="1">Inundación</option>
-      <option  value="2">Deslizamientos </option>
-      <option  value="3">Hundimientos de tierra </option>
-      <option  value="4">Grietas</option>
-      <option  value="5">Otras - Cúal</option>
-      <option  value="6">Ninguna de las anteriores</option>
-    </select>
+<div class="row">
+  <div class="col-md-6">
+    <div class="form-group">
+      <label >¿Cual de estos eventos ha afectado su barrio o vivienda en los últimos 2 años</label>
+      <select class="form-control" data-id="p9a">
+        <option  value="null">Seleccione...</option>
+        <option  value="1">Inundación</option>
+        <option  value="2">Deslizamientos </option>
+        <option  value="3">Hundimientos de tierra </option>
+        <option  value="4">Grietas</option>
+        <option  value="5">Otras - Cúal</option>
+        <option  value="6">Ninguna de las anteriores</option>
+      </select>
+    </div>
   </div>
-</div>
+  <div class="col-md-6">
+      <div class="form-group">
+        <label>Otro ¿Cúal?</label>
+        <input class="form-control" data-id="p9b"></input>
+      </div>
+  </div>
 </div>
 
 
@@ -1403,6 +1424,7 @@
 <small> (aplica para miembros del hogar con edad mayor o igual a 10 años)</small>
 
 <div class="paso" data-op="10">
+
     <div class="row">
       <div class="col-md-12">
         <div class="form-group">
@@ -1415,16 +1437,116 @@
         </div>
       </div>
     </div>
+  </div>
+
 
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-12">
         <div class="form-group">
-          <label>10.2 Cuantos?</label>
-          <input class="form-control numto999" data-id="p10_2"></input>
+          <label>10.2. ¿ Cuántos y de qué tipo? </label>
         </div>
       </div>
     </div>
+
+<div class="check">
+
+    <div class="row">
+      <div class="col-md-4">
+          <div class="form-group ">
+              <label class="col-sm-6" >Equinos</label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control numto999" data-json="equinos">
+              </div>
+          </div>
+        </div>
+        <div class="col-md-4">     
+          <div class="form-group ">
+              <label class="col-sm-6" >Vacunos</label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control numto999" data-json="vacunos">
+              </div>
+          </div>
+      </div>
+      <div class="col-md-4">     
+          <div class="form-group ">
+              <label class="col-sm-6" >Bovinos</label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control numto999" data-json="bovinos">
+              </div>
+          </div>
+      </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group ">
+                <label class="col-sm-6" >Porcinos</label>
+                <div class="col-sm-6">
+                  <input type="text" class="form-control numto999" data-json="porcinos">
+                </div>
+            </div>
+          </div>
+          <div class="col-md-4">     
+            <div class="form-group ">
+                <label class="col-sm-6" >Caninos</label>
+                <div class="col-sm-6">
+                  <input type="text" class="form-control numto999" data-json="caninos">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">     
+            <div class="form-group ">
+                <label class="col-sm-6" >Felinos</label>
+                <div class="col-sm-6">
+                  <input type="text" class="form-control numto999" data-json="felinos">
+                </div>
+            </div>
+        </div>
+      </div>
+
+      <div class="row">
+          <div class="col-md-4">
+              <div class="form-group ">
+                  <label class="col-sm-6" >Aves de cria</label>
+                  <div class="col-sm-6">
+                    <input type="text" class="form-control numto999" data-json="aves_cria">
+                  </div>
+              </div>
+            </div>
+            <div class="col-md-4">     
+              <div class="form-group ">
+                  <label class="col-sm-6" >Aves ornamentales</label>
+                  <div class="col-sm-6">
+                    <input type="text" class="form-control numto999" data-json="aves_ornamentales">
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-4">     
+              <div class="form-group ">
+                  <label class="col-sm-6" >Roedores</label>
+                  <div class="col-sm-6">
+                    <input type="text" class="form-control numto999" data-json="roedores">
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>
+        <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Otros. ¿Cúal? </label>
+                <input type="text" class="form-control" data-json="otros">
+              </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+   
 
     <div class="row">
       <div class="col-md-12">
@@ -1575,7 +1697,7 @@
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
           </tr>
           <tr>
-            <th scope="row" data-op="p10_4d">4. Banco, cooperativa de ahorro</th>
+            <th scope="row" data-op="p10_4d">4. Banco o cooperativa de ahorro</th>
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
@@ -1627,7 +1749,7 @@
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
           </tr>
           <tr>
-            <th scope="row" data-op="p10_4h">8. Entidad de caridad</th>
+            <th scope="row" data-op="p10_4h">8. No tiene problemas económicos</th>
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
@@ -1640,7 +1762,7 @@
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
           </tr>
           <tr>
-            <th scope="row" data-op="p10_4i">9. No tiene problemas económicos</th>
+            <th scope="row" data-op="p10_4i">9. A nadie</th>
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
@@ -1653,20 +1775,7 @@
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
           </tr>
           <tr>
-            <th scope="row" data-op="p10_4j">10. No tiene a quien recurrir</th>
-            <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
-            <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
-            <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
-            <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
-            <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
-            <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
-            <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
-            <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
-            <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
-            <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
-          </tr>
-          <tr>
-            <th scope="row" data-op="p10_4k">11. Otro. Cual?</th>
+            <th scope="row" data-op="p10_4j">10. Otro. Cual?</th>
             <td><input class="form-control"></input></td>
             <td><input class="form-control"></input></td>
             <td><input class="form-control"></input></td>
@@ -1791,7 +1900,7 @@
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
           </tr>
           <tr>
-            <th scope="row" data-op="p10_5g">7. Entidad de caridad</th>
+            <th scope="row" data-op="p10_5g">7. Iglesia congregación, grupo espiritual</th>
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
@@ -1804,7 +1913,7 @@
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
           </tr>
           <tr>
-            <th scope="row" data-op="p10_5h">8. Iglesia, congregación o grupo espiritual</th>
+            <th scope="row" data-op="p10_5h">8. No tiene quien le ayude</th>
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
@@ -1817,20 +1926,7 @@
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
           </tr>
           <tr>
-            <th scope="row" data-op="p10_5i">9. No tiene problemas personales</th>
-            <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
-            <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
-            <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
-            <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
-            <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
-            <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
-            <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
-            <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
-            <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
-            <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
-          </tr>
-          <tr>
-            <th scope="row" data-op="p10_5j">10. No tiene quien le ayude</th>
+            <th scope="row" data-op="p10_5i">9. Nadie, lo soluciona solo</th>
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
@@ -1888,7 +1984,7 @@
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
           </tr>
           <tr>
-            <th scope="row" data-op="p10_6b">2. Organización artística, musical voluntaria, deportivas, social o de recreación.</th>
+            <th scope="row" data-op="p10_6b">2. Organización artística (música, danza, teatro, etc.)</th>
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
@@ -1901,7 +1997,7 @@
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
           </tr>
           <tr>
-            <th scope="row" data-op="p10_6c">3. Asociación e madres y padres de familia, ex-alumnos(a)s entre otros.</th>
+            <th scope="row" data-op="p10_6c">3. Asociación de padres familia, exalumno(a)s</th>
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
@@ -1914,7 +2010,7 @@
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
           </tr>
           <tr>
-            <th scope="row" data-op="p10_6d">4. Cooperativa o asociación de productor(a)s o comerciantes.</th>
+            <th scope="row" data-op="p10_6d">4. Cooperativa o asociación de productore(a)s o comerciantes</th>
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
@@ -1927,7 +2023,7 @@
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
           </tr>
           <tr>
-            <th scope="row" data-op="p10_6e">5. Organización voluntaria ambientalista, de atención en salud o de caridad.</th>
+            <th scope="row" data-op="p10_6e">5. Organización ambientalista, de atención en salud o de caridad</th>
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
@@ -1940,7 +2036,7 @@
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
           </tr>
           <tr>
-            <th scope="row" data-op="p10_6f">6. Grupo o partido politico</th>
+            <th scope="row" data-op="p10_6f">6. Grupo o partido político</th>
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
@@ -1953,7 +2049,7 @@
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
           </tr>
           <tr>
-            <th scope="row" data-op="p10_6g">7. Organizaciones de propiedad horizontal.</th>
+            <th scope="row" data-op="p10_6g">7. Organización de propiedad horizontal</th>
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
@@ -1966,7 +2062,7 @@
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
           </tr>
           <tr>
-            <th scope="row" data-op="p10_6h">8. Junta de acción comunal, civica barrial o de seguridad y vigilancia.</th>
+            <th scope="row" data-op="p10_6h">8. Junta de acción comunal, cívica barrial o de seguridad y vigilancia</th>
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
@@ -1992,7 +2088,7 @@
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
           </tr>
           <tr>
-            <th scope="row" data-op="p10_6j">10. Grupos juveniles (metaleros, skinheads, emos, entre otros)</th>
+            <th scope="row" data-op="p10_6j">10. Grupos urbanos (Metaleros, skinheads, emos, entre otros)</th>
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
@@ -2005,7 +2101,7 @@
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
           </tr>
           <tr>
-            <th scope="row" data-op="p10_6k">11. Organización étnica (autoridad indigena grupo de negritudes, comunidades afrodescendientes, ROM)</th>
+            <th scope="row" data-op="p10_6k">11. Organización étnica (autoridad indígena, grupo de negritudes, comunidades afrodescendientes, Rom)</th>
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
@@ -2031,7 +2127,7 @@
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
           </tr>
           <tr>
-            <th scope="row" data-op="p10_6m">13. Organizaciones LGBT (Lesbianas, Gays, Bisexuales, y Trangeneristas)</th>
+            <th scope="row" data-op="p10_6m">13. Organización LGBTI (lesbianas, gays, bisexuales, transgeneristas e intersexuales)</th>
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
@@ -2044,7 +2140,7 @@
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
           </tr>
           <tr>
-            <th scope="row" data-op="p10_6n">14. No pertenece a ninguna de las anteriores organizaciones.</th>
+            <th scope="row" data-op="p10_6n">14. No pertenece a ninguna de las anteriores organizaciones (pase a 10.7)</th>
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
@@ -2056,6 +2152,37 @@
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
             <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
           </tr>
+
+
+          <tr>
+              <th scope="row" data-op="p10_6o">15. Organización deportiva, social o de recreación</th>
+              <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
+              <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
+              <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
+              <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
+              <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
+              <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
+              <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
+              <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
+              <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
+              <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
+            </tr>
+
+          <tr>
+              <th scope="row" data-op="p10_6p">16. Asociación de acuerdo (sólo para rural)</th>
+              <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
+              <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
+              <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
+              <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
+              <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
+              <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
+              <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
+              <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
+              <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
+              <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
+            </tr>
+
+
         </tbody>
 
       </table>
@@ -2454,7 +2581,7 @@
 
     <div class="row">
       <div class="col-md-12 " data-toggle="collapse" data-target="#tema11">
-        <h3 class="titulo_ficha">11. Condiciones y prácticas asociadas al capital ambiental (Si/No) O.M.</h3>
+        <h3 class="titulo_ficha">11. Condiciones y prácticas asociadas al capital ambiental O.M.</h3>
       </div>
     </div>
 
@@ -2984,7 +3111,7 @@
 
   <div class="row">
     <div class="col-md-12 " data-toggle="collapse" data-target="#tema12">
-      <h3 class="titulo_ficha">12. Uso de tecnologias de la información -TIC (Para personas de 5 años o más)</h3>
+      <h3 class="titulo_ficha">12. Uso de Tecnologías de la Información y la Comunicación- TIC (Todo el capítulo para miembros de edad igual o mayor a 5 años)</h3>
     </div>
   </div>
 
@@ -3292,7 +3419,7 @@
               <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
             </tr>
             <tr>
-              <th scope="row" data-op="p12_3f">6. otro sitio. Especifique cual.</th>
+              <th scope="row" data-op="p12_3f">6. otro sitio. </th>
               <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
               <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
               <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
@@ -3304,6 +3431,20 @@
               <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
               <td><div class="checkbox"><label style="font-size: 1.5em"><input type="checkbox" value="" ><span class="cr"><i class="cr-icon fa fa-check"></i></span></label></div></td>
             </tr>
+
+            <tr>
+                <th scope="row" data-op="p12_3g">Otro Especifique cual.</th>
+                <td><input class="form-control"></input></td>
+                <td><input class="form-control"></input></td>
+                <td><input class="form-control"></input></td>
+                <td><input class="form-control"></input></td>
+                <td><input class="form-control"></input></td>
+                <td><input class="form-control"></input></td>
+                <td><input class="form-control"></input></td>
+                <td><input class="form-control"></input></td>
+                <td><input class="form-control"></input></td>
+                <td><input class="form-control"></input></td>
+              </tr>
 
           </tbody>
 
@@ -3320,7 +3461,7 @@
       </div>
 
 
-        <table class="table  check opc_unica">
+        <table class="table  check  opc_unica">
           <thead>
             <tr>
               <th style="width:50px" scope="col"></th>
@@ -3917,7 +4058,6 @@
 <div id="tema14" class="collapse">
 
 <div class="paso" data-op="14">
-
       <div class="row">
         <div class="col-md-12">
           <div class="form-group">
@@ -3927,6 +4067,7 @@
         </div>
       </div>
 </div>
+
 </div>
 
       <div class="row">
@@ -3937,6 +4078,32 @@
 
 <div id="tema15" class="collapse">
 
+    <div class="paso" data-op="15">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                  <small>De conformidad con el artículo 9 de la ley 1581 de
+                      2012, con la presente manifiesto que 
+                      autorizo, de forma previa, expresa e informada, que
+                      mi información personal y la de mi núcleo familiar se
+                      recolecte, ingrese a bases de datos, se actualice,
+                      rectifique o suprima, según sea pertinente, y sea
+                      trasnferida a las entidades distritales o nacionales
+                      competentes.</small>
+                  <select class="form-control obligatorio" data-id="p15" >
+                    <option value="">Seleccione...</option>
+                    <option value="SI">Si</option>
+                    <option value="NO">No</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+  </div>
+
+
+
       <div class="row">
         <div class="col-md-4">
           <div class="form-group">
@@ -3946,20 +4113,72 @@
         </div>
         <div class="col-md-4">
           <div class="form-group">
-            <label>Contrato</label>
-            <input class="form-control" id="elaboro_contrato" disabled></input>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form-group">
             <label>Nombre</label>
             <input class="form-control"  id="elaboro_nombre" disabled></input>
           </div>
         </div>
+        <div class="col-md-4">
+            <div class="form-group">
+              <label>Contrato</label>
+              <input class="form-control" id="elaboro_contrato" disabled></input>
+            </div>
+          </div>
       </div>
 
 
+  </div>
+
+  <div class="row">
+      <div class="col-md-12 ">
+        <h3 class="titulo_ficha">16. Ficha Social Escaneada</h3>
+      </div>
+  </div>
+
+  <p>Por favor cargue la ficha social escaneada en PDF. Un (1) solo árchivo pdf es permitido:</p> 
+    <div class="row"> 
+          <div class="col-md-12"> 
+              <div class="form-group">
+                <div class="file-loading"> 
+                    <input id="input-b2" name="input-b2" type="file" class="file upd" accept="application/pdf"> 
+                </div> 
+            </div> 
+          </div> 
+    </div> 
+
+
+    <div class="row">
+        <div class="col-md-12 ">
+            <div class="form-group">
+              <button type="button" class="btn btn-success" id="validar_ficha"><span class="glyphicon glyphicon-share-alt"></span> Enviar Ficha para su Aprobación</button>
+            </div>
+        </div>
     </div>
+
+
+
+
+    <div id="ver_obs_aprobacion">
+    <div class="row">
+        <div class="col-md-12 ">
+          <h3 class="titulo_ficha">17. Observaciones de Aprobación</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label>Observaciones de aprobación:</label>
+            <textarea class="form-control" rows="10" id="observaciones_aprobacion"></textarea>
+          </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 ">
+            <div class="form-group">
+              <button type="button" class="btn btn-primary" id="guardar_obs_ficha"><span class="glyphicon glyphicon-floppy-saved"></span> Guardar observaciones</button>
+            </div>
+        </div>
+    </div>
+  </div>
 
 
     <div class="modal fade" id="myModal" role="dialog">
@@ -3975,7 +4194,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label>Tipo de identificación</label>
-                    <select class="form-control obligatorio" id="sel_tipo_identificacion">
+                    <select class="form-control" id="sel_tipo_identificacion">
                       <option value="">Seleccione...</option>
                       <option value="1">CC: Cédula de ciudadania</option>
                       <option value="2">C.E: Cédula de Extranjería</option>
@@ -4006,50 +4225,207 @@
                       </div>
                     </div>
 
-              </div
-
-
-
-
+              </div>
 
             </div>
 
           </div>
 
         </div>
+
       </div>
+
+
+      <div class="modal fade" id="modal_lugar_nacimiento" role="dialog">
+          <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Lugar de nacimiento</h4>
+              </div>
+              <div class="modal-body">
+                <h3>Lugar de nacimiento</h3>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>Departamento</label>
+                      <select class="form-control" id="departamento">
+                        <option value="">Seleccione...</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>Municipio</label>
+                      <select class="form-control" id="municipio">
+                          <option value="">Seleccione...</option>
+                      </select>
+                    </div>
+                  </div>
+  
+                    <div class="col-md-12">
+                      <div class="form-group">
+                          <button type="button" class="btn btn-success" id="save_lugar_nacimiento"><span class="glyphicon glyphicon-plus"></span> Guardar</button>
+                      </div>
+                    </div>
+  
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <button type="button" class="btn btn-danger" id="cerrar_modal_nacimiento" style="float: right">x</button>
+                        </div>
+                      </div>
+  
+                </div>
+  
+              </div>
+  
+            </div>
+  
+          </div>
+  
+        </div>
+  
+
+
+
+
+
+
 
 
 </body>
 
-
+</html>
 
 <!-- Validacion de fechas -->
 
 
-<script src="js/reas/FichaSocial/validation.js"></script>
-<script src="js/reas/FichaSocial/adicionarfamilia.js"></script>
-<script src="js/reas/FichaSocial/guardarFicha.js"></script>
-<script src="js/reas/FichaSocial/traerdatos.js"></script>
-<script src="js/reas/FichaSocial/aprobacion.js"></script>
+<link type="text/css" href="js/vendors/kartik-v-bootstrap-fileinput/css/fileinput.min.css" rel="stylesheet" />
 
 
-
-<script src="js/vendors/bootstrap-select/js/bootstrap-select.min.js"></script>
 
 
 
 <script>
 
-$('select[data-id="p2_8"]').selectpicker({
-  liveSearch: true,
-  style: 'btn-primary',
-    size: 2
+
+
+$.getScript("js/reas/FichaSocial/validation.js", function() {
+  $.getScript("js/reas/FichaSocial/adicionarfamilia.js", function() {
+    $.getScript("js/reas/FichaSocial/guardarFicha.js", function() {
+      $.getScript("js/reas/FichaSocial/traerdatos.js", function() {
+        $.getScript("js/reas/FichaSocial/aprobacion.js", function() {
+
+        });
+      });
+    });
+  });
 });
 
-$('select[data-id="p2_8"]').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
-  $('select[data-id="p2_8"]').selectpicker('toggle');
+
+$.getScript("js/vendors/kartik-v-bootstrap-fileinput/js/fileinput.min.js", function() {
+  $.getScript("js/vendors/kartik-v-bootstrap-fileinput/js/locales/es.js", function() {
+
+
+  });
 });
+
+
+var seguir_archivo=0;
+$( document ).ready(function() {
+    
+
+
+var datos1 = {};
+var url_preview1='';
+    $.ajax({
+        type: "POST",
+        url: "GestionConsultas",
+        data: {
+            op: "consulta_pdf_ficha_social",
+            identificador: identificador
+        },
+        dataType: "json",
+        async: false,
+        success: function (response) {
+
+            if (response)
+            {
+                if (response.length > 0) {
+
+                    for (var i = 0; i < response.length; i++) {
+
+                        var resultado = response[i];
+
+                            datos1["1"] = (resultado["id"] ? resultado["id"] : '');
+                            datos1["2"] = (resultado["nombre"] ? resultado["nombre"] : '');
+                            url_preview1='ObtenerArchivo?ID='+datos1["1"];
+                            seguir_archivo=1;
+                    }
+
+                } else {
+ 
+                }
+            }
+        }, error: function (a) {
+            alert("No fué posible obtener las alternativas");
+        }
+
+
+    });
+
+ if(datos1["1"]===undefined){
+    var contar=false;
+}else{
+    var contar=true;
+}
+
+$("#input-b2").fileinput({
+    theme: 'fa',
+    language: 'es',
+    fileActionSettings: {
+    'showRemove': false,
+    'indicatorNew': '&nbsp;'
+},
+    initialPreview: [
+        url_preview1
+    ],
+        initialPreviewFileType: 'pdf', 
+        initialPreviewConfig: [  
+        {type: "pdf", size:100,caption: datos1["2"], key: 1,id:1, downloadUrl:'ObtenerArchivo?ID='+datos1["1"]}
+    ],
+    uploadExtraData: function (previewId, index) {  // callback example        
+            var out = {
+                numFolios: 1,
+                descripcion: 'Ficha Social',
+                identificador: identificador,
+                tipo_documento: '1301',
+                thumbnail: ''
+            };
+            return out;
+        },    
+  
+    uploadUrl: 'FileUploader',
+    deleteUrl: 'GestionConsultas',
+    allowedFileExtensions: ["pdf"],
+    initialPreviewAsData: true,
+    showUpload: true,
+    overwriteInitial: false,
+    browseOnZoneClick: true,
+    showRemove: false,
+    autoReplace:false,
+    maxFileCount: 1,
+    validateInitialCount: contar,
+   
+});
+
+$("#input-b2").on('filepreajax', function (event, previewId, index) {
+        seguir_archivo=1;
+        $('.fileinput-upload').hide();
+        $('.btn-file').hide();        
+});
+});
+
 
 
 
@@ -4059,10 +4435,31 @@ $('[data-toggle="popover"]').popover();
 function explode(){
   $('#fondo').hide();
 }
-setTimeout(explode, 500);
+setTimeout(explode, 800);
+
+
+
+
+
+ $('.check th[scope="col"]').hover(
+  function() {
+    
+    var numero=Number($( this ).text());
+    var nombre=(($('table[data-op="2m"]').find('tr').eq(numero).find('td').eq(3).find('input').val())?($('table[data-op="2m"]').find('tr').eq(numero).find('td').eq(3).find('input').val()):"");
+
+
+    $( this ).append( $( "<span class='spancito'> "+nombre+"</span>" ) );
+  }, function() {
+    $( this ).find( "span" ).last().remove();
+  }
+);
+
+
+
+
 
 
 </script>
 
 
-</html>
+

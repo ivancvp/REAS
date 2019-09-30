@@ -232,6 +232,8 @@ function gen_lista_chequeo(datos){
 
 function logica_lista_chequeo(identificador,datos,dat_not,modo){
     
+   console.log(dat_not.id_tipo_actividad)
+   console.log(dat_not)
    
   var vereditas=usuario_cargo.includes("Vereditas");
 
@@ -404,6 +406,7 @@ function logica_lista_chequeo(identificador,datos,dat_not,modo){
              });
         }else{
             
+
             envio_de_notificacion(''+identificador+'',1,2,1,''+usuario_identificador+'',''+dat_not["creado_por"]+'',1,$('#obs_lista').val(),null);
             var id_actividad = dat_not["id_actividad"];
             quitar_tarea_lider(id_actividad);
@@ -411,6 +414,7 @@ function logica_lista_chequeo(identificador,datos,dat_not,modo){
             $("#not_update").remove();
             $.getScript("alerta/notificaciones.js", function(){
              });
+             
         }
 
         $('#modal_form').modal('toggle');

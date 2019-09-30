@@ -24,6 +24,8 @@ function adicion(){
 
 
 
+//verifica si el número de identificación ingresado ya existe en la lista de miembros del hogar.
+
 $('#verificar_miembro').click(function(){
 
 var tipo=$('#sel_tipo_identificacion').val();
@@ -63,20 +65,23 @@ if(valida==1){
 }
 
 
-
 }
-
 
 
 });
 
+//cierre de los modales
 $("#cerrar_modal").click(function(){
   $('#myModal').modal('toggle');
-})
+});
 
+$("#cerrar_modal_nacimiento").click(function(){
+  $('#modal_lugar_nacimiento').modal('toggle');
+});
+
+
+// Boton de agregar un nuevo miembro.
 $('#addFamily').click(function(){
-
-
 
   $.confirm({
       title: 'Mensaje de confirmación!',
@@ -100,10 +105,29 @@ $('#addFamily').click(function(){
       }
   });
 
+});
 
+
+
+$('#departamento').change(function(){
+
+  var nom_dpto=$('#departamento').val();
+
+  var depto = deptos_mpios.filter(function (el) {
+    return (el.nom_depto === nom_dpto);
+  });
+
+  $('#municipio').empty();
+
+  $.each(depto , function(i, item) {
+    $('#municipio').append('<option val="'+item.nom_mun+'">'+item.nom_mun+'</option>');
+  });
 
 
 });
+
+
+
 
 function new_member(){
   adicion();
@@ -158,13 +182,15 @@ var conta=0;
 $('table[data-op="2m"] tr:last').find("input:not([type='checkbox'],[role='combobox']),select").each(function(key,value) {
 
 
-if($(this).val()==""){
+if($(this).val()=="" || $(this).val()=="null" ){
   conta=conta+1;
 }
-console.log($(this))
+
 });
 
-if(conta==14){
+console.log(conta)
+
+if(conta>12){
 
 
   obj["identificador"] =$('#id_ficha_social').val();
@@ -209,42 +235,49 @@ cuerpo_ficha();
 
 $('#save_ficha').click(function(){
 
-
-$('#fondo').show();
-
-setTimeout(guardado, 1);
-
-function guardado(){
-
-
-guardar_beneficiario();
-
-  $('.paso').each(function(i,j) {
-
-   var str=data_json1($(this),$(this).attr('data-op'),"input,select,textarea")
-   var str1=escapeSpecialChars(str);
-
-   guardarFicha(JSON.parse(str1));
-
- }).promise().done( function(){ $('#fondo').hide(); } );
-
-
-  $('.data').each(function(i,j) {
-
-  var str=data_json($(this),$(this).attr('data-op'),"tbody tr");
-  var str1=escapeSpecialChars(str);
-
-  guardarFichaFamilia(JSON.parse(str1));
-
-  });
-
-  guardar_checkbox();
-
-}
-
-
+  guardar_all();
 
 });
+
+function guardar_all(){
+
+  $('#fondo').show();
+
+  setTimeout(guardado, 1);
+  
+  function guardado(){
+  
+  
+  guardar_beneficiario();
+  
+    $('.paso').each(function(i,j) {
+  
+     var str=data_json1($(this),$(this).attr('data-op'),"input,select,textarea")
+     var str1=escapeSpecialChars(str);
+  
+     guardarFicha(JSON.parse(str1));
+  
+   }).promise().done( function(){ 
+     $('#fondo').hide();
+   } );
+  
+  
+    $('.data').each(function(i,j) {
+  
+    var str=data_json($(this),$(this).attr('data-op'),"tbody tr");
+    var str1=escapeSpecialChars(str);
+  
+    guardarFichaFamilia(JSON.parse(str1));
+  
+    });
+  
+    guardar_checkbox();
+  
+    guardarJsonp10_2();
+  
+  
+  }
+}
 
 
 
@@ -284,6 +317,16 @@ function data_json1(html,op,selector){
       }else{
         valor=$(this).val();
       }
+    }
+    if($(this).hasClass("moneda")){
+
+      if($(this).val()==""){
+        valor='"null"';
+      }else{
+        var moneda=$(this).val();
+        valor=moneda.replace(/\./g, "");
+      }
+   
     }
 
     str=str+',"' + $(this).attr("data-id") + '":' + valor ;

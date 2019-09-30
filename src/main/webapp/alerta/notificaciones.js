@@ -513,18 +513,20 @@ var opciones = jQuery.extend({
     if (formulario === 17) {
         
         var ficha="";
+        
         $.ajax({
          url:'js/reas/FichaSocial/FichaSocial.html',
          type:'POST',
          async:false,
          success: function(data){
-           ficha=data;
+             
+          ficha=data;
           var contenido=
           '<div class="modal-header">' +
+          '<p id="identify">'+res[index]["identificador"]+'</p>'+
           '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>' +
-          '<h4 class="modal-title">Formulario de la Ficha Social</h4>' +
           '</div>' +
-          '<div class="modal-body">' +
+          '<div class="modal-body">'+
           ficha+
           '</div>' +
           '<div class="modal-footer">' +
@@ -533,7 +535,9 @@ var opciones = jQuery.extend({
           generar_modal(contenido);
           
          }
+         
         });
+        
     }
     /*Formulario para aprobar ficha social */
     if (formulario === 18) {

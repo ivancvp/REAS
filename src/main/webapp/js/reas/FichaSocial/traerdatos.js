@@ -10,6 +10,13 @@ function getURLParams(k) {
 
 var identificador = getURLParams('identificador');
 
+if(identificador==""){
+  identificador = $('#identify').text();
+}
+
+
+console.log(identificador)
+
 $('#id_ficha_social').val(identificador);
 
 
@@ -36,6 +43,7 @@ $.ajax({
   dataType: "json",
   async: false,
   success: function (response) {
+   
     $.each( response[0], function( key, value ) {
           $("#"+key).val(value);
        });
@@ -44,6 +52,7 @@ $.ajax({
 
 
 var obj = {}
+var deptos_mpios={}
 obj["identificador"] =identificador;
 obj["op"] ='get_municipios_ficha_social';
 $.ajax({
@@ -53,14 +62,30 @@ $.ajax({
   dataType: "json",
   async: false,
   success: function (response) {
-    console.log(response)
+ 
+   deptos_mpios=response;
 
-  for(i=0;i<=response.length;i++){
-    $('select[data-id="p2_8"]').append('<option val="'+response[i].Nom_Municipio+'">'+response[i].Nom_Municipio+'</option>');
+   var lookup = {};
+   var items = deptos_mpios;
+   var result = [];
+   
+   for (var item, i = 0; item = items[i++];) {
+     var name = item.nom_depto;
+   
+     if (!(name in lookup)) {
+       lookup[name] = 1;
+       result.push(name);
+     }
+   }
+
+
+  for(i=0;i<result.length;i++){
+    $('#departamento').append('<option val="'+result[i]+'">'+result[i]+'</option>');
   }
 
 
   },
+
 });
 
 
@@ -88,6 +113,19 @@ $.ajax({
 
     }else {
       $("input[data-id='"+key+"'],select[data-id='"+key+"'],textarea[data-id='"+key+"']").val(value);
+    }
+
+    if(str1=="p10_2"){
+      $.each(value, function(k, v) {
+        $('input[data-json="'+k+'"]').val(v);
+      });
+    }
+    //valida que el numero de unidades habitacionales no sea de cero.
+    if(str1=="p8_7"){
+      if(value==0){
+        $("input[data-id='"+key+"']").val("");
+      }
+      
     }
 
      });
@@ -140,17 +178,23 @@ success: function (response) {
     async: false,
     success: function (response) {
 
-console.log(response)
 
- var tables=$('table').attr("data-op");
+
+
 
 $('table[data-op]').each(function(){
+
+
   var table=$(this);
+
+
       $.each( response[0], function( key, value ) {
 
         table.find("tr:eq("+i+") input[data-id='"+key+"'],tr:eq("+i+")  select[data-id='"+key+"'],tr:eq("+i+")  textarea[data-id='"+key+"']").val(value)
 
       });
+
+
 });
 
 
@@ -158,6 +202,8 @@ $('table[data-op]').each(function(){
 
 var j=i-1;
 $.each( response[0], function( key, value ) {
+
+  console.log("valor:"+value)
 
   var bool=false;
   if(value==="true"){
@@ -168,8 +214,18 @@ $.each( response[0], function( key, value ) {
   }
 
 
-  $("th[data-op='"+key+"']").parent().find("td:eq("+j+") > .checkbox label input[type='checkbox']").prop('checked',bool);
-  $("th[data-op='"+key+"']").parent().find("td:eq("+j+") > input,td:eq("+j+") > textarea").val(value);
+  if(key=="p12_2" || key=="p12_4a" || key=="p12_5"  || key=="p10_3" || key=="p10_8" || key=="p10_9" || key=="p10_010" ){//opcion unica de respuesta en tablas con checkbox
+    var indice=value-1;
+    $("th[data-op='"+key+"']:eq("+indice+")").parent().find("td:eq("+j+") > .checkbox label input[type='checkbox']").prop('checked',true);
+  }else{//opcion multiple de respuesta en tablas con checbox
+
+    $("th[data-op='"+key+"']").parent().find("td:eq("+j+") > .checkbox label input[type='checkbox']").prop('checked',bool);
+    $("th[data-op='"+key+"']").parent().find("td:eq("+j+") > input,td:eq("+j+") > textarea").val(value);
+
+  }
+
+
+
 
 
 });

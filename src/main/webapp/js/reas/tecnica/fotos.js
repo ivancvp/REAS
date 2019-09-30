@@ -815,7 +815,7 @@ function paso8() {
 
     
     $identificador = document.getElementById("identificador");
-    $revisado = null;
+    $revisado = false;
     $usuario_que_revisa='';
     $usuario_nombre_revisa='';
     $usuario_contrato_revisa='';

@@ -15,7 +15,6 @@ e.preventDefault();
        var contenido=
        '<div class="modal-header">' +
        '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>' +
-       '<h4 class="modal-title">Formulario de la Ficha Social</h4>' +
        '</div>' +
        '<div class="modal-body" id="modal_social">' +
        ficha+
@@ -74,7 +73,6 @@ function cuerpo_ficha(){
     var contenido=
     '<div class="modal-header">' +
     '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>' +
-    '<h4 class="modal-title">Formulario de la Ficha Social</h4>' +
     '</div>' +
     '<div class="modal-body">' +
     ficha+

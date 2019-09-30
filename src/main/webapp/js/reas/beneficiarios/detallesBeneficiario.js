@@ -199,13 +199,27 @@ generar_contenedor_pdf_fecha(tipo,fecha_inicial,false);
 
 function fecha_inicial_mes_habil_2_dias(){
     
-    var daystartOfMonth = moment().startOf('month').day();
+var daystartOfMonth = moment().startOf('month').day();
 
 var startOfMonth=moment().startOf('month').format("YYYY-MM-DD"); 
 
+var mes_pasado=true;
+
 var dayIncrement = 1;
 
-if(daystartOfMonth===4 ){
+if(daystartOfMonth===0 ){
+    dayIncrement=3;
+}
+else if(daystartOfMonth===1 ){
+    dayIncrement=2;
+}
+else if(daystartOfMonth===2 ){
+    dayIncrement=2;
+}
+else if(daystartOfMonth===3 ){
+    dayIncrement=2;
+}
+else if(daystartOfMonth===4 ){
     dayIncrement=2;
 }
 else if(daystartOfMonth===5){
@@ -216,9 +230,21 @@ else if(daystartOfMonth===6){
 }
 else if(daystartOfMonth===7){
     dayIncrement=3;
-}else{
-    dayIncrement=2;
 }
+
+var start = moment(startOfMonth).add(dayIncrement, 'd');
+var end = moment(new Date()).format("YYYY-MM-DD");
+
+var diferencia_dias_habiles_al_actual=moment.duration(start.diff(end)).asDays();
+
+if(diferencia_dias_habiles_al_actual<1){
+    mes_pasado=false;
+}
+
+if(mes_pasado){
+    startOfMonth=moment().subtract(1, 'months').date(1).format("YYYY-MM-DD");
+}
+
 
 return moment(startOfMonth).add(dayIncrement, 'd').format("YYYY-MM-DD");
 }

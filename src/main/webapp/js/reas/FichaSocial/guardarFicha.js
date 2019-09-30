@@ -17,17 +17,54 @@ obj["identificador"] =$('#id_ficha_social').val();
     url: "GestionConsultas",
     data: obj,
     dataType: "json",
-    async: false,
+    async: true,
     success: function (response) {
 
     },
 });
 
 
+}
 
 
+
+function guardarJsonp10_2(){
+
+  var obj = {}
+  var jsonObj = [];
+  item = {}
+  $('input[data-json]').each(function(){ 
+    
+    var value=$(this).val();
+    var key=$(this).attr('data-json');
+    
+    item [key] = value;
+    
+  });
+  
+  jsonObj.push(item);
+  var json=JSON.stringify(jsonObj[0]);
+
+  obj["identificador"] =$('#id_ficha_social').val();
+  obj["op"]="p10_2";
+  obj["p10_2"]=json;
+  
+  console.log(obj)
+
+  $.ajax({
+    type: "POST",
+    url: "GestionConsultas",
+    data: obj,
+    dataType: "json",
+    async: true,
+    success: function (response) {
+
+    },
+});
+  
 
 }
+
 
 function guardar_beneficiario(){
 
@@ -65,8 +102,8 @@ function save_elaboro_ficha(){
   $datos = {
        op: "update_elaboro_ficha_social",
        identificador:$('#id_ficha_social').val(),
-       nombre_elaboro:$('#elaboro_nombre').val(),
-       elaboro_contrato:$('#elaboro_contrato').val(),
+       usuario_id_elaboro:$('#elaboro_nombre').val(),
+       usuario_elaboro_contrato:$('#elaboro_contrato').val(),
        elaboro_fecha:$('#elaboro_fecha').val()
    };
 
@@ -75,7 +112,7 @@ function save_elaboro_ficha(){
      url: "GestionConsultas",
      data: $datos,
      dataType: "json",
-     async: false,
+     async: true,
      success: function (response) {
 
      },
@@ -96,7 +133,7 @@ function save_tel(){
      url: "GestionConsultas",
      data: $datos,
      dataType: "json",
-     async: false,
+     async: true,
      success: function (response) {
 
      },
@@ -121,7 +158,7 @@ function save_tel(){
        url: "GestionConsultas",
        data: $datos,
        dataType: "json",
-       async: false,
+       async: true,
        success: function (response) {
 
        },
@@ -157,7 +194,7 @@ function guardarFichaFamilia(json){
         url: "GestionConsultas",
         data: obj,
         dataType: "json",
-        async: false,
+        async: true,
         success: function (response) {
 
         },
@@ -188,7 +225,7 @@ function guardarBooleanFamilia(json){
     url: "GestionConsultas",
     data: obj,
     dataType: "json",
-    async: false,
+    async: true,
     success: function (response) {
 
     },
@@ -198,3 +235,29 @@ function guardarBooleanFamilia(json){
 
 
 }
+
+
+$('#guardar_obs_ficha').click(function(){
+
+  var obj = {}
+  obj["identificador"] =$('#id_ficha_social').val();
+  obj["op"]="save_obs_ficha_social";
+  obj["observacion"]=$('#observaciones_aprobacion').val();
+
+
+  console.log(obj)
+
+    $.ajax({
+    type: "POST",
+    url: "GestionConsultas",
+    data: obj,
+    dataType: "json",
+    async: true,
+    success: function (response) {
+      $.alert("Información almacenada correctamente");
+    },
+});
+
+
+
+});

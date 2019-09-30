@@ -869,11 +869,12 @@
 
 
         <script>
-            /*  
+              
+               /*
              $('#imp_masiva').click(function(){
              
              
-             
+            
              
              var array = [
              '2012-19-14079',
@@ -903,23 +904,40 @@
              
              
              */
-
-            /* para ejecutar este escript, por favor modificar el servlet ObtenerArchivo, dejando como parametros mimetype = "application/pdf"; y 
+            /*
+             * para ejecutar este escript, por favor modificar el servlet ObtenerArchivo, dejando como parametros mimetype = "application/pdf"; y 
              * response.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\""); y añadir 
-             * String identificador=resultSet.getString("identificador");
+             * String identificador=resultSet.getString("identificador");*/
              
-             
+             /*
              var array = [
-             '2013-2-14621',
-             '2013-2-14622',
-             '2013-2-14623',
-             '2018-11-15248'
+                '2018-CP19-16848',
+                '2018-CP19-16454',
+                '2018-CP19-16459',
+                '2018-CP19-16706',
+                '2018-CP19-16442',
+                '2018-CP19-16453',
+                '2018-CP19-16665',
+                '2018-CP19-16714',
+                '2018-CP19-16405',
+                '2018-CP19-16840',
+                '2018-CP19-16737',
+                '2018-CP19-16448',
+                '2018-CP19-16538',
+                '2018-CP19-16879',
+                '2018-CP19-16396',
+                '2018-CP19-16690',
+                '2018-CP19-16598',
+                '2018-CP19-16544',
+                '2018-CP19-16407',
+                '2018-CP19-16395',
+                '2018-CP19-16521',
+                '2018-CP19-16635',
+                '2018-CP19-16310',
+                '2018-CP19-16393',
+                '2018-CP19-16583'
              ];
-             
-             
-             
-             
-             
+
              
              for (var i in array) {
              
@@ -932,8 +950,9 @@
              type: "POST",
              url: "GestionConsultas",
              data: {
-             op: "consulta_pdf_visita_fallida",
-             identificador: identificador
+             op: "consulta_pdf_general",
+             identificador: identificador,
+             tidoc_id:'250007'
              },
              dataType: "json",
              async: false,

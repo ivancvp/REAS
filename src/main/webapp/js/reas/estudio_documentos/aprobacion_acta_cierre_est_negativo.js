@@ -40,9 +40,16 @@ function aprobacion(identificador,id_actividad,tipo_proceso,tipo_actividad,activ
         }
         if(formulario===18){
             if(modo===2){
-                dat1=consulta_aprobacion_ficha_social(identificador);   
-                nombre_creador=dat1[0]["nombre_elaboro"];
-                elaboro=dat1[0]["nombre_revisor"];
+                dat1=consulta_aprobacion_ficha_social(identificador); 
+                
+                var creador=consulta(dat1[0]["usuario_id_elaboro"]);
+                
+                nombre_creador=creador[0].usuario_nombre;
+                
+                var aprobo=consulta(dat1[0]["usuario_id_reviso"]);
+                
+                elaboro=aprobo[0].usuario_nombre;
+
             }
         }
 
@@ -138,7 +145,10 @@ function aprobacion(identificador,id_actividad,tipo_proceso,tipo_actividad,activ
             }
             if(formulario===18){
                 dat1=consulta_aprobacion_ficha_social(identificador);
-                dat1[0]["obs"]=datos["observaciones"];
+                dat1[0]["obs"]=datos["observacion_inicial"];
+ 
+              
+                
             }
 
             $('#obs_regreso').val((dat1[0]["obs"]?dat1[0]["obs"]:''));
@@ -157,14 +167,16 @@ function aprobacion(identificador,id_actividad,tipo_proceso,tipo_actividad,activ
             }
       }
 
-    $( "#sel_aprobacion" ).change(function() {        
-        if($('#sel_aprobacion').val()==="true"){
-            $('#show_obs').hide();
-        }else{
-            $('#show_obs').show();
-        }
-     
-    });
+        if(formulario!==18){
+            $( "#sel_aprobacion" ).change(function() {        
+                if($('#sel_aprobacion').val()==="true"){
+                    $('#show_obs').hide();
+                }else{
+                    $('#show_obs').show();
+                }
+            });
+        } 
+    
 
      
      $('#aprob_estudio').one('click', function () {
@@ -181,8 +193,9 @@ function aprobacion(identificador,id_actividad,tipo_proceso,tipo_actividad,activ
         var observacion_inicial=$('#obs_regreso').val();
         
         var observacion_final='';
-         var estado_aprobacion='';
-         
+        var estado_aprobacion='';
+        
+
         if($('#sel_aprobacion').val()==="true"){                    
             estado_aprobacion='Aprobado';
         }else{
@@ -245,10 +258,13 @@ function aprobacion(identificador,id_actividad,tipo_proceso,tipo_actividad,activ
         if(formulario===18){
             envio_de_notificacion(identificador,5,17,18,creador,asignado_a,estado,observacion_inicial,observacion_final);
         
-            if($('#sel_aprobacion').val()==="true"){
-                insertar_aprobacion_FichaSocial(identificador,$('#aprobo_est').val(),'3',$('#obs_regreso').val());
+                var info=consulta(creador);
+                var contrato=info[0]["usuario_contrato"];
+                
+            if($('#sel_aprobacion').val()==="true"){                                                
+                insertar_aprobacion_FichaSocial(identificador,creador,contrato,'3');
             }else{
-                insertar_aprobacion_FichaSocial(identificador,$('#aprobo_est').val(),'1',$('#obs_regreso').val());
+                insertar_aprobacion_FichaSocial(identificador,creador,contrato,'4');
             }
             var msg='<p><strong>Mensaje: </strong>La ficha Social con identificador: <strong> '+identificador+' </strong> ha sido: <strong>'+estado_aprobacion+'</strong> Las observaciones son: '+$('#obs_regreso').val()+'  </p>';
             correo(creador,asignado_a,"Aprobación de Ficha Social",msg,tipo_proceso);
@@ -261,4 +277,24 @@ function aprobacion(identificador,id_actividad,tipo_proceso,tipo_actividad,activ
          });
     
     });
+    
+        function consulta(id){
+        $datos = { op: 'get_datos_regreso',id:id};
+        $.ajax({
+        type: "GET",
+        url: "GestionConsultas",
+        data: $datos,
+        dataType: "json",
+        async: false,
+        success: function (response) {           
+              resultado = response;          
+        },
+        error: function (response) {
+          
+            }
+        });
+        return resultado;
+        }
+    
+    
  }

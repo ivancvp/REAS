@@ -4762,6 +4762,21 @@
         <conexion>atencion_reloca</conexion>
         <permisos>*</permisos>
     </Consulta>
+    <Consulta id="consulta_pdf_general">
+        <sql>
+            select 
+            encode(hmac(doc_id::text || '@SESSION_ID' ,doc_time::text, 'sha1'),'hex') id,
+            doc_descripcion descripcion,
+            doc_ruta nombre,
+            to_char(doc_time,'dd-mm-yyyy HH:MM') fecha           
+            from 
+            documento_adjunto d
+            where identificador = '@identificador' and tidoc_id = '@tidoc_id'
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+    </Consulta>
+
     <Consulta id="consulta_pdf_visita_fallida">
         <sql>
             select 
@@ -4842,6 +4857,20 @@
             from 
             documento_adjunto d
             where identificador = '@identificador' and tidoc_id =5103
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+    </Consulta>
+        <Consulta id="consulta_pdf_ficha_social">
+        <sql>
+            select 
+            encode(hmac(doc_id::text || '@SESSION_ID' ,doc_time::text, 'sha1'),'hex') id,
+            doc_descripcion descripcion,
+            doc_ruta nombre,
+            to_char(doc_time,'dd-mm-yyyy HH:MM') fecha           
+            from 
+            documento_adjunto d
+            where identificador = '@identificador' and tidoc_id =1301
         </sql>
         <conexion>atencion_reloca</conexion>
         <permisos>*</permisos>
@@ -5923,9 +5952,9 @@
             UPDATE fichasocial.hogar
             SET 	
             p7_7a='@p7_7a',
-            p7_7b='@p7_7b',
+            p7_7b=@p7_7b,
             p7_8a='@p7_8a',
-            p7_8b='@p7_8b',
+            p7_8b=@p7_8b,
             p7_9a='@p7_9a',
             p7_9b=@p7_9b,
             p7_010=@p7_010,
@@ -5937,7 +5966,7 @@
             p7_11_6=@p7_11_6,
             p7_11_7=@p7_11_7,
             p7_11_8=@p7_11_8,
-            p7_11_9='@p7_11_9',
+            p7_11_9=@p7_11_9,
             p7_11_010=@p7_11_010
             WHERE identificador='@identificador'
         </sql>
@@ -5954,11 +5983,11 @@
             p8_3a=@p8_3a,
             p8_3b='@p8_3b',
             p8_4_1a='@p8_4_1a',
-            p8_4_1b='@p8_4_1b',
+            p8_4_1b=@p8_4_1b,
             p8_4_2a='@p8_4_2a',
-            p8_4_2b='@p8_4_2b',
+            p8_4_2b=@p8_4_2b,
             p8_4_3a='@p8_4_3a',
-            p8_4_3b='@p8_4_3b',
+            p8_4_3b=@p8_4_3b,
             p8_5_1=@p8_5_1,
             p8_5_2=@p8_5_2,
             p8_5_3=@p8_5_3,
@@ -5976,23 +6005,34 @@
         <sql>
             UPDATE fichasocial.hogar
             SET 	
-            p9a=@p9a    
+            p9a=@p9a,
+            p9b='@p9b'        
             WHERE identificador='@identificador'
         </sql>
         <conexion>atencion_reloca</conexion>
         <permisos>*</permisos>       
     </Consulta>        
-      <Consulta id="10">
+    <Consulta id="10">
         <sql>
             UPDATE fichasocial.hogar
             SET 	
-            p10_1='@p10_1',
+            p10_1='@p10_1'
+            WHERE identificador='@identificador'
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>       
+    </Consulta>  
+    <Consulta id="p10_2">
+        <sql>
+            UPDATE fichasocial.hogar
+            SET 	
             p10_2='@p10_2'
             WHERE identificador='@identificador'
         </sql>
         <conexion>atencion_reloca</conexion>
         <permisos>*</permisos>       
-    </Consulta>            
+    </Consulta> 
+
       <Consulta id="11">
         <sql>
             UPDATE fichasocial.hogar
@@ -6078,6 +6118,16 @@
             UPDATE fichasocial.hogar
             SET 	
             p14='@p14'
+            WHERE identificador='@identificador'
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>       
+    </Consulta> 
+    <Consulta id="15">
+        <sql>
+            UPDATE fichasocial.hogar
+            SET 	
+            p15='@p15'
             WHERE identificador='@identificador'
         </sql>
         <conexion>atencion_reloca</conexion>
@@ -6209,7 +6259,6 @@
             p10_4h='@p10_4h',
             p10_4i='@p10_4i',
             p10_4j='@p10_4j',
-            p10_4k='@p10_4k',
             p10_5a='@p10_5a',
             p10_5b='@p10_5b',
             p10_5c='@p10_5c',
@@ -6219,7 +6268,6 @@
             p10_5g='@p10_5g',
             p10_5h='@p10_5h',
             p10_5i='@p10_5i',
-            p10_5j='@p10_5j',
             p10_6a='@p10_6a',
             p10_6b='@p10_6b',
             p10_6c='@p10_6c',
@@ -6234,6 +6282,8 @@
             p10_6l='@p10_6l',
             p10_6m='@p10_6m',
             p10_6n='@p10_6n',
+            p10_6o='@p10_6o',
+            p10_6p='@p10_6p',
             p10_7a='@p10_7a',
             p10_7b='@p10_7b',
             p10_7c='@p10_7c',
@@ -6253,6 +6303,7 @@
             p12_3d='@p12_3d',
             p12_3e='@p12_3e',
             p12_3f='@p12_3f',
+            p12_3g='@p12_3g',
             p12_4a=@p12_4a,
             
             p12_5=@p12_5,
@@ -6416,7 +6467,7 @@
     <Consulta id="insertar_pre_aprobacion_social">
         <sql>
             update fichasocial.aprobacion
-            set nombre_elaboro='@nombre_elaboro',
+            set usuario_id_elaboro='@usuario_id_elaboro',
             estado_ficha='@estado_ficha' where identificador='@identificador';
         </sql>
         <conexion>atencion_reloca</conexion>
@@ -6426,10 +6477,10 @@
     <Consulta id="insertar_aprobacion_FichaSocial">
         <sql>
             update fichasocial.aprobacion
-            set nombre_revisor='@nombre_revisor',
+            set usuario_id_reviso='@usuario_id_reviso',
+            usuario_reviso_contrato='@usuario_reviso_contrato',
             estado_ficha='@estado_ficha',
-            observaciones='@observaciones',
-            fecha=current_timestamp
+            reviso_fecha=current_timestamp
             where identificador='@identificador';
         </sql>
         <conexion>atencion_reloca</conexion>
@@ -6466,7 +6517,7 @@
     </Consulta>
     <Consulta id="get_municipios_ficha_social">
         <sql>
-            select * from "tbl_Municipios";
+            select * from deptos_municipios;
         </sql>
         <conexion>atencion_reloca</conexion>
         <permisos>*</permisos>       
@@ -6483,8 +6534,8 @@
     <Consulta id="update_elaboro_ficha_social">
         <sql>
           update fichasocial.aprobacion set 
-            nombre_elaboro='@nombre_elaboro',
-            elaboro_contrato='@elaboro_contrato',
+            usuario_id_elaboro='@usuario_id_elaboro',
+            usuario_elaboro_contrato='@usuario_elaboro_contrato',
             elaboro_fecha='@elaboro_fecha',
             estado_ficha=1 
             where identificador='@identificador';
@@ -6492,8 +6543,16 @@
         <conexion>atencion_reloca</conexion>
         <permisos>*</permisos>       
     </Consulta>    
-            
-                                            
+    <Consulta id="save_obs_ficha_social">
+        <sql>
+          update fichasocial.aprobacion set 
+            observaciones='@observacion'
+            where identificador='@identificador';
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>       
+    </Consulta>   
+                             
      <Consulta id="get_familia_resolucion">
         <sql>
           select concat(primer_nombre,' ',segundo_nombre,' ',"B01_Primer_Apellido",' ',"B02_Segundo_Apellido") as nombre 

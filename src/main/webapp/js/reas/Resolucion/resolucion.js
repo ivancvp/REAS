@@ -463,7 +463,7 @@ if(identificador.includes("CP19")){
         async: true,
         success: function (response) {
            
-console.log(response)
+            console.log(response)
            
            if(response.length> 0) {
             resultado=response;
@@ -554,7 +554,7 @@ if(subsidio=='31829597'){
                 $('#div_posterior_aprobacion').show();
                 $("#div_posterior_aprobacion").css("color", "#2874A6");
                 /*$("#quitar_tarea").show();*/
-                $('#enviar_acta_entrega').show();
+                // $('#enviar_acta_entrega').show();
 
             }else{
                 $('#enviar_acta_entrega').hide();
@@ -1046,6 +1046,7 @@ console.log(obj)
     $('.kv-file-remove').hide();
     $('.btn-file').hide();
     $('#quitar_tarea').hide();
+    
     if(modo===3){
         $('#impr_resolucion').hide();
     }

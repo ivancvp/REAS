@@ -303,15 +303,15 @@ function insertar_aprobacion_FichaTecnica(identificador,elaboro,aprobo,concepto,
 
     
 }
-function insertar_aprobacion_FichaSocial(identificador,nombre_revisor,estado_ficha,observaciones){
+function insertar_aprobacion_FichaSocial(identificador,usuario_id_reviso,usuario_reviso_contrato,estado_ficha){
     
 
     $datos = {
         op: 'insertar_aprobacion_FichaSocial',
         identificador: identificador,
-        nombre_revisor: nombre_revisor,
-        estado_ficha: estado_ficha,
-        observaciones:observaciones
+        usuario_id_reviso: usuario_id_reviso,
+        usuario_reviso_contrato:usuario_reviso_contrato,
+        estado_ficha: estado_ficha
     };
 
     $.ajax({
