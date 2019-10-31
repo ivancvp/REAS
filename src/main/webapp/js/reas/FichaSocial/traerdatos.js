@@ -8,30 +8,19 @@ function getURLParams(k) {
 }
 
 
-var identificador = getURLParams('identificador');
 
-if(identificador==""){
-  identificador = $('#identify').text();
+
+var identificador =$('#identify').text();
+
+
+if(identificador===""){
+  identificador = getURLParams('identificador');    
 }
 
-
-console.log(identificador)
 
 $('#id_ficha_social').val(identificador);
 
 
-var obj = {}
-obj["identificador"] =identificador;
-obj["op"] ='insertar_ficha_social_general';
-$.ajax({
-  type: "GET",
-  url: "GestionConsultas",
-  data: obj,
-  dataType: "json",
-  async: false,
-  success: function (response) {
-  },
-});
 
 var obj = {}
 obj["identificador"] =identificador;
@@ -102,6 +91,7 @@ $.ajax({
   async: false,
   success: function (response) {
 
+    
 
   $.each( response[0], function( key, value ) {
 
@@ -134,6 +124,8 @@ $.ajax({
   },
 });
 
+$('input[data-id="version"]').val("9");
+
 
 //parte de traer los Familiares
 
@@ -151,7 +143,13 @@ dataType: "json",
 async: false,
 success: function (response) {
 
+
   num_integrantes=response[0].count;
+
+  if(num_integrantes==0){
+    num_integrantes=1;
+  }
+  
   miembros_nuevos=num_integrantes;
   habilitar_checkbox(num_integrantes);
 
@@ -179,7 +177,7 @@ success: function (response) {
     success: function (response) {
 
 
-
+console.log(response)
 
 
 $('table[data-op]').each(function(){
@@ -189,6 +187,12 @@ $('table[data-op]').each(function(){
 
 
       $.each( response[0], function( key, value ) {
+        
+        if(key=="condicion_miembro"){
+         if(value==0){
+            value=1;
+         }
+        }
 
         table.find("tr:eq("+i+") input[data-id='"+key+"'],tr:eq("+i+")  select[data-id='"+key+"'],tr:eq("+i+")  textarea[data-id='"+key+"']").val(value)
 
@@ -203,21 +207,30 @@ $('table[data-op]').each(function(){
 var j=i-1;
 $.each( response[0], function( key, value ) {
 
-  console.log("valor:"+value)
+  
 
   var bool=false;
-  if(value==="true"){
+  if(value===true){
     bool=true;
   }
-  if(value==="false"){
+  if(value===false){
     bool=false;
   }
 
 
   if(key=="p12_2" || key=="p12_4a" || key=="p12_5"  || key=="p10_3" || key=="p10_8" || key=="p10_9" || key=="p10_010" ){//opcion unica de respuesta en tablas con checkbox
     var indice=value-1;
-    $("th[data-op='"+key+"']:eq("+indice+")").parent().find("td:eq("+j+") > .checkbox label input[type='checkbox']").prop('checked',true);
+    if(indice!=-1){
+      $("th[data-op='"+key+"']:eq("+indice+")").parent().find("td:eq("+j+") > .checkbox label input[type='checkbox']").prop('checked',true);
+    }
+    
   }else{//opcion multiple de respuesta en tablas con checbox
+  
+if(key=="p12_3a"){
+  console.log($("th[data-op='"+key+"']").parent().find("td:eq("+j+") > .checkbox label input[type='checkbox']"));
+  console.log(value)
+}
+    
 
     $("th[data-op='"+key+"']").parent().find("td:eq("+j+") > .checkbox label input[type='checkbox']").prop('checked',bool);
     $("th[data-op='"+key+"']").parent().find("td:eq("+j+") > input,td:eq("+j+") > textarea").val(value);

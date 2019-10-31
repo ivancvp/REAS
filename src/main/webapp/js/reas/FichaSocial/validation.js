@@ -6,38 +6,7 @@ if(!usr_funct.includes(3)){
   $('.float').hide();
 }
 
-$('select[data-id="version"]').change(function(){
-  if($(this).val()=="8"){
-    $('table[data-op="3m"] td:nth-child(7), table[data-op="3m"] th:nth-child(7)').hide();
 
-//cambio de la pregunta 3.9
-    $('#btn_msg_3_9a').hide();
-    $('#btn_msg_3_9b').show();
-
-  //cambio de opciones de acuerdo a la versión
-  $('option[version="8"]').show();
-  $('option[version="old"]').hide();
-
-
- $('select[data-id="p8_6_3"]').parents('.row').hide();
-
-  }else{
-    $('table[data-op="3m"] td:nth-child(7), table[data-op="3m"] th:nth-child(7)').show();
-    $('select[data-id="p8_6_3"]').parents('.row').show();
-
-//cambio de la pregunta 3.9
-    $('#btn_msg_3_9a').show();
-    $('#btn_msg_3_9b').hide();
-
-
-//cambio de opciones de acuerdo a la versión
-    $('option[version="8"]').hide();
-    $('option[version="old"]').show();
-
-  }
-
-
-}).change();
 
 //oculta boton de borrar miembro de la familia
 $('#del_fam').hide();
@@ -244,7 +213,7 @@ if(rango_edad=="1"){
 
 $(this).parents("tr").find("select[data-id='p2_012']").val(rango_edad);
 
-});
+}).change();
 
 //tipo de beneficiario validación.
 
@@ -364,8 +333,6 @@ e.stopImmediatePropagation();
 
 if($(this).val()==="SI"){
   $(this).parents("tr").find("select[data-id='p5_4a'],input[data-id='p5_4b']").prop('disabled', true);
-}else{
-  $(this).parents("tr").find("select[data-id='p5_4a'],input[data-id='p5_4b']").val("").prop('disabled', false);
 }
 
 }).change();
@@ -790,8 +757,12 @@ if(seguir_archivo==0){
           
                     action: function(){
           
-                        var responsable_proceso=152;
-          
+                      var responsable_proceso=117;
+
+                      if ( $( "#creado_por" ).length ) {
+                          responsable_proceso=$( "#creado_por" ).text();
+                      }
+
                         var act_padre=17;
           
                         var identificador=$('#id_ficha_social').val();
@@ -818,7 +789,15 @@ if(seguir_archivo==0){
                           success: function (response) {
                           },
                         });
-          
+
+                        //quita la tarea del lider 
+                        if ( $( "#id_actividad" ).length ) {
+                          
+                          quitar_tarea( $( "#id_actividad" ).text());
+                       
+                        }
+
+                                  
                         location.reload();
                     }
                   },
@@ -859,6 +838,39 @@ if(seguir_archivo==0){
 
 });
 
+$('#quitar_tarea').click(function(){
+
+  if ( $( "#id_actividad" ).length ) {
+                          
+    quitar_tarea( $( "#id_actividad" ).text());
+ 
+  }
+
+});
+
+
+function quitar_tarea(id_act){
+  $datos={
+    op: 'quitar_tarea_lider',        
+    id_act:id_act
+}
+
+$.ajax({
+   type: "GET",
+   url: "GestionConsultas",
+   data: $datos,
+   dataType: "json",
+   async: false,
+   success: function (response) {           
+       
+       location.reload();
+   },
+   error: function (response) {
+       alertify.error("Ocurrió un error ");
+   }
+});
+
+}
 
 
 //validaciòn de los checkbox.
@@ -907,6 +919,7 @@ var k=0;
 
 $("span.warning").remove();
 
+/* funcion que valida que existan dos beneficiarios dentro del nucleo familiar, se deshabilita
 $('select[data-id="tipo_beneficiario"]').each(function(key,value){
   j=j+1;
 
@@ -927,7 +940,7 @@ else if(k==j){
 }else{
   $('#tit_tipo_beneficiario').find("span.error").remove();
 }
-
+*/
 
 $('input[data-id="p2_7"]').each(function(key,value){
 

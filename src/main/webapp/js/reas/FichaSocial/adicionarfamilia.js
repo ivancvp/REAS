@@ -345,7 +345,11 @@ function data_json1(html,op,selector){
 //Get JSON checkbox
 function guardar_checkbox(){
 
-for (i = 1; i <= num_integrantes; i++) {
+num_miembros=$('table[data-op="2m"] tr').length;
+
+num_miembros=num_miembros-1;
+
+for (i = 1; i <= num_miembros; i++) {
   var j=i-1;
 
   var json = '{"op": "boolean","consecutivo":"'+i+'"';

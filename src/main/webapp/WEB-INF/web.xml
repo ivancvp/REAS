@@ -9,11 +9,9 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>/WEB-INF/applicationContext.xml</param-value>
     </context-param>
-    
     <listener>
         <listener-class>org.quartz.ee.servlet.QuartzInitializerListener</listener-class>
     </listener>
-    
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
@@ -79,6 +77,10 @@
         <servlet-name>SplitPDFFileUpload</servlet-name>
         <servlet-class>com.frmejia.backend.servlets.SplitPDFFileUpload</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetFileArchivo</servlet-name>
+        <servlet-class>com.frmejia.backend.servlets.GetFileArchivo</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/Reas/*</url-pattern>
@@ -126,6 +128,10 @@
     <servlet-mapping>
         <servlet-name>SplitPDFFileUpload</servlet-name>
         <url-pattern>/SplitPDFFileUpload</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetFileArchivo</servlet-name>
+        <url-pattern>/GetFileArchivo</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

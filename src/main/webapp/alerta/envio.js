@@ -114,6 +114,7 @@ function quitar_tarea_lider(id){
     });
     
 }
+
 function insertar_pre_aprobacion_est(id,tipo_estudio,consecutivo,estado){
     
     $datos={

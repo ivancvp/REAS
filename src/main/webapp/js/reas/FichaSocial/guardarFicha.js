@@ -2,6 +2,8 @@ var obj = {}
 
 function guardarFicha(json){
 
+
+
 console.log(json)
 
 obj["identificador"] =$('#id_ficha_social').val();
@@ -22,6 +24,7 @@ obj["identificador"] =$('#id_ficha_social').val();
 
     },
 });
+
 
 
 }
@@ -98,6 +101,22 @@ save_tel();
 save_elaboro_ficha();
 
 function save_elaboro_ficha(){
+
+
+var obj = {}
+obj["identificador"] =$('#id_ficha_social').val();
+obj["op"] ='insertar_ficha_social_general';
+obj["usuario_id_elaboro"]=$('#elaboro_nombre').val();
+$.ajax({
+  type: "GET",
+  url: "GestionConsultas",
+  data: obj,
+  dataType: "json",
+  async: false,
+  success: function (response) {
+  },
+});
+
 
   $datos = {
        op: "update_elaboro_ficha_social",

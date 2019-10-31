@@ -51,16 +51,11 @@ if (info_ficha.estado === 3) {
         }
     });
 
-} else if (info_ficha.estado === 4) {
-    caracterizacionMiembros()
+} 
+else if (info_ficha.estado === 1 || info_ficha.estado === 2 || info_ficha.estado === 4) {
+    caracterizacionMiembros();
     agregarTablas();
-    $('#btn_aprobar').hide();
-    $('#mensaje').append('<div class="alert alert-danger">  <strong>Devuelta!</strong> Indica que la ficha debe ser modificada, por favor revise el comentario respectivo</div>');
-} else if (info_ficha.estado === 2) {
-    caracterizacionMiembros()
-    agregarTablas();
-    $('li').removeClass('disabled');
-    $('#mensaje').append('<div class="alert alert-info">  <strong>Revisión!</strong> No se puede modificar esta ficha mientras se encuentra en revisión</div>');
+    $('#mensaje').append('<div class="alert alert-danger">  <strong>Ficha Bloqueada!</strong>Esta Ficha no se puede modificar ya.</div>');
     $('li').removeClass('disabled');
     $('#btn_aprobar').hide();
     $('#form_social_v7 input,#form_social_v7 select,#form_social_v7 textarea').attr('disabled', 'disabled');
@@ -71,7 +66,6 @@ if (info_ficha.estado === 3) {
                 $('#comentarios').prop('disabled', false);
                 nombreFormularios();
                 mostrarPersonasInfo();
-                comportamientoInfoBasica();
                 break;
             case '#step-3':
                 traerPersonasCarac();
@@ -90,7 +84,11 @@ if (info_ficha.estado === 3) {
                 break;
         }
     });
+    $('#aprobar_social').remove();
+    $('#devolver_social').remove();
+    $('#add_miembro_v7').remove();
 }
+
 
 //logica de guardado
 $('.btn_siguiente').on('click', function () {
@@ -312,6 +310,7 @@ function mostrarInformacion() {
         comportamientoInfoBasica();
         if (info_ficha.estado === 3 || info_ficha.estado === 2) {
             $('.btn_siguiente').hide();
+            
         }
 
 

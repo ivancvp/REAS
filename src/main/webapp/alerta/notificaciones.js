@@ -494,7 +494,10 @@ var opciones = jQuery.extend({
         var obs_inicial = res[index]["observacion_inicial"];
         var contenido=contenido_modal(re_asignacion(nom_crea, des_actividad, obs_inicial, datos),'Asignación de tareas');   
         generar_modal(contenido);
+        
+        
         logica_re_asignacion(res[index]);
+        
     }
         
     /*Formulario de aprobación SIG de Esteban */
@@ -527,6 +530,11 @@ var opciones = jQuery.extend({
           '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>' +
           '</div>' +
           '<div class="modal-body">'+
+          '<div style="display:none">' +
+          '<p id="id">'+res[index]["identificador"]+'</p>'+
+          '<p id="id_actividad">'+res[index]["id_actividad"]+'</p>'+
+          '<p id="creado_por">'+res[index]["creado_por"]+'</p>'+
+          '</div>' +
           ficha+
           '</div>' +
           '<div class="modal-footer">' +
@@ -685,7 +693,7 @@ function puede_reasignar(i) {
     var lider = '';
 
 
-    if (usuario_identificador === '351' || usuario_identificador === '152' || usuario_identificador === '351' || usuario_identificador === '168' || usuario_identificador === '76' || usuario_identificador === '117' || usuario_identificador === '9' || usuario_identificador === '199' || usuario_identificador === '16' || usuario_identificador === '196') {
+    if (usuario_identificador === '351' || usuario_identificador === '152' || usuario_identificador === '351' || usuario_identificador === '168' || usuario_identificador === '76' || usuario_identificador === '117' || usuario_identificador === '9' || usuario_identificador === '199' || usuario_identificador === '16' || usuario_identificador === '196'|| usuario_identificador === '117') {
         var lider = '<button type="button" class="btn btn-link btn-xs" onclick="hola({formulario:\'reasignar\',index:' + i + ',modo:1})" data-toggle="tooltip" data-placement="bottom" title="Reasignar">' +
                     '<i class="fas fa-list-ul"></i>' +
                     '</button>';
@@ -723,7 +731,7 @@ function notificacion(i) {
     function seguir_form(act_previa,act_nueva){
         var str='';
         
-        if(act_previa===6 || act_nueva===6 || act_previa===7 || act_nueva===7 || act_previa===9 || act_nueva===9 || act_previa===11 || act_nueva===11 || act_previa===20 || act_nueva===20 || act_previa===22 || act_nueva===22 || act_previa===24 || act_nueva===27 || act_nueva===26){
+        if(act_previa===17 || act_nueva===17 || act_previa===6 || act_nueva===6 || act_previa===7 || act_nueva===7 || act_previa===9 || act_nueva===9 || act_previa===11 || act_nueva===11 || act_previa===20 || act_nueva===20 || act_previa===22 || act_nueva===22 || act_previa===24 || act_nueva===27 || act_nueva===26){
             
         }else{
             str= '<button type="button" class="btn btn-link btn-xs" id="reg'+i+'" onclick="hola({formulario:5,index:' + i + ',modo:1})" data-toggle="tooltip" data-placement="bottom" title="Regresar tarea">' +

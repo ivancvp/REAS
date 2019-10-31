@@ -145,10 +145,12 @@ function aprobacion(identificador,id_actividad,tipo_proceso,tipo_actividad,activ
             }
             if(formulario===18){
                 dat1=consulta_aprobacion_ficha_social(identificador);
-                dat1[0]["obs"]=datos["observacion_inicial"];
- 
-              
                 
+                if(dat1[0]["estado_ficha"]===3){
+                    dat1[0]["concepto"]=true;
+                }
+                dat1[0]["obs"]=dat1[0]["observaciones"];
+
             }
 
             $('#obs_regreso').val((dat1[0]["obs"]?dat1[0]["obs"]:''));
@@ -167,6 +169,7 @@ function aprobacion(identificador,id_actividad,tipo_proceso,tipo_actividad,activ
             }
       }
 
+
         if(formulario!==18){
             $( "#sel_aprobacion" ).change(function() {        
                 if($('#sel_aprobacion').val()==="true"){
@@ -176,8 +179,7 @@ function aprobacion(identificador,id_actividad,tipo_proceso,tipo_actividad,activ
                 }
             });
         } 
-    
-
+  
      
      $('#aprob_estudio').one('click', function () {
          

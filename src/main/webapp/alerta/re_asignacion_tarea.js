@@ -103,9 +103,9 @@ var contenido=cont1+cont2+cont3;
 function logica_re_asignacion(datos){
     
           $('#asignar').click(function () {
-           var asignado_a = $('input[name=optradio]:checked').val();
+              
            
-       
+           var asignado_a = $('input[name=optradio]:checked').val();
            
            if(asignado_a=== 'undefined'){
                alert("Seleccione un destinatario para la tarea");
@@ -121,7 +121,8 @@ function logica_re_asignacion(datos){
                 var observacion_final='';
 
                 
-                envio_de_notificacion(identificador,1,tipo_actividad,actividad_padre,creador,asignado_a,estado,observacion_inicial,observacion_final);
+                envio_de_notificacion(identificador,5,tipo_actividad,actividad_padre,creador,asignado_a,estado,observacion_inicial,observacion_final);
+                
                  var msg='<p><strong>Mensaje: </strong>En su bandeja de entrada se encuentra una notificación para el identificador <strong> '+identificador+' </strong> </p><p><strong>Observaciones: </strong>'+observacion_inicial+'</p>';
 
                  correo(creador,asignado_a,"Asignación de Tarea por el líder del proceso",msg,tipo_proceso);
@@ -137,8 +138,12 @@ function logica_re_asignacion(datos){
              $('#modal_form').modal('toggle');
        
            }
+           
+
                       
          });
+         
+         
 }
 
  

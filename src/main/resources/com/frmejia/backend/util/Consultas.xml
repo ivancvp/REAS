@@ -1224,27 +1224,15 @@
     </Consulta> 
     <Consulta id="lista_tareas_social_reas">
         <sql>
-            select     
-            usuario_nombre,
-            us.usuario_id,
-            asignado_a,
-            tab_user.tius_id,
-            (select count(id_tipo_actividad) as cta_res from procesos.actividad as spa where pa.asignado_a=spa.asignado_a and id_tipo_actividad=3 and estado=1) as cta_res,
-            (select count(id_tipo_actividad) as cta_est from procesos.actividad as spa where pa.asignado_a=spa.asignado_a and id_tipo_actividad=2 and estado=1) as cta_est,
-            (select count(id_tipo_actividad) as cta_est from procesos.actividad as spa where pa.asignado_a=spa.asignado_a and id_tipo_actividad=6 and estado=1) as cta_rev
-            from public.usuario as us
-            left join 
-            procesos.actividad as pa 
-            on pa.asignado_a=us.usuario_id
-
-            inner join (
-            select us.usuario_id,tp.tius_id from usuario as us 
-            inner join tipo_usuario as tp on us.tius_id=tp.tius_id
-            inner join tipo_usuario_funcionalidad as uf on uf.tius_id=tp.tius_id
-            inner join tipo_funcionalidad as tf on uf.tifunc_id=tf.tifunc_id
-            where us.tius_id in (50) and usuario_id!=(select usuario_id from usuario u , parametros p WHERE u.usuario_usuario=p.param_descripcion  AND param_codigo='reas.lider.social')) as tab_user on us.usuario_id=tab_user.usuario_id
-
-            group by asignado_a, cta_res,cta_est,cta_rev, usuario_nombre,us.usuario_id,tab_user.tius_id;  
+                select 
+                usuario_nombre,
+                (0) as cta_res,
+                (0) as cta_est,
+                (0) as cta_rev,
+                u.usuario_id 
+                from usuario u 
+                inner join (select * from usuario_funcionalidad where tifunc_id=72 and usuario_id !=117) as sub1 
+                on u.usuario_id=sub1.usuario_id where u.usuario_fecha_vigencia > now()  
         </sql>
         <conexion>atencion_reloca</conexion>
         <permisos>*</permisos>
@@ -3817,7 +3805,7 @@
             (SELECT fecha_revisado as fecha_revision_ficha_tecnica from ficha_reconocimiento_v1 as tb_tecnica where identificador="IDENTIFICADOR"),
             (SELECT upper(usuario_nombre)as creador_social  from tbl_arraigo_vivienda as tb_social inner join usuario as us  on tb_social.id_profesional=us.usuario_id where identificador="IDENTIFICADOR" limit 1),
             (SELECT to_char(upd_time, 'YYYY-MM-DD') as fecha_elaboracion_social  from tbl_arraigo_vivienda as tb_social inner join usuario as us  on tb_social.id_profesional=us.usuario_id where identificador="IDENTIFICADOR" limit 1),
-            (SELECT "Num_Und_Habitacional" FROM "tbl_Unds_Habitacionales" WHERE "Identificador"="IDENTIFICADOR" OR "Identificador"="IDENTIFICA_ANTERIOR" ) as unidades_habitacionales            
+            (SELECT "Num_Und_Habitacional" FROM "tbl_Unds_Habitacionales" WHERE "Identificador"="IDENTIFICADOR" OR "Identificador"="IDENTIFICA_ANTERIOR" limit 1) as unidades_habitacionales            
             from definitiva  where upper("Sector") like 'VEREDITAS%';
         </sql>
         <conexion>atencion_reloca</conexion>
@@ -4100,8 +4088,13 @@
             ELSE false
             END
             from tbl_arraigo_vivienda where identificador='@identificador' limit 1 ) as ficha_caracterizacion
+            ,(select estado_ficha  from fichasocial.aprobacion where identificador='@identificador') as nueva_ficha_social
             ,(select count(*)from "tbl_Miembros" where "Identificador" ='@identificador') as registro_caracterizacion
-            ,(select revisado from ficha_reconocimiento_v1 where identificador='@identificador') as ficha_reconocimiento
+            ,(select  
+            CASE WHEN revisado=true THEN true            
+            ELSE false
+            END from ficha_reconocimiento_v1 where identificador='@identificador') as ficha_reconocimiento
+            ,(select count(*) from ficha_reconocimiento_v1 where identificador='@identificador') as conta_ficha_reconocimiento
             ,(select ('Contrato '|| consecontrato) as num_contrato from contrato WHERE identificador='@identificador' order by consecontrato DESC limit 1) as contrato
             ,(select cont_fecha_fin from contrato WHERE identificador='@identificador' order by consecontrato DESC limit 1) as fecha_fin
             ,(select (titular_nombre||' cc'||titular_cedula) as titular from contrato WHERE identificador='@identificador' order by consecontrato DESC limit 1) as titular 
@@ -5994,7 +5987,6 @@
             p8_5_4=@p8_5_4,
             p8_6_1=@p8_6_1,
             p8_6_2=@p8_6_2,
-            p8_6_3='@p8_6_3',
             p8_7=@p8_7
             WHERE identificador='@identificador'
         </sql>
@@ -6048,7 +6040,7 @@
             p11_1i=@p11_1i,
             p11_1j=@p11_1j,
             p11_1k=@p11_1k,
-            p11_1l=@p11_1l,
+
             p11_2a=@p11_2a,
             p11_2b=@p11_2b,
             p11_2c=@p11_2c,
@@ -6057,8 +6049,8 @@
             p11_2f=@p11_2f,
             p11_2g=@p11_2g,
             p11_2h=@p11_2h,
-            p11_2i=@p11_2i,
-            p11_2j=@p11_2j,
+        
+   
             p11_3a=@p11_3a,
             p11_3b=@p11_3b,
             p11_3c=@p11_3c,
@@ -6083,14 +6075,14 @@
             UPDATE fichasocial.hogar
             SET 	
             p12_1_1a='@p12_1_1a',
-            p12_1_1b='@p12_1_1b',
-            p12_1_1c='@p12_1_1c',
+            p12_1_1b=@p12_1_1b,
+            p12_1_1c=@p12_1_1c,
             p12_1_2a='@p12_1_2a',
-            p12_1_2b='@p12_1_2b',
-            p12_1_2c='@p12_1_2c',
+            p12_1_2b=@p12_1_2b,
+            p12_1_2c=@p12_1_2c,
             p12_1_3a='@p12_1_3a',
-            p12_1_3b='@p12_1_3b',
-            p12_1_3c='@p12_1_3c'    
+            p12_1_3b=@p12_1_3b,
+            p12_1_3c=@p12_1_3c    
             WHERE identificador='@identificador'
         </sql>
         <conexion>atencion_reloca</conexion>
@@ -6160,11 +6152,12 @@
             p2_6='@p2_6',
             p2_7=CASE WHEN to_date('@p2_7','YYYY MM DD') = '0001-01-01 BC' THEN NULL ELSE to_date('@p2_7','YYYY MM DD') END,
             p2_8='@p2_8',
-            p2_9='@p2_9',
+            p2_9=@p2_9,
             p2_010=CASE WHEN to_date('@p2_010','YYYY MM DD') = '0001-01-01 BC' THEN NULL ELSE to_date('@p2_010','YYYY MM DD') END,
             p2_011='@p2_011',
             p2_013=@p2_013,
-            p2_014=@p2_014
+            p2_014=@p2_014,
+            condicion_miembro=@condicion_miembro
             WHERE identificador='@identificador' and consecutivo='@consecutivo'
         </sql>
         <conexion>atencion_reloca</conexion>
@@ -6179,7 +6172,7 @@
             p3_3=@p3_3,
             p3_4=@p3_4,
             p3_5='@p3_5',
-            p3_6='@p3_6',
+            
             p3_7='@p3_7',
             p3_8='@p3_8',
             p3_9='@p3_9',
@@ -6256,18 +6249,22 @@
             p10_4e='@p10_4e',
             p10_4f='@p10_4f',
             p10_4g='@p10_4g',
-            p10_4h='@p10_4h',
+         
             p10_4i='@p10_4i',
             p10_4j='@p10_4j',
+            p10_4k='@p10_4k',
+            p10_4l='@p10_4l',
             p10_5a='@p10_5a',
             p10_5b='@p10_5b',
             p10_5c='@p10_5c',
             p10_5d='@p10_5d',
             p10_5e='@p10_5e',
             p10_5f='@p10_5f',
-            p10_5g='@p10_5g',
+           
             p10_5h='@p10_5h',
             p10_5i='@p10_5i',
+            p10_5j='@p10_5j',
+
             p10_6a='@p10_6a',
             p10_6b='@p10_6b',
             p10_6c='@p10_6c',
@@ -6305,7 +6302,7 @@
             p12_3f='@p12_3f',
             p12_3g='@p12_3g',
             p12_4a=@p12_4a,
-            
+            p12_4b='@p12_4b',
             p12_5=@p12_5,
             p12_6a='@p12_6a',
             p12_6b='@p12_6b',
@@ -6324,7 +6321,8 @@
             p12_7g='@p12_7g',
             p12_7h='@p12_7h',
             p12_7i='@p12_7i',
-            p12_7j='@p12_7j'
+            p12_7j='@p12_7j',
+            p12_7k='@p12_7k'
             WHERE identificador='@identificador' and consecutivo='@consecutivo'
         </sql>
         <conexion>atencion_reloca</conexion>
@@ -6355,8 +6353,8 @@
     <Consulta id="insertar_ficha_social_general">
         <sql>
             with rows as(INSERT INTO fichasocial.hogar
-                (identificador)
-            SELECT '@identificador'
+                (identificador,hogar_usuario,hogar_usuario_time)
+            SELECT '@identificador','@usuario_id_elaboro',current_timestamp
             WHERE
                 NOT EXISTS (
                     SELECT identificador FROM fichasocial.hogar WHERE identificador = '@identificador'
@@ -6364,8 +6362,8 @@
             
             with rows as(
             INSERT INTO fichasocial.miembros
-                (identificador,consecutivo)
-            SELECT '@identificador','1' 
+                (identificador,consecutivo,miembro_usuario,miembro_usuario_time)
+            SELECT '@identificador','1','@usuario_id_elaboro',current_timestamp 
             WHERE
             NOT EXISTS (
             SELECT identificador FROM fichasocial.miembros WHERE identificador = '@identificador' and consecutivo='1'
@@ -6533,12 +6531,23 @@
     </Consulta>
     <Consulta id="update_elaboro_ficha_social">
         <sql>
-          update fichasocial.aprobacion set 
+        update fichasocial.aprobacion set 
             usuario_id_elaboro='@usuario_id_elaboro',
             usuario_elaboro_contrato='@usuario_elaboro_contrato',
-            elaboro_fecha='@elaboro_fecha',
+            elaboro_fecha=current_timestamp,
             estado_ficha=1 
             where identificador='@identificador';
+
+        update fichasocial.hogar set
+            hogar_usuario_upd ='@usuario_id_elaboro',
+            hogar_usuario_upd_time=current_timestamp
+            where identificador='@identificador';
+
+        update fichasocial.miembros set
+            miembro_usuario_upd ='@usuario_id_elaboro',
+            miembro_usuario_upd_time =current_timestamp
+            where identificador='@identificador';
+
         </sql>
         <conexion>atencion_reloca</conexion>
         <permisos>*</permisos>       

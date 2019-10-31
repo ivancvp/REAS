@@ -79,6 +79,7 @@ $.reas('reas', {
                                             '				<h4><small><a id="btn-correo"><i class="fa fa-envelope"></i> Enviar correo</a></small></h4>' +
                                             unidades +
                                             '				 ' + (resultado['cuenta_ahorro'] > 0 ? '<h4><small>Cuenta de ahorro programado <a id="detalle_cuenta" target="#" class="badge badge-default badge-pill">ver</a></small></h4>' : '<h4><small>No posee cuenta de ahorro programado</h4>') +
+                                            '				<h4><a id="btn-expediente"><i class="far fa-file-pdf"></i> Ver Expediente</a></h4>' +
                                             '			</div>' +
                                             '		</div>' +
                                             '	</div>' +
@@ -163,7 +164,35 @@ $.reas('reas', {
 if($('#fech_act').val()===''){
    $('button[name="fech_ver"]').hide();
 }
-                                    
+        
+
+$('#btn-expediente').click(function(){
+   
+    
+       var identificador = document.getElementById("identificador").innerHTML;
+    var contenido=
+    '<div class="modal-body"> '+
+
+'<iframe src="https://docs.google.com/viewerng/viewer?url=GetFileArchivo?id=2017-8-38367&embedded=true" frameborder="0" height="100%" width="100%"></iframe>'+
+    '</div>'+
+    '<div class="modal-footer">' +    
+    '<button type="button" data-dismiss="modal" class="btn btn-default">Cerrar</button>' +
+    '</div>';
+
+    $('.modal-content').css('height', '80%');
+    $('.modal-body').css('max-height', 'calc(100% - 120px)');
+    $('#form').empty();
+    $('#form').append(contenido);
+    $('#modal_form').modal('show'); 
+    
+
+    
+    
+    
+    
+});
+        
+        
 $('.pdf_fecha').click(function(){
 
 
@@ -685,24 +714,38 @@ $.ajax({
                                     
                                     $('#ver_resolucion_vereditas').show();
 
+                                    
                                     if (!resultado['ficha_caracterizacion']) {
 //                                        $('#txt_social').text('Aún no posee ficha social');
                                         $('#lista_chequeo_btn').hide();
                                     }
-                                    if (!resultado['ficha_reconocimiento']) {
-                                        $('#fcaracterizacion').hide();
+                                    console.log(resultado['nueva_ficha_social'])
+                                    if(resultado['nueva_ficha_social']===3){
+                                        $('#lista_chequeo_btn').show();
                                     }
+                                    
                                     if (editar_ficha_tecnica) {
                                         $('#freconocimiento').show();
                                       
                                     }
-                                    console.log(resultado['registro_caracterizacion'])
-                                    if (resultado['registro_caracterizacion'] > 0) {
-                                        $('#fcaracterizacion').show();
+                                    
+                                    
+                                    if(resultado['conta_ficha_reconocimiento']>0){
+                                        
+                                        if (resultado['ficha_reconocimiento']) {
+                                            $('#fcaracterizacion,#fichasocial').show();
+                                        }else{
+                                            $('#fcaracterizacion,#fichasocial').hide();
+                                        }
+                                    }else{
+                                        $('#fcaracterizacion,#fichasocial').hide();
                                     }
-                                    if (editar_ficha_social && resultado['ficha_reconocimiento']) {
-                                        $('#fcaracterizacion').show();
+                                    
+                                    //Habilita la ficha social sin importar la ficha tecnica para las comunidades indigenas
+                                    if(identificador.indexOf("-W166-") != -1){
+                                        $('#fcaracterizacion,#fichasocial').show();
                                     }
+                                    
                                     if(!resultado['ficha_reconocimiento']){
                                         $('#concepto_hidrico').hide();                                        
                                     }else{

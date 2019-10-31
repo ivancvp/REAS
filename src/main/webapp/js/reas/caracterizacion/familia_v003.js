@@ -88,9 +88,16 @@ $(document).ready(function () {
 
     }
     if (aprob_ficha === "false") {
+        /* bloqueo de la ficha social en versión 6 por parte de ivan
         $('#observaciones_revision').attr('disabled', 'disabled');
         $('#aprobar_social').hide();
         $('#devolver_social').hide();
+        */
+       $('.nextBtn').hide();
+        $('#enviar_x_aprobacion').hide();
+        $("#soc_ficha").find("input, select, textarea").attr('disabled', 'disabled');
+        $('#observaciones_revision').prop('disabled', false);
+        
     }
 
     $('#aprobar_social').on('click', function () {

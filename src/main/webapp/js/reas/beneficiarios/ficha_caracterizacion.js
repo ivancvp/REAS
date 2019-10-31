@@ -99,7 +99,7 @@ $('#fcaracterizacion').on('click', function () {
                             (resultado['version_ficha'] ? " <li class='list-group-item'> <strong>Versión :</strong>  " + resultado['version_ficha'] + "</li>" : " ") +
                             "</ul></div></div>";
                     var contenido = '<div class="modal-header">' +
-                            '<h3 class="modal-title">Ficha de Caracterización</h3>' +
+                            '<h3 class="modal-title">Ficha de Caracterización </h3>' +
                             '<button type="button" class="close" data-dismiss="modal" aria-label="Close">' +
                             '   <span aria-hidden="true">&times;</span>' +
                             '</button>' +
@@ -110,7 +110,7 @@ $('#fcaracterizacion').on('click', function () {
                             '</div>' +
                             '<div class="modal-footer">' +
                             '<label style="float: left;margin-right:  5px;"> Versión de la ficha: </label> <select class=" btn form-control" id="version" style="width:200px"><option value="0"> seleccione...</option><option value="1" ' + (resultado['version_ficha'] === 6 ? "  selected  " : " ") + '    ' + (resultado['version_ficha'] === 7 ? "  disbled  " : " ") + '> Ficha social version 6</option><option value="2"  ' + (resultado['version_ficha'] === 7 ? "  selected  " : " ") + ' > Ficha social version 7</option></select>' +
-                            '   <button type="button" class="btn btn-primary" id="editar_social" data-dismiss="modal">Editar <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>' +
+                            '   <button type="button" class="btn btn-primary" id="editar_social" data-dismiss="modal">Ver Ficha Social <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>' +
                             '   <button type="button" class="btn btn-success" id="imprimir_social"   data-dismiss="modal">Imprimir <span class="glyphicon glyphicon-print" aria-hidden="true"></span></button>' +
                             '   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>' +
                             '</div>';

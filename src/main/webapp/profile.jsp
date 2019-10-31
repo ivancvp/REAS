@@ -461,7 +461,7 @@
 
                                                             <br><br>
                                                          
-                                                            <a href="#" class="btn btn-sm btn-primary" id="fcaracterizacion" >2.  <i class="fas fa-users"></i>  Ficha de caracterización</a>
+                                                            <a href="#" class="btn btn-sm btn-default" id="fcaracterizacion" >2.  <i class="fas fa-users"></i>  Ficha de caracterización</a>
                                                    
                                                             <br><br>
                                                            
