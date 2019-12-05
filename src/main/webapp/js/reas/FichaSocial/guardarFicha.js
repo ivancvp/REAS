@@ -190,6 +190,41 @@ function save_tel(){
 
 
 
+$('#condition_member').click(function(){
+
+  $('table[data-op="2m"] tr').each(function (i, row) {
+
+    if(i>0){
+     
+      var obj = {}
+      var condicion_miembro=$(this).find('select[data-id="condicion_miembro"]').val();
+
+      obj["identificador"] =$('#id_ficha_social').val();
+      obj["condicion_miembro"] = condicion_miembro
+      obj["op"] = "update_condicion_miembro"
+      obj["consecutivo"]=i
+      console.log(obj)
+
+        $.ajax({
+          type: "POST",
+          url: "GestionConsultas",
+          data: obj,
+          dataType: "json",
+          async: true,
+          success: function (response) {
+
+          },
+        })
+
+
+    }
+    
+
+  });
+
+});
+
+
 
 
 function guardarFichaFamilia(json){

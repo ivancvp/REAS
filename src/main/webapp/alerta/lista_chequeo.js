@@ -406,8 +406,24 @@ function logica_lista_chequeo(identificador,datos,dat_not,modo){
              });
         }else{
             
-
-            envio_de_notificacion(''+identificador+'',1,2,1,''+usuario_identificador+'',''+dat_not["creado_por"]+'',1,$('#obs_lista').val(),null);
+            var responsable_proceso='199';
+            
+            if(vereditas){
+                responsable_proceso='199';
+            }
+            if((data["Sector"]?data["Sector"]:'').toUpperCase()==='GAVILANES'){
+                responsable_proceso='199';
+            }
+            if (identificador.includes("CP19")){
+                responsable_proceso='351';
+            }
+            
+            var tipo_estudio_documentos=2;
+            if(dat_not["actividad_padre"]===25){
+                tipo_estudio_documentos=25;
+            }
+            
+            envio_de_notificacion(''+identificador+'',1,2,tipo_estudio_documentos,''+usuario_identificador+'',''+responsable_proceso+'',1,$('#obs_lista').val(),null);
             var id_actividad = dat_not["id_actividad"];
             quitar_tarea_lider(id_actividad);
             

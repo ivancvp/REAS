@@ -79,7 +79,7 @@ $.reas('reas', {
                                             '				<h4><small><a id="btn-correo"><i class="fa fa-envelope"></i> Enviar correo</a></small></h4>' +
                                             unidades +
                                             '				 ' + (resultado['cuenta_ahorro'] > 0 ? '<h4><small>Cuenta de ahorro programado <a id="detalle_cuenta" target="#" class="badge badge-default badge-pill">ver</a></small></h4>' : '<h4><small>No posee cuenta de ahorro programado</h4>') +
-                                            '				<h4><a id="btn-expediente"><i class="far fa-file-pdf"></i> Ver Expediente</a></h4>' +
+                                            
                                             '			</div>' +
                                             '		</div>' +
                                             '	</div>' +
@@ -124,7 +124,15 @@ $.reas('reas', {
                                             '</div>' +
                                             '</div>' +
                                             '</div>' +
+
                                             '<div >' +
+
+                                            '<div class="row" style="display:none">' +
+                                            '<div class="col-md-12 col-lg-offset-6">' +
+                                            '	<h3 ><a id="btn-expediente" style="color: #1ab394;border-style: solid;margin:3px;padding:8px;border-width: 1px;border-radius: 8px;"><i class="far fa-file-pdf"></i> Ver Expediente</a></h3>' +
+                                            '</div >' +
+                                            '</div >' +
+
                                             '<div class="row">' +
                                             '<div class="col-md-4 lista">' +
                                             '   <ul class="list-group">' +
@@ -169,11 +177,21 @@ if($('#fech_act').val()===''){
 $('#btn-expediente').click(function(){
    
     
-       var identificador = document.getElementById("identificador").innerHTML;
+var identificador = document.getElementById("identificador").innerHTML;
+
     var contenido=
     '<div class="modal-body"> '+
 
-'<iframe src="https://docs.google.com/viewerng/viewer?url=GetFileArchivo?id=2017-8-38367&embedded=true" frameborder="0" height="100%" width="100%"></iframe>'+
+        '            <div class="row"> '+         
+        '                   <div class="col-md-12"> '+
+        '                       <h2 >Expediente escaneado</h2>'+
+        '<p>En la siguiente ventana se visualiza escaneado completamente el expediente en formato PDF.</p>'+
+        '                       <div class="file-loading"> '+
+        '                           <input id="input-b1" name="input-b1" type="file" class="file" accept="application/pdf"> '+ 
+        '                       </div> '+
+        '                    </div> '+
+        '            </div> '+
+
     '</div>'+
     '<div class="modal-footer">' +    
     '<button type="button" data-dismiss="modal" class="btn btn-default">Cerrar</button>' +
@@ -183,13 +201,103 @@ $('#btn-expediente').click(function(){
     $('.modal-body').css('max-height', 'calc(100% - 120px)');
     $('#form').empty();
     $('#form').append(contenido);
-    $('#modal_form').modal('show'); 
+    
     
 
+    var sector =(resultado['sector'] ? resultado['sector'] : '');
     
+    var op="";
+    if(sector==="CARACOLÍ PAIMIS"){
+        op="3"
+    }else if(sector==="VEREDITAS"){
+        op="1";
+    }else{
+        op="2";
+    }
+
+    var url='GetFileArchivo?id='+identificador+'&op='+op;    
     
-    
-    
+$('.loader').addClass('is-active');
+
+checkHttpStatus(url);
+
+function checkHttpStatus(url) {     
+    $.ajax({
+        type: "GET",
+        data: {},
+        url: url,
+        error: function(response) {
+            
+            alertify.error("El expediente no ha sido digitalizado aún.");
+        }, success(response) {
+                
+                $('.loader').removeClass('is-active');
+                
+            $('#modal_form').modal('show'); 
+                file=$("#input-b1").fileinput({
+                theme: 'fa',
+                language: 'es',
+                initialPreview: [
+                    url
+                ], 
+                fileActionSettings: {
+                'showRemove': false,
+                'indicatorNew': '&nbsp;'
+            },
+                    initialPreviewConfig: [  
+                    {type: "pdf", size:100,caption: '', key: 1,id:1, downloadUrl:url}
+                ],
+
+                uploadUrl: 'FileUploader',
+                deleteUrl: 'GestionConsultas',
+                allowedFileExtensions: ["pdf"],
+                initialPreviewAsData: true,
+                showUpload: false,
+                overwriteInitial: false,
+                browseOnZoneClick: true,
+                showRemove: false,
+                autoReplace:false,
+                maxFileCount: 1
+            });
+            
+            $('.input-group-btn').remove();
+            $('.kv-file-remove').remove();
+        }
+    });
+}
+
+
+/*
+            $('#modal_form').modal('show'); 
+                file=$("#input-b1").fileinput({
+                theme: 'fa',
+                language: 'es',
+                initialPreview: [
+                    url
+                ], 
+                fileActionSettings: {
+                'showRemove': false,
+                'indicatorNew': '&nbsp;'
+            },
+                    initialPreviewConfig: [  
+                    {type: "pdf", size:100,caption: '', key: 1,id:1, downloadUrl:url}
+                ],
+
+                uploadUrl: 'FileUploader',
+                deleteUrl: 'GestionConsultas',
+                allowedFileExtensions: ["pdf"],
+                initialPreviewAsData: true,
+                showUpload: false,
+                overwriteInitial: false,
+                browseOnZoneClick: true,
+                showRemove: false,
+                autoReplace:false,
+                maxFileCount: 1
+            });
+            
+            $('.input-group-btn').remove();
+            $('.kv-file-remove').remove();
+    */
 });
         
         

@@ -700,8 +700,12 @@ if($(this).val()==="NO" || $(this).val()===""){
 
 }
 
+var enviar=true;
 
-$('#validar_ficha').click(function(){
+$('#validar_ficha').click(function(event){
+
+  event.preventDefault();
+  
 
 var i=obligatorio();
 if(i>0){
@@ -754,10 +758,14 @@ if(seguir_archivo==0){
               typeAnimated: true,
               buttons: {
                   Si: {
-          
+                    
+                    
                     action: function(){
-          
-                      var responsable_proceso=117;
+
+                      $('#validar_ficha').prop('disabled', true);
+                      
+                      if(enviar){
+                        var responsable_proceso=117;
 
                       if ( $( "#creado_por" ).length ) {
                           responsable_proceso=$( "#creado_por" ).text();
@@ -799,7 +807,18 @@ if(seguir_archivo==0){
 
                                   
                         location.reload();
+                      }
+                      enviar=false;
+
+                      
+
+
+
+
                     }
+
+
+                    
                   },
                   No: {
           

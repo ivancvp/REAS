@@ -112,6 +112,10 @@ if(aprobacion.estado_ficha=='3'){
    $('.float').remove();
    $('#validar_ficha').remove();
 
+
+
+
+
  }
 
 
@@ -128,7 +132,12 @@ if(aprobacion.estado_ficha=='3'){
 
 }
 
-
+if(usuario_usuario==="clopezu"){
+  $('select[data-id="condicion_miembro"]').prop("disabled", false).css("background-color","#FFFF");
+  $('#condition_member').show();
+}else{
+  $('#condition_member').hide();
+}
 
 
 }

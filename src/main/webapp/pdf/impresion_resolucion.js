@@ -1298,8 +1298,8 @@ function imp_resolucion_caracoli_version_2(identificador, elaboro, aprobo) {
                     { text: ' de ', bold: true, style: 'texto' },
                     { text: fecha_cdp_mes, bold: true, style: 'texto' },
                     { text: ' de ', bold: true, style: 'texto' },
-                    { text: fecha_cdp_ano, bold: true, style: 'texto' },
-                    { text: ' emitido por el responsable del presupuesto de la Entidad.', style: 'texto' }
+                    { text: fecha_cdp_ano , bold: true, style: 'texto' },
+                    { text: ' emitidos por el responsable del presupuesto de la Entidad.', style: 'texto' }
                 ]
             },
 

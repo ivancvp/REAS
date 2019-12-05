@@ -357,6 +357,32 @@ function get_familia_resolucion(){
                     $('#beneficiario_resolucion_especie').append('<option value="'+nombre+'">'+nombre+'</option>');
                 }
  
+            }else{
+                    $datos={
+                        op: 'get_familia_resolucion_ficha_social_nueva',        
+                        identificador:identificador
+                     };
+                    $.ajax({
+                        type: "GET",
+                        url: "GestionConsultas",
+                        data: $datos,
+                        dataType: "json",
+                        async: true,
+                        success: function (response) {           
+                            if(response.length>0){
+                                for(var i=0;i<response.length;i++){
+                                    var nombre=response[i].nombre;
+                                        nombre=nombre.trim().replace(/\s+/g, " ");           
+                                    $('#beneficiario_resolucion_especie').append('<option value="'+nombre+'">'+nombre+'</option>');
+                                }
+
+                            }else{
+
+                            }
+                        }
+                    });
+                
+                
             }
         }
     });
@@ -402,11 +428,11 @@ $('#impr_resolucion').click(function(){
     }
  
                 
-$('#pdf_resolucion').css('display', 'inline');
+    $('#pdf_resolucion').css('display', 'inline');
 
-pdfMake.createPdf(doc).getDataUrl(function (outDoc) {
-    document.getElementById('pdf_resolucion').src = outDoc;
-});   
+    pdfMake.createPdf(doc).getDataUrl(function (outDoc) {
+        document.getElementById('pdf_resolucion').src = outDoc;
+    });   
 
 
 });

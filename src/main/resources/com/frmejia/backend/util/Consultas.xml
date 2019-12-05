@@ -1408,6 +1408,7 @@
             select *,
             (select usuario_nombre from usuario where usuario_usuario='@usuario_usuario'),
             (select usuario_contrato from usuario where usuario_usuario='@usuario_usuario'),
+            (select "Num_Ficha_Tecnica" from public."tbl_Enlace_SURR" where "Identificador"='@identificador' limit 1 ) as id_ficha_idiger,
             (select usuario_nombre from usuario where usuario_usuario=ae.acta_entrega_user) as usuario_nombre1,
             (select usuario_contrato from usuario where usuario_usuario=ae.acta_entrega_user) as usuario_contrato1 from definitiva df
             INNER JOIN ficha_reconocimiento_v1 fr on df."IDENTIFICADOR"=fr.identificador
@@ -6058,13 +6059,15 @@
             p11_3e=@p11_3e,
             p11_3f=@p11_3f,
             p11_3g=@p11_3g,
+            p11_3h=@p11_3h,
             p11_4a=@p11_4a,
             p11_4b=@p11_4b,
             p11_4c=@p11_4c,
             p11_4d=@p11_4d,
             p11_4e=@p11_4e,
             p11_4f=@p11_4f,
-            p11_4g=@p11_4g
+            p11_4g=@p11_4g,
+            p11_4h=@p11_4h
             WHERE identificador='@identificador'
         </sql>
         <conexion>atencion_reloca</conexion>
@@ -6569,10 +6572,25 @@
         </sql>
         <conexion>atencion_reloca</conexion>
         <permisos>*</permisos>       
-    </Consulta>                                                                           
-                                                                                                                                            
-                                    
-                                                                    
+    </Consulta>  
+    
+    <Consulta id="get_familia_resolucion_ficha_social_nueva">
+        <sql>
+          select concat(p2_3,' ',p2_4,' ',p2_5,' ',p2_6)as nombre from fichasocial.miembros where identificador='@identificador'
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>       
+    </Consulta>                                                                                                                                                      
+                                                                                                                                                                            
+    <Consulta id="update_condicion_miembro">
+        <sql>
+          update fichasocial.miembros set condicion_miembro=@condicion_miembro where identificador='@identificador' and consecutivo=@consecutivo
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>       
+    </Consulta>  
+
+
 </Consultas>
 
 

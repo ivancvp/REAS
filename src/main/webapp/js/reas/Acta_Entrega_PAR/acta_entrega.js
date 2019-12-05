@@ -36,12 +36,17 @@ function gen_acta_entrega(identificador){
      '                       </div> '+ 
                             '   </div> '+
  '                     </div> '+
- '                     <div class="col-md-6"> '+
+ '                     <div class="col-md-3"> '+
                                 '   <div class="form-group"> '+
                                 '     <label for="identificador" class="control-label">Identificador</label> '+
                                 '     <input type="text" class="form-control" id="id_acta_entrega" placeholder="identificador" disabled> '+
                                 '   </div> '+
-
+ '                     </div> '+
+  '                     <div class="col-md-3"> '+
+                                '   <div class="form-group"> '+
+                                '     <label class="control-label">Ficha Técnica IDIGER</label> '+
+                                '     <input type="text" class="form-control" id="id_ficha_idiger" placeholder="FICHA TÉCNICA IDIGER No" disabled> '+
+                                '   </div> '+
  '                     </div> '+
  '                 </div> '+
   '                 <div class="row"> '+
@@ -338,9 +343,9 @@ function gen_acta_entrega(identificador){
 '    </div>'+
 '</div>'+
    
-        '<div class="modal-footer">' +
-        '<button type="button" data-dismiss="modal" class="btn btn-default">Cerrar</button>' +
-        '</div>';
+    '<div class="modal-footer">' +
+    '<button type="button" data-dismiss="modal" class="btn btn-default">Cerrar</button>' +
+    '</div>';
 
 
 
@@ -485,6 +490,7 @@ $('input').keyup(function() {
         async: false,
         success: function (response) {
             resultado = response[0];
+            $('#id_ficha_idiger').val((resultado["id_ficha_idiger"]?resultado["id_ficha_idiger"]:''));
             $('#id_acta_entrega').val((resultado["IDENTIFICADOR"]?resultado["IDENTIFICADOR"]:''));
             $('#ben1').val((resultado["Nombre 1"]?resultado["Nombre 1"]:''));
             $('#ced1').val((resultado["Cedula 1"]?resultado["Cedula 1"]:''));
@@ -492,6 +498,7 @@ $('input').keyup(function() {
             $('#ced2').val((resultado["Cedula 2"]?resultado["Cedula 2"]:''));
             $('#localidad').val((resultado["Localidad"]?resultado["Localidad"]:''));
             $('#upz').val((resultado["UPZ"]?resultado["UPZ"]:''));
+            
             $('#barrio').val((resultado["Barrio"]?resultado["Barrio"]:''));
             $('#chip').val((resultado["Código Chip Catastro"]?resultado["Código Chip Catastro"]:''));
             $('#dir_campo').val((resultado["Dirección"]?resultado["Dirección"]:''));

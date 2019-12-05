@@ -662,7 +662,7 @@ function logica_est_documentos(index,res,datos,modo){
                     $('.obs_rev').attr('disabled', 'disabled');
                     $('.obs_rev').css({"backgroundColor":"white"});
                 }
-                if(res[index]["actividad_padre"]===1){
+                if(res[index]["actividad_padre"]===1 || res[index]["actividad_padre"]===25){
                     $('.div_obs').hide();
                 }
         } 

@@ -35,6 +35,8 @@
         <link href="js/vendors/devextreme/css/dx.light.css" rel="stylesheet" type="text/css"/>
 
         <script src="js/vendors/js-xlsx-master/dist/xlsx.full.min.js" type="text/javascript"></script>
+        <script src="js/vendors/sheetjs-master/dist/xlsx.full.min.js" type="text/javascript"></script>
+        
     </head>
 
     <body class="skin-1">

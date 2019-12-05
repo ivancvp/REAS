@@ -124,11 +124,11 @@ var opciones = jQuery.extend({
     if (formulario === 1 || formulario===25) {
 
         var identificador = '';
+        
         if (modo === 3) {
             identificador = index;
         } else {
             identificador = res[index]["identificador"];
-
         }
         
         var sector=get_sector(identificador);
@@ -178,6 +178,7 @@ var opciones = jQuery.extend({
                 }else{
                     
                     lista_chequeo_all(tipo_estudio);
+                    
                 }
                 
                 function lista_chequeo_all(tipo_estudio){                    
@@ -731,9 +732,10 @@ function notificacion(i) {
     function seguir_form(act_previa,act_nueva){
         var str='';
         
-        if(act_previa===17 || act_nueva===17 || act_previa===6 || act_nueva===6 || act_previa===7 || act_nueva===7 || act_previa===9 || act_nueva===9 || act_previa===11 || act_nueva===11 || act_previa===20 || act_nueva===20 || act_previa===22 || act_nueva===22 || act_previa===24 || act_nueva===27 || act_nueva===26){
+        if( act_previa===5 || act_previa===17 || act_nueva===17 || act_previa===6 || act_nueva===6 || act_previa===7 || act_nueva===7 || act_previa===9 || act_nueva===9 || act_previa===11 || act_nueva===11 || act_previa===20 || act_nueva===20 || act_previa===22 || act_nueva===22 || act_previa===24 || act_nueva===27 || act_nueva===26){
             
         }else{
+
             str= '<button type="button" class="btn btn-link btn-xs" id="reg'+i+'" onclick="hola({formulario:5,index:' + i + ',modo:1})" data-toggle="tooltip" data-placement="bottom" title="Regresar tarea">' +
             '<div style="font-size:1.5em; color:#E74C3C">'+
                 '<i class="fas fa-undo-alt"></i>'+

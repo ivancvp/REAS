@@ -120,22 +120,22 @@ function logica_re_asignacion(datos){
                 var observacion_inicial=datos["observacion_inicial"];
                 var observacion_final='';
 
+                var id_tipo_proceso=datos["id_tipo_proceso"];
+
                 
-                envio_de_notificacion(identificador,5,tipo_actividad,actividad_padre,creador,asignado_a,estado,observacion_inicial,observacion_final);
+                envio_de_notificacion(identificador,id_tipo_proceso,tipo_actividad,actividad_padre,creador,asignado_a,estado,observacion_inicial,observacion_final);
                 
                  var msg='<p><strong>Mensaje: </strong>En su bandeja de entrada se encuentra una notificación para el identificador <strong> '+identificador+' </strong> </p><p><strong>Observaciones: </strong>'+observacion_inicial+'</p>';
 
                  correo(creador,asignado_a,"Asignación de Tarea por el líder del proceso",msg,tipo_proceso);
-          
-          
-          
           
                 var id_actividad = datos["id_actividad"];
                 quitar_tarea_lider(id_actividad);
                             $("#not_update").remove();
                             $.getScript("alerta/notificaciones.js", function(){
                              });
-             $('#modal_form').modal('toggle');
+                $('#modal_form').modal('toggle');
+       
        
            }
            

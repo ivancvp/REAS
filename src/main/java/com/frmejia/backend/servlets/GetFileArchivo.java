@@ -47,9 +47,25 @@ public class GetFileArchivo extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        
         String id = request.getParameter("id");
+        String op = request.getParameter("op");
+        String req = request.getParameter("req");
+        
+        
+        String fileName = "";
+        
+        
+        if(op.equals("1")){
+          fileName = "\\\\10.216.160.201\\escaneos reasentamientos\\ESCANER VEREDITAS\\";  
+        }else if(op.equals("2")){
+          fileName = "\\\\10.216.160.201\\escaneos reasentamientos\\CONTRALORIA\\";  
+        }else if(op.equals("3")){
+           fileName = "\\\\10.216.160.201\\escaneos reasentamientos\\CARACOLI\\"; 
+        }
 
-         String fileName = "\\\\10.216.160.201\\escaneos reasentamientos\\ESCANER VEREDITAS\\";
+         
          String fileType = "";
          
          fileName=fileName+id+".PDF";
@@ -60,23 +76,37 @@ public class GetFileArchivo extends HttpServlet {
          response.setContentType(fileType);
 
          // Make sure to show the download dialog
-         response.setHeader("Content-disposition","inline; filename=yourcustomfilename.pdf");
+         
 
          // Assume file name is retrieved from database
          // For example D:\\file\\test.pdf
 
          File my_file = new File(fileName);
 
-         // This should send the file to browser
-         OutputStream out = response.getOutputStream();
-         FileInputStream in = new FileInputStream(my_file);
-         byte[] buffer = new byte[4096];
-         int length;
-         while ((length = in.read(buffer)) > 0){
-            out.write(buffer, 0, length);
-         }
-         in.close();
-         out.flush();
+            if(my_file.exists() && !my_file.isDirectory()) { 
+                response.setHeader("Content-disposition","inline; filename=yourcustomfilename.pdf");
+                // This should send the file to browser
+                OutputStream out = response.getOutputStream();
+                FileInputStream in = new FileInputStream(my_file);
+                byte[] buffer = new byte[4096];
+                int length;
+                while ((length = in.read(buffer)) > 0){
+                   out.write(buffer, 0, length);
+                }
+                in.close();
+                out.flush();
+            }else{
+                PrintWriter out = response.getWriter();
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                out.print("{'hola':'adios'}");
+                out.flush();
+            }
+         
+         
+         
+         
+         
     }
 
     /**

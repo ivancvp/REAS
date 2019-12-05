@@ -631,7 +631,11 @@
                     <div>
 
                     </div>
+                    
                 </div>
+                                                            
+            <div class="loader loader-default" data-text="Cargando..."></div>
+
 
             </div>
 
@@ -953,11 +957,15 @@
             </div>
         </div>
         <!--final modal ficha tecnica-->
+        
     </body>
 
         <link href='js/vendors/jquery-confirm-master/dist/jquery-confirm.min.css' rel='stylesheet' type='text/css' />
         <script src='js/vendors/jquery-confirm-master/dist/jquery-confirm.min.js' type='text/javascript'></script>
         
+        <link rel="stylesheet" href='js/vendors/css-loader-master/dist/css-loader.css' ></link>
+        
+
     <style>
         .slick_demo_2 .ibox-content {
             margin: 0 10px;

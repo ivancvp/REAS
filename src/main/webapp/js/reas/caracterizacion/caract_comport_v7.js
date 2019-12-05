@@ -308,10 +308,7 @@ function mostrarInformacion() {
         $('.miembro').hide();
 //        }
         comportamientoInfoBasica();
-        if (info_ficha.estado === 3 || info_ficha.estado === 2) {
-            $('.btn_siguiente').hide();
-            
-        }
+        $('.btn_siguiente').hide();
 
 
     }
