@@ -127,7 +127,7 @@ $.reas('reas', {
 
                                             '<div >' +
 
-                                            '<div class="row" style="display:none">' +
+                                            '<div class="row" style="display:none" >' +
                                             '<div class="col-md-12 col-lg-offset-6">' +
                                             '	<h3 ><a id="btn-expediente" style="color: #1ab394;border-style: solid;margin:3px;padding:8px;border-width: 1px;border-radius: 8px;"><i class="far fa-file-pdf"></i> Ver Expediente</a></h3>' +
                                             '</div >' +
@@ -206,16 +206,8 @@ var identificador = document.getElementById("identificador").innerHTML;
 
     var sector =(resultado['sector'] ? resultado['sector'] : '');
     
-    var op="";
-    if(sector==="CARACOLÍ PAIMIS"){
-        op="3"
-    }else if(sector==="VEREDITAS"){
-        op="1";
-    }else{
-        op="2";
-    }
-
-    var url='GetFileArchivo?id='+identificador+'&op='+op;    
+    
+    var url='GetFileArchivo?id='+identificador;
     
 $('.loader').addClass('is-active');
 
@@ -306,6 +298,7 @@ $('.pdf_fecha').click(function(){
 
     
 var fecha_btn=$('#'+this.attributes["name"].value).val();   
+
 var fecha_input=this.attributes["name"].value;
 
 var fecha_inicial="1950-01-01";
@@ -321,7 +314,20 @@ if(this.attributes["name"].value==='fech_ver'){
 if(this.attributes["name"].value==='fech_act'){
   var tipo='Acta de entrega alternativa habitacional';
   var codigo_pdf='7101';
+  
   fecha_inicial=fecha_inicial_mes_habil_2_dias();
+  
+    var now = moment().format('YYYY-MM-DD');;
+    
+
+    if (now > fecha_inicial) {
+       fecha_inicial = moment().startOf('month').format('YYYY-MM-DD');
+    } else {
+         
+       fecha_inicial =moment().subtract(1, 'months').startOf('month').format('YYYY-MM-DD');
+    }
+
+  
 }
 
 if(this.attributes["name"].value==='fech_par'){
@@ -382,8 +388,9 @@ if(mes_pasado){
     startOfMonth=moment().subtract(1, 'months').date(1).format("YYYY-MM-DD");
 }
 
-
+//console.log(moment(startOfMonth).add(dayIncrement, 'd').format("YYYY-MM-DD"))
 return moment(startOfMonth).add(dayIncrement, 'd').format("YYYY-MM-DD");
+
 }
 
 function generar_contenedor_pdf_fecha(tipo,date_inicial,contar){

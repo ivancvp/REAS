@@ -827,7 +827,7 @@ $("#input-b2").on('filepreajax', function (event, previewId, index) {
         seguir_archivo=1;
         $('.fileinput-upload').hide();
         $('.btn-file').hide();        
-    });
+ });
 
 
 /*Quitar la tarea de la notificación*/

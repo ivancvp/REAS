@@ -307,12 +307,13 @@
 
 
                 </div>
-              <!--
+                <!--
                 <input type="file" id="myFile" multiple="multiple">   
                 <button type="button" class="btn btn-danger btn-xs" id="imp_masiva">Impresión masiva </button>
                 <button type="button" class="btn btn-danger" id="correo_masivo">Correo Masivo </button>
                 -->
-
+                
+                
                 <div class="wrapper wrapper-content animated fadeInRight">
                     <div class="row" id="container_busqueda_beneficiarios">
 
@@ -1017,9 +1018,9 @@
                             var fd = new FormData();
                             
                             fd.append('numFolios', 1);
-                            fd.append('descripcion', 'Resolucion VUR');
-                            fd.append('identificador',fname.replace(".pdf", ""));
-                            fd.append('tipo_documento', '5103');
+                            fd.append('descripcion', 'Documento acta de entrega PAR');
+                            fd.append('identificador',fname.replace(".PDF", ""));
+                            fd.append('tipo_documento', '7305');
                             fd.append('thumbnail', '');                        
                             fd.append("myFile", document.getElementById("myFile").files[i]);                
                 

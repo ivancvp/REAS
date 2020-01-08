@@ -533,7 +533,10 @@
 
                                                         <div class="vertical-timeline-content">
                                                             <h2>Financiera</h2>
+                                                            
                                                             <p>Encuentra aquí lo relacionado a la información financiera del proceso. </p>
+                                                            <a href="#" class="btn btn-sm btn-success" id="solicitud_cdp" onclick="hola({formulario: 28, index: getURLParams('identificador'), modo: 3})"><i class="fas fa-hand-holding-usd"></i> Solicitud CDP</a>
+                                                            <a href="#" class="btn btn-sm btn-success" id="info_cdp" onclick="hola({formulario: 29, index: getURLParams('identificador'), modo: 3})"> <i class="fas fa-dollar-sign"></i> Información CDP</a>
                                                             <a href="#" class="btn btn-sm btn-primary" id="inf_financiera" onclick="hola({formulario: 10, index: getURLParams('identificador'), modo: 3})"><i class="fas fa-dollar-sign"></i> Financiera Vereditas</a>
 
                                                         </div>
@@ -758,6 +761,8 @@
         <%= CacheBuster.bust(application.getRealPath("/"), "js/reas/Acta_Entrega_PAR/acta_entrega_vereditas.js", "js")%>
         <%= CacheBuster.bust(application.getRealPath("/"), "js/reas/Acta_Entrega_PAR/aprobacion_acta_entrega.js", "js")%>
         <%= CacheBuster.bust(application.getRealPath("/"), "js/reas/Financiera/financiera_vereditas.js", "js")%>
+        <%= CacheBuster.bust(application.getRealPath("/"), "js/reas/Financiera/solicitud_cdp.js", "js")%>
+        <%= CacheBuster.bust(application.getRealPath("/"), "js/reas/Financiera/info_cdp.js", "js")%>
         <%= CacheBuster.bust(application.getRealPath("/"), "js/reas/Financiera/aprobacion_financiera.js", "js")%>
         <%= CacheBuster.bust(application.getRealPath("/"), "js/reas/estudio_documentos/acta_cierre_est_negativo.js", "js")%>
         <%= CacheBuster.bust(application.getRealPath("/"), "js/reas/estudio_documentos/aprobacion_acta_cierre_est_negativo.js", "js")%>

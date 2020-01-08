@@ -378,16 +378,16 @@ function logica_lista_chequeo(identificador,datos,dat_not,modo){
         if(verifica_obligatorios()===0){
          if(dat_not===0){
             
-            var responsable_proceso='199';
+            var responsable_proceso=get_usuario_tarea(27);
             
             if(vereditas){
-                responsable_proceso='199';
+                responsable_proceso=get_usuario_tarea(27);
             }
             if((data["Sector"]?data["Sector"]:'').toUpperCase()==='GAVILANES'){
-                responsable_proceso='199';
+                responsable_proceso=get_usuario_tarea(27);
             }
             if (identificador.includes("CP19")){
-                responsable_proceso='351';
+                responsable_proceso=get_usuario_tarea(28);
             }
             
             var act_padre=1;
@@ -406,16 +406,16 @@ function logica_lista_chequeo(identificador,datos,dat_not,modo){
              });
         }else{
             
-            var responsable_proceso='199';
+            var responsable_proceso=get_usuario_tarea(27);
             
             if(vereditas){
-                responsable_proceso='199';
+                responsable_proceso=get_usuario_tarea(27);
             }
             if((data["Sector"]?data["Sector"]:'').toUpperCase()==='GAVILANES'){
-                responsable_proceso='199';
+                responsable_proceso=get_usuario_tarea(27);
             }
             if (identificador.includes("CP19")){
-                responsable_proceso='351';
+                responsable_proceso=get_usuario_tarea(28);
             }
             
             var tipo_estudio_documentos=2;

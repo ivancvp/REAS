@@ -30,14 +30,7 @@
     color: #185D80;
   }
 
-  .titulo_ficha::after{
-    content: '\f0da';
-   font-family: FontAwesome;
-   font-weight: normal;
-   font-style: normal;
-   margin:0px 0px 0px 10px;
-   text-decoration:none;
-  }
+
 
   .grupo{
     padding: 10px;
@@ -317,8 +310,16 @@
       <div class="col-md-12">
         <div class="form-group">
           <label>Versión de la ficha social</label>
-          <input class="form-control" data-id="version"  disabled></input>
-          
+
+          <select class="form-control" data-id="version" disabled>
+            <option value="0">Versión 9</option>
+            <option value="9">Versión 9</option>
+            <option value="8">Versión 8</option>
+            <option value="7">Versión 7</option>
+            <option value="6">Versión 6</option>
+          </select>
+
+
         </div>
       </div>
     </div>
@@ -4525,7 +4526,7 @@ setTimeout(explode, 800);
 );
 
 
-
+$('table[data-op="2m"] td:nth-child(2), table[data-op="2m"] th:nth-child(2)').hide();
 
 
 

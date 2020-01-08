@@ -117,6 +117,7 @@ $.ajax({
       }
       
     }
+    
 
      });
 
@@ -124,7 +125,7 @@ $.ajax({
   },
 });
 
-$('input[data-id="version"]').val("9");
+
 
 
 //parte de traer los Familiares

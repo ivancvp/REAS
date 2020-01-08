@@ -115,13 +115,13 @@ $('.moneda').keyup(function(event) {
 $( "select[data-id='version']" ).change(function(e) {
 e.stopImmediatePropagation();
 
-if($(this).val()==="6"){
+if($(this).val()==="5" || $(this).val()==="6" || $(this).val()==="7" || $(this).val()==="8"){
 
 
 
   $.confirm({
     title: 'Mensaje',
-    content: 'Diligencie las preguntas de la ficha teniendo en cuenta que son de la ficha social versión 7',
+    content: 'Diligencie las respuestas de la versión seelccionada ajustandose a la versión 9',
     type: 'dark',
     icon: 'fa fa-spinner fa-spin',
       closeIcon: function(){
@@ -133,7 +133,7 @@ if($(this).val()==="6"){
       closeIcon: 'aRandomButton', // set a button handler
       buttons: {
           mas: function(){
-              $.alert('Debe diligenciar toda la ficha social que presenta la estructura de la ficha social versión 7, adecuando las opciones de la versión 6 a esta plantilla.');
+              $.alert('Debe diligenciar toda la ficha social que presenta la estructura de la ficha social en versión 9, adecuando las opciones de la versión seleccionada a esta plantilla.');
               return false; // you shall not pass
           },
           cerrar: function(){
@@ -938,28 +938,21 @@ var k=0;
 
 $("span.warning").remove();
 
-/* funcion que valida que existan dos beneficiarios dentro del nucleo familiar, se deshabilita
+/* funcion que valida que existan dos beneficiarios dentro del nucleo familiar, se deshabilita */
 $('select[data-id="tipo_beneficiario"]').each(function(key,value){
-  j=j+1;
 
-  if($(this).val()==""){
+  if($(this).val()=="PRINCIPAL"){
     k=k+1;
   }
 
 });
 
 $('#tit_tipo_beneficiario').find("span.error").remove();
-if(k==(j-1)){
-  $('#tit_tipo_beneficiario').append("<span class='error text-danger'> Falta un beneficiario</span>");
+if(k==0){
+  $('#tit_tipo_beneficiario').append("<span class='error text-danger'> Falta el beneficiario Principal</span>");
   i=1;
 }
-else if(k==j){
-  $('#tit_tipo_beneficiario').append("<span class='error text-danger'> Seleccione beneficiarios</span>");
-  i=1;
-}else{
-  $('#tit_tipo_beneficiario').find("span.error").remove();
-}
-*/
+
 
 $('input[data-id="p2_7"]').each(function(key,value){
 

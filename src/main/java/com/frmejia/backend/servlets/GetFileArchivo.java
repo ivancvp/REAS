@@ -50,22 +50,14 @@ public class GetFileArchivo extends HttpServlet {
         
         
         String id = request.getParameter("id");
-        String op = request.getParameter("op");
         String req = request.getParameter("req");
         
         
         String fileName = "";
-        
-        
-        if(op.equals("1")){
-          fileName = "\\\\10.216.160.201\\escaneos reasentamientos\\ESCANER VEREDITAS\\";  
-        }else if(op.equals("2")){
-          fileName = "\\\\10.216.160.201\\escaneos reasentamientos\\CONTRALORIA\\";  
-        }else if(op.equals("3")){
-           fileName = "\\\\10.216.160.201\\escaneos reasentamientos\\CARACOLI\\"; 
-        }
 
-         
+        fileName = "\\\\10.216.160.201\\escaneos reasentamientos\\EXPEDIENTES DOCUMENTALES CVP\\";  
+
+        
          String fileType = "";
          
          fileName=fileName+id+".PDF";

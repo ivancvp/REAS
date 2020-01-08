@@ -978,14 +978,14 @@ function logica_est_documentos(index,res,datos,modo){
                         }
                         else{
                             if(vereditas){
-                                asignado_a='199';
+                                asignado_a=get_usuario_tarea(27);
                             }else if((datos["Sector"]?datos["Sector"]:'').toUpperCase()==='GAVILANES'){ 
-                                asignado_a='199';
+                                asignado_a=get_usuario_tarea(27);
                             }else if(identificador.includes("CP19")){
-                                asignado_a='351';
+                                asignado_a=get_usuario_tarea(28);
                             }
                             else{
-                                asignado_a='199';
+                                asignado_a=get_usuario_tarea(27);
                             }
                         }
 

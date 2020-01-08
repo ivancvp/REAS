@@ -4855,6 +4855,21 @@
         <conexion>atencion_reloca</conexion>
         <permisos>*</permisos>
     </Consulta>
+
+   <Consulta id="consulta_pdf_cdp">
+        <sql>
+            select 
+            encode(hmac(doc_id::text || '@SESSION_ID' ,doc_time::text, 'sha1'),'hex') id,
+            doc_descripcion descripcion,
+            doc_ruta nombre,
+            to_char(doc_time,'dd-mm-yyyy HH:MM') fecha           
+            from 
+            documento_adjunto d
+            where identificador = '@identificador' and tidoc_id =7316
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+    </Consulta>
         <Consulta id="consulta_pdf_ficha_social">
         <sql>
             select 
@@ -6589,7 +6604,13 @@
         <conexion>atencion_reloca</conexion>
         <permisos>*</permisos>       
     </Consulta>  
-
+    <Consulta id="get_info_solicitud_cdp">
+        <sql>
+          select "Localidad" as localidad, "Nombre 1" as nombre, "Cedula 1" as cedula, "Barrio" as barrio, "Dirección" as direccion,"MZ" as manzana, "LT" as lote from definitiva where "IDENTIFICADOR"='@identificador'
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>       
+    </Consulta> 
 
 </Consultas>
 

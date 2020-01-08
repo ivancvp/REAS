@@ -304,7 +304,15 @@ function data_json1(html,op,selector){
   var tbl2 = $(html).find(selector).each(function(i) {
     x = $(this).find(selector);
 
-    var valor='"'+ $(this).val() + '"';
+
+    var vlr=null;
+
+    if($(this).val()!==null){
+      vlr= $(this).val().replace(/"/g, '\\"');
+    }
+   
+
+    var valor='"'+ vlr + '"';
 
     if($(this).attr('type')=="checkbox"){
       valor=$(this).prop('checked');
@@ -420,9 +428,10 @@ for (i = 1; i <= num_miembros; i++) {
 
 function escapeSpecialChars(jsonString) {
 
-            return jsonString.replace(/\n/g, "\\n")
-                .replace(/\r/g, "\\r")
-                .replace(/\t/g, "\\t")
-                .replace(/\f/g, "\\f");
+ var nuevo_json=jsonString.replace(/\n/g, "\\n")
+                          .replace(/\r/g, "\\r")
+                          .replace(/\t/g, "\\t")
+                          .replace(/\f/g, "\\f");
+    return nuevo_json;
 
 }

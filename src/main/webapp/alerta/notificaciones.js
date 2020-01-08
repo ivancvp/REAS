@@ -675,7 +675,43 @@ var opciones = jQuery.extend({
         generar_modal(contenido);
         logica_aprobacion(res[index], modo, identificador,24);
 
-    }     
+    }   
+    
+    if(formulario===28){
+        
+        
+        var contenido=contenido_modal(solicitud_cdp(),' Solicitud de CDP'); 
+        generar_modal(contenido);
+        
+        if(modo===3){
+            
+            identificador = index; 
+            
+            logica_solicitud_cdp(identificador,modo,1);
+            
+        }else{
+            logica_solicitud_cdp(res[index],modo,2);
+        }
+
+    }
+    
+        if(formulario===29){
+        
+        
+        var contenido=contenido_modal(info_cdp(),' Información de CDP'); 
+        generar_modal(contenido);
+        
+        if(modo===3){
+            
+            identificador = index; 
+            
+            logica_info_cdp(identificador,modo,1);
+            
+        }else{
+            logica_info_cdp(res[index],modo,2);
+        }
+
+    }
     
     
 
@@ -694,7 +730,7 @@ function puede_reasignar(i) {
     var lider = '';
 
 
-    if (usuario_identificador === '351' || usuario_identificador === '152' || usuario_identificador === '351' || usuario_identificador === '168' || usuario_identificador === '76' || usuario_identificador === '117' || usuario_identificador === '9' || usuario_identificador === '199' || usuario_identificador === '16' || usuario_identificador === '196'|| usuario_identificador === '117') {
+    if (usuario_identificador === '351' || usuario_identificador === '152' || usuario_identificador === '351' || usuario_identificador === '168' || usuario_identificador === '76' || usuario_identificador === '117' || usuario_identificador === '9' || usuario_identificador === '199' || usuario_identificador === '16' || usuario_identificador === '196'|| usuario_identificador === '117' || usuario_identificador === '271') {
         var lider = '<button type="button" class="btn btn-link btn-xs" onclick="hola({formulario:\'reasignar\',index:' + i + ',modo:1})" data-toggle="tooltip" data-placement="bottom" title="Reasignar">' +
                     '<i class="fas fa-list-ul"></i>' +
                     '</button>';
@@ -818,6 +854,7 @@ var content = '';
 
 
 var cta=1;
+
 $.each(uniqs, function (nombre_tarea, contador) {
     
   content = '<li style="width: 550px; border-bottom: 0.5px solid #BEBEBE; max-height: 800px; overflow: auto;overflow-x: hidden">' +
