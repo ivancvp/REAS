@@ -1404,6 +1404,29 @@ function get_usuario_tarea(tifunc){
  return resultado;
 }
 
+function get_usuarios_funciones(tifunc){
+    
+    $datos = {
+        op: 'get_usuarios_funciones',
+        tifunc:tifunc
+    };
+
+    var resultado=0;
+    $.ajax({
+        type: "GET",
+        url: "GestionConsultas",
+        data: $datos,
+        dataType: "json",
+        async: false,
+        success: function (response) {
+            resultado = response;
+        },
+        error: function (response) {
+            alert("Ocurrió un error");
+        }
+    }); 
+ return resultado;
+}
 
 function set_estado_ficha_tecnica(id,estado){
     

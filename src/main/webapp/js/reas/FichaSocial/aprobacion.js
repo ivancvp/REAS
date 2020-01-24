@@ -60,14 +60,54 @@ if(aprobacion.estado_ficha=='2'){
 if(aprobacion.estado_ficha=='1'){
   $('#titulo_ficha_social').append('<h3 style="color:#585858">Ficha social disponible en edición</h3>');
   consulta(usuario_identificador);
+
+
+  var usuario_elaboro=get_nombres(aprobacion.usuario_id_elaboro);
+
+  usuario_elaboro=usuario_elaboro[0].usuario_nombre;
+  $('#titulo_ficha_social').append('<h5 style="color:#5F5F5F">Ficha en edición por: '+usuario_elaboro+'</h5>');
+
+  if(aprobacion.usuario_id_elaboro==usuario_identificador){
+    
+  }else{
+    $("input,select[data-id],textarea[data-id],.checkbox").prop('disabled', true).css("background-color","#FBFBFB");
+
+
+    $("input").attr("disabled", true);
+ 
+    $("#addFamily").remove();
+    $('.float').remove();
+    $('#validar_ficha').remove();
+  }
+
+
 }
 
 if(aprobacion.estado_ficha=='4'){
   $('#titulo_ficha_social').append('<h3 style="color:#585858">Ficha social devuelta por modificaciones</h3>');
+
+  var usuario_elaboro=get_nombres(aprobacion.usuario_id_elaboro);
+  
+  usuario_elaboro=usuario_elaboro[0].usuario_nombre;
+  $('#titulo_ficha_social').append('<h5 style="color:#5F5F5F">Ficha en edición por: '+usuario_elaboro+'</h5>');
+
   consulta(usuario_identificador);
   $('#ver_obs_aprobacion').show();
   $('#observaciones_aprobacion').prop('disabled', true);
   $('#guardar_obs_ficha').remove();
+
+
+  if(aprobacion.usuario_id_elaboro==usuario_identificador){
+    
+  }else{
+    $("input,select[data-id],textarea[data-id],.checkbox").prop('disabled', true).css("background-color","#FBFBFB");
+    $("input").attr("disabled", true);
+    $("#addFamily").remove();
+    $('.float').remove();
+    $('#validar_ficha').remove();
+  }
+
+
 
   if ( $( "#id_actividad" ).length ) {
 
@@ -132,7 +172,7 @@ if(aprobacion.estado_ficha=='3'){
 
 }
 
-if(usuario_usuario==="clopezu"){
+if(usuario_identificador===get_usuario_tarea(29)){
   $('select[data-id="condicion_miembro"]').prop("disabled", false).css("background-color","#FFFF");
   $('#condition_member').show();
 }else{
@@ -147,7 +187,7 @@ if(usuario_usuario==="clopezu"){
 $('input[data-id="p2_8"]').prop('disabled', true);
 
 
-if(usuario_identificador!=117){
+if(usuario_identificador!=get_usuario_tarea(29)){
   $('select[data-id="condicion_miembro"]').prop('disabled', true);
 }
 

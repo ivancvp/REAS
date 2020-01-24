@@ -1,7 +1,7 @@
 
 
 var res = get_num_alert(id_user);
-
+var listado=get_usuarios_funciones(33);
 var num_not = res.length;
 
 var utc = new Date().toJSON().slice(0, 10).replace(/-/g, '/');
@@ -726,15 +726,21 @@ var nom_crea = "";
 var modo = 1;
 
 
+
 function puede_reasignar(i) {
     var lider = '';
+    
+    $.each(listado, function(k, v) {
+
+        if(usuario_identificador.toString()===v.usuario_id.toString()){
+                    lider = '<button type="button" class="btn btn-link btn-xs" onclick="hola({formulario:\'reasignar\',index:' + i + ',modo:1})" data-toggle="tooltip" data-placement="bottom" title="Reasignar">' +
+                            '<i class="fas fa-list-ul"></i>' +
+                            '</button>';
+        }
+        
+    });
 
 
-    if (usuario_identificador === '351' || usuario_identificador === '152' || usuario_identificador === '351' || usuario_identificador === '168' || usuario_identificador === '76' || usuario_identificador === '117' || usuario_identificador === '9' || usuario_identificador === '199' || usuario_identificador === '16' || usuario_identificador === '196'|| usuario_identificador === '117' || usuario_identificador === '271') {
-        var lider = '<button type="button" class="btn btn-link btn-xs" onclick="hola({formulario:\'reasignar\',index:' + i + ',modo:1})" data-toggle="tooltip" data-placement="bottom" title="Reasignar">' +
-                    '<i class="fas fa-list-ul"></i>' +
-                    '</button>';
-    }
     return lider;
 }
 

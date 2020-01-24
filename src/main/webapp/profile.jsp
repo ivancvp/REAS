@@ -44,7 +44,7 @@
         <!-- Text spinners style -->
         <link href="css/plugins/textSpinners/spinners.css" rel="stylesheet">
         <link href="css/animate.css" rel="stylesheet">
-        <link href="css/style.css" rel="stylesheet">
+        <link href="css/style.css?version=2" rel="stylesheet">
 
         <!-- Latest compiled JavaScript -->
         <script src="https://unpkg.com/tippy.js@2.0.2/dist/tippy.all.min.js"></script>

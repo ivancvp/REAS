@@ -55,7 +55,7 @@ public class GetFileArchivo extends HttpServlet {
         
         String fileName = "";
 
-        fileName = "\\\\10.216.160.201\\escaneos reasentamientos\\EXPEDIENTES DOCUMENTALES CVP\\";  
+        fileName = "/usr/local/repositorio/ExpedientesReas/EXPEDIENTES DOCUMENTALES CVP/";  
 
         
          String fileType = "";

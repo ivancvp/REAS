@@ -102,6 +102,8 @@ public class ObtenerArchivo extends HttpServlet {
                     Ent_Consulta ent_repositorio = new Ent_Consulta();
                     ent_repositorio = xmlUtil.obtenerConfiguracionConsulta("conexion_repositorio");
                     String dir = ent_repositorio.getUrl() + File.separator + File.separator + year + File.separator + month + File.separator + day;
+                            
+                    System.out.println(dir);
                     
                     File f = new File(dir + File.separator + id + ".zip");
                     if (f.exists() && !f.isDirectory()) {

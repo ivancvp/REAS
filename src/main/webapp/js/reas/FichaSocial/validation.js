@@ -765,7 +765,7 @@ if(seguir_archivo==0){
                       $('#validar_ficha').prop('disabled', true);
                       
                       if(enviar){
-                        var responsable_proceso=117;
+                        var responsable_proceso=asignado_a=get_usuario_tarea(29);
 
                       if ( $( "#creado_por" ).length ) {
                           responsable_proceso=$( "#creado_por" ).text();

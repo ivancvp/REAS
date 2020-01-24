@@ -1307,7 +1307,16 @@
         <conexion>atencion_reloca</conexion>
         <permisos>*</permisos>
         <es_dml_complejo>true</es_dml_complejo>
-    </Consulta>   
+    </Consulta> 
+    
+    <Consulta id="get_usuarios_funciones">
+        <sql>
+            select usuario_id from usuario_funcionalidad where tifunc_id=@tifunc;
+        </sql>
+        <conexion>atencion_reloca</conexion>
+        <permisos>*</permisos>
+        <es_dml_complejo>true</es_dml_complejo>
+    </Consulta>  
  
     <Consulta id="get_dat_est_doc1">
         <sql>

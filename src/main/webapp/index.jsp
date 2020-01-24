@@ -1043,6 +1043,152 @@
           
            */
             
+            
+            // modulo para cargar un mismo documento masivamente a varios identificadores.
+            
+            /*
+              var array = [
+                '2018-CP19-16651',
+                '2018-CP19-16383',
+                '2018-CP19-16338',
+                '2018-CP19-16508',
+                '2018-CP19-16684',
+                '2018-CP19-16814',
+                '2018-CP19-16361',
+                '2018-CP19-16589',
+                '2018-CP19-16434',
+                '2018-CP19-16625',
+                '2018-CP19-16740',
+                '2018-CP19-16324',
+                '2018-CP19-16618',
+                '2018-CP19-16880',
+                '2018-CP19-16449',
+                '2018-CP19-16575',
+                '2018-CP19-16485',
+                '2018-CP19-16878',
+                '2018-CP19-16748',
+                '2018-CP19-16728',
+                '2018-CP19-16774',
+                '2018-CP19-16511',
+                '2018-CP19-16490',
+                '2018-CP19-16517',
+                '2018-CP19-16567',
+                '2018-CP19-16530',
+                '2018-CP19-16381',
+                '2018-CP19-16569',
+                '2018-CP19-16415',
+                '2018-CP19-16809',
+                '2018-CP19-16839',
+                '2018-CP19-16340',
+                '2018-CP19-16699',
+                '2018-CP19-16558',
+                '2018-CP19-16457',
+                '2019-CP19-16901',
+                '2018-CP19-16504',
+                '2018-CP19-16825',
+                '2018-CP19-16616',
+                '2018-CP19-16487',
+                '2019-CP19-16888',
+                '2018-CP19-16818',
+                '2018-CP19-16776',
+                '2018-CP19-16587',
+                '2018-CP19-16834',
+                '2018-CP19-16694',
+                '2018-CP19-16398',
+                '2018-CP19-16619',
+                '2018-CP19-16695',
+                '2018-CP19-16744',
+                '2018-CP19-16597',
+                '2018-CP19-16560',
+                '2018-CP19-16617',
+                '2018-CP19-16689',
+                '2018-CP19-16344',
+                '2018-CP19-16486',
+                '2018-CP19-16657',
+                '2018-CP19-16505',
+                '2018-CP19-16590',
+                '2018-CP19-16588',
+                '2018-CP19-16875',
+                '2018-CP19-16507',
+                '2018-CP19-16874',
+                '2018-CP19-16793',
+                '2018-CP19-16805',
+                '2018-CP19-16863',
+                '2018-CP19-16623',
+                '2018-CP19-16835',
+                '2018-CP19-16420',
+                '2018-CP19-16533',
+                '2018-CP19-16610',
+                '2018-CP19-16599',
+                '2018-CP19-16561',
+                '2018-CP19-16309',
+                '2018-CP19-16429',
+                '2018-CP19-16542',
+                '2018-CP19-16433',
+                '2018-CP19-16649',
+                '2018-CP19-16789',
+                '2018-CP19-16307',
+                '2019-CP19-16896',
+                '2018-CP19-16790',
+                '2018-CP19-16654',
+                '2018-CP19-16803',
+                '2018-CP19-16830',
+                '2018-CP19-16495',
+                '2018-CP19-16798',
+                '2018-CP19-16758',
+                '2018-CP19-16730',
+                '2018-CP19-16543'
+             ];
+            
+             $('#imp_masiva').click(function(){
+                
+                
+               var fi = document.getElementById('myFile');
+               if (fi.files.length > 0) {
+
+
+                    // RUN A LOOP TO CHECK EACH SELECTED FILE.
+                    for (var i = 0; i <= fi.files.length - 1; i++) {
+
+                        
+                        
+                        
+                        for (var j in array) {
+                            
+                            var fname = fi.files.item(i).name;      // THE NAME OF THE FILE.
+                            var fsize = fi.files.item(i).size;      // THE SIZE OF THE FILE.
+                            
+                            var fd = new FormData();
+                            
+                            var identificador=array[j];
+                            
+                            fd.append('numFolios', 8);
+                            fd.append('descripcion', 'Reemplazar el número de certificado de disponibilidad presupuestal contenido en la parte considerativa de las resoluciones relacionadas en la tabla siguiente, el cual para todos los efectos legales será el 1522 de fecha 16 de octubre de 2019. ');
+                            fd.append('identificador',identificador);
+                            fd.append('tipo_documento', '5102');
+                            fd.append('thumbnail', '');                        
+                            fd.append("myFile", document.getElementById("myFile").files[i]);                
+                
+                            var xhr = new XMLHttpRequest();
+                                xhr.open("POST", "FileUploader");
+                                xhr.send(fd);
+                        }
+                            
+
+                    }
+                }
+                else { 
+                    alert('Please select a file.') 
+                }
+                
+                
+                
+            });
+            
+            */
+            
+            
+            
         </script>
         
         <link href='js/vendors/jquery-confirm-master/dist/jquery-confirm.min.css' rel='stylesheet' type='text/css' />

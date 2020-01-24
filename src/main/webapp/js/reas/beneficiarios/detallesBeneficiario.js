@@ -127,7 +127,7 @@ $.reas('reas', {
 
                                             '<div >' +
 
-                                            '<div class="row" style="display:none" >' +
+                                            '<div class="row"  >' +
                                             '<div class="col-md-12 col-lg-offset-6">' +
                                             '	<h3 ><a id="btn-expediente" style="color: #1ab394;border-style: solid;margin:3px;padding:8px;border-width: 1px;border-radius: 8px;"><i class="far fa-file-pdf"></i> Ver Expediente</a></h3>' +
                                             '</div >' +
@@ -207,7 +207,7 @@ var identificador = document.getElementById("identificador").innerHTML;
     var sector =(resultado['sector'] ? resultado['sector'] : '');
     
     
-    var url='GetFileArchivo?id='+identificador;
+var url='GetFileArchivo?id='+identificador;
     
 $('.loader').addClass('is-active');
 
@@ -221,6 +221,7 @@ function checkHttpStatus(url) {
         error: function(response) {
             
             alertify.error("El expediente no ha sido digitalizado aún.");
+            $('.loader').removeClass('is-active');
         }, success(response) {
                 
                 $('.loader').removeClass('is-active');

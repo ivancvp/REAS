@@ -26,7 +26,7 @@ function correo(IdUserFrom, IdUserTo, asunto, msg, idProceso) {
                     '<meta charset="UTF-8">' +
                     '</head>' +
                     '<body>' +
-                    '<h1 style="color:#20A1EB">Notificación Nueva Sistema GIS REAS</h1>' +
+                    '<h2 style="color:#656565">Notificación Nueva Sistema GIS REAS</h2>' +
                     '<br>' +
                     '<p><strong>Mensaje enviado por:</strong> ' + nombre + '</p>' +
                     msg +
@@ -35,7 +35,7 @@ function correo(IdUserFrom, IdUserTo, asunto, msg, idProceso) {
                     '<p style="color:#20A1EB"><strong>Id proceso: </strong> ' + idProceso + ' </p>' +
                     '<br>' +
                     '<br>' +
-                    '<img src="https://docs.google.com/uc?id=1no91ERErYBuog7taHyedNaba1toDIYqP" alt="Logo CVP" >' +
+                    '<img src="https://docs.google.com/uc?id=1JqRnJ5TtSTpJjMuXLotp_1zsEkly-xf6" alt="Logo CVP" >' +
                     '<p>Equipo GIS REAS</p>' +
                     '<p>Caja de la Vivienda Popular</p>' +
                     '<p style="color:#CB4335">Este correo es informativo, favor no responder a esta dirección de correo, ya que no se encuentra habilitada para recibir mensajes</p>' +
