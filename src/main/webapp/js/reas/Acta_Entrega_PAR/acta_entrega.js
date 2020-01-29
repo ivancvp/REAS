@@ -453,7 +453,7 @@ $('input').keyup(function() {
         
         if(seguir===0){
          var doc = pdf_acta_entrega();
-         pdfMake.createPdf(doc).download();
+         pdfMake.createPdf(doc).download('acta_entrega_'+identificador+'.pdf');
          $('#error_msg').css("display","none");  
         }else{
           $('#error_msg').css("display","block");  

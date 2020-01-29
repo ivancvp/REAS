@@ -16,13 +16,13 @@ function solicitud_cdp(){
  '                     <div class="col-md-4"> '+
                                 '   <div class="form-group"> '+
                                 '     <label for="" class="control-label">Nombre del beneficiario principal</label> '+
-                                '     <input type="text"   class="form-control ver" id="nombre" placeholder="Nombre del beneficiario" > '+
+                                '     <input type="text"   class="form-control ver" id="nombre1" placeholder="Nombre del beneficiario" > '+
                                 '   </div> '+
  '                     </div> '+
   '                     <div class="col-md-4"> '+
                                 '   <div class="form-group"> '+
                                 '     <label for="" class="control-label">Cédula</label> '+
-                                '     <input type="text"  class="form-control ver" id="cedula" placeholder="Cédula" > '+
+                                '     <input type="text"  class="form-control ver" id="cedula1" placeholder="Cédula" > '+
                                 '   </div> '+
  '                     </div> '+
  '                 </div> '+
@@ -33,19 +33,19 @@ function solicitud_cdp(){
  '                     <div class="col-md-4"> '+
                                 '   <div class="form-group "> '+
                                 '     <label for="" class="control-label">Barrio</label> '+
-                                '     <input type="text"  class="form-control ver" id="barrio" placeholder="Barrio" > '+
+                                '     <input type="text"  class="form-control ver" id="barrio1" placeholder="Barrio" > '+
                                 '   </div> '+
                        '   </div> '+
  '                     <div class="col-md-4"> '+
                                 '   <div class="form-group"> '+
                                 '     <label for="" class="control-label">Localidad</label> '+
-                                '     <input type="text"   class="form-control ver" id="localidad" placeholder="Localidad" > '+
+                                '     <input type="text"   class="form-control ver" id="localidad1" placeholder="Localidad" > '+
                                 '   </div> '+
  '                     </div> '+
   '                     <div class="col-md-4"> '+
                                 '   <div class="form-group"> '+
                                 '     <label for="" class="control-label">Dirección</label> '+
-                                '     <input type="text"   class="form-control ver" id="direccion" placeholder="Dirección" > '+
+                                '     <input type="text"   class="form-control ver" id="direccion1" placeholder="Dirección" > '+
                                 '   </div> '+
  '                     </div> '+
  '                 </div> '+
@@ -56,13 +56,13 @@ function solicitud_cdp(){
  '                     <div class="col-md-4"> '+
                                 '   <div class="form-group "> '+
                                 '     <label for="" class="control-label">Manzana</label> '+
-                                '     <input type="text"  class="form-control ver" id="manzana" placeholder="Manzana" > '+
+                                '     <input type="text"  class="form-control ver" id="manzana1" placeholder="Manzana" > '+
                                 '   </div> '+
                        '   </div> '+
  '                     <div class="col-md-4"> '+
                                 '   <div class="form-group"> '+
                                 '     <label for="" class="control-label">Lote</label> '+
-                                '     <input type="text"   class="form-control ver" id="lote" placeholder="Lote" > '+
+                                '     <input type="text"   class="form-control ver" id="lote1" placeholder="Lote" > '+
                                 '   </div> '+
  '                     </div> '+
   '                     <div class="col-md-4"> '+
@@ -123,7 +123,8 @@ return contenido;
 function logica_solicitud_cdp(datos,modo,tipo){
 
 
-console.log(datos)
+
+console.log(datos);
 
 var identificador="";
 if(tipo===1){
@@ -131,6 +132,8 @@ if(tipo===1){
 }else if(tipo===2){
     identificador=datos["identificador"];
 }
+
+console.log(identificador)
 
 $("#id_form").val(identificador);
 
@@ -149,21 +152,24 @@ $("#id_form").val(identificador);
         async: true,
         success: function (response) {
            
-            console.log(response)
+            
            
            if(response.length> 0) {
             resultado=response;
            $.each( response[0], function( key, value ) {
                
+               
+               
                if($('#'+key).hasClass('fecha') ){                       
                     $('#'+key).val(moment(value).format("DD/MM/YYYY"));
                 }else{
+                    
                     $('#'+key).val(value);
                 }
             });
 
             }
-
+                
            
         }
     });
@@ -241,7 +247,8 @@ $('.moneda').focusout(function(event) {
      
         if(conta===0){
             
-        var usuario_destino=120;
+        var usuario_destino=asignado_a=get_usuario_tarea(34);
+        
         var tipo_proceso=0;
 
         var observacion_inicial='Envio solicitud para nuevo CDP';
@@ -252,9 +259,7 @@ $('.moneda').focusout(function(event) {
 
         correo(usuario_identificador,usuario_destino,"Solicitud para generación de nuevo CDP",msg,tipo_proceso);
         
-        
-   
-       
+
         $("#not_update").remove();
             $.getScript("alerta/notificaciones.js", function(){
          });
@@ -296,6 +301,16 @@ return conta;
       
   }
     
+  
+  //se habilita el modulo para el usuario con funcionalidad 35
+ 
+  if(get_usuario_tarea(35)===parseInt(usuario_identificador)){
+      
+  }else{
+      $('.boton').hide();
+      $('.obligatorio ').attr('disabled', 'disabled'); 
+      $(".obligatorio ").css({"backgroundColor":"white"});
+  }
   
 
   

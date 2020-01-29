@@ -755,6 +755,8 @@
         <%= CacheBuster.bust(application.getRealPath("/"), "js/reas/Acta_Entrega_PAR/acta_entrega_vereditas.js", "js")%>
         <%= CacheBuster.bust(application.getRealPath("/"), "js/reas/Acta_Entrega_PAR/aprobacion_acta_entrega.js", "js")%>
         <%= CacheBuster.bust(application.getRealPath("/"), "js/reas/Financiera/financiera_vereditas.js", "js")%>
+        <%= CacheBuster.bust(application.getRealPath("/"), "js/reas/Financiera/solicitud_cdp.js", "js")%>
+        <%= CacheBuster.bust(application.getRealPath("/"), "js/reas/Financiera/info_cdp.js", "js")%>
         <%= CacheBuster.bust(application.getRealPath("/"), "js/reas/Financiera/aprobacion_financiera.js", "js")%>
         <%= CacheBuster.bust(application.getRealPath("/"), "js/reas/estudio_documentos/acta_cierre_est_negativo.js", "js")%>
         <%= CacheBuster.bust(application.getRealPath("/"), "js/reas/estudio_documentos/aprobacion_acta_cierre_est_negativo.js", "js")%>

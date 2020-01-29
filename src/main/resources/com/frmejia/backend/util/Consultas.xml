@@ -6615,7 +6615,7 @@
     </Consulta>  
     <Consulta id="get_info_solicitud_cdp">
         <sql>
-          select "Localidad" as localidad, "Nombre 1" as nombre, "Cedula 1" as cedula, "Barrio" as barrio, "Dirección" as direccion,"MZ" as manzana, "LT" as lote from definitiva where "IDENTIFICADOR"='@identificador'
+          select "Localidad" as localidad1, "Nombre 1" as nombre1, "Cedula 1" as cedula1, "Barrio" as barrio1, "Dirección" as direccion1,"MZ" as manzana1, "LT" as lote1 from definitiva where "IDENTIFICADOR"='@identificador'
         </sql>
         <conexion>atencion_reloca</conexion>
         <permisos>*</permisos>       
