@@ -85,7 +85,7 @@ header: {
                     height: 50
                          }, {text:'\n ACTA DE ENTREGA DEL PREDIO \n RECOMENDADO A LA CVP  ',rowSpan:3,alignment:'center',bold:true},{text:'Código: 208-REAS-Ft-65',colSpan:2,style:'tableExample'},{}],
                      ['','',{text:'Versión: 4',style:'tableExample'},{text:'Pág: 1 de 2',style:'tableExample'}],
-                     ['','',{text:'Vigente desde: 12-11-2019 ',colSpan:2,style:'tableExample'},{}]
+                     ['','',{text:'Vigente desde: 09-01-2020 ',colSpan:2,style:'tableExample'},{}]
 
                         ]
                 }

@@ -85,9 +85,10 @@ public class ConsultasManager {
         Iterator itr = parametros.entrySet().iterator();
         while (itr.hasNext()) {
             Map.Entry e = (Map.Entry) itr.next();
+            
 
-            if (!e.getKey().toString().equals("op")) {
-                query = query.replaceAll("@" + e.getKey().toString(), ((String[]) e.getValue())[0]);
+        if (!e.getKey().toString().equals("op")) {
+                query = query.replaceAll("@" + e.getKey().toString(), ((String[]) e.getValue())[0].replaceAll("\\$", ""));
             }
         }
         
@@ -95,7 +96,9 @@ public class ConsultasManager {
         postgresUtil.connecting(ent_Consulta.getUrl(), ent_Consulta.getUser(), ent_Consulta.getPassword());
         JSONArray jsonArrayResult = JsonUtil.convertResultSetToJSON(postgresUtil.executeQuerySQL(query));
         postgresUtil.cerrarConexion();
-
+        
+        
+        
         return jsonArrayResult;
     }
     

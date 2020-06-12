@@ -1033,7 +1033,6 @@ $('.data').each(function(index) {
             
         }
 
-
     }); 
         
         
